@@ -15,6 +15,9 @@ export class App extends Component {
 
       // turn on/off different layers
       modalIsOpen: true,
+
+      // current info from server
+      currentPrompt: "Is this a prompt?",
     }
     // bind func's to this
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -28,11 +31,13 @@ export class App extends Component {
             modalIsOpen={this.state.modalIsOpen}
             toggleModal={this.toggleModal}
             mobile={this.state.mobile}
+            currentPrompt={this.state.currentPrompt}
           />
         : <DesktopApp 
             modalIsOpen={this.state.modalIsOpen}
             toggleModal={this.toggleModal}
             mobile={this.state.mobile}
+            currentPrompt={this.state.currentPrompt}
           />
         }
       </div>
