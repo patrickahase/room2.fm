@@ -1,5 +1,8 @@
 /* z-index reference */
-/* 5 - modal */
+/* 1 - BG Vis */
+/* 2 - Current Prompt */
+/* 2 - Settings Menu */
+/* 5 - Modal */
 
 * {
   box-sizing: border-box;
@@ -139,7 +142,7 @@ code {
   position: absolute;
   bottom: min(1vw, 2.5vh);
   left: 35.5vw;
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-family: 'IBM Plex Sans Condensed', sans-serif;  
 }
 /* Door Closed - Text Logo */
 #logo-wrapper{
@@ -189,3 +192,114 @@ code {
 #logo-line-9{ animation: 0.4s ease-out 0s 1 slideIn9; }
 @keyframes slideIn9 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
 
+/* Text Chat */
+#chat{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  z-index: 1;
+  height:100%;
+  width:25%;
+}
+
+/* Marquee Scroll Bar */
+#top-banner-wrapper{
+  position: absolute;
+  width: 75%;
+  height: 7%;
+  top: 0%;
+  left: 0%;
+  pointer-events: none;
+  background-color: var(--comp-col-01);
+}
+#marquee-wrapper {
+  position: absolute;
+  top:0%;
+  left: 7vh;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: max(100%, max-content);
+  overflow: hidden;
+  background: transparent;
+  }
+#marquee-text-scroll{
+  color: var(--comp-col-03);
+  font-family: 'Nunito', sans-serif;
+  font-size: 3vw; 
+  animation: scroll-left 18s linear infinite;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: max-content;
+  text-align: center;
+  transform:translateX(0%);      
+}
+@keyframes scroll-left {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-33.3333%); }
+}
+#cd-gif{
+  height: 7vh;
+  width: 7vh;
+  border: rgb(155, 155, 155) solid 0.2vw;
+}
+
+/* Current Prompt */
+#current-prompt{
+  font-size: max(1.0vw, 0.8em);
+  width: 52.5%;
+  color: white;
+  position: absolute;
+  left: 12.5%;
+  bottom:30%;
+  z-index: 2;
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  pointer-events: none;
+  display: inline;
+  text-align: center;
+  white-space: pre-line;
+  background-color: rgb(31, 33, 28);
+}
+
+
+/* Mobile Rules */
+@media all and (any-hover: none) {
+/* Modal Style */
+#modal-wrapper{
+  top: 0vh;
+  left: 0vw;
+  right: 0vw;
+  bottom: 0vh;
+}
+#modal-title-wrapper{
+  height: 10%;
+}
+#modal-title{
+  position: absolute;
+  bottom: 0vh;
+  left: 0vw;
+  padding: 0 2.5vw;
+  padding-bottom: min(0.5vw, 2vh);
+  font-size: min(5vw, 8vh);
+  color: white;
+  user-select: none;
+}
+#modal-text{
+  font-size: min(3vh, 6vw);
+  padding: 4vh;
+  text-align: center;
+}
+#modal-text.modal-text-aoc{
+  font-size: min(4vh, 6vw);
+  padding: 4vh;
+}
+#modal-continue-button{
+  width: 40vw;
+  height: min(12vw, 30vh);
+  font-size: min(3vh, 6vw);
+  bottom: 7vh;
+  left: 30vw;
+}
+}

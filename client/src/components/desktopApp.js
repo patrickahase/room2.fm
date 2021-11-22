@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import IntroModal from './introModal';
+import Marquee from './marquee';
 
 export class DesktopApp extends Component {
   constructor(props) {
@@ -12,6 +13,14 @@ export class DesktopApp extends Component {
         {this.props.modalIsOpen
           ? <IntroModal mobile={this.props.mobile} toggleModal={this.props.toggleModal} />
           : <>
+            {/* Top Banner */}
+            <Marquee />
+            {/* Background Visuals */}
+            {/* <BGVis /> */}
+            {/* Response Overlay */}
+            {/* <Responses /> */}
+            {/* Prompt Overlay */}
+            <div id="current-prompt"> {this.props.currentPrompt} </div>
             {/* dead simple text chat */}
             <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>
           </>}
