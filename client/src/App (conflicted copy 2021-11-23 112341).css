@@ -316,14 +316,14 @@ code {
   width: calc(72vw - 25vh);
 }
 
-/* Audio Section */
-#audio-wrapper{
+/* Input Section */
+#input-wrapper{
   background-color: var(--comp-col-02);
   position: absolute;
-  right: 25%;
+  left: 25vh;
   bottom: 0%;
   height: 25%;
-  width: 3vw;
+  width: calc(72vw - 25vh);
 }
 
 /* Mobile Rules */

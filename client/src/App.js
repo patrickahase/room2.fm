@@ -16,6 +16,9 @@ export class App extends Component {
       // turn on/off different layers
       modalIsOpen: true,
 
+      // current user settings
+      drawingInput: true,
+
       // current info from server
       currentPrompt: "Is this a prompt?",
     }
@@ -32,12 +35,15 @@ export class App extends Component {
             toggleModal={this.toggleModal}
             mobile={this.state.mobile}
             currentPrompt={this.state.currentPrompt}
+            drawingInput={this.state.drawingInput}
           />
         : <DesktopApp 
             modalIsOpen={this.state.modalIsOpen}
             toggleModal={this.toggleModal}
             mobile={this.state.mobile}
             currentPrompt={this.state.currentPrompt}
+            drawingInput={this.state.drawingInput}
+            height={this.state.height}
           />
         }
       </div>
