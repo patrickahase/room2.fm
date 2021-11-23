@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AudioControls from './audioControls';
 import EmojiTri from './emojiTri';
 import IntroModal from './introModal';
 import Marquee from './marquee';
@@ -45,9 +46,7 @@ export class DesktopApp extends Component {
                 }
             </div>            
             {/* Audio Settings */}
-            <div id="audio-wrapper">              
-              {/* <Responses /> */}
-            </div>            
+            <AudioControls />      
             {/* dead simple text chat */}
             <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>
           </>}

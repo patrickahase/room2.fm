@@ -350,13 +350,47 @@ code {
 }
 
 /* Audio Section */
-#audio-wrapper{
+#audio-control-wrapper{
   background-color: var(--comp-col-02);
   position: absolute;
   right: 25%;
   bottom: 0%;
   height: 25%;
   width: 3vw;
+}
+#mute-button{
+  width: 3vw;
+  height: 3vw;
+  position: absolute;
+  bottom: 0%;
+}
+#volume-wrapper{
+  width: 3vw;
+  height: calc(25vh - 3vw);
+  position: absolute;
+  bottom: 3vw;
+  background-color: #222323;
+  border: 2px solid var(--comp-col-01);
+}
+.volume-indicator{
+  width: 100%;
+  background-color: var(--comp-col-03);
+  opacity: 0.5;
+  border: 2px dashed var(--comp-col-02);
+}
+.volume-indicator.active{
+  opacity: 1;
+  border: 2px solid var(--comp-col-02);
+}
+.volume-indicator:nth-child(odd){
+  border-radius: 10px 0px;
+  border-right: none;
+  border-bottom: none;
+}
+.volume-indicator:nth-child(even){
+  border-radius: 0px 10px;
+  border-bottom: none;
+  border-left: none;
 }
 
 /* Mobile Rules */

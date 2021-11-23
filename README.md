@@ -26,6 +26,8 @@ This is my refactoring of the room2 code base to set it up for continued use
 # Lissajous Display
 
 # Sound Controls
+- Add some animations to the volume notch controls
+- Handle click and hold events ?
 
 # Drawing Input
 
