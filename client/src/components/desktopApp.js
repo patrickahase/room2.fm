@@ -35,6 +35,7 @@ export class DesktopApp extends Component {
             {/* Emoji Triangle */}
             <EmojiTri 
               height={this.props.height}
+              artistPresets={this.props.artistPresets}
             />            
             {/* Input Section */}
             <div id="input-wrapper">              
