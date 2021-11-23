@@ -2,6 +2,7 @@ import './App.css';
 import React, { Component } from 'react';
 import DesktopApp from './components/desktopApp';
 import MobileApp from './components/mobileApp';
+import {artistPresets} from './content/preloadArrays.js';
 
 export class App extends Component {
   constructor() {
@@ -44,6 +45,7 @@ export class App extends Component {
             currentPrompt={this.state.currentPrompt}
             drawingInput={this.state.drawingInput}
             height={this.state.height}
+            artistPresets={artistPresets}
           />
         }
       </div>
