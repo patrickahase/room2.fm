@@ -2,6 +2,9 @@
 
 This is my refactoring of the room2 code base to set it up for continued use
 
+## Credits
+ - Curtis Jurgensen's custom cursor codepen was really helpful - https://codepen.io/curtisj44/pen/yGxJNX
+
 ## To Do
 - Do I need pixi-react-fiber? Uninstall if not
 - Update pre-load - how much do I need?
@@ -30,8 +33,10 @@ This is my refactoring of the room2 code base to set it up for continued use
 - Handle click and hold events ?
 
 # Drawing Input
+- Look into undo and erase functions with fabric js
 
 # Colour Selection
+- Finish Styling UI
 
 # Text Input
 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import AudioControls from './audioControls';
+import ColourPicker from './colourPicker';
+import DrawingCanvas from './drawingCanvas';
 import EmojiTri from './emojiTri';
 import IntroModal from './introModal';
 import Marquee from './marquee';
@@ -26,8 +28,7 @@ export class DesktopApp extends Component {
               {/* <Responses /> */}
             </div> 
             {/* Menu Overlay */}
-            <div id="settings-menu-wrapper">
-              {/* <SettingsMenu /> */}
+            <div id="settings-menu-wrapper">              
             </div>
             {/* Prompt Overlay */}
             <div id="current-prompt">
@@ -41,12 +42,40 @@ export class DesktopApp extends Component {
             {/* Input Section */}
             <div id="input-wrapper">              
               {this.props.drawingInput 
-                  ? <></>/* Drawing Input */
-                  : <></>/* Text Input */
+                ? <>{/* Drawing Input */}
+                  <DrawingCanvas 
+                    brushColour={"blue"}
+                    brushSize={10}
+                    />
+                </>
+                : <></>/* Text Input */
                 }
-            </div>            
-            {/* Audio Settings */}
-            <AudioControls />      
+            </div>
+            {/* Right UI Panel */}
+            <div id="right-ui-wrapper">
+              {/* Drawing Colour Picker */} 
+              <ColourPicker />
+              <button id="increase-brush-button">
+                B+
+              </button>
+              <button id="decrease-brush-button">
+                B-
+              </button>
+              <button id="erase-brush-button">
+                E
+              </button>
+              <button id="undo-button">
+                &#8604;
+              </button>
+              <button id="redo-button">
+                ↝
+              </button>
+              <button id="response-submit-button">
+                Submit Response
+              </button>
+              {/* Audio Settings */}
+              <AudioControls />              
+            </div> 
             {/* dead simple text chat */}
             <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>
           </>}
