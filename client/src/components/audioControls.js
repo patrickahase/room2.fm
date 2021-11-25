@@ -9,11 +9,13 @@ export class AudioControls extends Component {
   }
   render() {
     return (
-      <div id="audio-control-wrapper">              
-        <button id="mute-button" />
+      <>              
+        <button id="mute-button">
+          <MuteIcon />
+          </button>
         <div id="volume-wrapper">
         </div>
-      </div> 
+      </> 
     )
   }
   componentDidMount() { 
@@ -44,3 +46,34 @@ export class AudioControls extends Component {
 }
 
 export default AudioControls
+
+function MuteIcon(props){
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      transform="rotate(-90)">
+        {/* Speaker */}
+        <path d=" M 10,42
+                  A 2,2 90 0 1 12,40
+                  L 15,40 30,15 35,15
+                  Q 38,50 35,85 
+                  L 30,85 15,60 12,60
+                  A 2,2 90 0 1 10,58
+                  Z              
+        " />
+        {/* Volume Lines */}
+        <path fill="none" stroke="black" strokeLinecap="round" strokeWidth="6"
+              d=" M 45,35
+                  Q 55,50 45,65" />
+        <path fill="none" stroke="black" strokeLinecap="round" strokeWidth="6"
+              d=" M 55,22.5
+                  Q 77.33,50 55,77.5" />
+        <path fill="none" stroke="black" strokeLinecap="round" strokeWidth="6"
+              d=" M 65,10
+                  Q 101.66,50 65,90" />
+    </svg>
+  )
+}
