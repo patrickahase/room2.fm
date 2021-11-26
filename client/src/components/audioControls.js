@@ -27,6 +27,11 @@ export class AudioControls extends Component {
     for(let i = 0; i < notches; i++){
       let newDiv = document.createElement('div');
       newDiv.classList.add('volume-indicator');
+      /* TAKE OUT */
+      if(i > 1 ){
+        newDiv.classList.add('active');
+      }
+      
       newDiv.id = notches - i;
       newDiv.style.height = 100/notches + "%";
       newDiv.addEventListener('click', this.setVolume);
