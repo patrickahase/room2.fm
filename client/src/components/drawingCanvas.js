@@ -27,7 +27,22 @@ export class DrawingCanvas extends Component {
   componentDidMount() { 
     this.fabricInit();
    }
+   
   componentWillUnmount() {  }
+  componentDidUpdate(prevProps) {
+    /* update brush colour */
+    if (prevProps.brushColour !== this.props.brushColour) {
+      let newCanvasSetting = this.state.canvas;
+      newCanvasSetting.freeDrawingBrush.color = this.props.brushColour;
+      newCanvasSetting.freeDrawingCursor = this.getCustomCursor();
+    }
+    /* update brush size */
+    if (prevProps.brushSize !== this.props.brushSize) {
+      let newCanvasSetting = this.state.canvas;
+      newCanvasSetting.freeDrawingBrush.width = this.props.brushSize;
+      newCanvasSetting.freeDrawingCursor = this.getCustomCursor();
+    }  
+  }
   fabricInit(){
     let canvas = new fabric.Canvas('drawing-canvas', { isDrawingMode: true });
     let canvasWrapperRef = document.getElementById("drawing-canvas-wrapper"); 
@@ -35,9 +50,11 @@ export class DrawingCanvas extends Component {
     canvas.setHeight(canvasWrapperRef.offsetHeight);
     canvas.freeDrawingBrush.color = this.props.brushColour;    
     canvas.freeDrawingBrush.width = this.props.brushSize;
-    canvas.freeDrawingCursor = `url(${ this.getCustomCursor() }) ${ this.props.brushSize / 2 } ${ this.props.brushSize / 2 }, move`;
-    this.setState({ canvas: canvas }, 
+    canvas.freeDrawingCursor = this.getCustomCursor();
+    canvas.on('mouse:down', this.props.setIsDrawing);
+    this.setState({ canvas: canvas },
       () => { window.addEventListener('resize', this.updateCanvasDimensions); });
+    this.props.setCanvas(canvas);
   }
   updateCanvasDimensions() {
     let canvasWrapperRef = document.getElementById("drawing-canvas-wrapper");      
@@ -65,7 +82,7 @@ export class DrawingCanvas extends Component {
           </svg>
         `;
         
-        return `data:image/svg+xml;base64,${ window.btoa(circle) }`;
+        return `url(data:image/svg+xml;base64,${ window.btoa(circle) }) ${ this.props.brushSize / 2 } ${ this.props.brushSize / 2 }, move`;
       };
 }
 
