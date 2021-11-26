@@ -68,6 +68,21 @@ code {
 }
 
 
+/* Border Style */
+/* 
+.InsetBorder{
+  box-sizing: border-box;
+}
+.InsetBorder::after{
+  content: " ";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid var(--comp-col-03);
+}
+ */
 /* Modal Style */
 #modal-wrapper{
   position: absolute;
@@ -223,6 +238,17 @@ code {
   pointer-events: none;
   background-color: var(--comp-col-01);
 }
+#top-banner-wrapper::after{
+  content: " ";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid var(--comp-col-03);
+  border-image-source: linear-gradient(90deg, var(--comp-col-02), var(--comp-col-03));
+  border-image-slice: 1;
+}
 #marquee-wrapper {
   position: absolute;
   top:0%;
@@ -252,9 +278,9 @@ code {
   100% { transform: translateX(-33.3333%); }
 }
 #cd-gif{
-  height: 7vh;
+  height: 100%;
   width: 7vh;
-  border: rgb(155, 155, 155) solid 0.2vw;
+  border-right: var(--comp-col-03) double 4px;
 }
 
 /* Background Visuals */
@@ -302,6 +328,7 @@ code {
   white-space: pre-line;
   background-color: rgb(31, 33, 28);
   user-select: none;
+  border: 4px solid transparent;
 }
 
 /* Emoji Triangle */
@@ -316,6 +343,16 @@ code {
   justify-content: center;
   align-items: center;
   z-index: 1;
+}
+#emoji-tri-wrapper::after{
+  content: " ";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 2px solid var(--comp-col-01);
+  z-index: -1;
 }
 #emoji-tri-gradients{
   width: 100%;
@@ -351,12 +388,23 @@ code {
   height: 25%;
   width: calc(75vw - 50vh);
 }
+#input-wrapper::after{
+  content: " ";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  border: 2px solid var(--comp-col-01);
+  z-index: 5;
+  pointer-events: none;
+}
 
 /* Drawing Canvas */
 #drawing-canvas-wrapper{
   width: 100%;
   height: 100%;
-  background-color: wheat;
+  background-color: white;
 }
 #drawing-canvas{
   width: 100%;
@@ -441,7 +489,32 @@ code {
 #response-submit-button{
   grid-column: 1/5;
   grid-row: 5/6;
+  border: none;
+  background-color: var(--comp-col-03);
+  font-size: min(.85vw, 8vh);
+  font-family: 'IBM Plex Sans Condensed', sans-serif; 
+  color: var(--comp-col-01);  
 }
+
+#response-submit-button::after{
+  content: " ";
+  position: absolute;
+  left: 4px;
+  bottom: 4px;
+  width: calc(80% - 12px);
+  height: calc(20% - 12px);
+  border: 2px var(--comp-col-01);
+  border-style: dotted solid;
+  border-radius: 6px 0px;
+  transition: 0.2s;
+  background: #22232311;  
+}
+#response-submit-button:hover::after{
+  border-radius: 12px 0px;
+  background: transparent;
+}
+
+
 
 /* Audio Section */
 #audio-control-wrapper{
@@ -452,6 +525,27 @@ code {
 #mute-button{
   grid-column: 5/6;
   grid-row: 5/6;
+  border: none;
+  background-color: var(--comp-col-03);
+}
+#mute-button::after{
+  content: " ";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: calc(20% - 11px);
+  height: calc(20% - 4px);
+  border: 2px var(--comp-col-01);
+  border-style: none solid;
+  /* border-radius: 0px 6px; */
+  transition: 0.2s;
+  background: #22232311;
+}
+#mute-button:hover::after{
+  border-radius: 0px 8px;
+  height: calc(20% - 12px);
+  border-style: solid;
+  background: transparent;
 }
 #volume-wrapper{
   grid-column: 5/6;
@@ -459,23 +553,43 @@ code {
   background-color: #222323;
   border: 2px solid var(--comp-col-01);
 }
+#volume-wrapper::after{
+  content: " ";
+  position: absolute;
+  right: 4px;
+  top: 0px;
+  width: calc(20% - 11px);
+  height: 80%;
+  border: 2px var(--comp-col-01);
+  opacity: 0.8;
+  border-style: none solid;
+  pointer-events: none;
+  transition: 0.2s;
+  background: #22232311;
+  
+}
+#volume-wrapper:hover::after{
+  opacity: 1.0;
+  background: transparent;
+  
+}
 .volume-indicator{
   width: 100%;
   background-color: var(--comp-col-03);
   opacity: 0.5;
-  border: 2px dashed var(--comp-col-02);
+  /* border: 1.2px dotted var(--comp-col-02); */
 }
 .volume-indicator.active{
   opacity: 1;
-  border: 2px solid var(--comp-col-02);
+  /* border: 1.5px solid var(--comp-col-02); */
 }
 .volume-indicator:nth-child(odd){
-  border-radius: 10px 0px;
+  /* border-radius: 10px 0px; */
   border-right: none;
   border-bottom: none;
 }
 .volume-indicator:nth-child(even){
-  border-radius: 0px 10px;
+  /* border-radius: 0px 10px; */
   border-bottom: none;
   border-left: none;
 }
@@ -519,3 +633,4 @@ code {
   left: 30vw;
 }
 }
+

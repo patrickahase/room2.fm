@@ -105,7 +105,7 @@ export class DesktopApp extends Component {
                 ↝
               </button>
               <button id="response-submit-button">
-                Submit Response
+                SUBMIT RESPONSE
               </button>
               {/* Audio Settings */}
               <AudioControls />              
@@ -202,6 +202,20 @@ export class DesktopApp extends Component {
       this.state.drawingCanvas.loadFromJSON(newCanvasState);      
     }  
   }
+  /* getCSSRule(ruleName) {
+    ruleName = ruleName.toLowerCase();
+    var result = null;
+    var find = Array.prototype.find;
+
+    find.call(document.styleSheets, styleSheet => {
+        result = find.call(styleSheet.cssRules, cssRule => {
+            return cssRule instanceof CSSStyleRule 
+                && cssRule.selectorText.toLowerCase() === ruleName;
+        });
+        return result != null;
+    });
+    return result;
+  } */
 }
 
 export default DesktopApp

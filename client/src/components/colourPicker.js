@@ -21,6 +21,11 @@ export class ColourPicker extends Component {
       </>      
     )
   }
+  componentDidMount(){
+    document.getElementById('col1Select').addEventListener("input", this.colorInputChange.bind(this), false);
+    document.getElementById('col2Select').addEventListener("input", this.colorInputChange.bind(this), false);
+    document.getElementById('col3Select').addEventListener("input", this.colorInputChange.bind(this), false);
+  }
   click(){
     let selectors = document.getElementsByClassName("col-select"); 
     for (let i = 0; i < 3; i++){
@@ -44,6 +49,11 @@ export class ColourPicker extends Component {
       }
     }
   }
+  colorInputChange(e){
+    let colNum = e.target.id.charAt(3);
+    document.documentElement.style.setProperty('--comp-col-0'+colNum, e.target.value);
+  }
+  
 }
 
 export default ColourPicker
