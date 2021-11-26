@@ -1,6 +1,12 @@
 import React, { Component } from 'react'
 
 export class ColourPicker extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+    }
+    this.click = this.click.bind(this);
+  }
   render() {
     return (
       <>
@@ -8,15 +14,15 @@ export class ColourPicker extends Component {
         <SwapIcon />
       </button>
       <div id="col-select-wrapper">
-        <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue="#222323" />
-        <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue="#ff4adc" />
-        <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue="#3dff98" />
+        <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={this.props.colour1} />
+        <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={this.props.colour2} />
+        <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue={this.props.colour3} />
       </div>
       </>      
     )
   }
   click(){
-    let selectors = document.getElementsByClassName("col-select");
+    let selectors = document.getElementsByClassName("col-select"); 
     for (let i = 0; i < 3; i++){
       let cl = selectors[i].classList;
       switch(true){
@@ -31,6 +37,7 @@ export class ColourPicker extends Component {
         case cl.contains('third'):
         cl.remove('third');
         cl.add('first');
+        this.props.changeBrushColour(selectors[i].value);
         break;
         default:
         break;

@@ -4,6 +4,7 @@ This is my refactoring of the room2 code base to set it up for continued use
 
 ## Credits
  - Curtis Jurgensen's custom cursor codepen was really helpful - https://codepen.io/curtisj44/pen/yGxJNX
+ - Matthew Jones for his article on state management for undo/redo with fabric = https://exceptionnotfound.net/drawing-with-fabricjs-and-typescript-part-7-undo-redo/
 
 ## To Do
 - Do I need pixi-react-fiber? Uninstall if not
@@ -24,7 +25,7 @@ This is my refactoring of the room2 code base to set it up for continued use
 # Emoji Triangle
 - Is this useful still good design? Does anyone actually get something out of using it - especially if the time scale changes
 - Is equilateral the right answer?
-- Colour Ballance of the Y-Axis Gradient
+- Colour Balance of the Y-Axis Gradient
 
 # Lissajous Display
 
@@ -33,7 +34,10 @@ This is my refactoring of the room2 code base to set it up for continued use
 - Handle click and hold events ?
 
 # Drawing Input
-- Look into undo and erase functions with fabric js
+- ~~Look into undo and erase functions with fabric js~~
+- ~~save initial state to undo stack~~
+- fix not always undoing to first state - tied into redo somehow
+
 
 # Colour Selection
 - Finish Styling UI
