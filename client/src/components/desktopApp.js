@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import AudioControls from './audioControls';
-import ColourPicker from './colourPicker';
 import DrawingCanvas from './drawingCanvas';
 import EmojiTri from './emojiTri';
 import IntroModal from './introModal';
 import Marquee from './marquee';
 import { fabric } from 'fabric';
+import DrawingTools from './drawingTools';
 
 export class DesktopApp extends Component {
   constructor(props) {
@@ -82,28 +82,14 @@ export class DesktopApp extends Component {
             </div>
             {/* Right UI Panel */}
             <div id="right-ui-wrapper">
-              {/* Drawing Colour Picker */} 
-              <ColourPicker 
+              <DrawingTools
                 colour1={this.state.colour1}
                 colour2={this.state.colour2}
                 colour3={this.state.colour3}
                 changeBrushColour={this.changeBrushColour.bind(this)}
-              />
-              <button id="increase-brush-button" onClick={this.changeBrushSize}>
-                B+
-              </button>
-              <button id="decrease-brush-button" onClick={this.changeBrushSize}>
-                B-
-              </button>
-              <button id="erase-brush-button" onClick={this.toggleEraser}>
-                E
-              </button>
-              <button id="undo-button" onClick={this.undoDrawing}>
-                &#8604;
-              </button>
-              <button id="redo-button" onClick={this.redoDrawing}>
-                ↝
-              </button>
+                changeBrushSize={this.changeBrushSize.bind(this)} />
+
+              
               <button id="response-submit-button">
                 SUBMIT RESPONSE
               </button>
@@ -122,6 +108,9 @@ export class DesktopApp extends Component {
   }
   changeBrushColour(newColour){
     this.setState({ brushColour: newColour });
+  }
+  changeBrushSize(newSize){
+    this.setState({ brushSize: newSize });
   }
   changeBrushSize = (e) =>{
     if(e.target.id === "increase-brush-button"){
@@ -202,6 +191,7 @@ export class DesktopApp extends Component {
       this.state.drawingCanvas.loadFromJSON(newCanvasState);      
     }  
   }
+  // used once in drawing tools
   /* getCSSRule(ruleName) {
     ruleName = ruleName.toLowerCase();
     var result = null;

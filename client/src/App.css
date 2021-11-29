@@ -418,17 +418,24 @@ code {
   height: 25vh;
   right: 25%;
   bottom: 0%;
-  background-color: var(--comp-col-01);
+  background-color: var(--comp-col-03);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
 }
+#drawing-tools-wrapper{
+  grid-column: 1/5;
+  grid-row: 1/5;
+  position: relative;
+}
 
 /* Colour Selector */
 #col-select-wrapper{
-  position: relative;
-  grid-column: 2/5;
-  grid-row: 3/5;
+  position: absolute;
+  left: 5%;
+  top: 15%;
+  width: 90%;
+  height: 60%;
 }
 .col-select{
   position: absolute;
@@ -460,31 +467,125 @@ code {
   z-index: 1;
 }
 #col-swap-button{
-  grid-column: 2/5;
-  grid-row: 2/3;
+  position: relative;
+  width:5vh;
+  height:5vh;
+  left: 37.5%;
+  top: 0%;
+  /* position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 10vw;
+  height: 10vh; */
+  z-index: 10;
+  background: none;
+  border: none;
+  stroke: var(--comp-col-01);
+  fill: var(--comp-col-01);
 }
+#word-change{
+  position: absolute;
+  top: 0%;
+  left:0%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 15%;
+  width: 37.5%;
+  pointer-events: none;
+  font-size: min(.8vw, 9vh);
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  color: var(--comp-col-01);
+  opacity: 0.5;
+}
+#word-colour{
+  position: absolute;
+  top: 0%;
+  right:0%;
+  display: flex;
+  align-items: center;
+  height: 15%;
+  width: 37.5%;
+  pointer-events: none;
+  font-size: min(.8vw, 9vh);
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  color: var(--comp-col-01);
+  opacity: 0.5;
+}
+
 #increase-brush-button{
-  grid-column: 1/2;
-  grid-row: 3/4;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  left: 8.5%;
+  bottom: 25%;
+  border: none;
+  padding: 0;
+  border-radius: 0;
 }
+#increase-brush-circle{
+  transition: 1s;
+  transform-origin: center;
+}
+#increase-brush-button:hover #increase-brush-circle{
+  transform: scale(1.3);
+}
+.GrowthArrow{
+  transition: 1s;
+}
+#increase-brush-button:hover .GrowthArrow{
+  stroke-dashoffset: 0;
+  stroke-width: 4px;
+}
+#growth-arrowhead{
+  stroke-dashoffset: 0;
+  stroke-width: 4px;
+  transition: 1s;
+  transform: scale(0);
+}
+#increase-brush-button:hover #growth-arrowhead{
+  transform: scale(1);
+}
+
 #decrease-brush-button{
-  grid-column: 1/2;
-  grid-row: 4/5;
+  position: absolute;
+  width: 20%;
+  height: 20%;
+  right: 8.5%;
+  bottom: 25%;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+}
+#decrease-brush-circle{
+  transition: 1s;
+  transform-origin: center;
+}
+#decrease-brush-circle:hover{
+  transform: scale(0.65);
 }
 #erase-brush-button{
   grid-column: 1/2;
   grid-row: 2/3;
 }
 #undo-button{
-  grid-column: 1/3;
+  grid-column: 1/2;
   grid-row: 1/2;
+  border-style: dotted none none dotted;
 }
 #redo-button{
-  grid-column: 3/5;
+  grid-column: 2/3;
   grid-row: 1/2;
+  border-style: none dotted dotted none;
 }
-
-
+.RightUIButton{
+  background-color: var(--comp-col-03);
+  border-style: dotted dotted none none;
+  border-color: var(--comp-col-01);
+  font-size: min(1.5vw, 16vh);
+  font-family: 'IBM Plex Sans Condensed', sans-serif; 
+  border-radius: 6px;
+}
 /* Submit Response Button */
 #response-submit-button{
   grid-column: 1/5;
@@ -547,6 +648,17 @@ code {
   border-style: solid;
   background: transparent;
 }
+#mute-speaker{
+  fill: var(--comp-col-01);
+}
+.MuteLines{
+  opacity: 0.5;
+  transition: 0.5s;
+  stroke: var(--comp-col-01);
+}
+.MuteLines.active{
+  opacity: 1;
+}
 #volume-wrapper{
   grid-column: 5/6;
   grid-row: 1/5;
@@ -570,8 +682,7 @@ code {
 }
 #volume-wrapper:hover::after{
   opacity: 1.0;
-  background: transparent;
-  
+  background: transparent;  
 }
 .volume-indicator{
   width: 100%;

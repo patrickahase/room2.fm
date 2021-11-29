@@ -10,6 +10,7 @@ This is my refactoring of the room2 code base to set it up for continued use
 - Do I need pixi-react-fiber? Uninstall if not
 - Update pre-load - how much do I need?
 - Replace Artist Presets object with data from server
+- Add onmousehold style for buttons
 
 # Modal
 - Modal for Mobile ~ Decided to wait until later to make sure mobile layout is consistant - perhaps the modal continue button will need to match the prompt response button in some way ~
@@ -32,15 +33,18 @@ This is my refactoring of the room2 code base to set it up for continued use
 # Sound Controls
 - Add some animations to the volume notch controls
 - Handle click and hold events ?
+- Distinguish volume notch?
 
 # Drawing Input
 - ~~Look into undo and erase functions with fabric js~~
 - ~~save initial state to undo stack~~
 - fix not always undoing to first state - tied into redo somehow
+- maybe the brush buttons just need an arrow next to them
 
 
 # Colour Selection
 - Finish Styling UI
+- Change in colour 1 changes brush (and cursor) colour too
 
 # Text Input
 
