@@ -6,6 +6,8 @@ import IntroModal from './introModal';
 import Marquee from './marquee';
 import { fabric } from 'fabric';
 import DrawingTools from './drawingTools';
+import SettingsMenu from './settingsMenu';
+import VideoStreamPlayer from './videoStreamPlayer';
 
 export class DesktopApp extends Component {
   constructor(props) {
@@ -13,12 +15,12 @@ export class DesktopApp extends Component {
     this.state = {
 
       // ui & painter palette
-      colour1: "#222323",
-      colour2: "#ff4adc",
-      colour3: "#3dff98",
+      colours: {
+        colour1: "#222323",
+        colour2: "#ff4adc",
+        colour3: "#3dff98"},      
       
       // drawing settings
-      brushColour: "#222323",
       brushSize: 8,
 
       // undo/redo settings
@@ -30,6 +32,14 @@ export class DesktopApp extends Component {
       isDrawing: false,
       isEraser: false,
       savedBrush: null,
+      isMuted: false,
+
+      //video stream player
+      streamPlayer: null,
+
+      // emoji triangle values
+      emojiX: 0.5,
+      emojiY: 0.5,
     }
     this.setCanvas = this.setCanvas.bind(this);
     this.saveCanvasState = this.saveCanvasState.bind(this);
@@ -37,6 +47,7 @@ export class DesktopApp extends Component {
     this.toggleEraser = this.toggleEraser.bind(this);
     this.undoDrawing = this.undoDrawing.bind(this);
     this.redoDrawing = this.redoDrawing.bind(this);
+    this.setStreamPlayer = this.setStreamPlayer.bind(this);
   }
   render() {
     return (
@@ -49,14 +60,15 @@ export class DesktopApp extends Component {
             {/* Background Visuals */}          
             <div id="bg-vis-wrapper">              
               {/* <BGVis /> */}
+              <VideoStreamPlayer
+                setStreamPlayer={this.setStreamPlayer} />
             </div>
             {/* Response Overlay */}
             <div id="response-wrapper">              
               {/* <Responses /> */}
             </div> 
             {/* Menu Overlay */}
-            <div id="settings-menu-wrapper">              
-            </div>
+            <SettingsMenu />
             {/* Prompt Overlay */}
             <div id="current-prompt">
               {this.props.currentPrompt}
@@ -71,7 +83,7 @@ export class DesktopApp extends Component {
               {this.props.drawingInput 
                 ? <>{/* Drawing Input */}
                   <DrawingCanvas 
-                    brushColour={this.state.brushColour}
+                    brushColour={this.state.colours.colour1}
                     brushSize={this.state.brushSize}
                     setCanvas={this.setCanvas}
                     setIsDrawing={this.setIsDrawing}
@@ -83,18 +95,18 @@ export class DesktopApp extends Component {
             {/* Right UI Panel */}
             <div id="right-ui-wrapper">
               <DrawingTools
-                colour1={this.state.colour1}
-                colour2={this.state.colour2}
-                colour3={this.state.colour3}
-                changeBrushColour={this.changeBrushColour.bind(this)}
-                changeBrushSize={this.changeBrushSize.bind(this)} />
-
-              
+                colours={this.state.colours}
+                changeColourOrder={this.changeColourOrder.bind(this)}
+                changeBrushSize={this.changeBrushSize.bind(this)} />              
               <button id="response-submit-button">
                 SUBMIT RESPONSE
               </button>
               {/* Audio Settings */}
-              <AudioControls />              
+              <AudioControls
+                muteAudio={this.muteAudio.bind(this)}
+                isMuted={this.state.isMuted}
+                changeVolume={this.changeVolume.bind(this)}
+              />             
             </div> 
             {/* dead simple text chat */}
             <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>
@@ -106,14 +118,19 @@ export class DesktopApp extends Component {
     // update css style sheet
     document.addEventListener('mouseup', this.saveCanvasState);
   }
-  changeBrushColour(newColour){
-    this.setState({ brushColour: newColour });
+  changeColourOrder(){
+    let newColourOrder = {
+      colour1: this.state.colours.colour3,
+      colour2: this.state.colours.colour1,
+      colour3: this.state.colours.colour2,
+    };
+    this.setState({ colours: newColourOrder });
   }
   changeBrushSize(newSize){
     this.setState({ brushSize: newSize });
   }
   changeBrushSize = (e) =>{
-    if(e.target.id === "increase-brush-button"){
+    if(e.target.id === "increase-brush-circle"){
       if(this.state.brushSize < 20){        
         this.setState(prevState => ({ brushSize: prevState.brushSize + 2}))
       }      
@@ -191,21 +208,52 @@ export class DesktopApp extends Component {
       this.state.drawingCanvas.loadFromJSON(newCanvasState);      
     }  
   }
-  // used once in drawing tools
-  /* getCSSRule(ruleName) {
-    ruleName = ruleName.toLowerCase();
-    var result = null;
-    var find = Array.prototype.find;
-
-    find.call(document.styleSheets, styleSheet => {
-        result = find.call(styleSheet.cssRules, cssRule => {
-            return cssRule instanceof CSSStyleRule 
-                && cssRule.selectorText.toLowerCase() === ruleName;
-        });
-        return result != null;
-    });
-    return result;
-  } */
+  setStreamPlayer(streamPlayer){
+    this.setState({ streamPlayer: streamPlayer })
+  }
+  muteAudio(){
+    if(this.state.isMuted){
+      this.setState({ isMuted: false });
+      this.state.streamPlayer.muted(false);
+    } else {
+      this.setState({ isMuted: true });
+      this.state.streamPlayer.muted(true);
+    }    
+  }
+  changeVolume(newVolume){
+    this.state.streamPlayer.volume(newVolume);
+  }
+  /* Desktop DB Connections */
+  // init db and then triger update loop
+  initEmTriDB(){
+    let date = new Date();
+    let currentMinute = date.getUTCMinutes() + (date.getUTCHours() * 60);
+    fetch(`/api/emtrisetup`, {
+      headers: {
+        'Content-type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({emojiX: this.state.emojiX, emojiY: this.state.emojiY, umin: currentMinute})
+    })
+    .then(res => res.json())
+    .then(res => this.setTableId(res.data))
+    .then(() => this.updateEmTriDB());
+  }
+  updateEmTriDB(){
+    let date = new Date();
+    let currentMinute = date.getUTCMinutes() + (date.getUTCHours() * 60);
+    fetch(`/api/emtriupdate`, {
+      headers: {
+        'Content-type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify({emojiX: this.state.emojiX, emojiY: this.state.emojiY, umin: currentMinute, tableId: this.state.tableId, lastTextPrompt: this.state.lastTextPrompt, lastImagePrompt: this.state.lastImagePrompt})
+    })
+    .then(response => response.json())
+    .then(res => this.mapResponseData(res.data));
+    this.updateEmTriDB = this.updateEmTriDB.bind(this);
+    setTimeout(this.updateEmTriDB, 7000);
+  }
 }
 
 export default DesktopApp

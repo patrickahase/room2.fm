@@ -26,7 +26,7 @@ export class EmojiTri extends Component {
             {/* Gradient Triangle - height = width * 0.866 */}
             <polygon points="0,0 1,0 0.5,1" />
           </clipPath>
-          <foreignObject x="10" y="15.36" width="80" height="69.28" clip-path="url(#emoji-tri-clip-path)">
+          <foreignObject x="10" y="15.36" width="80" height="69.28" clipPath="url(#emoji-tri-clip-path)">
             <div id="emoji-tri-gradients" xmlns="http://www.w3.org/1999/xhtml" />
           </foreignObject>
           {/* 1.6vw */}
@@ -44,9 +44,9 @@ export class EmojiTri extends Component {
           <defs>
             {/* Gradient for the selector */}
             <radialGradient id="stroke-gradient">
-              <stop offset="70%"   stop-color="transparent" />
-              <stop offset="90%"   stop-color="white" />
-              <stop offset="95%"   stop-color="black" />
+              <stop offset="70%" stopColor="transparent" />
+              <stop offset="90%" stopColor="white" />
+              <stop offset="95%" stopColor="black" />
             </radialGradient>
           </defs>
         </svg>              

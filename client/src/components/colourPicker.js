@@ -16,9 +16,9 @@ export class ColourPicker extends Component {
       <div id="word-change">CHANGE\</div>
       <span id="word-colour">/COLOUR</span>
       <div id="col-select-wrapper">
-        <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={this.props.colour1} />
-        <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={this.props.colour2} />
-        <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue={this.props.colour3} />
+        <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={this.props.colours.colour1} />
+        <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={this.props.colours.colour2} />
+        <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue={this.props.colours.colour3} />
       </div>
       </>      
     )
@@ -29,7 +29,7 @@ export class ColourPicker extends Component {
     document.getElementById('col3Select').addEventListener("input", this.colorInputChange.bind(this), false);
   }
   click(){
-    let selectors = document.getElementsByClassName("col-select"); 
+    let selectors = document.getElementsByClassName("col-select");
     for (let i = 0; i < 3; i++){
       let cl = selectors[i].classList;
       switch(true){
@@ -44,12 +44,12 @@ export class ColourPicker extends Component {
         case cl.contains('third'):
         cl.remove('third');
         cl.add('first');
-        this.props.changeBrushColour(selectors[i].value);
         break;
         default:
         break;
       }
     }
+    this.props.changeColourOrder();
   }
   colorInputChange(e){
     let colNum = e.target.id.charAt(3);
@@ -76,7 +76,7 @@ function SwapIcon(){
         {/* <rect width="100%" height="1%" y="50%" fill="blue" />
         <rect width="1%" height="100%" x="25%" fill="blue" /> */}
         {/* Line */}
-        <path fill="none" strokeWidth="4" marker-end="url(#arrowhead)" 
+        <path fill="none" strokeWidth="4" markerEnd="url(#arrowhead)" 
               d=" M 25, 50
                   L 0,13.4 100,13.4 50,86.6
                   " />

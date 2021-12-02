@@ -45,9 +45,11 @@ This is my refactoring of the room2 code base to set it up for continued use
 # Colour Selection
 - Finish Styling UI
 - Change in colour 1 changes brush (and cursor) colour too
+- fix colour change input - messing with svgs
 
 # Text Input
 
 # Intro Overlay
 
 # Options Menu
+- restart stream connection option

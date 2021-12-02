@@ -64,12 +64,12 @@ export class App extends Component {
   updateWindowDimensions() {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
-
   toggleModal() {
     this.setState(prevState => ({
       modalIsOpen: !prevState.modalIsOpen
     }))
   }
+    
 }
 
 export default App
