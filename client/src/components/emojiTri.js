@@ -44,7 +44,7 @@ export class EmojiTri extends Component {
           <defs>
             {/* Gradient for the selector */}
             <radialGradient id="stroke-gradient">
-              <stop offset="70%" stopColor="transparent" />
+              <stop offset="0%" stopColor="transparent" />
               <stop offset="90%" stopColor="white" />
               <stop offset="95%" stopColor="black" />
             </radialGradient>

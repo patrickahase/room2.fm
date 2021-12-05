@@ -117,6 +117,7 @@ export class DesktopApp extends Component {
   componentDidMount() {  
     // update css style sheet
     document.addEventListener('mouseup', this.saveCanvasState);
+    this.initEmTriDB();
   }
   changeColourOrder(){
     let newColourOrder = {
@@ -226,33 +227,14 @@ export class DesktopApp extends Component {
   /* Desktop DB Connections */
   // init db and then triger update loop
   initEmTriDB(){
-    let date = new Date();
-    let currentMinute = date.getUTCMinutes() + (date.getUTCHours() * 60);
-    fetch(`/api/emtrisetup`, {
+    fetch(`/api/getScheduleInit`, {
       headers: {
         'Content-type': 'application/json'
       },
-      method: 'POST',
-      body: JSON.stringify({emojiX: this.state.emojiX, emojiY: this.state.emojiY, umin: currentMinute})
-    })
-    .then(res => res.json())
-    .then(res => this.setTableId(res.data))
-    .then(() => this.updateEmTriDB());
-  }
-  updateEmTriDB(){
-    let date = new Date();
-    let currentMinute = date.getUTCMinutes() + (date.getUTCHours() * 60);
-    fetch(`/api/emtriupdate`, {
-      headers: {
-        'Content-type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify({emojiX: this.state.emojiX, emojiY: this.state.emojiY, umin: currentMinute, tableId: this.state.tableId, lastTextPrompt: this.state.lastTextPrompt, lastImagePrompt: this.state.lastImagePrompt})
+      method: 'GET'
     })
     .then(response => response.json())
-    .then(res => this.mapResponseData(res.data));
-    this.updateEmTriDB = this.updateEmTriDB.bind(this);
-    setTimeout(this.updateEmTriDB, 7000);
+    .then(res => console.log(res.data));
   }
 }
 

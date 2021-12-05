@@ -4,7 +4,10 @@
   "description": "interactive live music site",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -17,7 +20,10 @@
   },
   "homepage": "https://github.com/patrickahase/room2.fm#readme",
   "dependencies": {
+    "concurrently": "^6.4.0",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.15"
   }
 }
