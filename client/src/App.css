@@ -294,11 +294,14 @@ code {
   z-index: 1;
 }
 
+<<<<<<< HEAD
 #video-stream-wrapper{
   width: 100%;
   height: 100%;
 }
 
+=======
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
 /* Responses from the Server */
 #response-wrapper{
   position: absolute;
@@ -307,7 +310,10 @@ code {
   left: 0%;
   top: 7%;
   z-index: 2;
+<<<<<<< HEAD
   pointer-events: none;
+=======
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
 }
 
 /* Settings Menu */
@@ -315,6 +321,7 @@ code {
   position: absolute;
   left: 0%;
   top: 7%;
+<<<<<<< HEAD
   width: 5%;
   z-index: 3;
   display: flex;
@@ -328,6 +335,11 @@ code {
   display: flex;
   flex-direction: column;
 }
+=======
+  z-index: 3;
+}
+
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
 /* Current Prompt */
 #current-prompt{
   font-size: max(1.0vw, 0.8em);
@@ -434,11 +446,16 @@ code {
   height: 25vh;
   right: 25%;
   bottom: 0%;
+<<<<<<< HEAD
   background-color: var(--comp-col-03);
+=======
+  background-color: var(--comp-col-01);
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
 }
+<<<<<<< HEAD
 #drawing-tools-wrapper{
   grid-column: 1/5;
   grid-row: 1/5;
@@ -452,6 +469,14 @@ code {
   top: 15%;
   width: 90%;
   height: 60%;
+=======
+
+/* Colour Selector */
+#col-select-wrapper{
+  position: relative;
+  grid-column: 2/5;
+  grid-row: 3/5;
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
 }
 .col-select{
   position: absolute;
@@ -483,6 +508,7 @@ code {
   z-index: 1;
 }
 #col-swap-button{
+<<<<<<< HEAD
   position: relative;
   width:5vh;
   height:5vh;
@@ -583,6 +609,33 @@ code {
   font-size: min(1.5vw, 16vh);
   font-family: 'IBM Plex Sans Condensed', sans-serif; 
 }
+=======
+  grid-column: 2/5;
+  grid-row: 2/3;
+}
+#increase-brush-button{
+  grid-column: 1/2;
+  grid-row: 3/4;
+}
+#decrease-brush-button{
+  grid-column: 1/2;
+  grid-row: 4/5;
+}
+#erase-brush-button{
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+#undo-button{
+  grid-column: 1/3;
+  grid-row: 1/2;
+}
+#redo-button{
+  grid-column: 3/5;
+  grid-row: 1/2;
+}
+
+
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
 /* Submit Response Button */
 #response-submit-button{
   grid-column: 1/5;
@@ -611,9 +664,12 @@ code {
   border-radius: 12px 0px;
   background: transparent;
 }
+<<<<<<< HEAD
 #response-submit-button:active::after{
   background: #22232344;
 }
+=======
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
 
 
 
@@ -648,6 +704,7 @@ code {
   border-style: solid;
   background: transparent;
 }
+<<<<<<< HEAD
 #mute-button:active::after{
   background: #22232344;
 }
@@ -662,6 +719,8 @@ code {
 .MuteLines.active{
   opacity: 1;
 }
+=======
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
 #volume-wrapper{
   grid-column: 5/6;
   grid-row: 1/5;
@@ -685,7 +744,12 @@ code {
 }
 #volume-wrapper:hover::after{
   opacity: 1.0;
+<<<<<<< HEAD
   background: transparent;  
+=======
+  background: transparent;
+  
+>>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
 }
 .volume-indicator{
   width: 100%;
