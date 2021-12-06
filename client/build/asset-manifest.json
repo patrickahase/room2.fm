@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bc649a73.chunk.css",
+    "main.js": "/static/js/main.73be6995.chunk.js",
+    "main.js.map": "/static/js/main.73be6995.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0f16f66c.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0f16f66c.js.map",
+    "static/css/2.0a7915ad.chunk.css": "/static/css/2.0a7915ad.chunk.css",
+    "static/js/2.1f7c32bc.chunk.js": "/static/js/2.1f7c32bc.chunk.js",
+    "static/js/2.1f7c32bc.chunk.js.map": "/static/js/2.1f7c32bc.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.0a7915ad.chunk.css.map": "/static/css/2.0a7915ad.chunk.css.map",
+    "static/css/main.bc649a73.chunk.css.map": "/static/css/main.bc649a73.chunk.css.map",
+    "static/js/2.1f7c32bc.chunk.js.LICENSE.txt": "/static/js/2.1f7c32bc.chunk.js.LICENSE.txt",
+    "static/media/alien.png": "/static/media/alien.381f0676.png",
+    "static/media/blossoming-flower.png": "/static/media/blossoming-flower.5f78e6a8.png",
+    "static/media/butterfly.png": "/static/media/butterfly.22ba9572.png",
+    "static/media/desert.png": "/static/media/desert.afb4dc6a.png",
+    "static/media/leaf-in-wind.png": "/static/media/leaf-in-wind.b5dea42c.png",
+    "static/media/mushroom.png": "/static/media/mushroom.6f17f235.png",
+    "static/media/slowdiscpixel.gif": "/static/media/slowdiscpixel.685ade7f.gif",
+    "static/media/spiral-shell.png": "/static/media/spiral-shell.49e9854a.png",
+    "static/media/teddy-bear.png": "/static/media/teddy-bear.a4c592be.png",
+    "static/media/woozy.png": "/static/media/woozy.df9645ec.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0f16f66c.js",
+    "static/css/2.0a7915ad.chunk.css",
+    "static/js/2.1f7c32bc.chunk.js",
+    "static/css/main.bc649a73.chunk.css",
+    "static/js/main.73be6995.chunk.js"
+  ]
+}
