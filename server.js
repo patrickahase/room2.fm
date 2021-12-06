@@ -6,8 +6,8 @@ const path = require('path');
 const app = express();
 app.use(express.json());
 
-/* // load api endpoints for client app
-const endPoints = require('./api/room2ClientAPI'); */
+// load api endpoints for client app
+const endPoints = require('./api/room2ClientAPI');
 
 // direct to build folder
 app.use(express.static(path.join(__dirname, 'client/build' )));
@@ -17,8 +17,8 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname, '/client/build/index.html' );
 });
 
-/* // reroute API calls to API endpoints script
-app.use('/api/', endPoints ); */
+// reroute API calls to API endpoints script
+app.use('/api/', endPoints );
 
 // look more into process stuff
 const port = process.env.PORT || 33061;
