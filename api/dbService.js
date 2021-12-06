@@ -21,7 +21,7 @@ const connectSettings = {
 const connection = mysql.createConnection(connectSettings);
 
 const sqlQueries = {
-  getScheduleInitQ: `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType FROM LIVE_SCHEDULE WHERE id = 1;`,
+  getScheduleInitQ: `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType' FROM LIVE_SCHEDULE WHERE id = 1;`,
   /* insertTextQ:  `INSERT INTO liveTextPrompts (textPrompt, umin) VALUES (?, ?);
                      INSERT INTO liveTextPromptsBU (textPrompt, umin) VALUES (?, ?);`,
   insertImageQ: `INSERT INTO liveImagePrompts (imagePrompts, umin) VALUES (?, ?);
