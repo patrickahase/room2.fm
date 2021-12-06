@@ -35,11 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
   },
   "devDependencies": {
     "video.js": "^7.17.0"
-=======
->>>>>>> 64fb46d7d74262fa4ccde706309f23b35e2344e6
   }
 }
