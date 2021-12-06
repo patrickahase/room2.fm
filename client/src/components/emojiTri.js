@@ -31,13 +31,13 @@ export class EmojiTri extends Component {
           </foreignObject>
           {/* 1.6vw */}
           <foreignObject x="0" y="0" width="20" height="20">
-            <img id="emoji-1" alt={this.props.artistPresets[0].emoji01alt} src={this.props.artistPresets[0].emoji01} />
+            <img id="emoji-1" alt={this.props.emoji1.alt} src={this.props.emoji1.src} />
           </foreignObject>
           <foreignObject x="80" y="0" width="20" height="20">
-            <img id="emoji-2" alt={this.props.artistPresets[0].emoji02alt} src={this.props.artistPresets[0].emoji02} />
+            <img id="emoji-2" alt={this.props.emoji2.alt} src={this.props.emoji2.src} />
           </foreignObject>
           <foreignObject x="40" y="80" width="20" height="20">
-            <img id="emoji-3" alt={this.props.artistPresets[0].emoji03alt} src={this.props.artistPresets[0].emoji03} />
+            <img id="emoji-3" alt={this.props.emoji3.alt} src={this.props.emoji3.src} />
           </foreignObject>
           {/* Selector */}
           <circle  id="selector-circle" className="Draggable" cx="0" cy="0" r="7" transform={"translate(50 45)"} fill="url(#stroke-gradient)" />

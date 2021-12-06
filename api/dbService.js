@@ -21,7 +21,10 @@ const connectSettings = {
 const connection = mysql.createConnection(connectSettings);
 
 const sqlQueries = {
-  getScheduleInitQ: `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType' FROM LIVE_SCHEDULE WHERE id = 1;`,
+  getScheduleInitQ: `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType' FROM LIVE_SCHEDULE WHERE id = 1;
+                     SELECT ALT_TEXT AS 'altText1', EMOJI_STRING AS 'emojiString1' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_1 FROM LIVE_SCHEDULE WHERE id = 1 );
+                     SELECT ALT_TEXT AS 'altText2', EMOJI_STRING AS 'emojiString2' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_2 FROM LIVE_SCHEDULE WHERE id = 1 );
+                     SELECT ALT_TEXT AS 'altText3', EMOJI_STRING AS 'emojiString3' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_3 FROM LIVE_SCHEDULE WHERE id = 1 );`, 
   /* insertTextQ:  `INSERT INTO liveTextPrompts (textPrompt, umin) VALUES (?, ?);
                      INSERT INTO liveTextPromptsBU (textPrompt, umin) VALUES (?, ?);`,
   insertImageQ: `INSERT INTO liveImagePrompts (imagePrompts, umin) VALUES (?, ?);

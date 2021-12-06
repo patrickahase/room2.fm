@@ -40,6 +40,14 @@ export class DesktopApp extends Component {
       // emoji triangle values
       emojiX: 0.5,
       emojiY: 0.5,
+
+      // schedule data
+      currentArtist: null,
+      currentPrompt: null,
+      promptType: null,
+      emoji1: null,
+      emoji2: null,
+      emoji3: null
     }
     this.setCanvas = this.setCanvas.bind(this);
     this.saveCanvasState = this.saveCanvasState.bind(this);
@@ -56,7 +64,8 @@ export class DesktopApp extends Component {
           ? <IntroModal mobile={this.props.mobile} toggleModal={this.props.toggleModal} />
           : <>
             {/* Top Banner */}
-            <Marquee />  
+            <Marquee
+              currentArtist={this.state.currentArtist} />  
             {/* Background Visuals */}          
             <div id="bg-vis-wrapper">              
               {/* <BGVis /> */}
@@ -71,16 +80,19 @@ export class DesktopApp extends Component {
             <SettingsMenu />
             {/* Prompt Overlay */}
             <div id="current-prompt">
-              {this.props.currentPrompt}
+              {this.state.currentPrompt}
             </div>           
             {/* Emoji Triangle */}
             <EmojiTri 
               height={this.props.height}
               artistPresets={this.props.artistPresets}
+              emoji1={this.state.emoji1}
+              emoji2={this.state.emoji2}
+              emoji3={this.state.emoji3}
             />            
             {/* Input Section */}
             <div id="input-wrapper">              
-              {this.props.drawingInput 
+              {this.state.promptType === 'draw' 
                 ? <>{/* Drawing Input */}
                   <DrawingCanvas 
                     brushColour={this.state.colours.colour1}
@@ -117,7 +129,7 @@ export class DesktopApp extends Component {
   componentDidMount() {  
     // update css style sheet
     document.addEventListener('mouseup', this.saveCanvasState);
-    this.initEmTriDB();
+    this.initSchedule();
   }
   changeColourOrder(){
     let newColourOrder = {
@@ -226,8 +238,8 @@ export class DesktopApp extends Component {
   }
   /* Desktop DB Connections */
   // init db and then triger update loop
-  initEmTriDB(){
-    fetch(`https://room2.fm/api/getScheduleInit`, {
+  initSchedule(){
+    fetch(`http://localhost:33061/api/getScheduleInit`, {
       headers: {
         'Content-type': 'application/json'
       },
@@ -235,7 +247,40 @@ export class DesktopApp extends Component {
       mode: 'cors'
     })
       .then(res => res.json())
-      .then(res => console.log(res));
+      .then(res => this.setFromSchedule(res.data));
+  }
+  updateSchedule(){
+    fetch(`http://localhost:33061/api/getScheduleInit`, {
+      headers: {
+        'Content-type': 'application/json'
+      },
+      method: 'GET',
+      mode: 'cors'
+    })
+      .then(res => res.json())
+      .then(res => console.log(res.data));
+  }
+  // res.data[0] is schedule
+  // res.data[1] is emoji1
+  // res.data[2] is emoji2
+  // res.data[3] is emoji3
+  setFromSchedule(data) {
+    console.log(data);
+    if(data[0][0].currentArtist !== this.state.currentArtist){
+      this.setState({
+        currentArtist: data[0][0].currentArtist,
+        emoji1: { alt: data[1][0].altText1, src: data[1][0].emojiString1 },
+        emoji2: { alt: data[2][0].altText2, src: data[2][0].emojiString2 },
+        emoji3: { alt: data[3][0].altText3, src: data[3][0].emojiString3 },
+      })
+    }
+    if(data[0][0].currentPrompt !== this.state.currentPrompt){
+      this.setState({  
+        currentPrompt: data[0][0].currentPrompt,
+        promptType: data[0][0].promptType,
+      })
+    }
+    
   }
 }
 

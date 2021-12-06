@@ -6,7 +6,7 @@ export class Marquee extends Component {
       <div id="top-banner-wrapper">
         <img id="cd-gif" src={require('../content/media/slowdiscpixel.gif').default} alt="spinning cd gif" />  
         <div id="marquee-wrapper">
-            <div id="marquee-text-scroll"> Marquee </div>
+            <div id="marquee-text-scroll"> {this.props.currentArtist} </div>
         </div>            
       </div>
     )
