@@ -9,7 +9,7 @@ const DbService = require('./dbService');
 router.get('/getScheduleInit', (req, res) => {
   const db = DbService.getDbServiceInstance();
   const result = db.getScheduleInit();
-  result.then(data => res.json({ data: data }))
+  result.then(data => res.send({ data: "data" }))
         .catch(err => console.log(err));
 });
 

@@ -227,14 +227,15 @@ export class DesktopApp extends Component {
   /* Desktop DB Connections */
   // init db and then triger update loop
   initEmTriDB(){
-    fetch(`/api/getScheduleInit`, {
+    fetch(`https://room2.fm/api/getScheduleInit`, {
       headers: {
         'Content-type': 'application/json'
       },
-      method: 'GET'
+      method: 'GET',
+      mode: 'cors'
     })
-    .then(response => response.json())
-    .then(res => console.log(res.data));
+      .then(res => res.json())
+      .then(res => console.log(res));
   }
 }
 

@@ -1,10 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+var cors = require('cors');
 
 //init app and body parser
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // load api endpoints for client app
 const endPoints = require('./api/room2ClientAPI');

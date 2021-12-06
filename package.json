@@ -21,6 +21,7 @@
   "homepage": "https://github.com/patrickahase/room2.fm#readme",
   "dependencies": {
     "concurrently": "^6.4.0",
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mysql2": "^2.3.3",
