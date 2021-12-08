@@ -33,14 +33,40 @@ export class App extends Component {
       responsesToDisplay: false,
       unseenResponses: [],
       lastResponseID: 0,
+
+      // undo/redo settings
+      maxUndo: 10,
+      drawingCanvas: null,
+      redoStack: [],
+      stateStack: [],
+      currentCanvasState: null,
+
+      // ui & painter palette
+      colours: {
+        colour1: "#222323",
+        colour2: "#ff4adc",
+        colour3: "#3dff98"},      
+      
+      // drawing settings
+      brushSize: 8,
+
+      isDrawing: false,
+      isEraser: false,
+      savedBrush: null,
     }
     // bind func's to this
+    this.setCanvas = this.setCanvas.bind(this);
+    this.saveCanvasState = this.saveCanvasState.bind(this);
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.updateEmojis = this.updateEmojis.bind(this);
     this.updateSchedule = this.updateSchedule.bind(this);
     this.getNextResponse = this.getNextResponse.bind(this);
     this.submitImageResponse = this.submitImageResponse.bind(this);
+    this.setIsDrawing = this.setIsDrawing.bind(this);
+    this.toggleEraser = this.toggleEraser.bind(this);
+    this.undoDrawing = this.undoDrawing.bind(this);
+    this.redoDrawing = this.redoDrawing.bind(this);
   }
   render() {
     return (
@@ -69,6 +95,15 @@ export class App extends Component {
             submitImageResponse={this.submitImageResponse}
             getNextResponse={this.getNextResponse}
             responsesToDisplay={this.state.responsesToDisplay}
+            setCanvas={this.setCanvas}
+            changeBrushSize={this.changeBrushSize.bind(this)}
+            colours={this.state.colours}
+            brushSize={this.state.brushSize}
+            setIsDrawing={this.setIsDrawing}
+            changeColourOrder={this.changeColourOrder.bind(this)}
+            undoDrawing={this.undoDrawing.bind(this)}
+            redoDrawing={this.redoDrawing.bind(this)}
+            toggleEraser={this.toggleEraser.bind(this)}
           />
         }
       </div>
@@ -92,8 +127,10 @@ export class App extends Component {
     if(this.state.modalIsOpen){
       this.setState({ modalIsOpen: false });
       this.updateSchedule();
+      document.addEventListener('mouseup', this.saveCanvasState);
     } else {
       this.setState({ modalIsOpen: true });
+      document.removeEventListener('mouseup', this.saveCanvasState);
     }
   }
   /* Desktop DB Connections */
@@ -193,7 +230,7 @@ export class App extends Component {
     });
     const formData = new FormData();
     let imageFile = this.dataURLtoFile(dataURL, 'response.png');
-    console.log(imageInput);
+    this.state.drawingCanvas.clear();
     formData.append('upload', imageFile, 'response.png');
     fetch('http://localhost:33061/api/insertImageResponse', {
       method: 'PUT',
@@ -213,6 +250,97 @@ export class App extends Component {
       this.setState({unseenResponses: updatedResponseArray});      
     }
     return oldestResponse;   
+  }
+
+  changeColourOrder(){
+    let newColourOrder = {
+      colour1: this.state.colours.colour3,
+      colour2: this.state.colours.colour1,
+      colour3: this.state.colours.colour2,
+    };
+    this.setState({ colours: newColourOrder });
+  }
+  changeBrushSize(newSize){
+    this.setState({ brushSize: newSize });
+  }
+  changeBrushSize = (e) =>{
+    if(e.target.id === "increase-brush-circle"){
+      if(this.state.brushSize < 20){        
+        this.setState(prevState => ({ brushSize: prevState.brushSize + 2}))
+      }      
+    }  else if(this.state.brushSize > 2) {
+        this.setState(prevState => ({ brushSize: prevState.brushSize - 2}))
+    } 
+  }
+  toggleEraser(){
+    let canvas = this.state.drawingCanvas;
+    if(!this.state.isEraser){
+      this.setState({ isEraser: true, savedBrush: canvas.freeDrawingBrush }, () => {
+        canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
+        canvas.freeDrawingBrush.width = this.state.savedBrush.width;
+      });
+    } else {
+      canvas.freeDrawingBrush = this.state.savedBrush;
+      this.setState({ isEraser: false });
+    }
+  }
+  /* undo/redo functions */
+  setCanvas(canvas){
+    // set canvas reference and save initial state for undo/redo
+    this.setState({ drawingCanvas: canvas, currentCanvasState: canvas.toDatalessJSON() });
+  }
+  setIsDrawing(){
+    this.setState({ isDrawing: true });
+  }
+  saveCanvasState(){
+    if(this.state.isDrawing){
+      let newStateStack = this.state.stateStack;
+      let currentCanvasState = this.state.currentCanvasState;
+      if(newStateStack.length === this.state.maxUndo){
+        // drop the oldest state if at max undo count
+        newStateStack.shift();
+      }
+      // add current canvas state to stack
+      newStateStack.push( currentCanvasState );
+      //update current state
+      this.setState({ currentCanvasState: this.state.drawingCanvas.toDatalessJSON(), 
+                      stateStack: newStateStack, 
+                      redoStack: [],
+                      isDrawing: false });
+    }    
+  }
+  undoDrawing(){
+    // if states left to undo
+    if(this.state.stateStack.length > 0){
+      let newCanvasState = this.state.currentCanvasState;
+      let currentCanvasState = this.state.drawingCanvas.toDatalessJSON();
+      // push current state to redo stack
+      let newRedoStack = this.state.redoStack;
+      newRedoStack.push(currentCanvasState);
+      // pop previous state from state stack
+      let newStateStack = this.state.stateStack;
+      let newState = newStateStack.pop();
+      // update to previous states and both stacks
+      this.setState({ currentCanvasState: newState, redoStack: newRedoStack, stateStack: newStateStack});
+      // update actual canvas
+      this.state.drawingCanvas.loadFromJSON(newCanvasState);      
+    }    
+  }
+  redoDrawing(){
+    // if states left to redo
+    if(this.state.redoStack.length > 0){
+      // pop new state from redo stack
+      let newRedoStack = this.state.redoStack;
+      let newCanvasState = newRedoStack.pop();
+      let currentCanvasState = this.state.drawingCanvas.toDatalessJSON();
+      // push current state to undo stack
+      let newStateStack = this.state.stateStack;
+      newStateStack.push(currentCanvasState);
+      // update to previous states and both stacks
+      this.setState({ currentCanvasState: currentCanvasState, redoStack: newRedoStack, stateStack: newStateStack});
+      // update actual canvas
+      this.state.drawingCanvas.loadFromJSON(newCanvasState);      
+    }  
   }
 
   dataURLtoFile(dataurl, filename) {

@@ -18,13 +18,13 @@ export class DrawingTools extends Component {
                 />
                 <button id="increase-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> <IncreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> </button>
                 <button id="decrease-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> <DecreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> </button>
-                <button id="erase-brush-button" className="RightUIButton" onClick={this.toggleEraser}>
+                <button id="erase-brush-button" className="RightUIButton" onClick={this.props.toggleEraser}>
                   E
                 </button>
-                <button id="undo-button" className="RightUIButton" onClick={this.undoDrawing}>
+                <button id="undo-button" className="RightUIButton" onClick={this.props.undoDrawing}>
                 ⮌
                 </button>
-                <button id="redo-button" className="RightUIButton" onClick={this.redoDrawing}>
+                <button id="redo-button" className="RightUIButton" onClick={this.props.redoDrawing}>
                 ⮎
                 </button>
               </div>

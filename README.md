@@ -7,13 +7,13 @@ This is my refactoring of the room2 code base to set it up for continued use
  - Matthew Jones for his article on state management for undo/redo with fabric = https://exceptionnotfound.net/drawing-with-fabricjs-and-typescript-part-7-undo-redo/
 
 # To Do
-- Do I need pixi-react-fiber? Uninstall if not
+- ~~Do I need pixi-react-fiber? Uninstall if not~~
 - Update pre-load - how much do I need?
-- Replace Artist Presets object with data from server
+- ~~Replace Artist Presets object with data from server~~
 - Add onmousehold style for buttons
 - timer function? something with raf perhaps?
 - ~~lift state up from desktop~~
-- add in last prompt tracker
+- ~~add in last prompt tracker~~
 - massage random
 - do i need some kind of state lock on response array?
 - better prompt type detection on client recieve

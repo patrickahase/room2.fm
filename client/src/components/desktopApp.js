@@ -4,7 +4,6 @@ import DrawingCanvas from './drawingCanvas';
 import EmojiTri from './emojiTri';
 import IntroModal from './introModal';
 import Marquee from './marquee';
-import { fabric } from 'fabric';
 import DrawingTools from './drawingTools';
 import SettingsMenu from './settingsMenu';
 import VideoStreamPlayer from './videoStreamPlayer';
@@ -14,25 +13,7 @@ export class DesktopApp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
-      // ui & painter palette
-      colours: {
-        colour1: "#222323",
-        colour2: "#ff4adc",
-        colour3: "#3dff98"},      
       
-      // drawing settings
-      brushSize: 8,
-
-      // undo/redo settings
-      maxUndo: 10,
-      drawingCanvas: null,
-      redoStack: [],
-      stateStack: [],
-      currentCanvasState: null,
-      isDrawing: false,
-      isEraser: false,
-      savedBrush: null,
       isMuted: false,
 
       //video stream player
@@ -43,12 +24,6 @@ export class DesktopApp extends Component {
       emojiY: 0.5,
 
     }
-    this.setCanvas = this.setCanvas.bind(this);
-    this.saveCanvasState = this.saveCanvasState.bind(this);
-    this.setIsDrawing = this.setIsDrawing.bind(this);
-    this.toggleEraser = this.toggleEraser.bind(this);
-    this.undoDrawing = this.undoDrawing.bind(this);
-    this.redoDrawing = this.redoDrawing.bind(this);
     this.setStreamPlayer = this.setStreamPlayer.bind(this);
   }
   render() {
@@ -75,7 +50,7 @@ export class DesktopApp extends Component {
               height={this.props.height}
               width={this.props.width} /> 
             {/* Menu Overlay */}
-            {/* <SettingsMenu /> */}
+            <SettingsMenu />
             {/* Prompt Overlay */}
             <div id="current-prompt">
               {this.props.currentPrompt}
@@ -93,10 +68,10 @@ export class DesktopApp extends Component {
               {this.props.promptType === 'draw' 
                 ? <>{/* Drawing Input */}
                   <DrawingCanvas 
-                    brushColour={this.state.colours.colour1}
-                    brushSize={this.state.brushSize}
-                    setCanvas={this.setCanvas}
-                    setIsDrawing={this.setIsDrawing}
+                    brushColour={this.props.colours.colour1}
+                    brushSize={this.props.brushSize}
+                    setCanvas={this.props.setCanvas}
+                    setIsDrawing={this.props.setIsDrawing}
                     />
                 </>
                 : <>
@@ -107,9 +82,12 @@ export class DesktopApp extends Component {
             {/* Right UI Panel */}
             <div id="right-ui-wrapper">
               <DrawingTools
-                colours={this.state.colours}
-                changeColourOrder={this.changeColourOrder.bind(this)}
-                changeBrushSize={this.changeBrushSize.bind(this)} />              
+                undoDrawing={this.props.undoDrawing}
+                redoDrawing={this.props.redoDrawing}
+                toggleEraser={this.props.toggleEraser}
+                colours={this.props.colours}
+                changeColourOrder={this.props.changeColourOrder}
+                changeBrushSize={this.props.changeBrushSize} />              
               <button id="response-submit-button" onClick={this.props.submitImageResponse}>
                 SUBMIT RESPONSE
               </button>
@@ -128,98 +106,9 @@ export class DesktopApp extends Component {
   }
   componentDidMount() {  
     // update css style sheet
-    document.addEventListener('mouseup', this.saveCanvasState);
+    
   }
-  changeColourOrder(){
-    let newColourOrder = {
-      colour1: this.state.colours.colour3,
-      colour2: this.state.colours.colour1,
-      colour3: this.state.colours.colour2,
-    };
-    this.setState({ colours: newColourOrder });
-  }
-  changeBrushSize(newSize){
-    this.setState({ brushSize: newSize });
-  }
-  changeBrushSize = (e) =>{
-    if(e.target.id === "increase-brush-circle"){
-      if(this.state.brushSize < 20){        
-        this.setState(prevState => ({ brushSize: prevState.brushSize + 2}))
-      }      
-    }  else if(this.state.brushSize > 2) {
-        this.setState(prevState => ({ brushSize: prevState.brushSize - 2}))
-    } 
-  }
-  toggleEraser(){
-    let canvas = this.state.drawingCanvas;
-    if(!this.state.isEraser){
-      this.setState({ isEraser: true, savedBrush: canvas.freeDrawingBrush }, () => {
-        canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
-        canvas.freeDrawingBrush.width = this.state.savedBrush.width;
-      });
-    } else {
-      canvas.freeDrawingBrush = this.state.savedBrush;
-      this.setState({ isEraser: false });
-    }
-  }
-  /* undo/redo functions */
-  setCanvas(canvas){
-    // set canvas reference and save initial state for undo/redo
-    this.setState({ drawingCanvas: canvas, currentCanvasState: canvas.toDatalessJSON() });
-  }
-  setIsDrawing(){
-    this.setState({ isDrawing: true });
-  }
-  saveCanvasState(){
-    if(this.state.isDrawing){
-      let newStateStack = this.state.stateStack;
-      let currentCanvasState = this.state.currentCanvasState;
-      if(newStateStack.length === this.state.maxUndo){
-        // drop the oldest state if at max undo count
-        newStateStack.shift();
-      }
-      // add current canvas state to stack
-      newStateStack.push( currentCanvasState );
-      //update current state
-      this.setState({ currentCanvasState: this.state.drawingCanvas.toDatalessJSON(), 
-                      stateStack: newStateStack, 
-                      redoStack: [],
-                      isDrawing: false });
-    }    
-  }
-  undoDrawing(){
-    // if states left to undo
-    if(this.state.stateStack.length > 0){
-      let newCanvasState = this.state.currentCanvasState;
-      let currentCanvasState = this.state.drawingCanvas.toDatalessJSON();
-      // push current state to redo stack
-      let newRedoStack = this.state.redoStack;
-      newRedoStack.push(currentCanvasState);
-      // pop previous state from state stack
-      let newStateStack = this.state.stateStack;
-      let newState = newStateStack.pop();
-      // update to previous states and both stacks
-      this.setState({ currentCanvasState: newState, redoStack: newRedoStack, stateStack: newStateStack});
-      // update actual canvas
-      this.state.drawingCanvas.loadFromJSON(newCanvasState);      
-    }    
-  }
-  redoDrawing(){
-    // if states left to redo
-    if(this.state.redoStack.length > 0){
-      // pop new state from redo stack
-      let newRedoStack = this.state.redoStack;
-      let newCanvasState = newRedoStack.pop();
-      let currentCanvasState = this.state.drawingCanvas.toDatalessJSON();
-      // push current state to undo stack
-      let newStateStack = this.state.stateStack;
-      newStateStack.push(currentCanvasState);
-      // update to previous states and both stacks
-      this.setState({ currentCanvasState: currentCanvasState, redoStack: newRedoStack, stateStack: newStateStack});
-      // update actual canvas
-      this.state.drawingCanvas.loadFromJSON(newCanvasState);      
-    }  
-  }
+  
   setStreamPlayer(streamPlayer){
     this.setState({ streamPlayer: streamPlayer })
   }
