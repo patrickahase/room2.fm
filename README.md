@@ -11,6 +11,13 @@ This is my refactoring of the room2 code base to set it up for continued use
 - Update pre-load - how much do I need?
 - Replace Artist Presets object with data from server
 - Add onmousehold style for buttons
+- timer function? something with raf perhaps?
+- ~~lift state up from desktop~~
+- add in last prompt tracker
+- massage random
+- do i need some kind of state lock on response array?
+- better prompt type detection on client recieve
+- random image distribution
 
 ## Modal
 - Modal for Mobile ~ Decided to wait until later to make sure mobile layout is consistant - perhaps the modal continue button will need to match the prompt response button in some way ~
@@ -58,6 +65,7 @@ This is my refactoring of the room2 code base to set it up for continued use
 - change room2ClientAPI to async / await
 - update sql queries to new scheme
 - update sql so it returns one object with the three emojis
+- write seperate get call for retrieving emojis - don't need to send them every update
 
 ## Database
 - plan new scheme

@@ -21,10 +21,15 @@ const connectSettings = {
 const connection = mysql.createConnection(connectSettings);
 
 const sqlQueries = {
-  getScheduleInitQ: `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType' FROM LIVE_SCHEDULE WHERE id = 1;
+  getScheduleQ:       `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType',
+                        EMOJI_1 AS 'emoji1', EMOJI_2 AS 'emoji2', EMOJI_3 AS 'emoji3' FROM LIVE_SCHEDULE WHERE id = 1;`, 
+  getResponseUpdateQ: `SELECT * FROM TEXT_RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 15 minute) AND (id > ?);`, 
+  getEmojisQ:         `SELECT ALT_TEXT AS 'altText', EMOJI_STRING AS 'emojiString' FROM EMOJI_STORAGE WHERE NAME = (? OR ? OR ?);`,
+  insertTextQ:        `INSERT INTO TEXT_RESPONSES (RESPONSE) VALUE (?);`,
+  /* getScheduleInitQ: `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType' FROM LIVE_SCHEDULE WHERE id = 1;
                      SELECT ALT_TEXT AS 'altText1', EMOJI_STRING AS 'emojiString1' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_1 FROM LIVE_SCHEDULE WHERE id = 1 );
                      SELECT ALT_TEXT AS 'altText2', EMOJI_STRING AS 'emojiString2' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_2 FROM LIVE_SCHEDULE WHERE id = 1 );
-                     SELECT ALT_TEXT AS 'altText3', EMOJI_STRING AS 'emojiString3' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_3 FROM LIVE_SCHEDULE WHERE id = 1 );`, 
+                     SELECT ALT_TEXT AS 'altText3', EMOJI_STRING AS 'emojiString3' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_3 FROM LIVE_SCHEDULE WHERE id = 1 );`,  */
   /* insertTextQ:  `INSERT INTO liveTextPrompts (textPrompt, umin) VALUES (?, ?);
                      INSERT INTO liveTextPromptsBU (textPrompt, umin) VALUES (?, ?);`,
   insertImageQ: `INSERT INTO liveImagePrompts (imagePrompts, umin) VALUES (?, ?);
@@ -43,8 +48,38 @@ class DbService {
   }
 
   async getScheduleInit() {
+    try { const scheduleData = await new Promise((resolve, reject) => {
+            connection.query(sqlQueries.getScheduleQ, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return [scheduleData, []];
+    } catch(error) { console.log(error); }
+  }
+
+  async getScheduleUpdate(lastResponseID) {
+    let insertData = [lastResponseID];
+    try { const scheduleData = await new Promise((resolve, reject) => {
+            connection.query(sqlQueries.getScheduleQ, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          const responseData = await new Promise((resolve, reject) => {
+            connection.query(sqlQueries.getResponseUpdateQ, insertData, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return [scheduleData, responseData];
+    } catch(error) { console.log(error); }
+  }
+
+  async getEmojisUpdate(emoji1, emoji2, emoji3) {
+    let insertData = [emoji1, emoji2, emoji3];
     try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getScheduleInitQ, (err, results) => {
+            connection.query(sqlQueries.getEmojisQ, insertData, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
@@ -53,10 +88,21 @@ class DbService {
     } catch(error) { console.log(error); }
   }
 
-  async insertNewReflectText(reflectText, reflectTime) {
-    let insertData = [reflectText, reflectTime, reflectText, reflectTime];
+  async insertNewReflectText(reflectText) {
+    let insertData = [reflectText];
     try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertTextQuery, insertData, (err, results) => {
+            connection.query(sqlQueries.insertTextQ, insertData, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return response;
+    } catch(error) { console.log(error); }
+  }
+  async insertNewReflectImage(reflectImage) {
+    let insertData = [reflectImage];
+    try { const response = await new Promise((resolve, reject) => {
+            connection.query(sqlQueries.insertTextQ, insertData, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
@@ -65,7 +111,7 @@ class DbService {
     } catch(error) { console.log(error); }
   }
 
-  async insertNewReflectImage(reflectImage, reflectTime) {
+ /*  async insertNewReflectImage(reflectImage, reflectTime) {
     let insertData = [reflectImage, reflectTime, reflectImage, reflectTime];
     try { const response = await new Promise((resolve, reject) => {
             connection.query(sqlQueries.insertImageQuery, insertData, (err, results) => {
@@ -75,7 +121,7 @@ class DbService {
           });
           return response;
     } catch(error) { console.log(error); }
-  }
+  } */
 
 }
 

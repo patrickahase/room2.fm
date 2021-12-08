@@ -309,6 +309,29 @@ code {
   z-index: 2;
   pointer-events: none;
 }
+.TextResponseBox{
+  background-color: #007dff;
+  opacity: 0;
+  position: absolute;
+  transition: 1.5s;
+}
+.TextResponseBox.FadeIn{
+  opacity: 1;
+}
+.TextResponseBox.FadeOut{
+  opacity: 0;
+}
+.ImageResponseBox{
+  opacity: 0;
+  position: absolute;
+  transition: 1.5s;
+}
+.ImageResponseBox.FadeIn{
+  opacity: 1;
+}
+.ImageResponseBox.FadeOut{
+  opacity: 0;
+}
 
 /* Settings Menu */
 #settings-menu-wrapper{
@@ -393,6 +416,7 @@ code {
 }
 #selector-circle{
   z-index: 3;
+  cursor: move;
 }
 
 /* Input Section */
@@ -427,6 +451,17 @@ code {
   height: 100%;
   cursor: pointer;
 }
+
+/* Text Area Input */
+#text-input{
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 8px;
+  resize: none;
+  border: 0;
+}
+
 /* Righthand UI Section */
 #right-ui-wrapper{
   position: absolute;

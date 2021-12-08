@@ -8,6 +8,7 @@ import { fabric } from 'fabric';
 import DrawingTools from './drawingTools';
 import SettingsMenu from './settingsMenu';
 import VideoStreamPlayer from './videoStreamPlayer';
+import ResponseDisplay from './responseDisplay';
 
 export class DesktopApp extends Component {
   constructor(props) {
@@ -41,13 +42,6 @@ export class DesktopApp extends Component {
       emojiX: 0.5,
       emojiY: 0.5,
 
-      // schedule data
-      currentArtist: null,
-      currentPrompt: null,
-      promptType: null,
-      emoji1: null,
-      emoji2: null,
-      emoji3: null
     }
     this.setCanvas = this.setCanvas.bind(this);
     this.saveCanvasState = this.saveCanvasState.bind(this);
@@ -61,38 +55,42 @@ export class DesktopApp extends Component {
     return (
       <div id="desktop-wrapper">
         {this.props.modalIsOpen
-          ? <IntroModal mobile={this.props.mobile} toggleModal={this.props.toggleModal} />
+          ? <IntroModal 
+              mobile={this.props.mobile}
+              toggleModal={this.props.toggleModal} />
           : <>
             {/* Top Banner */}
             <Marquee
-              currentArtist={this.state.currentArtist} />  
+              currentArtist={this.props.currentArtist} />  
             {/* Background Visuals */}          
             <div id="bg-vis-wrapper">              
               {/* <BGVis /> */}
               <VideoStreamPlayer
-                setStreamPlayer={this.setStreamPlayer} />
+                setStreamPlayer={this.setStreamPlayer} />                
             </div>
             {/* Response Overlay */}
-            <div id="response-wrapper">              
-              {/* <Responses /> */}
-            </div> 
+            <ResponseDisplay 
+              getNextResponse={this.props.getNextResponse}
+              responsesToDisplay={this.props.responsesToDisplay}
+              height={this.props.height}
+              width={this.props.width} /> 
             {/* Menu Overlay */}
-            <SettingsMenu />
+            {/* <SettingsMenu /> */}
             {/* Prompt Overlay */}
             <div id="current-prompt">
-              {this.state.currentPrompt}
+              {this.props.currentPrompt}
             </div>           
             {/* Emoji Triangle */}
             <EmojiTri 
               height={this.props.height}
               artistPresets={this.props.artistPresets}
-              emoji1={this.state.emoji1}
-              emoji2={this.state.emoji2}
-              emoji3={this.state.emoji3}
+              emoji1={this.props.emoji1}
+              emoji2={this.props.emoji2}
+              emoji3={this.props.emoji3}
             />            
             {/* Input Section */}
             <div id="input-wrapper">              
-              {this.state.promptType === 'draw' 
+              {this.props.promptType === 'draw' 
                 ? <>{/* Drawing Input */}
                   <DrawingCanvas 
                     brushColour={this.state.colours.colour1}
@@ -101,7 +99,9 @@ export class DesktopApp extends Component {
                     setIsDrawing={this.setIsDrawing}
                     />
                 </>
-                : <></>/* Text Input */
+                : <>
+                  <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
+                </>/* Text Input */
                 }
             </div>
             {/* Right UI Panel */}
@@ -110,7 +110,7 @@ export class DesktopApp extends Component {
                 colours={this.state.colours}
                 changeColourOrder={this.changeColourOrder.bind(this)}
                 changeBrushSize={this.changeBrushSize.bind(this)} />              
-              <button id="response-submit-button">
+              <button id="response-submit-button" onClick={this.props.submitImageResponse}>
                 SUBMIT RESPONSE
               </button>
               {/* Audio Settings */}
@@ -129,7 +129,6 @@ export class DesktopApp extends Component {
   componentDidMount() {  
     // update css style sheet
     document.addEventListener('mouseup', this.saveCanvasState);
-    this.initSchedule();
   }
   changeColourOrder(){
     let newColourOrder = {
@@ -236,52 +235,7 @@ export class DesktopApp extends Component {
   changeVolume(newVolume){
     this.state.streamPlayer.volume(newVolume);
   }
-  /* Desktop DB Connections */
-  // init db and then triger update loop
-  initSchedule(){
-    fetch(`http://localhost:33061/api/getScheduleInit`, {
-      headers: {
-        'Content-type': 'application/json'
-      },
-      method: 'GET',
-      mode: 'cors'
-    })
-      .then(res => res.json())
-      .then(res => this.setFromSchedule(res.data));
-  }
-  updateSchedule(){
-    fetch(`http://localhost:33061/api/getScheduleInit`, {
-      headers: {
-        'Content-type': 'application/json'
-      },
-      method: 'GET',
-      mode: 'cors'
-    })
-      .then(res => res.json())
-      .then(res => console.log(res.data));
-  }
-  // res.data[0] is schedule
-  // res.data[1] is emoji1
-  // res.data[2] is emoji2
-  // res.data[3] is emoji3
-  setFromSchedule(data) {
-    console.log(data);
-    if(data[0][0].currentArtist !== this.state.currentArtist){
-      this.setState({
-        currentArtist: data[0][0].currentArtist,
-        emoji1: { alt: data[1][0].altText1, src: data[1][0].emojiString1 },
-        emoji2: { alt: data[2][0].altText2, src: data[2][0].emojiString2 },
-        emoji3: { alt: data[3][0].altText3, src: data[3][0].emojiString3 },
-      })
-    }
-    if(data[0][0].currentPrompt !== this.state.currentPrompt){
-      this.setState({  
-        currentPrompt: data[0][0].currentPrompt,
-        promptType: data[0][0].promptType,
-      })
-    }
-    
-  }
+  
 }
 
 export default DesktopApp
