@@ -18,6 +18,7 @@ This is my refactoring of the room2 code base to set it up for continued use
 - do i need some kind of state lock on response array?
 - better prompt type detection on client recieve
 - random image distribution
+- reconnect submit button (and change to turnery on input change)
 
 ## Modal
 - Modal for Mobile ~ Decided to wait until later to make sure mobile layout is consistant - perhaps the modal continue button will need to match the prompt response button in some way ~
@@ -39,8 +40,9 @@ This is my refactoring of the room2 code base to set it up for continued use
 
 ## Sound Controls
 - Add some animations to the volume notch controls
-- Handle click and hold events ?
-- Distinguish volume notch?
+- handle drag?
+- ~~Handle click and hold events ?~~
+- ~~Distinguish volume notch?~~
 
 ## Drawing Input
 - ~~Look into undo and erase functions with fabric js~~
@@ -64,8 +66,9 @@ This is my refactoring of the room2 code base to set it up for continued use
 ## Server
 - change room2ClientAPI to async / await
 - update sql queries to new scheme
-- update sql so it returns one object with the three emojis
-- write seperate get call for retrieving emojis - don't need to send them every update
+- ~~update sql so it returns one object with the three emojis~~
+- ~~write seperate get call for retrieving emojis - don't need to send them every update~~
+- error handling when can't connect
 
 ## Database
 - plan new scheme

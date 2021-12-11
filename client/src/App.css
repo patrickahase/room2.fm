@@ -29,6 +29,10 @@
   --comp-col-03:#3dff98;
 }
 
+::after{
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'IBM Plex Sans Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -667,9 +671,9 @@ code {
 #mute-button::after{
   content: " ";
   position: absolute;
-  right: 4px;
+  right: 2%;
   bottom: 4px;
-  width: calc(20% - 11px);
+  width: 16%;
   height: calc(20% - 4px);
   border: 2px var(--comp-col-01);
   border-style: none solid;
@@ -706,42 +710,40 @@ code {
 #volume-wrapper::after{
   content: " ";
   position: absolute;
-  right: 4px;
+  right: 2%;
   top: 0px;
-  width: calc(20% - 11px);
+  width: 16%;
   height: 80%;
   border: 2px var(--comp-col-01);
-  opacity: 0.8;
   border-style: none solid;
-  pointer-events: none;
   transition: 0.2s;
-  background: #22232311;
-  
+  background: #22232311;  
 }
 #volume-wrapper:hover::after{
-  opacity: 1.0;
   background: transparent;  
 }
-.volume-indicator{
+.VolumeNotch{
   width: 100%;
   background-color: var(--comp-col-03);
   opacity: 0.5;
-  /* border: 1.2px dotted var(--comp-col-02); */
+  border-radius: 3px;
+  pointer-events: none;
+  /* border: 1px dotted var(--comp-col-02); */
 }
-.volume-indicator.active{
+.VolumeActive{
+  opacity: 0.9;
+}
+.VolumeHover{
   opacity: 1;
   /* border: 1.5px solid var(--comp-col-02); */
 }
-.volume-indicator:nth-child(odd){
-  /* border-radius: 10px 0px; */
-  border-right: none;
-  border-bottom: none;
+#volume-wrapper:active{
+  border: 4px solid var(--comp-col-01); 
 }
-.volume-indicator:nth-child(even){
-  /* border-radius: 0px 10px; */
-  border-bottom: none;
-  border-left: none;
+#volume-wrapper:active .VolumeHover{
+  opacity: 0.7;
 }
+
 
 /* Mobile Rules */
 @media all and (any-hover: none) {

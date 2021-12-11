@@ -4,7 +4,9 @@ export class AudioControls extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      volumeNotches: 12
+      volumeNotches: 12,
+      volumeDragging: false,
+      hoverNotch: null
     }
   }
   render() {
@@ -26,41 +28,57 @@ export class AudioControls extends Component {
   }
   createNotches(){
     let volumeWrapper = document.getElementById('volume-wrapper');
+    volumeWrapper.addEventListener('mousemove', this.detectVolumeHover);
+    volumeWrapper.addEventListener('mouseenter', this.detectVolumeHover);
+    volumeWrapper.addEventListener('mousedown', this.detectVolumeClick);
+    volumeWrapper.addEventListener('mouseleave', this.exitVolumeWrapper);
     let notches = this.state.volumeNotches;
     for(let i = 0; i < notches; i++){
       let newDiv = document.createElement('div');
-      newDiv.classList.add('volume-indicator');
-      /* TAKE OUT */
-      newDiv.classList.add('active');      
+      newDiv.classList.add('VolumeNotch');
+      newDiv.classList.add('VolumeActive');     
       newDiv.id = notches - i;
       newDiv.style.height = 100/notches + "%";
-      newDiv.addEventListener('click', this.setVolume);
       volumeWrapper.appendChild(newDiv);
     }
   }
-  setVolume = (e) => {
-    let notches = e.target.parentNode.childNodes;
-    let clickID = e.target.id;
-    // change the mute icon opacity
+  exitVolumeWrapper(){
+    Array.from(document.getElementsByClassName('VolumeHover')).forEach(function (element) {
+      element.classList.remove('VolumeHover');
+    });    
+  }
+  detectVolumeHover = (e) => {
+    let volumeWrapper = e.target;
+    let mousePos = Math.trunc((e.clientY - volumeWrapper.getBoundingClientRect().top) / volumeWrapper.offsetHeight * this.state.volumeNotches);
+    if(this.state.hoverNotch !== mousePos){ 
+      this.setState({ hoverNotch: mousePos });
+      Array.from(document.getElementsByClassName('VolumeHover')).forEach(function (element) {
+        element.classList.remove('VolumeHover');
+      });      
+      e.target.childNodes[mousePos].classList.add('VolumeHover');
+      if(e.buttons === 1) {
+        this.detectVolumeClick(e);
+      }
+    }
+  }
+  // can this be streamlined?? possibly get a normal value from mouse pos then do other maths to it
+  detectVolumeClick = (e) => {
+    let volumeWrapper = e.target;
+    let mousePos = Math.trunc((e.clientY - volumeWrapper.getBoundingClientRect().top) / volumeWrapper.offsetHeight * this.state.volumeNotches);
+    Array.from(document.getElementsByClassName('VolumeNotch')).forEach(function (element, index) {
+      if(index+1 > mousePos){ element.classList.add('VolumeActive') }
+      else{ element.classList.remove('VolumeActive') }
+    });
     let iconLines = document.getElementsByClassName('MuteLines');
-    // this is based on 12 volume notches
-    let lineCutoff = Math.floor(clickID/5);
+    let lineCutoff = 3 - (mousePos/this.state.volumeNotches*3);
     for (let j = 0; j < 3; j ++){
-      if(j<lineCutoff+1){
+      if(j<lineCutoff){
         iconLines[j].classList.add('active');
       } else {
         iconLines[j].classList.remove('active');
       }
     }
-    // change the volume bar opacity
-    for(let k = 0; k < clickID; k++){
-      notches[notches.length-k-1].classList.add('active');  
-    }
-    for(let m = e.target.id; m < notches.length; m++){
-      notches[notches.length-m-1].classList.remove('active');
-    }
-    //set actual volume
-    let newVolume = clickID * 1.0/notches.length;
+    let newVolume = 1 - mousePos / this.state.volumeNotches;
     this.props.changeVolume(newVolume);
   }
 }
