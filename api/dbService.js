@@ -5,15 +5,12 @@ let instance = null;
 // Db Config
 const connectSettings = {
   // currently set to public connection
-  /* host: process.env.ROOM2_DB_HOST, */
-  host: 'room2live-do-user-9677059-0.b.db.ondigitalocean.com',
-  /* user: process.env.ROOM2_DB_USER, */
-  user: 'doadmin',
+  host: process.env.ROOM2_DB_HOST,
+  user: process.env.ROOM2_DB_USER,
   multipleStatements: true,
-  /* password: process.env.ROOM2_DB_PASSWORD, */
-  password: 'PLSVaCHytzwqbGeG',
+  password: process.env.ROOM2_DB_PASSWORD,
   database: 'room2live',
-  supportBigNumbers : true,
+  supportBigNumbers : true, 
   port: 25060,
   insecureAuth: true
 };
@@ -25,15 +22,7 @@ const sqlQueries = {
                         EMOJI_1 AS 'emoji1', EMOJI_2 AS 'emoji2', EMOJI_3 AS 'emoji3' FROM LIVE_SCHEDULE WHERE id = 1;`, 
   getResponseUpdateQ: `SELECT * FROM TEXT_RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 15 minute) AND (id > ?);`, 
   getEmojisQ:         `SELECT ALT_TEXT AS 'altText', EMOJI_STRING AS 'emojiString' FROM EMOJI_STORAGE WHERE NAME = (? OR ? OR ?);`,
-  insertTextQ:        `INSERT INTO TEXT_RESPONSES (RESPONSE) VALUE (?);`,
-  /* getScheduleInitQ: `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType' FROM LIVE_SCHEDULE WHERE id = 1;
-                     SELECT ALT_TEXT AS 'altText1', EMOJI_STRING AS 'emojiString1' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_1 FROM LIVE_SCHEDULE WHERE id = 1 );
-                     SELECT ALT_TEXT AS 'altText2', EMOJI_STRING AS 'emojiString2' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_2 FROM LIVE_SCHEDULE WHERE id = 1 );
-                     SELECT ALT_TEXT AS 'altText3', EMOJI_STRING AS 'emojiString3' FROM EMOJI_STORAGE WHERE NAME = ( SELECT EMOJI_3 FROM LIVE_SCHEDULE WHERE id = 1 );`,  */
-  /* insertTextQ:  `INSERT INTO liveTextPrompts (textPrompt, umin) VALUES (?, ?);
-                     INSERT INTO liveTextPromptsBU (textPrompt, umin) VALUES (?, ?);`,
-  insertImageQ: `INSERT INTO liveImagePrompts (imagePrompts, umin) VALUES (?, ?);
-                     INSERT INTO liveImagePromptsBU (imagePrompts, umin) VALUES (?, ?);` */
+  insertTextQ:        `INSERT INTO TEXT_RESPONSES (RESPONSE) VALUE (?);`
 }
 
 connection.connect((err) => {
