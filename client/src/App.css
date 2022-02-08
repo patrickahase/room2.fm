@@ -25,8 +25,8 @@
 /*Preset Colours*/
 :root{
   --comp-col-01:#222323;
-  --comp-col-02:#ff4adc;
-  --comp-col-03:#3dff98;
+  --comp-col-02:#5252ff;
+  --comp-col-03:#b5e877;
 }
 
 ::after{
@@ -298,6 +298,14 @@ code {
   z-index: 1;
 }
 
+.gl-container{
+  position: absolute;
+  top:0%;
+  left: 0%;
+  z-index: 99;
+/*   background-color: #222323; */
+}
+
 #video-stream-wrapper{
   width: 100%;
   height: 100%;
@@ -424,6 +432,15 @@ code {
 }
 
 /* Input Section */
+#input-select-wrapper{
+  position: absolute;
+  left: 25vh;
+  bottom: 25%;
+  z-index: 3;
+  font-size: max(1.0vw, 0.8em);
+  background-color: rgb(31, 33, 28);
+  color: white;
+}
 #input-wrapper{
   background-color: var(--comp-col-03);
   position: absolute;
@@ -455,6 +472,7 @@ code {
   height: 100%;
   cursor: pointer;
 }
+
 
 /* Text Area Input */
 #text-input{
@@ -630,7 +648,7 @@ code {
   background-color: var(--comp-col-03);
   font-size: min(.85vw, 8vh);
   font-family: 'IBM Plex Sans Condensed', sans-serif; 
-  color: var(--comp-col-01);  
+  color: var(--comp-col-01);
 }
 
 #response-submit-button::after{
@@ -745,43 +763,44 @@ code {
 }
 
 
+
 /* Mobile Rules */
 @media all and (any-hover: none) {
-/* Modal Style */
-#modal-wrapper{
-  top: 0vh;
-  left: 0vw;
-  right: 0vw;
-  bottom: 0vh;
-}
-#modal-title-wrapper{
-  height: 10%;
-}
-#modal-title{
-  position: absolute;
-  bottom: 0vh;
-  left: 0vw;
-  padding: 0 2.5vw;
-  padding-bottom: min(0.5vw, 2vh);
-  font-size: min(5vw, 8vh);
-  color: white;
-  user-select: none;
-}
-#modal-text{
-  font-size: min(3vh, 6vw);
-  padding: 4vh;
-  text-align: center;
-}
-#modal-text.modal-text-aoc{
-  font-size: min(4vh, 6vw);
-  padding: 4vh;
-}
-#modal-continue-button{
-  width: 40vw;
-  height: min(12vw, 30vh);
-  font-size: min(3vh, 6vw);
-  bottom: 7vh;
-  left: 30vw;
-}
+  /* Modal Style */
+  #modal-wrapper{
+    top: 0vh;
+    left: 0vw;
+    right: 0vw;
+    bottom: 0vh;
+  }
+  #modal-title-wrapper{
+    height: 10%;
+  }
+  #modal-title{
+    position: absolute;
+    bottom: 0vh;
+    left: 0vw;
+    padding: 0 2.5vw;
+    padding-bottom: min(0.5vw, 2vh);
+    font-size: min(5vw, 8vh);
+    color: white;
+    user-select: none;
+  }
+  #modal-text{
+    font-size: min(3vh, 6vw);
+    padding: 4vh;
+    text-align: center;
+  }
+  #modal-text.modal-text-aoc{
+    font-size: min(4vh, 6vw);
+    padding: 4vh;
+  }
+  #modal-continue-button{
+    width: 40vw;
+    height: min(12vw, 30vh);
+    font-size: min(3vh, 6vw);
+    bottom: 7vh;
+    left: 30vw;
+  }
 }
 

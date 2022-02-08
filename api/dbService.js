@@ -20,9 +20,10 @@ const connection = mysql.createConnection(connectSettings);
 const sqlQueries = {
   getScheduleQ:       `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType',
                         EMOJI_1 AS 'emoji1', EMOJI_2 AS 'emoji2', EMOJI_3 AS 'emoji3' FROM LIVE_SCHEDULE WHERE id = 1;`, 
-  getResponseUpdateQ: `SELECT * FROM TEXT_RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 15 minute) AND (id > ?);`, 
+  getResponseUpdateQ: `SELECT * FROM RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 15 minute) AND (id > ?);`, 
   getEmojisQ:         `SELECT ALT_TEXT AS 'altText', EMOJI_STRING AS 'emojiString' FROM EMOJI_STORAGE WHERE NAME = (? OR ? OR ?);`,
-  insertTextQ:        `INSERT INTO TEXT_RESPONSES (RESPONSE) VALUE (?);`
+  /* insertTextQ:        `INSERT INTO TEXT_RESPONSES (RESPONSE) VALUE (?);` */
+  insertResponseQ:    `INSERT INTO RESPONSES (RESPONSE) VALUE (?);`
 }
 
 connection.connect((err) => {
@@ -80,7 +81,7 @@ class DbService {
   async insertNewReflectText(reflectText) {
     let insertData = [reflectText];
     try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertTextQ, insertData, (err, results) => {
+            connection.query(sqlQueries.insertResponseQ, insertData, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
@@ -91,7 +92,7 @@ class DbService {
   async insertNewReflectImage(reflectImage) {
     let insertData = [reflectImage];
     try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertTextQ, insertData, (err, results) => {
+            connection.query(sqlQueries.insertResponseQ, insertData, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });

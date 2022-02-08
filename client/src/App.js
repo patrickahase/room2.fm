@@ -21,10 +21,10 @@ export class App extends Component {
       // schedule data
       currentArtist: null,
       currentPrompt: null,
-      promptType: null,
-      emoji1: null,
-      emoji2: null,
-      emoji3: null,
+      promptType: 'draw',
+      emoji1: require("./content/emojis/alien.png"),
+      emoji2: require("./content/emojis/alien.png"),
+      emoji3: require("./content/emojis/alien.png"),
       // how often it updates
       // let's start at 5 sec
       scheduleLoopTime: 5000,
@@ -33,6 +33,7 @@ export class App extends Component {
       responsesToDisplay: false,
       unseenResponses: [],
       lastResponseID: 0,
+      drawingResponse: true,
 
       // undo/redo settings
       maxUndo: 10,
@@ -62,11 +63,13 @@ export class App extends Component {
     this.updateEmojis = this.updateEmojis.bind(this);
     this.updateSchedule = this.updateSchedule.bind(this);
     this.getNextResponse = this.getNextResponse.bind(this);
-    this.submitImageResponse = this.submitImageResponse.bind(this);
+    this.submitResponse = this.submitResponse.bind(this);
     this.setIsDrawing = this.setIsDrawing.bind(this);
     this.toggleEraser = this.toggleEraser.bind(this);
     this.undoDrawing = this.undoDrawing.bind(this);
     this.redoDrawing = this.redoDrawing.bind(this);
+    this.setDrawInput = this.setDrawInput.bind(this);
+    this.setWriteInput = this.setWriteInput.bind(this);
   }
   render() {
     return (
@@ -92,7 +95,7 @@ export class App extends Component {
             emoji1={this.state.emoji1}
             emoji2={this.state.emoji2}
             emoji3={this.state.emoji3}
-            submitImageResponse={this.submitImageResponse}
+            submitResponse={this.submitResponse}
             getNextResponse={this.getNextResponse}
             responsesToDisplay={this.state.responsesToDisplay}
             setCanvas={this.setCanvas}
@@ -104,6 +107,9 @@ export class App extends Component {
             undoDrawing={this.undoDrawing.bind(this)}
             redoDrawing={this.redoDrawing.bind(this)}
             toggleEraser={this.toggleEraser.bind(this)}
+            setDrawInput={this.setDrawInput}
+            setWriteInput={this.setWriteInput}
+            drawingResponse={this.state.drawingResponse}
           />
         }
       </div>
@@ -182,7 +188,7 @@ export class App extends Component {
     }
     // if new responses    
     if (responseData.length){
-      console.log(responseData)
+      console.log(responseData);
       let newResponses = [];
       responseData.forEach(response => newResponses.push(response.RESPONSE));
       console.log(newResponses);
@@ -207,7 +213,7 @@ export class App extends Component {
         emoji3: { alt: res.data[2].altText, src: res.data[2].emojiString }
       }) });
   }
-  submitTextResponse(){
+  /* submitTextResponse(){
     let textInput = document.getElementById('text-input');
     let responseText = textInput.value;
     textInput.value = '';
@@ -239,6 +245,41 @@ export class App extends Component {
     .then(response => response.json())
     .then(result => { console.log('Success:', result); })
     .catch(error => { console.error('Error:', error); });
+  } */
+
+  submitResponse(){
+    if(this.state.drawingResponse){
+      let imageInput = document.getElementById('drawing-canvas');
+      var dataURL = imageInput.toDataURL({
+        format: 'png',
+        left: 0,
+        top: 0,
+        width: imageInput.width,
+        height: imageInput.height
+      });
+      const formData = new FormData();
+      let imageFile = this.dataURLtoFile(dataURL, 'response.png');
+      this.state.drawingCanvas.clear();
+      formData.append('upload', imageFile, 'response.png');
+      fetch('http://localhost:33061/api/insertImageResponse', {
+        method: 'PUT',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(result => { console.log('Success:', result); })
+      .catch(error => { console.error('Error:', error); });
+    } else {
+      let textInput = document.getElementById('text-input');
+      let responseText = textInput.value;
+      textInput.value = '';
+      fetch(`http://localhost:33061/api/insertTextResponse`, {
+        headers: { 'Content-type': 'application/json' },
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify({reflectText: responseText})
+      })
+      .then(response => console.log(response.json()));
+    }    
   }
   getNextResponse(){
     let oldestResponse = null;
@@ -251,7 +292,12 @@ export class App extends Component {
     }
     return oldestResponse;   
   }
-
+  setDrawInput(){
+    this.setState({drawingResponse: true});
+  }
+  setWriteInput(){
+    this.setState({drawingResponse: false});
+  }
   changeColourOrder(){
     let newColourOrder = {
       colour1: this.state.colours.colour3,

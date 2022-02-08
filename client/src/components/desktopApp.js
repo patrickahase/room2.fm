@@ -6,7 +6,7 @@ import IntroModal from './introModal';
 import Marquee from './marquee';
 import DrawingTools from './drawingTools';
 import SettingsMenu from './settingsMenu';
-import VideoStreamPlayer from './videoStreamPlayer';
+import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
 
 export class DesktopApp extends Component {
@@ -22,6 +22,8 @@ export class DesktopApp extends Component {
       // emoji triangle values
       emojiX: 0.5,
       emojiY: 0.5,
+
+      timer: 0.,
 
     }
     this.setStreamPlayer = this.setStreamPlayer.bind(this);
@@ -40,8 +42,12 @@ export class DesktopApp extends Component {
             {/* Background Visuals */}          
             <div id="bg-vis-wrapper">              
               {/* <BGVis /> */}
-              <VideoStreamPlayer
-                setStreamPlayer={this.setStreamPlayer} />                
+              <GLVis
+                timer={this.state.timer}
+                height={this.props.height}
+                width={this.props.width} />
+              {/* <VideoStreamPlayer
+                setStreamPlayer={this.setStreamPlayer} />  */}               
             </div>
             {/* Response Overlay */}
             <ResponseDisplay 
@@ -63,9 +69,16 @@ export class DesktopApp extends Component {
               emoji2={this.props.emoji2}
               emoji3={this.props.emoji3}
             />            
+            {/* Input Selection */}
+            <div id="input-select-wrapper">
+              <span>I would like to </span>
+              <button id="draw-input-select-button" onClick={this.props.setDrawInput}>draw</button>
+              <button id="write-input-select-button" onClick={this.props.setWriteInput}>write</button>
+              <span> a response</span>
+            </div>
             {/* Input Section */}
             <div id="input-wrapper">              
-              {this.props.promptType === 'draw' 
+              {this.props.drawingResponse
                 ? <>{/* Drawing Input */}
                   <DrawingCanvas 
                     brushColour={this.props.colours.colour1}
@@ -88,8 +101,8 @@ export class DesktopApp extends Component {
                 colours={this.props.colours}
                 changeColourOrder={this.props.changeColourOrder}
                 changeBrushSize={this.props.changeBrushSize} />              
-              <button id="response-submit-button"/*  onClick={this.props.submitImageResponse} */>
-                SUBMIT RESPONSE
+              <button id="response-submit-button" onClick={this.props.submitResponse}>
+                <span>SUBMIT RESPONSE</span>                
               </button>
               {/* Audio Settings */}
               <AudioControls
@@ -106,9 +119,15 @@ export class DesktopApp extends Component {
   }
   componentDidMount() {  
     // update css style sheet
-    
+    this.startTimer();
   }
-  
+  startTimer() {
+    this.myInterval = setInterval(() => {
+      this.setState(prevState =>({
+        timer: prevState.timer + 0.01
+      }))
+    }, 50)     
+  }
   setStreamPlayer(streamPlayer){
     this.setState({ streamPlayer: streamPlayer })
   }
@@ -122,7 +141,7 @@ export class DesktopApp extends Component {
     }    
   }
   changeVolume(newVolume){
-    this.state.streamPlayer.volume(newVolume);
+    /* this.state.streamPlayer.volume(newVolume); */
   }
   
 }

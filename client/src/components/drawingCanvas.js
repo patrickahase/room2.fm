@@ -57,13 +57,14 @@ export class DrawingCanvas extends Component {
     this.props.setCanvas(canvas);
   }
   updateCanvasDimensions() {
-    let canvasWrapperRef = document.getElementById("drawing-canvas-wrapper");      
-    this.state.canvas.setWidth(canvasWrapperRef.offsetWidth);
-    this.state.canvas.setHeight(canvasWrapperRef.offsetHeight);
-    this.setState({ canvasWidth: canvasWrapperRef.offsetWidth, 
-      canvasHeight: canvasWrapperRef.offsetHeight });    
+    let canvasWrapperRef = document.getElementById("drawing-canvas-wrapper");
+    if(canvasWrapperRef){
+      this.state.canvas.setWidth(canvasWrapperRef.offsetWidth);
+      this.state.canvas.setHeight(canvasWrapperRef.offsetHeight);
+      this.setState({ canvasWidth: canvasWrapperRef.offsetWidth, 
+        canvasHeight: canvasWrapperRef.offsetHeight });
+    }       
   }
-
   /* Custom Cursor - Curtis Jurgensen - https://codepen.io/curtisj44/pen/yGxJNX*/
   getCustomCursor = () => {
     const circle = `

@@ -92,6 +92,7 @@ router.put('/insertImageResponse', (req, res) => {
     }
   });  
 });
+
 /* 
 // Could possibly move the Date.now call to the server? not sure it really makes a difference
 submitImageResponse() {

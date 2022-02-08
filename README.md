@@ -6,6 +6,20 @@ This is my refactoring of the room2 code base to set it up for continued use
  - Curtis Jurgensen's custom cursor codepen was really helpful - https://codepen.io/curtisj44/pen/yGxJNX
  - Matthew Jones for his article on state management for undo/redo with fabric = https://exceptionnotfound.net/drawing-with-fabricjs-and-typescript-part-7-undo-redo/
 
+# To Do For Bleed Test
+- ~~Response type select~~
+- ~~DB to accept either response type then display~~
+- ~~WebGL BG~~
+- Get rid of emoji triangle?
+- Set up vultr and audio stream
+- Re up chat
+- Fix UI for different selections
+- Hook up volume
+- Top Menu
+- Prompt change countdown? (maybe response type select means not an issue)
+- Timer Function
+- Keep drawing if input change
+
 # To Do
 - ~~Do I need pixi-react-fiber? Uninstall if not~~
 - Update pre-load - how much do I need?
@@ -19,6 +33,8 @@ This is my refactoring of the room2 code base to set it up for continued use
 - better prompt type detection on client recieve
 - random image distribution
 - reconnect submit button (and change to turnery on input change)
+- add sound design?
+- comment out console logs
 
 ## Modal
 - Modal for Mobile ~ Decided to wait until later to make sure mobile layout is consistant - perhaps the modal continue button will need to match the prompt response button in some way ~
