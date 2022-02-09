@@ -20,7 +20,7 @@ const connection = mysql.createConnection(connectSettings);
 const sqlQueries = {
   getScheduleQ:       `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType',
                         EMOJI_1 AS 'emoji1', EMOJI_2 AS 'emoji2', EMOJI_3 AS 'emoji3' FROM LIVE_SCHEDULE WHERE id = 1;`, 
-  getResponseUpdateQ: `SELECT * FROM RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 15 minute) AND (id > ?);`, 
+  getResponseUpdateQ: `SELECT * FROM RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 1500 minute) AND (id > ?);`, 
   getEmojisQ:         `SELECT ALT_TEXT AS 'altText', EMOJI_STRING AS 'emojiString' FROM EMOJI_STORAGE WHERE NAME = (? OR ? OR ?);`,
   /* insertTextQ:        `INSERT INTO TEXT_RESPONSES (RESPONSE) VALUE (?);` */
   insertResponseQ:    `INSERT INTO RESPONSES (RESPONSE) VALUE (?);`

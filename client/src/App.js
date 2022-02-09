@@ -45,8 +45,8 @@ export class App extends Component {
       // ui & painter palette
       colours: {
         colour1: "#222323",
-        colour2: "#ff4adc",
-        colour3: "#3dff98"},      
+        colour2: "#5252ff",
+        colour3: "#b5e877"},      
       
       // drawing settings
       brushSize: 8,

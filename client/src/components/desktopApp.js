@@ -8,6 +8,7 @@ import DrawingTools from './drawingTools';
 import SettingsMenu from './settingsMenu';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
+import AudioStreamPlayer from './audioStreamPlayer';
 
 export class DesktopApp extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ export class DesktopApp extends Component {
 
     }
     this.setStreamPlayer = this.setStreamPlayer.bind(this);
+    this.setGainControl = this.setGainControl.bind(this);
   }
   render() {
     return (
@@ -57,9 +59,21 @@ export class DesktopApp extends Component {
               width={this.props.width} /> 
             {/* Menu Overlay */}
             <SettingsMenu />
-            {/* Prompt Overlay */}
-            <div id="current-prompt">
-              {this.props.currentPrompt}
+            {/* Prompt and Input Selection Overlay */}
+            <div id="current-prompt-wrapper">
+              <div id="prompt-end-timer-wrapper">
+                <div id="prompt-end-timer" />
+                <div id="prompt-end-timer-overlay" />
+              </div>           
+              <div id="current-prompt">
+                {this.props.currentPrompt}
+              </div>           
+              <div id="input-select-wrapper">
+                <span>I would like to </span>
+                <button id="draw-input-select-button" onClick={this.props.setDrawInput}>draw</button>
+                <button id="write-input-select-button" onClick={this.props.setWriteInput}>write</button>
+                <span> a response</span>
+              </div>           
             </div>           
             {/* Emoji Triangle */}
             <EmojiTri 
@@ -70,12 +84,7 @@ export class DesktopApp extends Component {
               emoji3={this.props.emoji3}
             />            
             {/* Input Selection */}
-            <div id="input-select-wrapper">
-              <span>I would like to </span>
-              <button id="draw-input-select-button" onClick={this.props.setDrawInput}>draw</button>
-              <button id="write-input-select-button" onClick={this.props.setWriteInput}>write</button>
-              <span> a response</span>
-            </div>
+            
             {/* Input Section */}
             <div id="input-wrapper">              
               {this.props.drawingResponse
@@ -109,7 +118,10 @@ export class DesktopApp extends Component {
                 muteAudio={this.muteAudio.bind(this)}
                 isMuted={this.state.isMuted}
                 changeVolume={this.changeVolume.bind(this)}
-              />             
+                />
+              <AudioStreamPlayer
+                setStreamPlayer={this.setStreamPlayer}
+                setGainControl={this.setGainControl} />             
             </div> 
             {/* dead simple text chat */}
             <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>
@@ -120,6 +132,7 @@ export class DesktopApp extends Component {
   componentDidMount() {  
     // update css style sheet
     this.startTimer();
+    document.addEventListener('keydown', this.presetKeyDown.bind(this));
   }
   startTimer() {
     this.myInterval = setInterval(() => {
@@ -128,20 +141,48 @@ export class DesktopApp extends Component {
       }))
     }, 50)     
   }
+  presetKeyDown(e){
+    if (e.keyCode === 192){
+      this.startPromptCountdown();
+    } 
+  }
+  startPromptCountdown(){
+    let promptTimer = document.getElementById("prompt-end-timer-wrapper").children[0];
+    let promptTimerOverlay = document.getElementById("prompt-end-timer-wrapper").children[1];
+    promptTimerOverlay.style.transition = "60s linear";
+    promptTimerOverlay.style.width = "100%";
+    let countdown = 60;
+    promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
+    let x = setInterval(function() {    
+      countdown -= 1;
+      promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
+      if (countdown < 1) {
+        clearInterval(x);
+        promptTimerOverlay.style.transition = "0s linear";
+        promptTimerOverlay.style.width = "0%";
+        promptTimer.innerHTML = "";        
+      }
+    }, 1000);
+  }
   setStreamPlayer(streamPlayer){
     this.setState({ streamPlayer: streamPlayer })
   }
+  setGainControl(gainControl){
+    this.setState({ gainControl: gainControl })
+  }
   muteAudio(){
+    let streamPlayer = this.state.streamPlayer;
     if(this.state.isMuted){
       this.setState({ isMuted: false });
-      this.state.streamPlayer.muted(false);
+      streamPlayer.muted = false;
     } else {
       this.setState({ isMuted: true });
-      this.state.streamPlayer.muted(true);
+      streamPlayer.muted = true;
     }    
   }
   changeVolume(newVolume){
     /* this.state.streamPlayer.volume(newVolume); */
+    this.state.gainControl.gain.setValueAtTime(newVolume, this.state.streamPlayer.currentTime);
   }
   
 }

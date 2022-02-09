@@ -8,17 +8,16 @@ export class AudioStreamPlayer extends Component {
           id="audio-stream"
           src="https://room2interface.xyz/stream"
           type="audio/mpg"
-          crossOrigin="anonymous" />
-        
+          crossOrigin="anonymous" />        
       </div>
     )
   }
-  componentDidMount() {
-    this.audioStream = document.getElementById('audio-stream');
-    /* should this be in audio init instead? */
-    this.audioStream.load();
+  componentDidMount() {    
+    this.audioInit();
    }
   audioInit(){
+    this.audioStream = document.getElementById('audio-stream');
+    this.props.setStreamPlayer(this.audioStream);
     //set up gain
     var AudioContext = window.AudioContext // Default
       || window.webkitAudioContext // Safari and old versions of Chrome
@@ -26,9 +25,12 @@ export class AudioStreamPlayer extends Component {
     if (AudioContext) {
         var audioContext = new AudioContext();
         const gainNode = audioContext.createGain();
-        const source = audioContext.createMediaElementSource(this.music);
+        this.props.setGainControl(gainNode);
+        const source = audioContext.createMediaElementSource(this.audioStream);
         source.connect(gainNode);
         gainNode.connect(audioContext.destination);
+        this.audioStream.load();
+        this.audioStream.play();
     } else {
         // Web Audio API is not supported
         alert("Sorry, but the Web Audio API is not supported by your browser. Please, consider upgrading to the latest version or downloading Google Chrome or Mozilla Firefox");

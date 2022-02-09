@@ -320,9 +320,12 @@ code {
   top: 7%;
   z-index: 2;
   pointer-events: none;
+  /* background-color: #ffffff55;
+  border: solid white 3px; */
 }
 .TextResponseBox{
-  background-color: #007dff;
+  /* background-color: #007dff;
+  border: solid white 1px; */
   opacity: 0;
   position: absolute;
   transition: 1.5s;
@@ -364,22 +367,42 @@ code {
   flex-direction: column;
 }
 /* Current Prompt */
-#current-prompt{
-  font-size: max(1.0vw, 0.8em);
-  width: calc(75vw - 50vh);
-  color: white;
+#current-prompt-wrapper{
   position: absolute;
-  left: 12.5%;
-  bottom:30%;
+  left: 25vh;
+  bottom: 25%;
+  width: calc(75vw - 50vh);
   z-index: 3;
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
-  pointer-events: none;
-  display: inline;
-  text-align: center;
-  white-space: pre-line;
+  font-size: max(1.0vw, 0.8em);
   background-color: rgb(31, 33, 28);
+  color: white;  
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
   user-select: none;
-  border: 4px solid transparent;
+  pointer-events: none;
+  text-align: center;
+}
+#prompt-end-timer-wrapper{
+  display: grid;
+}
+#prompt-end-timer{
+  grid-column: 1;
+  grid-row: 1;
+}
+#prompt-end-timer-overlay{
+  grid-column: 1;
+  grid-row: 1;
+  background-color: white;
+  mix-blend-mode: difference;
+  width: 0%;
+}
+.PromptEndTimerOverlayFull{
+  width: 100%;
+}
+#current-prompt{  
+
+}
+#input-select-wrapper{
+  padding-top: 1vh;
 }
 
 /* Emoji Triangle */
@@ -432,15 +455,6 @@ code {
 }
 
 /* Input Section */
-#input-select-wrapper{
-  position: absolute;
-  left: 25vh;
-  bottom: 25%;
-  z-index: 3;
-  font-size: max(1.0vw, 0.8em);
-  background-color: rgb(31, 33, 28);
-  color: white;
-}
 #input-wrapper{
   background-color: var(--comp-col-03);
   position: absolute;
