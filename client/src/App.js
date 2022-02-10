@@ -144,7 +144,7 @@ export class App extends Component {
   /* Desktop DB Connections */
   // init db and then triger update loop
   initSchedule(){
-    fetch(`http://localhost:33061/api/getScheduleInit`, {
+    fetch(`https://room2.fm/api/getScheduleInit`, {
       headers: {
         'Content-type': 'application/json'
       },
@@ -155,7 +155,7 @@ export class App extends Component {
       .then(res => this.setStateFromDB(res.data));
   }
   updateSchedule(){
-    fetch(`http://localhost:33061/api/getScheduleUpdate`, {
+    fetch(`https://room2.fm/api/getScheduleUpdate`, {
       headers: {
         'Content-type': 'application/json'
       },
@@ -206,7 +206,7 @@ export class App extends Component {
     } 
   }
   updateEmojis(emoji1, emoji2, emoji3){
-    fetch(`http://localhost:33061/api/getEmojisUpdate`, {
+    fetch(`https://room2.fm/api/getEmojisUpdate`, {
       headers: { 'Content-type': 'application/json' },
       method: 'POST',
       mode: 'cors',
@@ -267,7 +267,7 @@ export class App extends Component {
       let imageFile = this.dataURLtoFile(dataURL, 'response.png');
       this.state.drawingCanvas.clear();
       formData.append('upload', imageFile, 'response.png');
-      fetch('http://localhost:33061/api/insertImageResponse', {
+      fetch('https://room2.fm/api/insertImageResponse', {
         method: 'PUT',
         body: formData
       })
@@ -278,7 +278,7 @@ export class App extends Component {
       let textInput = document.getElementById('text-input');
       let responseText = textInput.value;
       textInput.value = '';
-      fetch(`http://localhost:33061/api/insertTextResponse`, {
+      fetch(`https://room2.fm/api/insertTextResponse`, {
         headers: { 'Content-type': 'application/json' },
         method: 'POST',
         mode: 'cors',
