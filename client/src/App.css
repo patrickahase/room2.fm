@@ -167,12 +167,15 @@ code {
   width: 9vw;
   height: min(3vw, 7vh);
   font-size: min(1.5vw, 4vh);
-  color: #5252ff;
+  color: white;
   user-select: none;
   position: absolute;
   bottom: min(1vw, 2.5vh);
   left: 35.5vw;
   font-family: 'IBM Plex Sans Condensed', sans-serif;  
+}
+#modal-continue-button:hover{
+  color: #5252ff;
 }
 /* Door Closed - Text Logo */
 #logo-wrapper{
@@ -326,9 +329,13 @@ code {
 .TextResponseBox{
   /* background-color: #007dff;
   border: solid white 1px; */
+  font-size: max(1.0vw, 0.8em);
+  color: white;  
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
   opacity: 0;
   position: absolute;
   transition: 1.5s;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 .TextResponseBox.FadeIn{
   opacity: 1;
@@ -378,7 +385,7 @@ code {
   color: white;  
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   user-select: none;
-  pointer-events: none;
+  /* pointer-events: none; */
   text-align: center;
 }
 #prompt-end-timer-wrapper{
@@ -403,6 +410,21 @@ code {
 }
 #input-select-wrapper{
   padding-top: 1vh;
+}
+.InputSelectButton{
+  background-color: rgb(31, 33, 28);
+  color: white;
+  font-size: max(1.0vw, 0.8em);
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  margin-bottom: 2px;
+  border: 1px white;
+  border-style: dotted solid;
+  border-radius: 3px 0px;
+}
+.ActiveInputButton{
+  /* color: #5252ff; */
+  border-width: 2px;
+  border-color: #5252ff;
 }
 
 /* Emoji Triangle */
@@ -477,9 +499,12 @@ code {
 
 /* Drawing Canvas */
 #drawing-canvas-wrapper{
+  position: relative;
+  top: -100%;
   width: 100%;
   height: 100%;
   background-color: white;
+  z-index: 3;
 }
 #drawing-canvas{
   width: 100%;
@@ -490,12 +515,14 @@ code {
 
 /* Text Area Input */
 #text-input{
+  position: relative;
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 8px;
   resize: none;
   border: 0;
+  z-index: 4;
 }
 
 /* Righthand UI Section */
@@ -514,13 +541,15 @@ code {
   grid-column: 1/5;
   grid-row: 1/5;
   position: relative;
+  display: grid;
+  grid-template-columns: 5% repeat(5, 1fr) 5%;
+  grid-template-rows: 10% repeat(5, 1fr);
 }
-
 /* Colour Selector */
 #col-select-wrapper{
   position: absolute;
   left: 5%;
-  top: 15%;
+  top: 5%;
   width: 90%;
   height: 60%;
 }
@@ -533,7 +562,7 @@ code {
   /* transition: 1s; */
 }
 .col-select.first{
-  top: 40%;
+  top: 35%;
   left: 30.2%;
   width: 39.6%;
   height: 60%;
@@ -554,26 +583,27 @@ code {
   z-index: 1;
 }
 #col-swap-button{
-  position: relative;
+  /* position: relative;
   width:5vh;
   height:5vh;
   left: 37.5%;
-  top: 0%;
+  top: 0%; */
   /* position: absolute;
   left: 0%;
   top: 0%;
   width: 10vw;
   height: 10vh; */
+  grid-row: 5/6;
+  grid-column: 4/5;
   z-index: 10;
   background: none;
-  border: none;
   stroke: var(--comp-col-01);
   fill: var(--comp-col-01);
 }
 #word-change{
   position: absolute;
-  top: 0%;
-  left:0%;
+  top: 65%;
+  left:2%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -587,8 +617,8 @@ code {
 }
 #word-colour{
   position: absolute;
-  top: 0%;
-  right:0%;
+  top: 65%;
+  right:2%;
   display: flex;
   align-items: center;
   height: 15%;
@@ -601,12 +631,8 @@ code {
 }
 
 #increase-brush-button{
-  position: absolute;
-  width: 22%;
-  height: 20%;
-  left: 7.5%;
-  bottom: 25%;
-  border: none;
+  grid-row: 6/7;
+  grid-column: 2/3;
 }
 #increase-brush-circle{
   transition: 0.5s;
@@ -617,13 +643,8 @@ code {
   transform: scale(1.4);
 }
 #decrease-brush-button{
-  position: absolute;
-  width: 22%;
-  height: 20%;
-  right: 7.5%;
-  bottom: 25%;
-  padding: 0;
-  border: none;
+  grid-row: 6/7;
+  grid-column: 3/4;
 }
 #decrease-brush-circle{
   transition: 0.5s;
@@ -634,20 +655,25 @@ code {
   transform: scale(0.65);
 }
 #erase-brush-button{
-  position: absolute;
-  bottom: 0%;
-  left: 0%;
+  grid-row: 6/7;
+  grid-column: 4/5;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 #undo-button{
-  position: absolute;
-  bottom: 0%;
-  border-style: dotted none none dotted;
+  grid-row: 6/7;
+  grid-column: 5/6;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 #redo-button{
-  position: absolute;
-  bottom: 0%;
-  right: 0%;
-  border-style: none dotted dotted none;
+  grid-row: 6/7;
+  grid-column: 6/7;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 .RightUIButton{
   background-color: var(--comp-col-03);
@@ -668,10 +694,10 @@ code {
 #response-submit-button::after{
   content: " ";
   position: absolute;
-  left: 4px;
+  left: 4.167%;
   bottom: 4px;
-  width: calc(80% - 12px);
-  height: calc(20% - 12px);
+  width: 71.67%;
+  height: calc(20% - 8px);
   border: 2px var(--comp-col-01);
   border-style: dotted solid;
   border-radius: 6px 0px;

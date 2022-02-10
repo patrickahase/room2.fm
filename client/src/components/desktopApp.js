@@ -69,10 +69,10 @@ export class DesktopApp extends Component {
                 {this.props.currentPrompt}
               </div>           
               <div id="input-select-wrapper">
-                <span>I would like to </span>
-                <button id="draw-input-select-button" onClick={this.props.setDrawInput}>draw</button>
-                <button id="write-input-select-button" onClick={this.props.setWriteInput}>write</button>
-                <span> a response</span>
+                <span>I would like to&nbsp;
+                <button id="draw-input-select" className="InputSelectButton" onClick={this.props.setDrawInput}>draw</button>&nbsp;/&nbsp;
+                <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={this.props.setWriteInput}>write</button>
+                &nbsp;a response</span>
               </div>           
             </div>           
             {/* Emoji Triangle */}
@@ -87,19 +87,18 @@ export class DesktopApp extends Component {
             
             {/* Input Section */}
             <div id="input-wrapper">              
-              {this.props.drawingResponse
-                ? <>{/* Drawing Input */}
-                  <DrawingCanvas 
-                    brushColour={this.props.colours.colour1}
-                    brushSize={this.props.brushSize}
-                    setCanvas={this.props.setCanvas}
-                    setIsDrawing={this.props.setIsDrawing}
-                    />
-                </>
-                : <>
-                  <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
-                </>/* Text Input */
-                }
+              <>
+                <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
+              </>
+              <>{/* Drawing Input */}
+                <DrawingCanvas 
+                  brushColour={this.props.colours.colour1}
+                  brushSize={this.props.brushSize}
+                  setCanvas={this.props.setCanvas}
+                  setIsDrawing={this.props.setIsDrawing}
+                  />
+              </>
+                
             </div>
             {/* Right UI Panel */}
             <div id="right-ui-wrapper">
@@ -110,7 +109,7 @@ export class DesktopApp extends Component {
                 colours={this.props.colours}
                 changeColourOrder={this.props.changeColourOrder}
                 changeBrushSize={this.props.changeBrushSize} />              
-              <button id="response-submit-button" onClick={this.props.submitResponse}>
+              <button id="response-submit-button" /* onClick={this.props.submitResponse} */>
                 <span>SUBMIT RESPONSE</span>                
               </button>
               {/* Audio Settings */}
@@ -132,7 +131,6 @@ export class DesktopApp extends Component {
   componentDidMount() {  
     // update css style sheet
     this.startTimer();
-    document.addEventListener('keydown', this.presetKeyDown.bind(this));
   }
   startTimer() {
     this.myInterval = setInterval(() => {
@@ -140,29 +138,6 @@ export class DesktopApp extends Component {
         timer: prevState.timer + 0.01
       }))
     }, 50)     
-  }
-  presetKeyDown(e){
-    if (e.keyCode === 192){
-      this.startPromptCountdown();
-    } 
-  }
-  startPromptCountdown(){
-    let promptTimer = document.getElementById("prompt-end-timer-wrapper").children[0];
-    let promptTimerOverlay = document.getElementById("prompt-end-timer-wrapper").children[1];
-    promptTimerOverlay.style.transition = "60s linear";
-    promptTimerOverlay.style.width = "100%";
-    let countdown = 60;
-    promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
-    let x = setInterval(function() {    
-      countdown -= 1;
-      promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
-      if (countdown < 1) {
-        clearInterval(x);
-        promptTimerOverlay.style.transition = "0s linear";
-        promptTimerOverlay.style.width = "0%";
-        promptTimer.innerHTML = "";        
-      }
-    }, 1000);
   }
   setStreamPlayer(streamPlayer){
     this.setState({ streamPlayer: streamPlayer })

@@ -7,18 +7,23 @@ This is my refactoring of the room2 code base to set it up for continued use
  - Matthew Jones for his article on state management for undo/redo with fabric = https://exceptionnotfound.net/drawing-with-fabricjs-and-typescript-part-7-undo-redo/
 
 # To Do For Bleed Test
+- Re up chat limit - currently 6
+- Fix UI icons
+- Top Menu?
+- Timer function?
+- Get rid of emoji triangle?
+- ~~fix controls.room2.fm~~
+- new bg vis?
+- explainer overlay
+- change the routes to the live server!!!!
 - ~~Response type select~~
 - ~~DB to accept either response type then display~~
 - ~~WebGL BG~~
-- Get rid of emoji triangle?
-- Set up vultr and audio stream
-- Re up chat
-- Fix UI for different selections
-- Hook up volume
-- Top Menu
-- Prompt change countdown? (maybe response type select means not an issue)
-- Timer Function
-- Keep drawing if input change
+- ~~Set up vultr and audio stream~~
+- ~~Hook up volume~~
+- ~~Prompt change countdown? (maybe response type select means not an issue~~
+- ~~Keep drawing if input change~~
+
 
 # To Do
 - ~~Do I need pixi-react-fiber? Uninstall if not~~
@@ -35,6 +40,8 @@ This is my refactoring of the room2 code base to set it up for continued use
 - reconnect submit button (and change to turnery on input change)
 - add sound design?
 - comment out console logs
+- update db login for new db
+- look for empty responses
 
 ## Modal
 - Modal for Mobile ~ Decided to wait until later to make sure mobile layout is consistant - perhaps the modal continue button will need to match the prompt response button in some way ~

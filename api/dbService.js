@@ -17,6 +17,11 @@ const connectSettings = {
 
 const connection = mysql.createConnection(connectSettings);
 
+connection.connect((err) => {
+  if(err) { console.log(err.message) }
+  console.log('db ' + connection.state );
+});
+
 const sqlQueries = {
   getScheduleQ:       `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType',
                         EMOJI_1 AS 'emoji1', EMOJI_2 AS 'emoji2', EMOJI_3 AS 'emoji3' FROM LIVE_SCHEDULE WHERE id = 1;`, 
@@ -25,11 +30,6 @@ const sqlQueries = {
   /* insertTextQ:        `INSERT INTO TEXT_RESPONSES (RESPONSE) VALUE (?);` */
   insertResponseQ:    `INSERT INTO RESPONSES (RESPONSE) VALUE (?);`
 }
-
-connection.connect((err) => {
-  if(err) { console.log(err.message) }
-  console.log('db ' + connection.state );
-});
 
 class DbService {
 

@@ -22,6 +22,7 @@ export class App extends Component {
       currentArtist: null,
       currentPrompt: null,
       promptType: 'draw',
+      promptCountdown: false,
       emoji1: require("./content/emojis/alien.png"),
       emoji2: require("./content/emojis/alien.png"),
       emoji3: require("./content/emojis/alien.png"),
@@ -70,6 +71,7 @@ export class App extends Component {
     this.redoDrawing = this.redoDrawing.bind(this);
     this.setDrawInput = this.setDrawInput.bind(this);
     this.setWriteInput = this.setWriteInput.bind(this);
+    this.startPromptCountdown = this.startPromptCountdown.bind(this);
   }
   render() {
     return (
@@ -181,10 +183,14 @@ export class App extends Component {
     }
     // if new prompt
     if(scheduleData.currentPrompt !== this.state.currentPrompt){
-      this.setState({  
-        currentPrompt: scheduleData.currentPrompt,
-        promptType: scheduleData.promptType
-      })
+      if(document.getElementById("prompt-end-timer-wrapper")){
+        this.startPromptCountdown(scheduleData.currentPrompt);
+      } else {
+        this.setState({  
+          currentPrompt: scheduleData.currentPrompt,
+          promptType: scheduleData.promptType
+        })
+      }     
     }
     // if new responses    
     if (responseData.length){
@@ -294,9 +300,17 @@ export class App extends Component {
   }
   setDrawInput(){
     this.setState({drawingResponse: true});
+    document.getElementById("drawing-canvas-wrapper").style.zIndex = "4";
+    document.getElementById("text-input").style.zIndex = "3";
+    document.getElementsByClassName("ActiveInputButton")[0].classList.remove("ActiveInputButton");
+    document.getElementById("draw-input-select").classList.add("ActiveInputButton");
   }
   setWriteInput(){
     this.setState({drawingResponse: false});
+    document.getElementById("drawing-canvas-wrapper").style.zIndex = "3";
+    document.getElementById("text-input").style.zIndex = "4";
+    document.getElementsByClassName("ActiveInputButton")[0].classList.remove("ActiveInputButton");
+    document.getElementById("text-input-select").classList.add("ActiveInputButton");
   }
   changeColourOrder(){
     let newColourOrder = {
@@ -388,8 +402,31 @@ export class App extends Component {
       this.state.drawingCanvas.loadFromJSON(newCanvasState);      
     }  
   }
+  startPromptCountdown(newPrompt){
+    if(!this.state.promptCountdown){
+      this.setState({promptCountdown: true}, () => {
+        let promptTimer = document.getElementById("prompt-end-timer-wrapper").children[0];
+        let promptTimerOverlay = document.getElementById("prompt-end-timer-wrapper").children[1];
+        promptTimerOverlay.style.transition = "60s linear";
+        promptTimerOverlay.style.width = "100%";
+        let countdown = 60;
+        promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
+        let x = setInterval(() => {    
+          countdown -= 1;
+          promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
+          if (countdown < 1) {
+            clearInterval(x);
+            promptTimerOverlay.style.transition = "0s linear";
+            promptTimerOverlay.style.width = "0%";
+            promptTimer.innerHTML = "";
+            this.setState({currentPrompt: newPrompt, promptCountdown: false})        
+          }
+        }, 1000);
+      })
+    }    
+  }
 
-  dataURLtoFile(dataurl, filename) {
+  dataURLtoFile(dataurl, filename){
       var arr = dataurl.split(','),
         mime = arr[0].match(/:(.*?);/)[1],
         bstr = atob(arr[1]),
@@ -402,6 +439,20 @@ export class App extends Component {
         type: mime
       });
   }
+/*   getCSSRule(ruleName) {
+    ruleName = ruleName.toLowerCase();
+    var result = null;
+    var find = Array.prototype.find;
+
+    find.call(document.styleSheets, styleSheet => {
+        result = find.call(styleSheet.cssRules, cssRule => {
+            return cssRule instanceof CSSStyleRule 
+                && cssRule.selectorText.toLowerCase() === ruleName;
+        });
+        return result != null;
+    });
+    return result;
+  } */
 }
 
 export default App

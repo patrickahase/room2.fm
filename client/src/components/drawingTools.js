@@ -16,6 +16,12 @@ export class DrawingTools extends Component {
                   colours={this.props.colours}
                   changeColourOrder={this.props.changeColourOrder}
                 />
+                <div id="but1" />
+                <div id="but2" />
+                <div id="but3" />
+                <div id="but4" />
+                <div id="but5" />
+                <div id="but6" />
                 <button id="increase-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> <IncreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> </button>
                 <button id="decrease-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> <DecreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> </button>
                 <button id="erase-brush-button" className="RightUIButton" onClick={this.props.toggleEraser}>
@@ -96,8 +102,7 @@ function IncreaseBrushSize(props){
         <polyline points="10,20 10,80" fill="none" stroke="black" strokeWidth="4" />   
         <polyline points="0,30 10,20 20,30" fill="none" stroke="black" strokeWidth="4" />   
     </svg>  
-  </>
-    
+  </>    
   )
 }
 /* expecting a 1:1 aspect ratio */

@@ -20,7 +20,7 @@ export class ResponseDisplay extends Component {
     )
   }
   componentDidMount(){
-    /* this.responseTest(); */
+    this.responseTest();
   }
   componentDidUpdate() {
     if (this.props.responsesToDisplay) {
@@ -47,39 +47,39 @@ export class ResponseDisplay extends Component {
     }, 5000);
   }
   createResponseTextBox(textResponse){
-      let responseWrapper = document.getElementById('response-wrapper');
-      let newResponseBox = document.createElement('span');
-      newResponseBox.innerHTML = textResponse;
-      let xRoll = this.randomInt(0, 75);
-      let yRoll = this.randomInt(0, 75);
-      let wRoll = this.randomInt(25, 75-xRoll);
-      let hRoll = this.randomInt(25, 75-yRoll);
-      // this should have min width/height of 25%
-      newResponseBox.style.maxWidth = wRoll + '%';
-      newResponseBox.style.maxHeight = hRoll + '%';
-      /* newResponseBox.style.visibility = 'hidden'; */
-      newResponseBox.classList.add('TextResponseBox');
-      responseWrapper.appendChild(newResponseBox);
-      // check for collision and return object with boundaries
-      /* let updatedBoundaries = this.detectCollision(xRoll, xRoll + (newResponseBox.offsetWidth/responseWrapper.offsetWidth)*100, yRoll, yRoll + (newResponseBox.offsetHeight/responseWrapper.offsetHeight)*100); */
-      // update position and width/height
-      newResponseBox.style.left = xRoll + "%";
-      newResponseBox.style.top = yRoll + "%";
-      /* newResponseBox.style.maxWidth = (updatedBoundaries.right - updatedBoundaries.left) + '%';
-      newResponseBox.style.maxHeight = (updatedBoundaries.bottom - updatedBoundaries.top) + '%';
-      newResponseBox.style.visibility = ''; */
-      // add fade in/out
+    let responseWrapper = document.getElementById('response-wrapper');
+    let newResponseBox = document.createElement('span');
+    newResponseBox.innerHTML = textResponse;
+    let xRoll = this.randomInt(0, 75);
+    let yRoll = this.randomInt(0, 75);
+    let wRoll = this.randomInt(25, 75-xRoll);
+    /* let hRoll = this.randomInt(25, 75-yRoll); */
+    // this should have min width/height of 25%
+    newResponseBox.style.maxWidth = wRoll + '%';
+    /* newResponseBox.style.maxHeight = hRoll + '%'; */
+    /* newResponseBox.style.visibility = 'hidden'; */
+    newResponseBox.classList.add('TextResponseBox');
+    responseWrapper.appendChild(newResponseBox);
+    // check for collision and return object with boundaries
+    /* let updatedBoundaries = this.detectCollision(xRoll, xRoll + (newResponseBox.offsetWidth/responseWrapper.offsetWidth)*100, yRoll, yRoll + (newResponseBox.offsetHeight/responseWrapper.offsetHeight)*100); */
+    // update position and width/height
+    newResponseBox.style.left = xRoll + "%";
+    newResponseBox.style.top = yRoll + "%";
+    /* newResponseBox.style.maxWidth = (updatedBoundaries.right - updatedBoundaries.left) + '%';
+    newResponseBox.style.maxHeight = (updatedBoundaries.bottom - updatedBoundaries.top) + '%';
+    newResponseBox.style.visibility = ''; */
+    // add fade in/out
+    setTimeout(() => {
+      newResponseBox.classList.add('FadeIn');
       setTimeout(() => {
-        newResponseBox.classList.add('FadeIn');
-        setTimeout(() => {
-        newResponseBox.classList.add('FadeOut');
-        /* this.removeBoundary(); */
-        }, this.state.textHangTime)
-        setTimeout(() => {
-          responseWrapper.removeChild(newResponseBox);
-          if (this.props.responsesToDisplay) { this.createResponseTextBox(this.props.getNextResponse()); }
-        }, this.state.textFadeTime + this.state.textHangTime + 100)
-      }, 100);
+      newResponseBox.classList.add('FadeOut');
+      /* this.removeBoundary(); */
+      }, this.state.textHangTime)
+      setTimeout(() => {
+        responseWrapper.removeChild(newResponseBox);
+        if (this.props.responsesToDisplay) { this.createResponseTextBox(this.props.getNextResponse()); }
+      }, this.state.textFadeTime + this.state.textHangTime + 100)
+    }, 100);
       
       // we actually want to do this as a percentage which means converting the width and height?
       // but we can leave the top and left
