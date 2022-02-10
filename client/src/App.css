@@ -280,6 +280,10 @@ code {
   text-align: center;
   transform:translateX(0%);      
 }
+.MarqueeEmoji{
+  position: relative;
+  top: -0.45vw;
+}
 @keyframes scroll-left {
   0%   { transform: translateX(0%); }
   100% { transform: translateX(-33.3333%); }

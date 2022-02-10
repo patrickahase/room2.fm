@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 export class ResponseDisplay extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ export class ResponseDisplay extends Component {
     )
   }
   componentDidMount(){
-    this.responseTest();
+    /* this.responseTest(); */
   }
   componentDidUpdate() {
     if (this.props.responsesToDisplay) {
