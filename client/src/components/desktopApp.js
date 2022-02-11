@@ -115,7 +115,7 @@ export class DesktopApp extends Component {
                 colours={this.props.colours}
                 changeColourOrder={this.props.changeColourOrder}
                 changeBrushSize={this.props.changeBrushSize} />              
-              <button id="response-submit-button" /* onClick={this.props.submitResponse} */>
+              <button id="response-submit-button" onClick={this.props.submitResponse}>
                 <span>SUBMIT RESPONSE</span>                
               </button>
               {/* Audio Settings */}
