@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.2b5bcf7c.chunk.css",
-    "main.js": "/static/js/main.61ce32e0.chunk.js",
-    "main.js.map": "/static/js/main.61ce32e0.chunk.js.map",
+    "main.css": "/static/css/main.19feab2a.chunk.css",
+    "main.js": "/static/js/main.6be91ab9.chunk.js",
+    "main.js.map": "/static/js/main.6be91ab9.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.0f16f66c.js",
     "runtime-main.js.map": "/static/js/runtime-main.0f16f66c.js.map",
     "static/js/2.b2a9a59c.chunk.js": "/static/js/2.b2a9a59c.chunk.js",
     "static/js/2.b2a9a59c.chunk.js.map": "/static/js/2.b2a9a59c.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.2b5bcf7c.chunk.css.map": "/static/css/main.2b5bcf7c.chunk.css.map",
+    "static/css/main.19feab2a.chunk.css.map": "/static/css/main.19feab2a.chunk.css.map",
     "static/js/2.b2a9a59c.chunk.js.LICENSE.txt": "/static/js/2.b2a9a59c.chunk.js.LICENSE.txt",
     "static/media/alien.png": "/static/media/alien.381f0676.png",
     "static/media/blossoming-flower.png": "/static/media/blossoming-flower.5f78e6a8.png",
+    "static/media/App.css": "/static/media/eraser_pic.5ab7c810.svg",
     "static/media/butterfly.png": "/static/media/butterfly.22ba9572.png",
     "static/media/desert.png": "/static/media/desert.afb4dc6a.png",
     "static/media/leaf-in-wind.png": "/static/media/leaf-in-wind.b5dea42c.png",
@@ -24,7 +25,7 @@
   "entrypoints": [
     "static/js/runtime-main.0f16f66c.js",
     "static/js/2.b2a9a59c.chunk.js",
-    "static/css/main.2b5bcf7c.chunk.css",
-    "static/js/main.61ce32e0.chunk.js"
+    "static/css/main.19feab2a.chunk.css",
+    "static/js/main.6be91ab9.chunk.js"
   ]
 }

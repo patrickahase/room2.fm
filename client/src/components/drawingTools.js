@@ -22,10 +22,10 @@ export class DrawingTools extends Component {
                 <div id="but4" />
                 <div id="but5" />
                 <div id="but6" />
-                <button id="increase-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> <IncreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> </button>
-                <button id="decrease-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> <DecreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> </button>
+                <button id="increase-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> {/* <IncreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> */} </button>
+                <button id="decrease-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> {/* <DecreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> */} </button>
                 <button id="erase-brush-button" className="RightUIButton" onClick={this.props.toggleEraser}>
-                  E
+                {/*   E */}
                 </button>
                 <button id="undo-button" className="RightUIButton" onClick={this.props.undoDrawing}>
                 ⮌

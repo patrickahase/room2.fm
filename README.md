@@ -8,14 +8,17 @@ This is my refactoring of the room2 code base to set it up for continued use
 
 # To Do For Bleed Test
 - Re up chat limit - currently 6
-- Fix UI icons
+- Fix UI icons size and pos
 - Top Menu?
 - Timer function?
 - Get rid of emoji triangle?
 - ~~fix controls.room2.fm~~
 - new bg vis?
 - explainer overlay
-- change the routes to the live server!!!!
+- writing text default size
+- collision - just make it re calculate on hit
+- ~~update ssl to cover www~~
+- ~~change the routes to the live server!!!!~~
 - ~~Response type select~~
 - ~~DB to accept either response type then display~~
 - ~~WebGL BG~~

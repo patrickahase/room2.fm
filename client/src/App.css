@@ -9,7 +9,9 @@
 /* 3 - Emoji Tri Circle Selector */
 /* 3 - Current Prompt */
 /* 3 - Settings Menu */
-/* 5 - Modal */
+/* 4 - Text Input */
+/* 5 - Info Overlay */
+/* 6 - Modal */
 
 * {
   box-sizing: border-box;
@@ -97,7 +99,7 @@ code {
   background-color: rgb(31, 33, 28);
   border-radius: 4px;
   padding: 1vw;
-  z-index: 5;
+  z-index: 6;
 }
 #modal-title-wrapper{
   position: absolute;
@@ -497,7 +499,7 @@ code {
   right: 4px;
   bottom: 4px;
   border: 2px solid var(--comp-col-01);
-  z-index: 5;
+  z-index: 6;
   pointer-events: none;
 }
 
@@ -637,6 +639,7 @@ code {
 #increase-brush-button{
   grid-row: 6/7;
   grid-column: 2/3;
+  background: no-repeat center/50vh url('./content/media/brush_plus.svg');
 }
 #increase-brush-circle{
   transition: 0.5s;
@@ -649,6 +652,7 @@ code {
 #decrease-brush-button{
   grid-row: 6/7;
   grid-column: 3/4;
+  background: no-repeat center/50vh url('./content/media/brush_minus.svg');
 }
 #decrease-brush-circle{
   transition: 0.5s;
@@ -664,6 +668,7 @@ code {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  background: no-repeat center/50vh url('./content/media/eraser_pic.svg');
 }
 #undo-button{
   grid-row: 6/7;
@@ -806,7 +811,45 @@ code {
   opacity: 0.7;
 }
 
-
+/* Info Overlay */
+#info-overlay-wrapper{
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 5;
+}
+#info-overlay-close{
+  color: #aaaaaa;
+  float: right;
+  font-size: 5vw;
+  font-weight: bold;
+  width:5vw;
+  height:5vw;
+  display: flex;
+  align-items: center;
+}
+#info-overlay-close:hover,
+#info-overlay-close:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+#info-overlay-proceed{
+  color: #fff;
+  font-size: 3vw;
+  position: absolute;
+  width: 75%;
+  height: 68%;
+  left: 0%;
+  top: 7%;
+  white-space: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+}
 
 /* Mobile Rules */
 @media all and (any-hover: none) {

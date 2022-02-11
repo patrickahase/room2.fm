@@ -5,10 +5,11 @@ import EmojiTri from './emojiTri';
 import IntroModal from './introModal';
 import Marquee from './marquee';
 import DrawingTools from './drawingTools';
-import SettingsMenu from './settingsMenu';
+/* import SettingsMenu from './settingsMenu'; */
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
 import AudioStreamPlayer from './audioStreamPlayer';
+import { InfoOverlay } from './infoOverlay';
 
 export class DesktopApp extends Component {
   constructor(props) {
@@ -25,6 +26,8 @@ export class DesktopApp extends Component {
       emojiY: 0.5,
 
       timer: 0.,
+
+      infoOverlay: true
 
     }
     this.setStreamPlayer = this.setStreamPlayer.bind(this);
@@ -58,7 +61,10 @@ export class DesktopApp extends Component {
               height={this.props.height}
               width={this.props.width} /> 
             {/* Menu Overlay */}
-            <SettingsMenu />
+            {/* <SettingsMenu /> */}
+            {/* Info Overlay */}
+            {/* {this.state.infoOverlay &&
+              <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> } */}
             {/* Prompt and Input Selection Overlay */}
             <div id="current-prompt-wrapper">
               <div id="prompt-end-timer-wrapper">
@@ -158,6 +164,9 @@ export class DesktopApp extends Component {
   changeVolume(newVolume){
     /* this.state.streamPlayer.volume(newVolume); */
     this.state.gainControl.gain.setValueAtTime(newVolume, this.state.streamPlayer.currentTime);
+  }
+  toggleInfoOverlay(){
+    this.setState(prevState => ({infoOverlay: !prevState.infoOverlay}))
   }
   
 }
