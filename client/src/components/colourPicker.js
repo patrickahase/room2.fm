@@ -54,6 +54,18 @@ export class ColourPicker extends Component {
   colorInputChange(e){
     let colNum = e.target.id.charAt(3);
     document.documentElement.style.setProperty('--comp-col-0'+colNum, e.target.value);
+    switch(e.target.classList[1]){
+      case "first":
+        this.props.changeColours("colour1", e.target.value);
+        break;
+      case "second":
+        this.props.changeColours("colour2", e.target.value);
+        break;
+      case "third":
+        this.props.changeColours("colour3", e.target.value);
+        break;
+      default:
+    }
   }
   
 }

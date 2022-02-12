@@ -17,6 +17,10 @@ This is my refactoring of the room2 code base to set it up for continued use
 - explainer overlay
 - writing text default size
 - collision - just make it re calculate on hit
+- ~~text prompt submission~~ ?
+- ~~colour brush update~~
+- ~~brush size up~~
+- server won't stay up?
 - ~~update ssl to cover www~~
 - ~~change the routes to the live server!!!!~~
 - ~~Response type select~~
@@ -38,13 +42,15 @@ This is my refactoring of the room2 code base to set it up for continued use
 - ~~add in last prompt tracker~~
 - massage random
 - do i need some kind of state lock on response array?
-- better prompt type detection on client recieve
+- ~~better prompt type detection on client recieve~~
 - random image distribution
 - reconnect submit button (and change to turnery on input change)
 - add sound design?
 - comment out console logs
 - update db login for new db
 - look for empty responses
+- killswitch
+- mute switch
 
 ## Modal
 - Modal for Mobile ~ Decided to wait until later to make sure mobile layout is consistant - perhaps the modal continue button will need to match the prompt response button in some way ~

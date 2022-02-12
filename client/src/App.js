@@ -106,6 +106,7 @@ export class App extends Component {
             brushSize={this.state.brushSize}
             setIsDrawing={this.setIsDrawing}
             changeColourOrder={this.changeColourOrder.bind(this)}
+            changeColours={this.changeColours.bind(this)}
             undoDrawing={this.undoDrawing.bind(this)}
             redoDrawing={this.redoDrawing.bind(this)}
             toggleEraser={this.toggleEraser.bind(this)}
@@ -320,11 +321,16 @@ export class App extends Component {
     };
     this.setState({ colours: newColourOrder });
   }
-  changeBrushSize(newSize){
-    this.setState({ brushSize: newSize });
+  changeColours(colourSelect, newColour){
+    let newColours = this.state.colours;
+    newColours[colourSelect] = newColour;
+    this.setState({ colours: newColours });
   }
+  /* changeBrushSize(newSize){
+    this.setState({ brushSize: newSize });
+  } */
   changeBrushSize = (e) =>{
-    if(e.target.id === "increase-brush-circle"){
+    if(e.target.id === "increase-brush-button"){
       if(this.state.brushSize < 20){        
         this.setState(prevState => ({ brushSize: prevState.brushSize + 2}))
       }      

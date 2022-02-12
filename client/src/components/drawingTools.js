@@ -15,6 +15,7 @@ export class DrawingTools extends Component {
                 <ColourPicker 
                   colours={this.props.colours}
                   changeColourOrder={this.props.changeColourOrder}
+                  changeColours={this.props.changeColours}
                 />
                 <div id="but1" />
                 <div id="but2" />

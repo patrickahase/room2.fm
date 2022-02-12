@@ -114,6 +114,7 @@ export class DesktopApp extends Component {
                 toggleEraser={this.props.toggleEraser}
                 colours={this.props.colours}
                 changeColourOrder={this.props.changeColourOrder}
+                changeColours={this.props.changeColours}
                 changeBrushSize={this.props.changeBrushSize} />              
               <button id="response-submit-button" onClick={this.props.submitResponse}>
                 <span>SUBMIT RESPONSE</span>                
