@@ -34,7 +34,7 @@ export class App extends Component {
       responsesToDisplay: false,
       unseenResponses: [],
       lastResponseID: 0,
-      drawingResponse: true,
+      drawingResponse: false,
 
       // undo/redo settings
       maxUndo: 10,

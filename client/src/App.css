@@ -333,8 +333,8 @@ code {
   border: solid white 3px; */
 }
 .TextResponseBox{
-  background-color: #007dff;
-  border: solid white 1px;
+  /* background-color: #007dff;
+  border: solid white 1px; */
   font-size: max(1.0vw, 0.8em);
   color: white;  
   font-family: 'IBM Plex Sans Condensed', sans-serif;
