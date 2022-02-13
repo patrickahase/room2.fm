@@ -20,7 +20,7 @@ export class ResponseDisplay extends Component {
     )
   }
   componentDidMount(){
-    this.responseTest();
+    /* this.responseTest(); */
   }
   componentDidUpdate() {
     if (this.props.responsesToDisplay) {
