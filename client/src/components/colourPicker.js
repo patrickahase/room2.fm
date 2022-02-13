@@ -35,15 +35,15 @@ export class ColourPicker extends Component {
       switch(true){
         case cl.contains('first'):
         cl.remove('first');
-        cl.add('second');
+        cl.add('third');
         break;
         case cl.contains('second'):
         cl.remove('second');
-        cl.add('third');
+        cl.add('first');
         break;
         case cl.contains('third'):
         cl.remove('third');
-        cl.add('first');
+        cl.add('second');
         break;
         default:
         break;

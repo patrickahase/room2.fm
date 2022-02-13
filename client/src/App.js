@@ -195,10 +195,8 @@ export class App extends Component {
     }
     // if new responses    
     if (responseData.length){
-      console.log(responseData);
       let newResponses = [];
       responseData.forEach(response => newResponses.push(response.RESPONSE));
-      console.log(newResponses);
       this.setState(prevState => ({
         unseenResponses: prevState.unseenResponses.concat(newResponses),
         responsesToDisplay: true,
@@ -315,9 +313,9 @@ export class App extends Component {
   }
   changeColourOrder(){
     let newColourOrder = {
-      colour1: this.state.colours.colour3,
-      colour2: this.state.colours.colour1,
-      colour3: this.state.colours.colour2,
+      colour1: this.state.colours.colour2,
+      colour2: this.state.colours.colour3,
+      colour3: this.state.colours.colour1,
     };
     this.setState({ colours: newColourOrder });
   }
