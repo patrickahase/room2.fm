@@ -10,7 +10,7 @@ This is my refactoring of the room2 code base to set it up for continued use
 - Re up chat limit - currently 6
 - Fix UI icons size and pos
 - Top Menu?
-- Timer function?
+- ~~Timer function?~~
 - Get rid of emoji triangle?
 - ~~fix controls.room2.fm~~
 - new bg vis?

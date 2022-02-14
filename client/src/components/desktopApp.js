@@ -5,7 +5,7 @@ import EmojiTri from './emojiTri';
 import IntroModal from './introModal';
 import Marquee from './marquee';
 import DrawingTools from './drawingTools';
-/* import SettingsMenu from './settingsMenu'; */
+import SettingsMenu from './settingsMenu';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
 import AudioStreamPlayer from './audioStreamPlayer';
@@ -61,10 +61,11 @@ export class DesktopApp extends Component {
               height={this.props.height}
               width={this.props.width} /> 
             {/* Menu Overlay */}
-            {/* <SettingsMenu /> */}
+            <SettingsMenu 
+              overlayToggle={this.toggleInfoOverlay.bind(this)} />
             {/* Info Overlay */}
-            {/* {this.state.infoOverlay &&
-              <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> } */}
+            {this.state.infoOverlay &&
+              <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> }
             {/* Prompt and Input Selection Overlay */}
             <div id="current-prompt-wrapper">
               <div id="prompt-end-timer-wrapper">

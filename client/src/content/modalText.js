@@ -1,5 +1,5 @@
 export const acknowledgementOfCountryText = <span>
-  This website was created and is maintained on the unceded territory of the Wurundjeri People of the Kulin Nations, 
+  This website was created and is maintained on the unceded territory of the Wurundjeri People of the Eastern Kulin Nation, 
   the Traditional Custodians of the land. We recognise their ongoing legacy of connection to land, waters and culture 
   and pay respect to their Elders past, present and emerging. We extend this respect to all other First Nations peoples 
   of this continent, whose stolen land the material pathways that allow our digital connectivity are built upon.
@@ -34,17 +34,17 @@ export const introText = <>
 
 export const instructionsText = <>
   <span>
-    You can share your response to the music in a number of ways.
+    You can share your response to the music, prompts and visuals in a number of ways.
   </span>
   <br />
   <br />
-  <span>
+  {/* <span>
     You are encouraged to use the emoji triangle in the bottom left of the screen to convey what you are feeling about the 
     sounds you are receiving. Click and drag the circle to any of the points of the triangle or somewhere between them. The 
     collective selection of everyone participating in the stream will be reflected in the main visuals.
-  </span>
-  <br />
-  <br />
+  </span> */}
+  {/* <br />
+  <br /> */}
   <span>
     Periodically, text prompts will come up in the lower middle of the screen. Underneath the prompts you can select to respond 
     via either writing or drawing depending on what you think is most appropriate. Once you are happy with your response you can 
@@ -61,7 +61,7 @@ export const instructionsText = <>
   <br />
   <br />
   <span>
-    You can use the chat box on the right of the screen to directly speak to others participating. Select a username and 
+    You can also use the chat box on the right of the screen to directly speak to others participating. Select a username and 
     click ‘Join Room’ to engage. Be yourself, be someone else, be whomever you want to be!
   </span>
   <br />

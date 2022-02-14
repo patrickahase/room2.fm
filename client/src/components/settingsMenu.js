@@ -6,7 +6,7 @@ export class SettingsMenu extends Component {
       <div id="settings-menu-wrapper">
       <button id="settings-menu-button">MENU</button>
       <div id="settings-dropdown">
-        <button id="settings-info-button">INFO</button>
+        <button id="settings-info-button" onClick={this.props.overlayToggle}>INFO</button>
         {/* <button id="settings-graphics-button">GRAPHICS</button>
           <div id="graphics-dropdown">
             <button className="GraphicsButton">LOW</button>

@@ -601,7 +601,7 @@ code {
   height: 10vh; */
   grid-row: 5/6;
   grid-column: 4/5;
-  z-index: 10;
+  z-index: 5;
   background: none;
   stroke: var(--comp-col-01);
   fill: var(--comp-col-01);
@@ -817,7 +817,7 @@ code {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 5;
+  z-index: 7;
 }
 #info-overlay-close{
   color: #aaaaaa;
@@ -835,20 +835,63 @@ code {
   text-decoration: none;
   cursor: pointer;
 }
-#info-overlay-proceed{
+.InfoOverlayText{
   color: #fff;
+  white-space: normal;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  font-size: 1.5vw;
+}
+#info-overlay-proceed{  
   font-size: 3vw;
   position: absolute;
   width: 75%;
   height: 68%;
   left: 0%;
-  top: 7%;
-  white-space: normal;
-  display: flex;
-  align-items: center;
+  top: 7%;  
   justify-content: center;
-  user-select: none;
-  pointer-events: none;
+  user-select: none;  
+}
+#info-overlay-response-label{  
+  height: 20vh;
+  position: absolute;
+  left: 25%;
+  bottom: 5%;  
+  text-align: center;
+  display: inline;
+}
+#info-overlay-colour-select-label{  
+  height: 11vh;
+  position: absolute;
+  right: 28.9%;
+  bottom: 25%;  
+  text-align: center;
+}
+#info-overlay-volume-label{  
+  font-size: 1.5vw;
+  height: 15vh;
+  position: absolute;
+  left: 75.5%;
+  bottom: 7.5%;  
+}
+#info-overlay-mute-label{
+  height: 5vh;
+  position: absolute;
+  left: 75.5%;
+  bottom: 0%;  
+}
+#info-overlay-brush-size-eraser-label{
+  height: 5vh;
+  position: absolute;
+  left: 46.5%;
+  bottom: 4.5%;  
+}
+#info-overlay-undo-redo-label{
+  height: 5vh;
+  position: absolute;
+  left: 72%;
+  bottom: 4.5%;  
 }
 
 /* Mobile Rules */
