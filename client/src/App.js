@@ -55,6 +55,8 @@ export class App extends Component {
       isDrawing: false,
       isEraser: false,
       savedBrush: null,
+
+      focusMod: false
     }
     // bind func's to this
     this.setCanvas = this.setCanvas.bind(this);
@@ -87,6 +89,7 @@ export class App extends Component {
         : <DesktopApp 
             modalIsOpen={this.state.modalIsOpen}
             toggleModal={this.toggleModal}
+            toggleFocus={this.toggleFocus.bind(this)}
             mobile={this.state.mobile}
             currentPrompt={this.state.currentPrompt}
             promptType={this.state.promptType}
@@ -429,6 +432,21 @@ export class App extends Component {
       })
     }    
   }
+  toggleFocus(){
+    if(!this.state.focusMode){
+      this.setState({focusMode: true});
+      this.getCSSRule('.TextResponseBox').style.backgroundColor = "rgb(31, 33, 28)";
+      this.getCSSRule('.TextResponseBox').style.border = "solid white 1px";
+      this.getCSSRule('.ImageResponseBox').style.backgroundColor = "rgb(31, 33, 28)";
+      this.getCSSRule('.ImageResponseBox').style.border = "solid white 1px";
+    } else {
+      this.setState({focusMode: false});
+      this.getCSSRule('.TextResponseBox').style.backgroundColor = "";
+      this.getCSSRule('.TextResponseBox').style.border = "";
+      this.getCSSRule('.ImageResponseBox').style.backgroundColor = "";
+      this.getCSSRule('.ImageResponseBox').style.border = "";
+    }
+  }
 
   dataURLtoFile(dataurl, filename){
       var arr = dataurl.split(','),
@@ -443,7 +461,7 @@ export class App extends Component {
         type: mime
       });
   }
-/*   getCSSRule(ruleName) {
+  getCSSRule(ruleName) {
     ruleName = ruleName.toLowerCase();
     var result = null;
     var find = Array.prototype.find;
@@ -456,7 +474,7 @@ export class App extends Component {
         return result != null;
     });
     return result;
-  } */
+  }
 }
 
 export default App

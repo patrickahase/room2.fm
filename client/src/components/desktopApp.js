@@ -61,7 +61,8 @@ export class DesktopApp extends Component {
               height={this.props.height}
               width={this.props.width} /> 
             {/* Menu Overlay */}
-            <SettingsMenu 
+            <SettingsMenu
+              toggleFocus={this.props.toggleFocus} 
               overlayToggle={this.toggleInfoOverlay.bind(this)} />
             {/* Info Overlay */}
             {this.state.infoOverlay &&

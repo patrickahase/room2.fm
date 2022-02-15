@@ -24,8 +24,8 @@ export const introText = <>
     This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
     If you are having issues, please try one of these browsers.
     <br />
-   {/*  If you would like a high-contrast version of the website's text with no distortion please click 'Focus Mode' button.
-    <br />     */}
+    If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.
+    <br />    
     We will be moderating responses that we feel are intentionally disruptive or may make others feel unsafe in the space.
   </span>
   <br />

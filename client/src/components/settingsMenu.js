@@ -13,7 +13,7 @@ export class SettingsMenu extends Component {
             <button className="GraphicsButton">MEDIUM</button>
             <button className="GraphicsButton">HIGH</button>
           </div> */}
-        <button id="settings-focus-button">FOCUS</button>
+        <button id="settings-focus-button" onClick={this.props.toggleFocus}>FOCUS</button>
       </div>
       
       </div>
