@@ -635,7 +635,11 @@ code {
   color: var(--comp-col-01);
   opacity: 0.5;
 }
-
+.RightUIButton{
+  background-color: var(--comp-col-03);
+  font-size: min(1.5vw, 16vh);
+  font-family: 'IBM Plex Sans Condensed', sans-serif; 
+}
 #increase-brush-button{
   grid-row: 6/7;
   grid-column: 2/3;
@@ -673,18 +677,20 @@ code {
 #undo-button{
   grid-row: 6/7;
   grid-column: 5/6;
-  background: no-repeat url('./content/media/undo.png');
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: no-repeat center/50vh url('./content/media/undo.svg');
 }
 #redo-button{
   grid-row: 6/7;
   grid-column: 6/7;
-  background: no-repeat url('./content/media/redo.png');
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: no-repeat center/50vh url('./content/media/redo.svg');
 }
-.RightUIButton{
-  background-color: var(--comp-col-03);
-  font-size: min(1.5vw, 16vh);
-  font-family: 'IBM Plex Sans Condensed', sans-serif; 
-}
+
 /* Submit Response Button */
 #response-submit-button{
   grid-column: 1/5;
