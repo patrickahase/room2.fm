@@ -345,10 +345,12 @@ export class App extends Component {
       this.setState({ isEraser: true, savedBrush: canvas.freeDrawingBrush }, () => {
         canvas.freeDrawingBrush = new fabric.EraserBrush(canvas);
         canvas.freeDrawingBrush.width = this.state.savedBrush.width;
+        document.getElementById("erase-brush-button").classList.add("Active");
       });
     } else {
       canvas.freeDrawingBrush = this.state.savedBrush;
       this.setState({ isEraser: false });
+      document.getElementById("erase-brush-button").classList.remove("Active");
     }
   }
   /* undo/redo functions */

@@ -10,6 +10,7 @@ import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
 import AudioStreamPlayer from './audioStreamPlayer';
 import { InfoOverlay } from './infoOverlay';
+import ColourPicker from './colourPicker';
 
 export class DesktopApp extends Component {
   constructor(props) {
@@ -108,16 +109,25 @@ export class DesktopApp extends Component {
               </>
                 
             </div>
-            {/* Right UI Panel */}
-            <div id="right-ui-wrapper">
-              <DrawingTools
+            <DrawingTools
                 undoDrawing={this.props.undoDrawing}
                 redoDrawing={this.props.redoDrawing}
                 toggleEraser={this.props.toggleEraser}
                 colours={this.props.colours}
                 changeColourOrder={this.props.changeColourOrder}
                 changeColours={this.props.changeColours}
-                changeBrushSize={this.props.changeBrushSize} />              
+                changeBrushSize={this.props.changeBrushSize} />  
+            {/* Right UI Panel */}
+            <div id="right-ui-wrapper">
+            <div id="drawing-tools-wrapper">                
+                <ColourPicker 
+                  colours={this.props.colours}
+                  changeColourOrder={this.props.changeColourOrder}
+                  changeColours={this.props.changeColours}
+                />
+                
+            </div>
+                          
               <button id="response-submit-button" onClick={this.props.submitResponse}>
                 <span>SUBMIT RESPONSE</span>                
               </button>

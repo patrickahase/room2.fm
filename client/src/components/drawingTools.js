@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ColourPicker from './colourPicker';
+
 
 export class DrawingTools extends Component {
   constructor(props) {
@@ -11,29 +11,22 @@ export class DrawingTools extends Component {
   }
   render() {
     return (
-      <div id="drawing-tools-wrapper">                
-                <ColourPicker 
-                  colours={this.props.colours}
-                  changeColourOrder={this.props.changeColourOrder}
-                  changeColours={this.props.changeColours}
-                />
-                <div id="but1" />
-                <div id="but2" />
-                <div id="but3" />
-                <div id="but4" />
-                <div id="but5" />
-                <div id="but6" />
-                <button id="increase-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> {/* <IncreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> */} </button>
-                <button id="decrease-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> {/* <DecreaseBrushSize colour1={this.props.colours.colour1} colour2={this.state.frameColour} /> */} </button>
-                <button id="erase-brush-button" className="RightUIButton" onClick={this.props.toggleEraser}>
-                {/*   E */}
-                </button>
-                <button id="undo-button" className="RightUIButton" onClick={this.props.undoDrawing}>
-                </button>
-                <button id="redo-button" className="RightUIButton" onClick={this.props.redoDrawing}>
-
-                </button>
+      <>
+      
+              <div id="drawing-buttons-wrapper">
+                {/* <button>bigger brush</button>
+                <button>smaller brush</button>
+                <button>eraser</button>
+                <button>undo</button>
+                <button>redo</button> */}
+                <button id="increase-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> BRUSH + <div id="brush-up-icon" /></button>
+                <button id="decrease-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> BRUSH - <div id="brush-down-icon" /></button>
+                <button id="erase-brush-button" className="RightUIButton" onClick={this.props.toggleEraser}> ERASER <div id="eraser-icon" /></button>
+                <button id="undo-button" className="RightUIButton" onClick={this.props.undoDrawing}> UNDO <div id="undo-icon" /></button>
+                <button id="redo-button" className="RightUIButton" onClick={this.props.redoDrawing}> REDO <div id="redo-icon" /></button>
+              
               </div>
+      </>
     )
   }
   componentDidMount() {

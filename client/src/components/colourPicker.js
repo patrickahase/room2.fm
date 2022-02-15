@@ -13,8 +13,8 @@ export class ColourPicker extends Component {
       <button id="col-swap-button" onClick={this.click}>
         <SwapIcon />
       </button>
-      <span id="word-change">CHANGE\</span>
-      <span id="word-colour">/COLOUR</span>
+      <span id="word-change">CHANGE</span>
+      <span id="word-colour">COLOUR</span>
       <div id="col-select-wrapper">
         <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={this.props.colours.colour1} />
         <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={this.props.colours.colour2} />
