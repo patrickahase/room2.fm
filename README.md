@@ -7,14 +7,14 @@ This is my refactoring of the room2 code base to set it up for continued use
  - Matthew Jones for his article on state management for undo/redo with fabric = https://exceptionnotfound.net/drawing-with-fabricjs-and-typescript-part-7-undo-redo/
 
 # To Do For Bleed Test
-- Re up chat limit - currently 6
+- ~~Re up chat limit - currently 6~~
 - Fix UI icons size and pos
 - Top Menu?
 - ~~Timer function?~~
 - Get rid of emoji triangle?
 - ~~fix controls.room2.fm~~
 - new bg vis?
-- explainer overlay
+- ~~explainer overlay~~
 - writing text default size
 - collision - just make it re calculate on hit
 - ~~text prompt submission~~ ?

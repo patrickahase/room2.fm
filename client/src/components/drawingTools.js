@@ -29,10 +29,10 @@ export class DrawingTools extends Component {
                 {/*   E */}
                 </button>
                 <button id="undo-button" className="RightUIButton" onClick={this.props.undoDrawing}>
-                ⮌
+                
                 </button>
                 <button id="redo-button" className="RightUIButton" onClick={this.props.redoDrawing}>
-                ⮎
+                
                 </button>
               </div>
     )

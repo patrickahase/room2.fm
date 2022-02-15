@@ -616,7 +616,7 @@ code {
   height: 15%;
   width: 37.5%;
   pointer-events: none;
-  font-size: min(.8vw, 9vh);
+  font-size: min(.7vw, 8vh);
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   color: var(--comp-col-01);
   opacity: 0.5;
@@ -630,7 +630,7 @@ code {
   height: 15%;
   width: 37.5%;
   pointer-events: none;
-  font-size: min(.8vw, 9vh);
+  font-size: min(.7vw, 8vh);
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   color: var(--comp-col-01);
   opacity: 0.5;
@@ -673,16 +673,12 @@ code {
 #undo-button{
   grid-row: 6/7;
   grid-column: 5/6;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  background: no-repeat url('./content/media/undo.png');
 }
 #redo-button{
   grid-row: 6/7;
   grid-column: 6/7;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
+  background: no-repeat url('./content/media/redo.png');
 }
 .RightUIButton{
   background-color: var(--comp-col-03);

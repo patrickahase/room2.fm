@@ -81,14 +81,14 @@ function SwapIcon(){
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg" >
         {/* Arrow Head */}
-        <marker id="arrowhead" markerWidth="10" markerHeight="7"refX="7" refY="3.5" orient="auto">
-          <polygon points="0 0, 10 3.5, 0 7" />
+        <marker id="arrowhead" markerWidth="10" markerHeight="6" refX="7" refY="3" orient="auto">
+          <polygon points="0 0, 8 3.5, 0 6" />
         </marker>
         {/* <rect width="100%" height="100%" fill="red" /> */}
         {/* <rect width="100%" height="1%" y="50%" fill="blue" />
         <rect width="1%" height="100%" x="25%" fill="blue" /> */}
         {/* Line */}
-        <path fill="none" strokeWidth="4" markerEnd="url(#arrowhead)" 
+        <path fill="none" strokeWidth="8" markerEnd="url(#arrowhead)" 
               d=" M 25, 50
                   L 0,13.4 100,13.4 50,86.6
                   " />
