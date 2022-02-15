@@ -30,6 +30,7 @@ This is my refactoring of the room2 code base to set it up for continued use
 - ~~Hook up volume~~
 - ~~Prompt change countdown? (maybe response type select means not an issue~~
 - ~~Keep drawing if input change~~
+- fix emoji update
 
 
 # To Do

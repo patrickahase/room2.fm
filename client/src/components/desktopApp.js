@@ -66,8 +66,8 @@ export class DesktopApp extends Component {
               toggleFocus={this.props.toggleFocus} 
               overlayToggle={this.toggleInfoOverlay.bind(this)} />
             {/* Info Overlay */}
-            {this.state.infoOverlay &&
-              <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> }
+            {/* {this.state.infoOverlay &&
+              <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> } */}
             {/* Prompt and Input Selection Overlay */}
             <div id="current-prompt-wrapper">
               <div id="prompt-end-timer-wrapper">
