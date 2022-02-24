@@ -199,7 +199,7 @@ export class App extends Component {
     // if new responses    
     if (responseData.length){
       let newResponses = [];
-      responseData.forEach(response => newResponses.push(response.RESPONSE));
+      responseData.forEach(response => newResponses.push([response.RESPONSE, response.RESPONSE_TYPE]));
       this.setState(prevState => ({
         unseenResponses: prevState.unseenResponses.concat(newResponses),
         responsesToDisplay: true,
@@ -257,36 +257,43 @@ export class App extends Component {
 
   submitResponse(){
     if(this.state.drawingResponse){
-      let imageInput = document.getElementById('drawing-canvas');
-      var dataURL = imageInput.toDataURL({
-        format: 'png',
-        left: 0,
-        top: 0,
-        width: imageInput.width,
-        height: imageInput.height
-      });
-      const formData = new FormData();
-      let imageFile = this.dataURLtoFile(dataURL, 'response.png');
-      this.state.drawingCanvas.clear();
-      formData.append('upload', imageFile, 'response.png');
-      fetch('https://room2.fm/api/insertImageResponse', {
-        method: 'PUT',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(result => { console.log('Success:', result); })
-      .catch(error => { console.error('Error:', error); });
+      // image response
+      if(this.state.stateStack.length > 0){
+        let imageInput = document.getElementById('drawing-canvas');
+        var dataURL = imageInput.toDataURL({
+          format: 'png',
+          left: 0,
+          top: 0,
+          width: imageInput.width,
+          height: imageInput.height
+        });
+        const formData = new FormData();
+        let imageFile = this.dataURLtoFile(dataURL, 'response.png');
+        this.state.drawingCanvas.clear();
+        formData.append('upload', imageFile, 'response.png');
+        fetch('https://room2.fm/api/insertImageResponse', {
+          method: 'PUT',
+          body: formData
+        })
+        .then(response => response.json())
+        .then(result => { console.log('Success:', result); })
+        .catch(error => { console.error('Error:', error); });
+        this.resetUndoStack();
+      }      
     } else {
+      // text response
       let textInput = document.getElementById('text-input');
       let responseText = textInput.value;
-      textInput.value = '';
-      fetch(`https://room2.fm/api/insertTextResponse`, {
-        headers: { 'Content-type': 'application/json' },
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify({reflectText: responseText})
-      })
-      .then(response => console.log(response.json()));
+      if(responseText.length > 0){
+        textInput.value = '';
+        fetch(`https://room2.fm/api/insertTextResponse`, {
+          headers: { 'Content-type': 'application/json' },
+          method: 'POST',
+          mode: 'cors',
+          body: JSON.stringify({reflectText: responseText})
+        })
+        .then(response => console.log(response.json()));
+      }      
     }    
   }
   getNextResponse(){
@@ -410,6 +417,9 @@ export class App extends Component {
       // update actual canvas
       this.state.drawingCanvas.loadFromJSON(newCanvasState);      
     }  
+  }
+  resetUndoStack(){
+    this.setState({ redoStack: [], stateStack: []});
   }
   startPromptCountdown(newPrompt){
     if(!this.state.promptCountdown){

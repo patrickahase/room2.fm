@@ -29,10 +29,10 @@ export class ResponseDisplay extends Component {
         setTimeout(() => {
           let nextResponse = this.props.getNextResponse();
           if (nextResponse) {
-            if(nextResponse.startsWith('room2-image-responses')){
-              this.createResponseImageBox(nextResponse);
+            if(nextResponse[1] === "image"){
+              this.createResponseImageBox(nextResponse[0]);
             } else {
-              this.createResponseTextBox(nextResponse);
+              this.createResponseTextBox(nextResponse[0]);
             } 
           }
                    
@@ -77,7 +77,7 @@ export class ResponseDisplay extends Component {
       }, this.state.textHangTime)
       setTimeout(() => {
         responseWrapper.removeChild(newResponseBox);
-        if (this.props.responsesToDisplay) { this.createResponseTextBox(this.props.getNextResponse()); }
+        /* if (this.props.responsesToDisplay) { this.createResponseTextBox(this.props.getNextResponse());  */
       }, this.state.textFadeTime + this.state.textHangTime + 100)
     }, 100);
       
@@ -109,7 +109,7 @@ export class ResponseDisplay extends Component {
           }, this.state.textHangTime)
           setTimeout(() => {
             document.getElementById('response-wrapper').removeChild(newResponseBox);
-            if (this.props.responsesToDisplay) { this.createResponseTextBox(this.props.getNextResponse()); }
+            /* if (this.props.responsesToDisplay) { this.createResponseTextBox(this.props.getNextResponse()); */
           }, this.state.textFadeTime + this.state.textHangTime + 100)
         }, 100);
         document.getElementById('response-wrapper').appendChild(newResponseBox);

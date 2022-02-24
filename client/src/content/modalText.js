@@ -1,7 +1,7 @@
 export const acknowledgementOfCountryText = <span>
   This website was created and is maintained on the unceded territory of the Wurundjeri People of the Eastern Kulin Nation, 
   the Traditional Custodians of the land. We recognise their ongoing legacy of connection to land, waters and culture 
-  and pay respect to their Elders past, present and emerging. We extend this respect to all other First Nations peoples 
+  and pay respect to their Elders past and present. We extend this respect to all other First Nations peoples 
   of this continent, whose stolen land the material pathways that allow our digital connectivity are built upon.
 </span>
 
