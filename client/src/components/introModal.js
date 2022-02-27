@@ -7,7 +7,7 @@ export class IntroModal extends Component {
   constructor(props) {
     super(props)    
     this.state = {
-      modalPages: 1,
+      modalPages: 4,
       currentPage: 1,
     }
     this.continueClick = this.continueClick.bind(this);
