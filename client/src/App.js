@@ -129,7 +129,7 @@ export class App extends Component {
       //MOBILE
     } else {
       //DESKTOP
-      this.initSchedule();
+      //this.initSchedule();
     }
   }
   updateWindowDimensions() {
@@ -138,7 +138,7 @@ export class App extends Component {
   toggleModal() {
     if(this.state.modalIsOpen){
       this.setState({ modalIsOpen: false });
-      this.updateSchedule();
+      //this.updateSchedule();
       document.addEventListener('mouseup', this.saveCanvasState);
     } else {
       this.setState({ modalIsOpen: true });
