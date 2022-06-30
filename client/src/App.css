@@ -15,7 +15,7 @@
 
 * {
   box-sizing: border-box;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /*General Font*/
@@ -71,6 +71,7 @@ code {
   grid-template-rows: repeat(20, 1fr);
   width: 100%;
   height: 100%;
+  
 }
 
 
@@ -90,25 +91,13 @@ code {
 }
  */
 /* Modal Style */
-.ModalWrapper{
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-.ModalOverlay{
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.ModalBox{
+#modal-wrapper{
   position: absolute;
   top: 10vh;
   left: 10vw;
   right: 10vw;
   bottom: 10vh;
-  background-color: rgb(31, 33, 28);
+  background-color: #222323;
   border-radius: 4px;
   padding: 1vw;
   z-index: 6;
@@ -311,14 +300,16 @@ code {
 /* Background Visuals */
 #bg-vis-wrapper{
   position: absolute;
-  width: 75%;
-  height: 68%;
+  width: 100%;
+  height: 100%;
   left: 0%;
-  top: 7%;
+  top: 0%;
   background: linear-gradient(90deg, #b5e877, #5252ff);
   z-index: 1;
+  overflow: hidden;
 }
 
+/* overlay */
 .gl-container{
   position: absolute;
   top:0%;
@@ -423,9 +414,6 @@ code {
 .PromptEndTimerOverlayFull{
   width: 100%;
 }
-#current-prompt{  
-
-}
 #input-select-wrapper{
   padding-top: 1vh;
 }
@@ -443,55 +431,6 @@ code {
   /* color: #5252ff; */
   border-width: 2px;
   border-color: #5252ff;
-}
-
-/* Emoji Triangle */
-#emoji-tri-wrapper{
-  width: 25vh;
-  height: 25vh;
-  position: absolute;
-  left: 0%;
-  bottom: 0%;
-  background: radial-gradient(var(--comp-col-02) 20%, var(--comp-col-03) 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
-}
-#emoji-tri-wrapper::after{
-  content: " ";
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  right: 4px;
-  bottom: 4px;
-  border: 2px solid var(--comp-col-01);
-  z-index: -1;
-}
-#emoji-tri-gradients{
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(transparent 0%, var(--comp-col-01) 70%),
-              linear-gradient(90deg, var(--comp-col-02) 20%, var(--comp-col-03) 80%);
-}
-#emoji-1{
-  width: 100%;
-  height: auto;
-  user-select: none;
-}
-#emoji-2{
-  width: 100%;
-  height: auto;
-  user-select: none;
-}
-#emoji-3{
-  width: 100%;
-  height: auto;
-  user-select: none;
-}
-#selector-circle{
-  z-index: 3;
-  cursor: move;
 }
 
 /* Input Section */
@@ -773,18 +712,61 @@ code {
 
 
 /* Audio Section */
+#audio-player-wrapper{
+  position: absolute;
+  top: 35%;
+  left: 25%;
+  width: 50%;
+  height: 5%;
+  background-color: var(--comp-col-02);
+  z-index: 2;
+  display: flex;
+}
+
+.AudioPlayerButton{
+  width: 5vh;
+  height: 5vh;
+  border: none;
+  background-color: var(--comp-col-03);
+  padding: 0%;
+  /* border: #222323 1px solid; */
+}
+
+#volume-wrapper{
+  width: 5vh;
+  height: 20vh;
+  background-color: #222323;
+  border: 2px solid var(--comp-col-01);
+  position: absolute;
+  bottom: 100%;
+  right: 0%;
+  transform-origin: bottom;
+  transform: scaleY(0%);
+  transition: transform ease-out 0.2s;
+}
+
+#mute-button:hover #volume-wrapper{
+  transform: scaleY(100%);
+}
+
+#timeline{
+  flex-grow: 1;
+  background-color: #222323;
+}
+#playhead{
+  height: 100%;
+  width: 0%;
+  background-color: var(--comp-col-02);
+}
+
+/* old controls */
 #audio-control-wrapper{
   background-color: var(--comp-col-02);
   grid-column: 5/6;
   grid-row: 1/6;
 }
-#mute-button{
-  grid-column: 5/6;
-  grid-row: 5/6;
-  border: none;
-  background-color: var(--comp-col-03);
-}
-#mute-button::after{
+
+/* #mute-button::after{
   content: " ";
   position: absolute;
   right: 2%;
@@ -793,7 +775,6 @@ code {
   height: calc(20% - 4px);
   border: 2px var(--comp-col-01);
   border-style: none solid;
-  /* border-radius: 0px 6px; */
   transition: 0.2s;
   background: #22232311;
 }
@@ -805,25 +786,23 @@ code {
 }
 #mute-button:active::after{
   background: #22232344;
-}
+} */
 #mute-speaker{
   fill: var(--comp-col-01);
+}
+.AudioPlayerIcon{
+  fill: var(--comp-col-01);
+  stroke: var(--comp-col-01);
 }
 .MuteLines{
   opacity: 0.5;
   transition: 0.5s;
-  stroke: var(--comp-col-01);
 }
 .MuteLines.active{
   opacity: 1;
 }
-#volume-wrapper{
-  grid-column: 5/6;
-  grid-row: 1/5;
-  background-color: #222323;
-  border: 2px solid var(--comp-col-01);
-}
-#volume-wrapper::after{
+
+/* #volume-wrapper::after{
   content: " ";
   position: absolute;
   right: 2%;
@@ -837,7 +816,7 @@ code {
 }
 #volume-wrapper:hover::after{
   background: transparent;  
-}
+} */
 .VolumeNotch{
   width: 100%;
   background-color: var(--comp-col-03);

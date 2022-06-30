@@ -62,10 +62,10 @@ export const shaders = Shaders.create({
 export class GLVis extends Component {
   render() {
     return <>
-    <Surface width={this.props.width*0.75} height={this.props.height*0.68}>
+    <Surface width={this.props.width} height={this.props.height}>
 
       <NearestCopy>
-        <Node shader={shaders.onecolour} ignoreUnusedUniforms uniforms={{timer: this.props.timer, width: this.props.width*0.075, height: this.props.width*0.068}} width={this.props.width*0.075} height={this.props.height*0.068} /> 
+        <Node shader={shaders.onecolour} ignoreUnusedUniforms uniforms={{timer: this.props.timer, width: this.props.width*0.75, height: this.props.width*0.68}} width={this.props.width*0.75} height={this.props.height*0.68} /> 
       </NearestCopy>
                               
     </Surface>

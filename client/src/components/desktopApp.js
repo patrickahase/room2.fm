@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import AudioControls from './audioControls';
 import DrawingCanvas from './drawingCanvas';
-import EmojiTri from './emojiTri';
 import IntroModal from './introModal';
-import Marquee from './marquee';
 import DrawingTools from './drawingTools';
 import SettingsMenu from './settingsMenu';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
-import AudioStreamPlayer from './audioStreamPlayer';
 import { InfoOverlay } from './infoOverlay';
 import ColourPicker from './colourPicker';
+import AudioTrackPlayer from './audioTrackPlayer';
 
 export class DesktopApp extends Component {
   constructor(props) {
@@ -41,26 +39,20 @@ export class DesktopApp extends Component {
           ? <IntroModal 
               mobile={this.props.mobile}
               toggleModal={this.props.toggleModal} />
-          : <>
-            {/* Top Banner */}
-            <Marquee
-              currentArtist={this.props.currentArtist} />  
-            {/* Background Visuals */}          
+          : <>      
             <div id="bg-vis-wrapper">              
-              {/* <BGVis /> */}
               <GLVis
                 timer={this.state.timer}
                 height={this.props.height}
-                width={this.props.width} />
-              {/* <VideoStreamPlayer
-                setStreamPlayer={this.setStreamPlayer} />  */}               
+                width={this.props.width} />          
             </div>
             {/* Response Overlay */}
             <ResponseDisplay 
               getNextResponse={this.props.getNextResponse}
               responsesToDisplay={this.props.responsesToDisplay}
               height={this.props.height}
-              width={this.props.width} /> 
+              width={this.props.width} />
+            <AudioTrackPlayer />
             {/* Menu Overlay */}
             {/* <SettingsMenu
               toggleFocus={this.props.toggleFocus} 
@@ -69,7 +61,7 @@ export class DesktopApp extends Component {
             {/* {this.state.infoOverlay &&
               <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> } */}
             {/* Prompt and Input Selection Overlay */}
-            <div id="current-prompt-wrapper">
+            {/* <div id="current-prompt-wrapper">
               <div id="prompt-end-timer-wrapper">
                 <div id="prompt-end-timer" />
                 <div id="prompt-end-timer-overlay" />
@@ -83,66 +75,56 @@ export class DesktopApp extends Component {
                 <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={this.props.setWriteInput}>write</button>
                 &nbsp;a response</span>
               </div>           
-            </div>           
-            {/* Emoji Triangle */}
-            <EmojiTri 
-              height={this.props.height}
-              artistPresets={this.props.artistPresets}
-              emoji1={this.props.emoji1}
-              emoji2={this.props.emoji2}
-              emoji3={this.props.emoji3}
-            />            
+            </div>  */}                    
             {/* Input Selection */}
             
             {/* Input Section */}
-            <div id="input-wrapper">              
+            {/* <div id="input-wrapper"> */}              
               <>
-                <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
+                {/* <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." /> */}
               </>
               <>{/* Drawing Input */}
-                <DrawingCanvas 
+                {/* <DrawingCanvas 
                   brushColour={this.props.colours.colour1}
                   brushSize={this.props.brushSize}
                   setCanvas={this.props.setCanvas}
                   setIsDrawing={this.props.setIsDrawing}
-                  />
+                  /> */}
               </>
                 
-            </div>
-            <DrawingTools
+            {/* </div> */}
+            {/* <DrawingTools
                 undoDrawing={this.props.undoDrawing}
                 redoDrawing={this.props.redoDrawing}
                 toggleEraser={this.props.toggleEraser}
                 colours={this.props.colours}
                 changeColourOrder={this.props.changeColourOrder}
                 changeColours={this.props.changeColours}
-                changeBrushSize={this.props.changeBrushSize} />  
+                changeBrushSize={this.props.changeBrushSize} />  */} 
             {/* Right UI Panel */}
             <div id="right-ui-wrapper">
             <div id="drawing-tools-wrapper">                
-                <ColourPicker 
+                {/* <ColourPicker 
                   colours={this.props.colours}
                   changeColourOrder={this.props.changeColourOrder}
                   changeColours={this.props.changeColours}
-                />
+                /> */}
                 
             </div>
                           
-              <button id="response-submit-button" onClick={this.props.submitResponse}>
+              {/* <button id="response-submit-button" onClick={this.props.submitResponse}>
                 <span>SUBMIT RESPONSE</span>                
-              </button>
+              </button> */}
               {/* Audio Settings */}
-              <AudioControls
+              {/* <AudioControls
                 muteAudio={this.muteAudio.bind(this)}
                 isMuted={this.state.isMuted}
                 changeVolume={this.changeVolume.bind(this)}
                 />
               <AudioStreamPlayer
                 setStreamPlayer={this.setStreamPlayer}
-                setGainControl={this.setGainControl} />             
-            </div> 
-            {/* dead simple text chat */}
-            <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>
+                setGainControl={this.setGainControl} />   */}           
+            </div>
           </>}
       </div>
     )
