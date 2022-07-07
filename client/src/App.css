@@ -414,6 +414,32 @@ code {
 .PromptEndTimerOverlayFull{
   width: 100%;
 }
+
+/* select response */
+
+#ready-submission-button{
+  border-left: 1px solid #fff;
+  border-top: 1px solid #fff;
+  border-right: 1px solid #848484;
+  border-bottom: 1px solid #848484;
+  background-color: var(--comp-col-01);
+  padding: 0.2vw 1vw 0.2vw 1vw;
+  width: 15vw;
+  height: 3vw;
+  font-size: 1.5vw;
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  color: var(--comp-col-01);
+  text-shadow: 0.5px 0.5px 1px var(--comp-col-03), -0.5px -0.5px 1px var(--comp-col-02);
+  user-select: none;
+  position: absolute;
+  top: 50%;
+  left: 42.5%;
+  display: inline;
+  opacity: 1;
+  transition: 3s;
+  z-index: 2;
+}
+
 #input-select-wrapper{
   padding-top: 1vh;
 }
