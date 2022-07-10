@@ -6,8 +6,53 @@
     <title>BF Room2 assets</title>
 </head>
 
+<style>
+    .noshow {
+        display: none;
+    }
+
+    #AOC {
+        max-width: 80vw;
+        border: 1px dotted black;
+    }
+</style>
+
 <body>
+    <span id="timemoji"></span>
+    <span id="moonmoji"></span>
+    <p><span id="local-conditions"></span> <span id="texttime"></span></p>
+    
+    <div id="AOC">
+
+    
+      <h1>Acknowledging Country</h1>
+
+      <p>
+        This website is hosted and maintained in on unceded Wurundjeri Woi-wurrung Country. 
+        Avantwhatever.net caretakers are settlers here, listening and learning from local people and place. We pay our respects and gratitude to Wurundjeri Elders past and present, and promise to tread lightly.
+      </p>
+      <p>
+        We extend these respects and promises to those other First Nations peoples and communities, on whose land, sea and air the material pathways that allow our digital connectivity are embedded.
+      </p>
+      <p>Do you know whose country you occupy?</p>
+      <button id="wherebutton">Where are you?</button>
+      <p id="countryinfo" class="noshow"></p>
+
+      <button id="continuebtn" class="noshow" onclick="closeaoc()"> Continue </button>
+      <p id="currentmoji" class="noshow loading"></p>
+      <p id="disclaimer" class="noshow">
+        <span class="astrix">*</span> 
+        The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank">ipinfo.io</a> and/or <a href="https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API" target="_blank">the Geolocation API</a>.. 
+        Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
+        This is not authoritative or representative and should be approached critically.
+        Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank">GitHub</a>.
+      </p>
+    </div>
+  </div>
+
+
 
 </body>
 <script src="bf.js"></script>
+<script src="where.js"></script>
 </html>
