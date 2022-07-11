@@ -11,6 +11,8 @@ export default function DesktopApp(props) {
 
   const[askResponse, setAskResponse] = useState(false);
   const[readyToRespond, setReadyToRespond] = useState(false);
+  /* if false it's assumed to be text instead */
+  const[inputIsDraw, setInputIsDraw] = useState(true);
 
   const[timer, setTimer] = useState(0.);
   const[timerInterval, setTimerInterval] = useState(0.);
@@ -49,13 +51,13 @@ export default function DesktopApp(props) {
           {readyToRespond &&
             <>
               <div id="input-select-wrapper">
-                <span>
-                  I would like to 
-                  <button className="InputSelectButton">draw</button>
-                  /
+                <span id="input-select">
+                  I would like to&nbsp;
+                  <button id="draw-input-select" className="InputSelectButton" onClick={() => setInput(true)}>draw</button>&nbsp;/&nbsp;
+                  <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setInput(false)}>write</button>
+                  &nbsp;a response
                 </span>
-              </div>
-              
+              </div>              
               <div id="input-wrapper"></div>
             </>            
           }
@@ -87,6 +89,18 @@ export default function DesktopApp(props) {
   }
   function restartTimer() {
     setTimer(0.);    
+  }
+  /* to change between draw and write - true = draw - false = text */
+  function setInput(changeToDraw){
+    if(changeToDraw){
+      setInputIsDraw(true);
+      document.getElementById("draw-input-select").classList.add("ActiveInputButton");
+      document.getElementById("text-input-select").classList.remove("ActiveInputButton");
+    } else {
+      setInputIsDraw(false);
+      document.getElementById("draw-input-select").classList.remove("ActiveInputButton");
+      document.getElementById("text-input-select").classList.add("ActiveInputButton");
+    }
   }
   
 }

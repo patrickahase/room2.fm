@@ -391,8 +391,7 @@ code {
   z-index: 3;
   display: flex;
   justify-content: center;
-  /* pointer-events: none; */
-  
+  /* pointer-events: none; */  
 }
 #current-prompt{
   background-color: rgb(31, 33, 28);
@@ -431,7 +430,23 @@ code {
 }
 
 #input-select-wrapper{
-  padding-top: 1vh;
+  position: absolute;
+  left: 25%;
+  top: 40%;
+  width: 50%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+}
+#input-select{
+  background-color: rgb(31, 33, 28);
+  max-width: 100%;
+  font-size: 1.5vw;  
+  color: white;  
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  user-select: none;
+  text-align: center;
+  padding: 0 1vw;
 }
 .InputSelectButton{
   background-color: rgb(31, 33, 28);
