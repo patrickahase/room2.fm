@@ -385,34 +385,24 @@ code {
 /* Current Prompt */
 #current-prompt-wrapper{
   position: absolute;
-  left: 25vh;
-  bottom: 25%;
-  width: calc(75vw - 50vh);
+  left: 25%;
+  bottom: 70%;
+  width: 50%;
   z-index: 3;
-  font-size: max(1.0vw, 0.8em);
+  display: flex;
+  justify-content: center;
+  /* pointer-events: none; */
+  
+}
+#current-prompt{
   background-color: rgb(31, 33, 28);
+  max-width: 100%;
+  font-size: 1.5vw;  
   color: white;  
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   user-select: none;
-  /* pointer-events: none; */
   text-align: center;
-}
-#prompt-end-timer-wrapper{
-  display: grid;
-}
-#prompt-end-timer{
-  grid-column: 1;
-  grid-row: 1;
-}
-#prompt-end-timer-overlay{
-  grid-column: 1;
-  grid-row: 1;
-  background-color: white;
-  mix-blend-mode: difference;
-  width: 0%;
-}
-.PromptEndTimerOverlayFull{
-  width: 100%;
+  padding: 0 1vw;
 }
 
 /* select response */
@@ -425,7 +415,7 @@ code {
   background-color: var(--comp-col-01);
   padding: 0.2vw 1vw 0.2vw 1vw;
   width: 15vw;
-  height: 3vw;
+  min-height: 3vw;
   font-size: 1.5vw;
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   color: var(--comp-col-01);

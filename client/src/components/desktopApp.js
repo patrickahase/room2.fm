@@ -25,19 +25,14 @@ export default function DesktopApp(props) {
             toggleModal={props.toggleModal} />
         /* else show the desktop app */
         : <>
-          {/* Background Visuals */}
-          <div id="bg-vis-wrapper">              
-            <GLVis
-              timer={timer}
-              height={props.height}
-              width={props.width} />          
+          {/* Daily Prompt */}
+          <div id="current-prompt-wrapper">
+            <div id="current-prompt">
+              Take a deep breath. As you exhale, what feelings linger for you?
+              <br />
+              Share as much or as little as you’d like.
+            </div>
           </div>
-          {/* External Response Overlay */}
-          <ResponseDisplay 
-            getNextResponse={props.getNextResponse}
-            responsesToDisplay={props.responsesToDisplay}
-            height={props.height}
-            width={props.width} />
           {/* Audio Player */}
           <AudioTrackPlayer
             setAudioSourceRef={setAudioSourceRef}
@@ -48,12 +43,35 @@ export default function DesktopApp(props) {
             />
           {/* Ask if ready to respond */} 
           {askResponse &&
-            <button id="ready-submission-button"> submit response </button>
+            <button id="ready-submission-button" onClick={() => {setReadyToRespond(true); setAskResponse(false);}}> i'm ready to respond </button>
           }
           {/* Show response input */}
           {readyToRespond &&
-            <div id="input-wrapper"></div>
+            <>
+              <div id="input-select-wrapper">
+                <span>
+                  I would like to 
+                  <button className="InputSelectButton">draw</button>
+                  /
+                </span>
+              </div>
+              
+              <div id="input-wrapper"></div>
+            </>            
           }
+          {/* External Response Overlay */}
+          <ResponseDisplay 
+            getNextResponse={props.getNextResponse}
+            responsesToDisplay={props.responsesToDisplay}
+            height={props.height}
+            width={props.width} />
+          {/* Background Visuals */}
+          <div id="bg-vis-wrapper">              
+            <GLVis
+              timer={timer}
+              height={props.height}
+              width={props.width} />          
+          </div> 
           </>
       }
     </div>
