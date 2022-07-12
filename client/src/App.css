@@ -421,7 +421,7 @@ code {
   text-shadow: 0.5px 0.5px 1px var(--comp-col-03), -0.5px -0.5px 1px var(--comp-col-02);
   user-select: none;
   position: absolute;
-  top: 50%;
+  top: 45%;
   left: 42.5%;
   display: inline;
   opacity: 1;
@@ -429,18 +429,23 @@ code {
   z-index: 2;
 }
 
-#input-select-wrapper{
+/* Input Section */
+#input-wrapper{
+  background-color: var(--comp-col-03);
   position: absolute;
   left: 25%;
-  top: 40%;
+  top: 45%;
   width: 50%;
   z-index: 3;
+}
+#input-select-wrapper{
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 #input-select{
   background-color: rgb(31, 33, 28);
-  max-width: 100%;
+  width: 100%;
   font-size: 1.5vw;  
   color: white;  
   font-family: 'IBM Plex Sans Condensed', sans-serif;
@@ -464,16 +469,11 @@ code {
   border-color: #5252ff;
 }
 
-/* Input Section */
-#input-wrapper{
-  background-color: var(--comp-col-03);
-  position: absolute;
-  left: 40vh;
-  bottom: 0%;
-  height: 25%;
-  width: calc(75vw - 65vh);
+#input-area{
+  width: 100%;
+  height: 25vh;
 }
-#input-wrapper::after{
+#input-area::after{
   content: " ";
   position: absolute;
   top: 4px;
@@ -500,18 +500,16 @@ code {
   cursor: pointer;
 }
 
-
 /* Text Area Input */
 #text-input{
-  position: relative;
   width: 100%;
-  height: 100%;
+  height: 25vh;
   margin: 0;
   padding: 8px;
   resize: none;
   border: 0;
-  z-index: 4;
 }
+
 
 /* Righthand UI Section */
 #right-ui-wrapper{

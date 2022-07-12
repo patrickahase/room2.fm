@@ -12,7 +12,7 @@ export default function DesktopApp(props) {
   const[askResponse, setAskResponse] = useState(false);
   const[readyToRespond, setReadyToRespond] = useState(false);
   /* if false it's assumed to be text instead */
-  const[inputIsDraw, setInputIsDraw] = useState(true);
+  const[inputIsDraw, setInputIsDraw] = useState(false);
 
   const[timer, setTimer] = useState(0.);
   const[timerInterval, setTimerInterval] = useState(0.);
@@ -50,15 +50,26 @@ export default function DesktopApp(props) {
           {/* Show response input */}
           {readyToRespond &&
             <>
-              <div id="input-select-wrapper">
-                <span id="input-select">
-                  I would like to&nbsp;
-                  <button id="draw-input-select" className="InputSelectButton" onClick={() => setInput(true)}>draw</button>&nbsp;/&nbsp;
-                  <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setInput(false)}>write</button>
-                  &nbsp;a response
-                </span>
-              </div>              
-              <div id="input-wrapper"></div>
+                           
+              <div id="input-wrapper">
+                <div id="input-select-wrapper">
+                  <span id="input-select">
+                    I would like to&nbsp;
+                    <button id="draw-input-select" className="InputSelectButton" onClick={() => setInput(true)}>draw</button>
+                    &nbsp;/&nbsp;
+                    <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setInput(false)}>write</button>
+                    &nbsp;a response
+                  </span>
+                </div>
+                <div id="input-area">
+                  {!inputIsDraw
+                   ?<textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
+                   :<></>
+                    
+                  }
+                </div> 
+                
+              </div>
             </>            
           }
           {/* External Response Overlay */}
