@@ -488,9 +488,9 @@ code {
 /* Drawing Canvas */
 #drawing-canvas-wrapper{
   position: relative;
-  top: -100%;
+  top: 0%;
   width: 100%;
-  height: 100%;
+  height: 25vh;
   background-color: white;
   z-index: 3;
 }
@@ -510,34 +510,27 @@ code {
   border: 0;
 }
 
-
 /* Righthand UI Section */
-#right-ui-wrapper{
-  position: absolute;
+#drawing-tools-wrapper{
   width: 25vh;
   height: 25vh;
-  right: 25%;
-  bottom: 0%;
-  background-color: var(--comp-col-03);
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-}
-#drawing-tools-wrapper{
   grid-column: 1/5;
   grid-row: 1/5;
-  position: relative;
+  position: absolute;
   display: grid;
   grid-template-columns: 5% repeat(11, 1fr) 5%;
   grid-template-rows: 10% repeat(11, 1fr);
+  right: -25vh;
+  bottom: 0%;
+  background-color: var(--comp-col-03);
 }
 #drawing-buttons-wrapper{
   position: absolute;
   width: 15vh;
   height: 25vh;
-  left: 25vh;
+  left: -15vh;
   bottom: 0%;
-  background-color: var(--comp-col-02);
+  
   display: flex;
   flex-direction: column;
 }

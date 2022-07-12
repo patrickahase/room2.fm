@@ -3,6 +3,9 @@ import IntroModal from './introModal';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
 import AudioTrackPlayer from './audioTrackPlayer';
+import DrawingTools from './drawingTools';
+import DrawingCanvas from './drawingCanvas';
+import ColourPicker from './colourPicker';
 
 /* set timer refresh rate in ms */
 const timerRefreshRate = 50;
@@ -49,8 +52,7 @@ export default function DesktopApp(props) {
           }
           {/* Show response input */}
           {readyToRespond &&
-            <>
-                           
+            <>                           
               <div id="input-wrapper">
                 <div id="input-select-wrapper">
                   <span id="input-select">
@@ -64,11 +66,27 @@ export default function DesktopApp(props) {
                 <div id="input-area">
                   {!inputIsDraw
                    ?<textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
-                   :<></>
-                    
+                   :<>
+                      <DrawingTools
+                        undoDrawing={props.undoDrawing}
+                        redoDrawing={props.redoDrawing}
+                        toggleEraser={props.toggleEraser}
+                        colours={props.colours}
+                        changeColourOrder={props.changeColourOrder}
+                        changeColours={props.changeColours}
+                        changeBrushSize={props.changeBrushSize} />
+                      <DrawingCanvas 
+                        brushColour={props.colours.colour1}
+                        brushSize={props.brushSize}
+                        setCanvas={props.setCanvas}
+                        setIsDrawing={props.setIsDrawing} />
+                      <ColourPicker 
+                        colours={props.colours}
+                        changeColourOrder={props.changeColourOrder}
+                        changeColours={props.changeColours} />                      
+                   </>                                    
                   }
-                </div> 
-                
+                </div>               
               </div>
             </>            
           }
