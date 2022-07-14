@@ -5,6 +5,8 @@ import { acknowledgementOfCountryText, introText, instructionsText, /* warningTe
 
 export default function IntroModal(props) {
   const [currentModalPage, setCurrentModalPage] = useState(1);
+  
+  const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
 
   // run init on load
   useEffect(() => {
@@ -14,7 +16,7 @@ export default function IntroModal(props) {
   },[]);
 
   let modalPages = [
-    //page 1 Logo
+    //page 1 Logo - no continue button on this one if the site needs to get closed
     <div id="logo-wrapper">
       <div id="text-logo">
         <pre id="pre-logo-wrapper">
@@ -37,6 +39,20 @@ export default function IntroModal(props) {
         <div id="modal-text-vert-align">
           <div id="modal-text" className="modal-text-aoc">
             {acknowledgementOfCountryText}
+          </div>
+        </div>
+      </div>
+      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+    </>,
+
+    //getting the current date
+    <>
+      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
+        <div id="modal-text-vert-align">
+          <div id="modal-text" className="modal-text-aoc">
+            {currentDate > 50
+            ? <>{currentDate.getMonth()}</>
+            : <>{currentDate.getYear()}</>} 
           </div>
         </div>
       </div>
