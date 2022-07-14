@@ -16,7 +16,7 @@ export class App extends Component {
       height: window.innerHeight,
 
       // turn on/off different layers
-      modalIsOpen: false,
+      modalIsOpen: true,
 
       // schedule data
       currentArtist: null,
