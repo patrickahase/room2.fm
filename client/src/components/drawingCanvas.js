@@ -51,10 +51,11 @@ export class DrawingCanvas extends Component {
     canvas.freeDrawingBrush.color = this.props.brushColour;    
     canvas.freeDrawingBrush.width = this.props.brushSize;
     canvas.freeDrawingCursor = this.getCustomCursor();
-    canvas.on('mouse:down', this.props.setIsDrawing);
+    canvas.on('mouse:down', () => this.setDrawing());
     this.setState({ canvas: canvas },
       () => { window.addEventListener('resize', this.updateCanvasDimensions); });
-    this.props.setCanvas(canvas);
+    this.props.setDrawingCanvas(canvas);
+    this.props.setCurrentCanvasState(canvas.toDatalessJSON());
   }
   updateCanvasDimensions() {
     let canvasWrapperRef = document.getElementById("drawing-canvas-wrapper");
@@ -64,6 +65,10 @@ export class DrawingCanvas extends Component {
       this.setState({ canvasWidth: canvasWrapperRef.offsetWidth, 
         canvasHeight: canvasWrapperRef.offsetHeight });
     }       
+  }
+  setDrawing(){
+    /* console.log("canvas-click") */
+    this.props.setIsDrawing(true);    
   }
   /* Custom Cursor - Curtis Jurgensen - https://codepen.io/curtisj44/pen/yGxJNX*/
   getCustomCursor = () => {

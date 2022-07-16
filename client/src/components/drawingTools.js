@@ -19,8 +19,8 @@ export class DrawingTools extends Component {
                 <button>eraser</button>
                 <button>undo</button>
                 <button>redo</button> */}
-                <button id="increase-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> BRUSH + <div id="brush-up-icon" /></button>
-                <button id="decrease-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> BRUSH - <div id="brush-down-icon" /></button>
+                <button id="increase-brush-button" className="RightUIButton"> BRUSH + <div id="brush-up-icon" /></button>
+                <button id="decrease-brush-button" className="RightUIButton"> BRUSH - <div id="brush-down-icon" /></button>
                 <button id="erase-brush-button" className="RightUIButton" onClick={this.props.toggleEraser}> ERASER <div id="eraser-icon" /></button>
                 <button id="undo-button" className="RightUIButton" onClick={this.props.undoDrawing}> UNDO <div id="undo-icon" /></button>
                 <button id="redo-button" className="RightUIButton" onClick={this.props.redoDrawing}> REDO <div id="redo-icon" /></button>
@@ -30,11 +30,18 @@ export class DrawingTools extends Component {
     )
   }
   componentDidMount() {
-    
+    // increase brush size on click if within limit
+    document.getElementById("increase-brush-button").addEventListener('click', () => {
+      if(this.props.brushSize < 20){ this.props.setBrushSize(this.props.brushSize + 2 ) }
+    });
+    // decrease brush size on click if within limit
+    document.getElementById("decrease-brush-button").addEventListener('click', () => {
+      if(this.props.brushSize > 2){ this.props.setBrushSize(this.props.brushSize - 2 ) }
+    });
   }
   componentDidUpdate(prevProps){
-    if (prevProps.colours.colour1 !== this.props.colours.colour1) {
-      var c = this.props.colours.colour1.substring(1);      // strip #
+    if (prevProps.colours[0] !== this.props.colours[0]) {
+      var c = this.props.colours[0].substring(1);      // strip #
       var rgb = parseInt(c, 16);   // convert rrggbb to decimal
       var r = (rgb >> 16) & 0xff;  // extract red
       var g = (rgb >>  8) & 0xff;  // extract green
@@ -79,9 +86,9 @@ function IncreaseBrushSize(props){
         <rect id="increase-brush-circle" width="100%" height="100%" x="0" y="0" fill="url(#increase-brush-gradient" />
         <defs>
           <radialGradient id="increase-brush-gradient">
-            <stop offset="60%" stopColor={props.colour1} />
-            <stop offset="60%" stopColor={props.colour1} />
-            <stop offset="65%" stopColor={props.colour2} />
+            <stop offset="60%" stopColor={props[0]} />
+            <stop offset="60%" stopColor={props[0]} />
+            <stop offset="65%" stopColor={props[1]} />
             <stop offset="85%" stopColor="transparent" />            
           </radialGradient>
         </defs>        
@@ -110,9 +117,9 @@ function DecreaseBrushSize(props){
         </rect>
         <defs>
           <radialGradient id="decrease-brush-gradient">
-            <stop offset="30%" stopColor={props.colour1} />
-            <stop offset="30%" stopColor={props.colour1} />
-            <stop offset="35%" stopColor={props.colour2} />
+            <stop offset="30%" stopColor={props[0]} />
+            <stop offset="30%" stopColor={props[0]} />
+            <stop offset="35%" stopColor={props[1]} />
             <stop offset="55%" stopColor="transparent" />            
           </radialGradient>
         </defs>

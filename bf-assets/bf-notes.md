@@ -25,3 +25,10 @@
 # Time log
 - 06/07 1ish hour setting up pages + copying in some code + cloned PH's github repo 
 - 10/07 1ish hour copying some code from dot net homepage
+
+# From PH
+- had a chat to Raag - they want to catch up in the next couple of weeks
+- the main takeaway though is we're shooting for 9 tracks that instead of changing everyday will change
+every 3 days, partially to make a more managable social media schedule for everyone
+- also refactored app.js so it's running only the stuff we need - the place to change the modalIsOpen is now
+on line 14 but i'm happy to keep that true for now 

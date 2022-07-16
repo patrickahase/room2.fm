@@ -72,18 +72,17 @@ export default function DesktopApp(props) {
                         redoDrawing={props.redoDrawing}
                         toggleEraser={props.toggleEraser}
                         colours={props.colours}
-                        changeColourOrder={props.changeColourOrder}
-                        changeColours={props.changeColours}
-                        changeBrushSize={props.changeBrushSize} />
-                      <DrawingCanvas 
-                        brushColour={props.colours.colour1}
                         brushSize={props.brushSize}
-                        setCanvas={props.setCanvas}
+                        setBrushSize={props.setBrushSize} />
+                      <DrawingCanvas 
+                        brushColour={props.colours[0]}
+                        brushSize={props.brushSize}
+                        setDrawingCanvas={props.setDrawingCanvas}
+                        setCurrentCanvasState={props.setCurrentCanvasState}
                         setIsDrawing={props.setIsDrawing} />
                       <ColourPicker 
                         colours={props.colours}
-                        changeColourOrder={props.changeColourOrder}
-                        changeColours={props.changeColours} />                      
+                        setCurrentColours={props.setCurrentColours} />                      
                    </>                                    
                   }
                 </div>               

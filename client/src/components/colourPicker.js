@@ -16,9 +16,9 @@ export class ColourPicker extends Component {
         <span id="word-change">CHANGE</span>
         <span id="word-colour">COLOUR</span>
         <div id="col-select-wrapper">
-          <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={this.props.colours.colour1} />
-          <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={this.props.colours.colour2} />
-          <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue={this.props.colours.colour3} />
+          <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={this.props.colours[0]} />
+          <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={this.props.colours[1]} />
+          <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue={this.props.colours[2]} />
         </div>
       </div>      
     )
@@ -49,20 +49,24 @@ export class ColourPicker extends Component {
         break;
       }
     }
-    this.props.changeColourOrder();
+    this.props.setCurrentColours([
+      this.props.colours[1],
+      this.props.colours[2],
+      this.props.colours[0]
+    ]);
   }
   colorInputChange(e){
     let colNum = e.target.id.charAt(3);
     document.documentElement.style.setProperty('--comp-col-0'+colNum, e.target.value);
     switch(e.target.classList[1]){
       case "first":
-        this.props.changeColours("colour1", e.target.value);
+        this.props.setCurrentColours(this.props.colours.splice(0, 1, e.target.value));
         break;
       case "second":
-        this.props.changeColours("colour2", e.target.value);
+        this.props.setCurrentColours(this.props.colours.splice(1, 1, e.target.value));
         break;
       case "third":
-        this.props.changeColours("colour3", e.target.value);
+        this.props.setCurrentColours(this.props.colours.splice(2, 1, e.target.value));
         break;
       default:
     }
