@@ -4,33 +4,24 @@ import { fabric } from 'fabric';
 import './App.css';
 
 import DesktopApp from './components/desktopApp';
+import { cyclePresets } from './content/cyclePresets';
 
 export default function App() {
   // is accessed on mobile
-  const [onMobile, setOnMobile] = useState(window.matchMedia('all and (any-hover: none)').matches);
+  const onMobile = window.matchMedia('all and (any-hover: none)').matches;
   // current window size
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   // is the intro modal open
   const [modalIsOpen, setModalIsOpen] = useState(true);
-  // details about current day preset - song, visuals, prompt etc
-  const [dayDetails, setDayDetails] = useState({
-    introStatement: "if you're seeing this the server is having some trouble",
-    prompt: "if you're seeing this the server is having some trouble",
-    trackDetails: "if you're seeing this the server is having some trouble",
-    trackLink: "",
-    artistLink: "",
-    trackSrc: "",
-    shaderName: "",
-    dbTable: ""
-  });
+  // get current position in cycle
+  const cyclePos = 0;
+  /* const cyclePos = asyncCycleCalc(); */
+  /* if false it's assumed to be text instead */
+  const[inputIsDraw, setInputIsDraw] = useState(false);
   // other responses from database
   const [responseData, setResponseData] = useState([]);
   // current drawing colours
-  const [currentColours, setCurrentColours] = useState([
-    "#222323",
-    "#5252ff",
-    "#b5e877"
-  ]);
+  const [currentColours, setCurrentColours] = useState(cyclePresets[cyclePos].colours);
   // drawing settings
   const [brushSize, setBrushSize] = useState(8);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -56,9 +47,6 @@ export default function App() {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    /* window.addEventListener('mousemove', () => {
-      console.log(isDrawing)}); */
-      /* document.addEventListener('mouseup', () => saveCanvasState()); */
   }, []);
 
   useEffect(() => {isDrawingRef.current = isDrawing}, [isDrawing]);
@@ -77,6 +65,8 @@ export default function App() {
         modalIsOpen={modalIsOpen}
         toggleModal={toggleModal}
         setIsDrawing={setIsDrawing}
+        cyclePreset={cyclePresets[cyclePos]}
+        setInput={setInput}
         colours={currentColours}
         setCurrentColours={setCurrentColours}
         brushSize={brushSize}
@@ -86,6 +76,7 @@ export default function App() {
         setCurrentCanvasState={setCurrentCanvasState}
         undoDrawing={undoDrawing}
         redoDrawing={redoDrawing}
+        submitResponse={submitResponse}
         />
       }
     </div>
@@ -101,6 +92,24 @@ export default function App() {
     }
     // toggle state
     setModalIsOpen(!modalIsOpen);
+  }
+  // to change between draw and write - true = draw - false = text
+  function setInput(changeToDraw){
+    if(changeToDraw){
+      setInputIsDraw(true);
+      document.getElementById("drawing-canvas-wrapper").style.zIndex = "6";
+      document.getElementById("draw-input-select").classList.add("ActiveInputButton");
+      document.getElementById("drawing-tools-wrapper").style.right = "-25vh";
+      document.getElementById("drawing-buttons-wrapper").style.left = "-15vh";
+      document.getElementById("text-input-select").classList.remove("ActiveInputButton");
+    } else {
+      setInputIsDraw(false);
+      document.getElementById("drawing-canvas-wrapper").style.zIndex = "4";
+      document.getElementById("draw-input-select").classList.remove("ActiveInputButton");
+      document.getElementById("drawing-tools-wrapper").style.right = "";
+      document.getElementById("drawing-buttons-wrapper").style.left = "";
+      document.getElementById("text-input-select").classList.add("ActiveInputButton");
+    }
   }
 
   // toggle eraser on/off - save brush if toggled on - reset old brush if toggled off
@@ -168,6 +177,71 @@ export default function App() {
       setRedoStack(newRedoStack);
       // update actual canvas
       drawingCanvas.loadFromJSON(newCanvasState);      
-    }  
+    }
+  }
+  // work out how many days have passed since the start of async and pick the right cycle
+  function asyncCycleCalc(){
+    /* !! work out correct start date */
+    let startDate = new Date('2022-07-10T00:00:00');
+    let daysInCycle = 3;
+    // work out days in between now and start, divide by 3 for cycle
+    // before return round down with floor
+    /* !! maybe worth working out edge cases outside of total cycles here? */
+    return Math.floor((Date.now() - startDate) / (1000 * 3600 * 24) / 3);
+  }
+
+  function submitResponse(){
+    // check if a text or an image response
+    if(inputIsDraw){
+      //image input
+      let imageInput = document.getElementById('drawing-canvas');
+      var dataURL = imageInput.toDataURL({
+        format: 'png',
+        left: 0,
+        top: 0,
+        width: imageInput.width,
+        height: imageInput.height
+      });
+      const formData = new FormData();
+      let imageFile = dataURLtoFile(dataURL, 'response.png');
+      drawingCanvas.clear();
+      // we add one to cycle pos to keep start from 1
+      formData.append('upload', imageFile, 'cycle_'+ (cyclePos+1) +'_response.png');
+      fetch(`http://localhost:33061/api/insertImageReflectionGetResponses`, {
+        method: 'PUT',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(result => { console.log('Success:', result); })
+      .catch(error => { console.error('Error:', error); });
+    } else {
+      // text input
+      let textInput = document.getElementById('text-input');
+      let responseText = textInput.value;
+      if(responseText.length > 0){
+        textInput.value = '';
+        fetch(`http://localhost:33061/api/insertTextReflectionGetResponses`, {
+          headers: { 'Content-type': 'application/json' },
+          method: 'POST',
+          mode: 'cors',
+          body: JSON.stringify({reflectText: responseText})
+        })
+      .then(response => console.log(response.json()));
+      }
+    }
+  }
+
+  function dataURLtoFile(dataurl, filename){
+    var arr = dataurl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {
+      type: mime
+    });
   }
 }

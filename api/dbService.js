@@ -9,7 +9,7 @@ const connectSettings = {
   user: process.env.ROOM2_DB_USER,
   multipleStatements: true,
   password: process.env.ROOM2_DB_PASSWORD,
-  database: 'room2live',
+  database: 'room2async',
   supportBigNumbers : true, 
   port: 25060,
   insecureAuth: true
@@ -22,13 +22,18 @@ connection.connect((err) => {
   console.log('db ' + connection.state );
 });
 
-const sqlQueries = {
-  getScheduleQ:       `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType',
-                       EMOJI_1 AS 'emoji1', EMOJI_2 AS 'emoji2', EMOJI_3 AS 'emoji3' FROM LIVE_SCHEDULE WHERE id = 1;`, 
-  getResponseUpdateQ: `SELECT * FROM RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 3 minute) AND (id > ?);`, 
-  getEmojisQ:         `SELECT ALT_TEXT AS 'altText', EMOJI_STRING AS 'emojiString' FROM EMOJI_STORAGE WHERE NAME = (? OR ? OR ?);`,
-  insertResponseQ:    `INSERT INTO RESPONSES (RESPONSE, RESPONSE_TYPE) VALUES (?, ?);`
-}
+const sqlQueries = [ `SELECT * FROM CYCLE_1; INSERT INTO CYCLE_1 (RESPONSE) VALUES (?);`,
+                     `SELECT * FROM CYCLE_2; INSERT INTO CYCLE_2 (RESPONSE) VALUE (?);`,
+                     `SELECT * FROM CYCLE_3; INSERT INTO CYCLE_3 (RESPONSE) VALUE (?);`,
+                     `SELECT * FROM CYCLE_4; INSERT INTO CYCLE_4 (RESPONSE) VALUE (?);`,
+                     `SELECT * FROM CYCLE_5; INSERT INTO CYCLE_5 (RESPONSE) VALUE (?);`,
+                     `SELECT * FROM CYCLE_6; INSERT INTO CYCLE_6 (RESPONSE) VALUE (?);`,
+                     `SELECT * FROM CYCLE_7; INSERT INTO CYCLE_7 (RESPONSE) VALUE (?);`,
+                     `SELECT * FROM CYCLE_8; INSERT INTO CYCLE_8 (RESPONSE) VALUE (?);`,
+                     `SELECT * FROM CYCLE_9; INSERT INTO CYCLE_9 (RESPONSE) VALUE (?);`]
+
+
+// to avoid sql injections use the cycleTable number to select from array of queries
 
 class DbService {
 
@@ -36,39 +41,11 @@ class DbService {
     return instance ? instance: new DbService();
   }
 
-  async getScheduleInit() {
-    try { const scheduleData = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getScheduleQ, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return [scheduleData, []];
-    } catch(error) { console.log(error); }
-  }
-
-  async getScheduleUpdate(lastResponseID) {
-    let insertData = [lastResponseID];
-    try { const scheduleData = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getScheduleQ, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          const responseData = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getResponseUpdateQ, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return [scheduleData, responseData];
-    } catch(error) { console.log(error); }
-  }
-
-  async getEmojisUpdate(emoji1, emoji2, emoji3) {
-    let insertData = [emoji1, emoji2, emoji3];
+  // run when inputing reflections and return responses
+  async insertReflectionGetResponses(reflection, cycleTable) {
+    let insertData = [reflection];
     try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getEmojisQ, insertData, (err, results) => {
+            connection.query(sqlQueries[cycleTable], insertData, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
@@ -76,41 +53,6 @@ class DbService {
           return response;
     } catch(error) { console.log(error); }
   }
-
-  async insertNewReflectText(reflectText) {
-    let insertData = [reflectText, "text"];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertResponseQ, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  }
-  async insertNewReflectImage(reflectImage) {
-    let insertData = [reflectImage, "image"];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertResponseQ, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  }
-
- /*  async insertNewReflectImage(reflectImage, reflectTime) {
-    let insertData = [reflectImage, reflectTime, reflectImage, reflectTime];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertImageQuery, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  } */
 
 }
 
