@@ -8,6 +8,7 @@ export default function ResponseDisplay(props) {
   // run loop once new response data arrives
   useEffect(() => {
     displayResponsesLoop(props.responseData);
+    console.log("bam")
   }, [props.responseData]);
 
   return (
@@ -16,9 +17,8 @@ export default function ResponseDisplay(props) {
 
   // loop through the responses
   function displayResponsesLoop(responseData){
-    let responses = responseData;
-    responseData.pop();
+    let responseToDisplay = responseData.pop();
     if (responseData.length > 0){ 
-      setTimeout(displayResponses, responseLoopDelay, responseData) }
+      setTimeout(displayResponsesLoop, responseLoopDelay, responseData) }
   }
 }
