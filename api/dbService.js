@@ -53,6 +53,17 @@ class DbService {
           return response;
     } catch(error) { console.log(error); }
   }
+  
+  async testLookup() {
+    try { const response = await new Promise((resolve, reject) => {
+            connection.query(`SELECT RESPONSE FROM CYCLE_1;`, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return response;
+    } catch(error) { console.log(error); }
+  }
 
 }
 

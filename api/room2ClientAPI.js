@@ -55,4 +55,11 @@ router.put('/insertImageReflectionGetResponses', (req, res) => {
   });  
 });
 
+router.post('/testLookup', (req, res) => {
+  const db = DbService.getDbServiceInstance();
+  const result = db.testLookup();
+  result.then(data => res.json({ data: data }))
+        .catch(err => console.log(err));
+});
+
 module.exports = router;

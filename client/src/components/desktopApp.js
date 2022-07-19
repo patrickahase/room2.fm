@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import IntroModal from './introModal';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
@@ -86,8 +86,7 @@ export default function DesktopApp(props) {
           }
           {/* External Response Overlay */}
           <ResponseDisplay 
-            getNextResponse={props.getNextResponse}
-            responsesToDisplay={props.responsesToDisplay}
+            responseData={props.responseData}
             height={props.height}
             width={props.width} />
           {/* Background Visuals */}

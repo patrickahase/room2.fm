@@ -77,6 +77,7 @@ export default function App() {
         undoDrawing={undoDrawing}
         redoDrawing={redoDrawing}
         submitResponse={submitResponse}
+        responseData={responseData}
         />
       }
     </div>
@@ -191,6 +192,8 @@ export default function App() {
   }
 
   function submitResponse(){
+    // set up array to push other responses to
+    let returnedResponses = [];
     // check if a text or an image response
     if(inputIsDraw){
       //image input
@@ -211,22 +214,29 @@ export default function App() {
         method: 'PUT',
         body: formData
       })
-      .then(response => response.json())
-      .then(result => { console.log('Success:', result); })
-      .catch(error => { console.error('Error:', error); });
+      .then(res => res.json())
+      .then(res => {for(const response of res.data) {
+        returnedResponses.push(response.RESPONSE);
+      }});
+      setResponseData(returnedResponses);
     } else {
       // text input
       let textInput = document.getElementById('text-input');
       let responseText = textInput.value;
       if(responseText.length > 0){
         textInput.value = '';
-        fetch(`http://localhost:33061/api/insertTextReflectionGetResponses`, {
+        /* fetch(`http://localhost:33061/api/insertTextReflectionGetResponses`, { */
+        fetch(`http://localhost:33061/api/testLookup`, {
           headers: { 'Content-type': 'application/json' },
           method: 'POST',
           mode: 'cors',
           body: JSON.stringify({reflectText: responseText})
         })
-      .then(response => console.log(response.json()));
+      .then(res => res.json())
+      .then(res => {for(const response of res.data) {
+        returnedResponses.push(response.RESPONSE);
+      }});
+      setResponseData(returnedResponses);
       }
     }
   }
