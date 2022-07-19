@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'client/build' )));
 
 // serve index - '/' or '*' ?
 app.get('/', (req, res) => {
+  console.log("check")
   res.sendFile(__dirname, '/client/build/index.html' );
 });
 
