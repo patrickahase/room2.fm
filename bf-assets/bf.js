@@ -3,6 +3,8 @@ var long = 144.94984320919224;
 var timemoji = document.getElementById('timemoji');
 var timepar = document.getElementById('texttime');
 var date = new Date(); //date currently relative to audience browser, change to local Nth Melb/AEST zone? 
+var roomoffset = -600; 
+var newoffset; 
 var currentMoonEmoji;
 var htmoon = document.getElementById('moonmoji');
 var suntimes = SunCalc.getTimes(date, lat, long);
@@ -47,3 +49,24 @@ if (phase == 75) { currentMoonEmoji = celestialEmojis.lastquarterMoon;};
 if (phase > 75) { currentMoonEmoji = celestialEmojis.waningCrescentMoon;};
 
 htmoon.innerHTML = currentMoonEmoji;
+
+function tz () {
+  var compoffset = date.getTimezoneOffset(); 
+  console.log(compoffset); 
+  console.log(date.getUTCHours() + 10); 
+  if (compoffset == roomoffset) {
+    console.log('same timezone'); 
+  } else if (compoffset > roomoffset) {
+    newoffset = compoffset - roomoffset; 
+    console.log(newoffset);
+  } else if (compoffset < roomoffset) {
+    newoffset = roomoffset - compoffset;
+    console.log(newoffset);
+  }; 
+
+ 
+
+}
+
+tz(); 
+

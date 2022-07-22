@@ -73,7 +73,7 @@ const locArray = data.loc.split(',')
 if (locArray.length !== 2) return null
 youlat = parseFloat(locArray[0])
 youlong = parseFloat(locArray[1])
-getdistance(youlat, youlong, netlat, netlong);
+getdistance(youlat, youlong, lat, long);
 if (youlat == null || youlong == null) return null
 return {
 youlat,
@@ -136,7 +136,7 @@ if(navigator.geolocation) {
   function setcoords(position) {
   youlat = position.coords.latitude; 
   youlong = position.coords.longitude; 
-  getdistance(youlat, youlong, netlat, netlong);
+  getdistance(youlat, youlong, lat, long);
   geolocatedterritories(youlat, youlong);
   if (youlat == null || youlong == null) return null
   return {
@@ -147,7 +147,7 @@ if(navigator.geolocation) {
     } else {
   youlat = null; 
   youlong = null;
-  getdistance(youlat, youlong, netlat, netlong);
+  getdistance(youlat, youlong, lat, long);
   loadingpar.classList.add('noshow');
   document.getElementById('continuebtn').classList.remove('noshow');
  
@@ -166,7 +166,7 @@ if(navigator.geolocation) {
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
       var d = R * c; // Distance in km
       d = Math.round(d);
-      document.getElementById('local-conditions').innerHTML = "We reckon you're about " + d + "km from our server,";
+      document.getElementById('geolocate').innerHTML = "We reckon you're about " + d + "km from our server,";
     }
     
     function deg2rad(deg) {
