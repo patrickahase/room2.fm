@@ -166,7 +166,7 @@ if(navigator.geolocation) {
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
       var d = R * c; // Distance in km
       d = Math.round(d);
-      document.getElementById('geolocate').innerHTML = "We reckon you're about " + d + "km from our server,";
+      document.getElementById('geolocate').innerHTML = "You're about " + d + "km from Arts House, where room2 live will happen on SUN 25 September, 14:00 – 19:00 AEST";
     }
     
     function deg2rad(deg) {

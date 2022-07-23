@@ -2,12 +2,13 @@ var lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Me
 var long = 144.94984320919224;
 var timemoji = document.getElementById('timemoji');
 var timepar = document.getElementById('texttime');
-var date = new Date(); //date currently relative to audience browser, change to local Nth Melb/AEST zone? 
+var date = new Date(); 
 var roomoffset = -600; 
-var newoffset; 
+// var newoffset; 
+var newhours; 
+var suntimes = SunCalc.getTimes(date, lat, long);
 var currentMoonEmoji;
 var htmoon = document.getElementById('moonmoji');
-var suntimes = SunCalc.getTimes(date, lat, long);
 
 const weather = fetch('https://api.openweathermap.org/data/2.5/weather?lat=-37.803193437556054&lon=144.94984320919224&appid=cbbd43ae50e58b735aaa5e361b1f3405').then(function(resp) { return resp.json() }) // using Open Weather API to get weather data for Arts House GPS coords, then convert data to json
 .then(function(data) {
@@ -51,22 +52,32 @@ if (phase > 75) { currentMoonEmoji = celestialEmojis.waningCrescentMoon;};
 htmoon.innerHTML = currentMoonEmoji;
 
 function tz () {
-  var compoffset = date.getTimezoneOffset(); 
-  console.log(compoffset); 
-  console.log(date.getUTCHours() + 10); 
-  if (compoffset == roomoffset) {
-    console.log('same timezone'); 
-  } else if (compoffset > roomoffset) {
-    newoffset = compoffset - roomoffset; 
-    console.log(newoffset);
-  } else if (compoffset < roomoffset) {
-    newoffset = roomoffset - compoffset;
-    console.log(newoffset);
-  }; 
-
- 
+  if (date.getTimezoneOffset() != roomoffset) {
+  newhours = date.getUTCHours() + 10; //evaluating times in UTC then adding 10 hours for UTC+10/AEST; won't need daylight savings time for the time window room2 is running
+  checknum(newhours); 
+  date.setHours(newhours); 
+  console.log(date.getHours()); 
+  sunrise (); 
+} else {
+  sunrise (); 
+}
 
 }
 
 tz(); 
+
+function sunrise () {
+  console.log();
+
+}
+
+//checking whether hours evaluations are above 24, if so removing 24 to get their AM time value in hours
+function checknum (num) {
+  if (num > 24) {
+    num = num - 24; 
+  } else {
+    num = num; 
+  }
+  return num
+}
 
