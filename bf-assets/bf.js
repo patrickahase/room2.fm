@@ -69,7 +69,7 @@ tz();
 function sunrise () {
   var sunrisetime = suntimes.sunrise;
   var sunrisehours = checknum (sunrisetime.getUTCHours() + 10); 
-  var sunrisemins = sunrisetime.getUTCMinutes();
+  var sunrisemins = sunrisetime.getUTCMinutes(); // AEST minutes are same as UTC minutes; getting mins from UTC means half-hour timezones like SA will be calculated
   document.getElementById('timepar').innerHTML = sunrisehours + ":" + sunrisemins; 
   // console.log(sunrisetime);
 
