@@ -67,7 +67,11 @@ function tz () {
 tz(); 
 
 function sunrise () {
-  console.log();
+  var sunrisetime = suntimes.sunrise;
+  var sunrisehours = checknum (sunrisetime.getUTCHours() + 10); 
+  var sunrisemins = sunrisetime.getUTCMinutes();
+  document.getElementById('timepar').innerHTML = sunrisehours + ":" + sunrisemins; 
+  // console.log(sunrisetime);
 
 }
 

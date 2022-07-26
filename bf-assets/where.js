@@ -130,7 +130,7 @@ if(navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(setcoords);
   if (GeolocationPositionError = true) {
     geolocatedterritories(youlat, youlong);
-    document.getElementById('local-conditions').innerHTML = "We're not sure how far away you are from our server";
+    //document.getElementById('local-conditions').innerHTML = "We're not sure how far away you are from our server";
     
   }
   function setcoords(position) {
