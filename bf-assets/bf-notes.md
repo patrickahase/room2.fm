@@ -25,6 +25,7 @@
 # Time log
 - 06/07 1ish hour setting up pages + copying in some code + cloned PH's github repo 
 - 10/07 1ish hour copying some code from dot net homepage
+- 1ish hour working on timezone stuff 
 
 # From PH
 - had a chat to Raag - they want to catch up in the next couple of weeks

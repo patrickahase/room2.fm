@@ -73,7 +73,7 @@ const locArray = data.loc.split(',')
 if (locArray.length !== 2) return null
 youlat = parseFloat(locArray[0])
 youlong = parseFloat(locArray[1])
-getdistance(youlat, youlong, netlat, netlong);
+getdistance(youlat, youlong, lat, long);
 if (youlat == null || youlong == null) return null
 return {
 youlat,
@@ -130,13 +130,13 @@ if(navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(setcoords);
   if (GeolocationPositionError = true) {
     geolocatedterritories(youlat, youlong);
-    document.getElementById('local-conditions').innerHTML = "We're not sure how far away you are from our server";
+    //document.getElementById('local-conditions').innerHTML = "We're not sure how far away you are from our server";
     
   }
   function setcoords(position) {
   youlat = position.coords.latitude; 
   youlong = position.coords.longitude; 
-  getdistance(youlat, youlong, netlat, netlong);
+  getdistance(youlat, youlong, lat, long);
   geolocatedterritories(youlat, youlong);
   if (youlat == null || youlong == null) return null
   return {
@@ -147,7 +147,7 @@ if(navigator.geolocation) {
     } else {
   youlat = null; 
   youlong = null;
-  getdistance(youlat, youlong, netlat, netlong);
+  getdistance(youlat, youlong, lat, long);
   loadingpar.classList.add('noshow');
   document.getElementById('continuebtn').classList.remove('noshow');
  
@@ -166,7 +166,7 @@ if(navigator.geolocation) {
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
       var d = R * c; // Distance in km
       d = Math.round(d);
-      document.getElementById('local-conditions').innerHTML = "We reckon you're about " + d + "km from our server,";
+      document.getElementById('geolocate').innerHTML = "You're about " + d + "km from Arts House, where room2 live will happen on SUN 25 September, 14:00 – 19:00 AEST";
     }
     
     function deg2rad(deg) {
