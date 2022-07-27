@@ -5,6 +5,7 @@ import './App.css';
 
 import DesktopApp from './components/desktopApp';
 import { cyclePresets } from './content/cyclePresets';
+import CollisionTest from './components/collisionTest';
 
 export default function App() {
   // is accessed on mobile
@@ -79,6 +80,7 @@ export default function App() {
         submitResponse={submitResponse}
         responseData={responseData}
         />
+        /* <CollisionTest /> */
       }
     </div>
   )
@@ -215,10 +217,17 @@ export default function App() {
         body: formData
       })
       .then(res => res.json())
-      .then(res => {for(const response of res.data) {
-        returnedResponses.push(response.RESPONSE);
-      }});
-      setResponseData(returnedResponses);
+      .then(res => {
+        try{
+          for(const response of res.data) {
+            returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
+          }
+          setResponseData(returnedResponses);
+        } catch(e) {
+          // if response not the data
+          console.log(e);
+        }
+        });
     } else {
       // text input
       let textInput = document.getElementById('text-input');
@@ -230,13 +239,21 @@ export default function App() {
           headers: { 'Content-type': 'application/json' },
           method: 'POST',
           mode: 'cors',
-          body: JSON.stringify({reflectText: responseText})
+          // we add one to cycle pos to keep start from 1
+          body: JSON.stringify({reflection: responseText, cycleTable: cyclePos+1})
         })
       .then(res => res.json())
-      .then(res => {for(const response of res.data) {
-        returnedResponses.push(response.RESPONSE);
-      }});
-      setResponseData(returnedResponses);
+      .then(res => {
+        try{
+          for(const response of res.data) {
+            returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);         
+          }
+          setResponseData(returnedResponses);
+        } catch(e) {
+          // if response not the data
+          console.log(e);
+        }
+        });      
       }
     }
   }

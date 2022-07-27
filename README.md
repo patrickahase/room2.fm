@@ -14,3 +14,4 @@ This is my refactoring of the room2 code base to set it up for continued use
 - handle cycle edge cases (more than total cycles)
 - reduncdency on artist info before modal toggle
 - set up online server app and replace url in app.js submitResponse
+- error handling returning server responses

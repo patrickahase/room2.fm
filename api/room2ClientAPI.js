@@ -19,7 +19,7 @@ const upload = multer({
     s3: s3,
     bucket: 'thelongesthumstore',
     acl: 'public-read',
-    key: (req, file, callBack) => { callBack(null, 'room2-async-cycle_'+ 1 +'/' + Date.now() + file.originalname.replace(/ /g,'-')) }
+    key: (req, file, callBack) => { callBack(null, 'room2-async-cycle_'+ (parseInt(file.originalname.replace(/ /g,'-').substr(6,1))-1) +'/' + Date.now() + file.originalname.replace(/ /g,'-')) }
   })
 }).array('upload', 1);
 
@@ -28,9 +28,8 @@ const upload = multer({
 // responses
 router.post('/insertTextReflectionGetResponses', (req, res) => {
   const {reflection, cycleTable} = req.body;
-  console.log(req.body.reflection)
   const db = DbService.getDbServiceInstance();
-  const result = db.insertReflectionGetResponses(reflection, cycleTable);
+  const result = db.insertReflectionGetResponses(reflection, 'text', cycleTable);
   result.then(data => res.json({ data: data }))
         .catch(err => console.log(err));
 });
@@ -48,7 +47,7 @@ router.put('/insertImageReflectionGetResponses', (req, res) => {
       const reflectImage = req.files[0].key;
       const db = DbService.getDbServiceInstance();
       /* console.log(cycleTable); */
-      const result = db.insertReflectionGetResponses(reflectImage, cycleTable);
+      const result = db.insertReflectionGetResponses(reflectImage, 'image', cycleTable);
       result.then(data => res.json({ data: data }))
             .catch(err => console.log(err));
     }

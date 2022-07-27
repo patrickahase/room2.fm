@@ -10,7 +10,7 @@ export default function IntroModal(props) {
   const date = new Date(); 
   const lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
   const long = 144.94984320919224;
-  const [suntimes] = useCalcTimes(SunCalc.getTimes(date, lat, long));
+  /* const [suntimes] = useCalcTimes(SunCalc.getTimes(date, lat, long)); */
   
   // run init on load
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function IntroModal(props) {
             {currentDate > 50
             ? <>{currentDate.getMonth()}</>
             : <>{currentDate.getYear()}</>} 
-            <p>{suntimes}</p>
+            <p>{/* {suntimes} */}</p>
           </div>
         </div>
       </div>
