@@ -5,13 +5,13 @@ import { acknowledgementOfCountryText, introText, instructionsText, /* warningTe
 
 export default function IntroModal(props) {
   const [currentModalPage, setCurrentModalPage] = useState(1);
-  
   const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
   const date = new Date(); 
   const lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
   const long = 144.94984320919224;
-  /* const [suntimes] = useCalcTimes(SunCalc.getTimes(date, lat, long)); */
-  
+  const [suntimes, setSuntimes] = useState(SunCalc.getTimes(date, lat, long));
+  // const [suntimes] = useCalcTimes(SunCalc.getTimes(date, lat, long)); 
+
   // run init on load
   useEffect(() => {
     const container = document.getElementById("AOC-modal");
@@ -57,7 +57,7 @@ export default function IntroModal(props) {
             {currentDate > 50
             ? <>{currentDate.getMonth()}</>
             : <>{currentDate.getYear()}</>} 
-            <p>{/* {suntimes} */}</p>
+            <p><>{suntimes}</></p>
           </div>
         </div>
       </div>
