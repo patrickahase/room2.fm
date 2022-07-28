@@ -3,6 +3,7 @@ var long = 144.94984320919224;
 var timemoji = document.getElementById('timemoji');
 var timepar = document.getElementById('texttime');
 var date = new Date(); 
+// tracks to change every 3 days
 var roomoffset = -600; 
 // var newoffset; 
 var newhours; 
@@ -52,7 +53,7 @@ if (phase > 75) { currentMoonEmoji = celestialEmojis.waningCrescentMoon;};
 htmoon.innerHTML = currentMoonEmoji;
 
 function tz () {
-  if (date.getTimezoneOffset() != roomoffset) {
+  if (date.getTimezoneOffset() != roomoffset) { //checking whether local date is same as Naarm time
   newhours = date.getUTCHours() + 10; //evaluating times in UTC then adding 10 hours for UTC+10/AEST; won't need daylight savings time for the time window room2 is running
   checknum(newhours); 
   date.setHours(newhours); 
