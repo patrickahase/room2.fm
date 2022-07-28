@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
-import {sunriseText} from './timeCalc';
+import {sunriseText, moonShape} from './timeCalc';
 export default function IntroModal(props) {
   const [currentModalPage, setCurrentModalPage] = useState(1);
   
@@ -53,6 +53,7 @@ export default function IntroModal(props) {
         <div id="modal-text-vert-align">
           <div id="modal-text">
             {sunriseText}
+            {moonShape}
           </div>
         </div>
       </div>        

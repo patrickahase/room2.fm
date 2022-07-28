@@ -908,6 +908,48 @@ code {
   bottom: 4.5%;  
 }
 
+/*Moon Styling*/
+.moonsphere {
+  border-radius: 100%;
+  width: 20vw;
+  height: 20vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}
+.hemisphere{
+  width: 50%;
+  height: 100%;
+}
+.moonlight {
+  background-color: #F4F6F0;
+}
+.moondark {
+  background-color: #575851;
+} /*change these colours, maybe programmed w/ weather info*/
+.moondivider,
+.moondivider:after {
+  top: 0;
+  left: 0;
+  width: 20vw;
+  height: 20vw;
+  position: absolute;
+  border-radius: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+.moondivider {
+  background-color: #575851; /* Dark */
+}
+.moondivider:after {
+  content: '';
+  background-color: #F4F6F0; /* Light */
+  transform: rotateY(180deg);
+}
+
 /* Mobile Rules */
 @media all and (any-hover: none) {
   /* Modal Style */

@@ -15,6 +15,56 @@
         max-width: 80vw;
         border: 1px dotted black;
     }
+    .sphere {
+    border-radius: 100%;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 50px;
+    }
+
+    .hemisphere {
+    width: 50%;
+    height: 100%;
+    }
+
+    .light {
+    background-color: #F4F6F0;
+    }
+
+    .dark {
+    background-color: #575851;
+    }
+
+    .divider,
+.divider:after {
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    border-radius: 100%;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+.divider {
+    background-color: #575851; /* Dark */
+}
+
+.divider:after {
+    content: '';
+    background-color: #F4F6F0; /* Light */
+    transform: rotateY(180deg);
+}
+
+#moonbg {
+  background-color: black;
+}
+
 </style>
 
 <body>
@@ -52,6 +102,13 @@
 
 <p id="geolocate"></p>
 <p id="timepar"></p>
+<div id="moonbg">
+<div class="sphere">
+  <div class="light hemisphere"></div>
+  <div class="dark hemisphere"></div>
+  <div class="divider"></div>
+</div>
+</div>
 
 </body>
 <script src="bf.js"></script>

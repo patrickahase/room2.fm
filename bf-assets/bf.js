@@ -86,3 +86,47 @@ function checknum (num) {
   return num
 }
 
+
+var phasedeg = 3.6 * phase;
+//60 - Math.floor(moontimes.phase * 360);
+console.log(phasedeg);
+
+
+  document.querySelector('.divider').style.transform = `rotate3d(0, 1, 0, ${phasedeg}deg)`
+
+  const hemispheres = document.querySelectorAll('.hemisphere')
+
+  if (phasedeg > 180) {
+    // Left
+    hemispheres[0].classList.remove('dark')
+    hemispheres[0].classList.add('light')
+
+    // Right
+    hemispheres[1].classList.add('dark')
+    hemispheres[1].classList.remove('light')
+  } else {
+    // Left
+    hemispheres[0].classList.add('dark')
+    hemispheres[0].classList.remove('light')
+
+    // Right
+    hemispheres[1].classList.remove('dark')
+    hemispheres[1].classList.add('light')
+  }
+
+
+/*const today = new Date()
+const dateSelect = document.querySelector('input')
+
+dateSelect.addEventListener('input', e => {
+  const selectedDate = new Date(e.target.value)
+
+  setMoonTitle(selectedDate)
+  setMoonRotation(getMoonPhaseRotation(selectedDate))
+})
+
+dateSelect.value = today.toISOString().slice(0, 10)
+
+setMoonTitle(today)
+setMoonRotation(getMoonPhaseRotation(today))*/
+
