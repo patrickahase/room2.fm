@@ -914,22 +914,21 @@ code {
   width: 20vw;
   height: 20vw;
   overflow: hidden;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   position: relative;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
+  margin: 5vh;
 }
 .hemisphere{
   width: 50%;
   height: 100%;
 }
 .moonlight {
-  background-color: #F4F6F0;
+  background-color: var(--comp-col-03);
 }
 .moondark {
-  background-color: #575851;
-} /*change these colours, maybe programmed w/ weather info*/
+  background-color: var(--comp-col-02);
+} 
 .moondivider,
 .moondivider:after {
   top: 0;
@@ -942,11 +941,11 @@ code {
   backface-visibility: hidden;
 }
 .moondivider {
-  background-color: #575851; /* Dark */
+  background-color: var(--comp-col-02); /* Dark */
 }
 .moondivider:after {
   content: '';
-  background-color: #F4F6F0; /* Light */
+  background-color: var(--comp-col-03); /* Light */
   transform: rotateY(180deg);
 }
 

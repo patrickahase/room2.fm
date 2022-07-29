@@ -3,8 +3,7 @@
     > "the tide is currently rising"/falling
 - Weather 
     > Current temp/conditions
-    > Forecast 
-    https://openweathermap.org/api/forecast30 (paid; the 5-day and current weather is free)
+    > Forecast - rainfall and humidity, maybe checking what the forecast will be at the next changeover
 - Moon phases (Suncalc) 
 - Sunrise/sunset and other time values 
 - Countdown to next composition? 
@@ -15,6 +14,7 @@ something like "there's x time left to listen/comment on this track. it'll chang
     > how do we feel about requesting geolocation tho 
 
 # Notes
+- the moon phase pics probably look too much like Rising graphics lol
 - 29/08/22 beginning of async 
 - 25/09/22 live event(s?) begin
 - Beginning of 'Spring', time of transition and warming up 
@@ -27,12 +27,15 @@ something like "there's x time left to listen/comment on this track. it'll chang
 - Tracks changing over at sunrise? 
     > now changing every 3 days, maybe still at sunrise tho 
 
-# Time log - total 6ish hours
+# Time log - total 9ish hours
 - 06/07 1ish hour setting up pages + copying in some code + cloned PH's github repo 
 - 10/07 1ish hour copying some code from dot net homepage
 - 1ish hour working on timezone stuff 
 - 26/07 installed suncalc as a node module, starting to work suncalc into introModal but haven't been able to test it yet
 - 28/07 2ish hours fixing bad hook and adding sunrise and sunset times; working on evaluating for UTC+10; separating time calculations into a separate file in components
+- 28/07 another 1.5ish hours spent working on moon phase illustration
+- 29/07 adding another moon phase illustration for 3 days in the future + looking at tide calendars
+- 29/07 1-2 hours working on weather data, looking at tide charts and finding BOM docs, working on Open Weather API for now
 
 # From PH
 - had a chat to Raag - they want to catch up in the next couple of weeks

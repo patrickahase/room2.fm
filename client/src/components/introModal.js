@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
-import {sunriseText, moonShape} from './timeCalc';
+import {sunriseText, moonShape, nextMoonShape} from './timeCalc';
 export default function IntroModal(props) {
   const [currentModalPage, setCurrentModalPage] = useState(1);
   
@@ -54,6 +54,7 @@ export default function IntroModal(props) {
           <div id="modal-text">
             {sunriseText}
             {moonShape}
+            {nextMoonShape}
           </div>
         </div>
       </div>        
