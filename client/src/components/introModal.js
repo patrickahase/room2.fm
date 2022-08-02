@@ -1,17 +1,10 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
-import SunCalc from 'suncalc'; 
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
-
+import {sunriseText, moonShape, nextMoonShape} from './timeCalc';
 export default function IntroModal(props) {
-  const [currentModalPage, setCurrentModalPage] = useState(0);
-  const [currentDate, setCurrentDate] = useState(new Date(Date.now()));
-  const date = new Date(); 
-  const lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
-  const long = 144.94984320919224;
-  const [suntimes, setSuntimes] = useState(SunCalc.getTimes(date, lat, long));
-  // const [suntimes] = useCalcTimes(SunCalc.getTimes(date, lat, long)); 
-
+  const [currentModalPage, setCurrentModalPage] = useState(1);
+  
   // run init on load
   useEffect(() => {
     const container = document.getElementById("AOC-modal");
@@ -47,18 +40,22 @@ export default function IntroModal(props) {
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
     </>,
 
-    //getting the current date
-    /* <>
-      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
-        <div id="modal-text-vert-align">
-          <div id="modal-text" className="modal-text-aoc">
-            {currentDate > 50
-            ? <>{currentDate.getMonth()}</>
-            : <>{currentDate.getYear()}</>} 
-            <p><>{suntimes}</></p>
-          </div>
+    //BF working on time stuff
+    /*<>
+      <div id="modal-title-wrapper">
+        <div id="modal-title">
+          Welcome to room2.fm live!
         </div>
       </div>
+      <div id="modal-text-wrapper">
+        <div id="modal-text-vert-align">
+          <div id="modal-text">
+            {sunriseText}
+            {moonShape}
+            {nextMoonShape}
+          </div>
+        </div>
+      </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
     </>, */
   
@@ -109,5 +106,3 @@ export default function IntroModal(props) {
     </div>
   )
 }
-
-
