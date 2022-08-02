@@ -6,6 +6,7 @@ export const acknowledgementOfCountryText = <span>
 </span>
 
 export const introText = <>
+<p>
   <span>
     room2.fm seeks to create a digital space for collective reflection, sharing, and vulnerability. During the last lockdown 
     season we were lucky to have a range of guest artists who helped facilitate this by contributing sounds, texts and visuals 
@@ -20,6 +21,7 @@ export const introText = <>
   </span>
   <br />
   <br />
+</p>
   <span className="ModalTextSmall">
     This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
     If you are having issues, please try one of these browsers.
@@ -28,23 +30,15 @@ export const introText = <>
     <br />    
     We will be moderating responses that we feel are intentionally disruptive or may make others feel unsafe in the space.
   </span>
-  <br />
-  <br />
 </>
 
 export const instructionsText = <>
+<p>
   <span>
     You can share your response to the music, prompts and visuals in a number of ways.
   </span>
   <br />
   <br />
-  {/* <span>
-    You are encouraged to use the emoji triangle in the bottom left of the screen to convey what you are feeling about the 
-    sounds you are receiving. Click and drag the circle to any of the points of the triangle or somewhere between them. The 
-    collective selection of everyone participating in the stream will be reflected in the main visuals.
-  </span> */}
-  {/* <br />
-  <br /> */}
   <span>
     Periodically, text prompts will come up in the lower middle of the screen. Underneath the prompts you can select to respond 
     via either writing or drawing depending on what you think is most appropriate. Once you are happy with your response you can 
@@ -66,6 +60,7 @@ export const instructionsText = <>
   </span>
   <br />
   <br />
+</p>
   <span className="ModalTextSmall">
     room2.fm was created by Patrick Hase and Anuraag Bhatia. We welcome your thoughts, feedback, or questions - please send them through to room2fm@gmail.com
   </span>            

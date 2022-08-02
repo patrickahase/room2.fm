@@ -41,7 +41,7 @@ export default function AudioTrackPlayer(props) {
   }, []);
 
   return (
-    <div id="audio-player-wrapper">
+    <div id="audio-player-wrapper" className="Collider">
       {/* audio source */}
       <audio src={require("../content/sade.mp3").default} id="audio-source" />
       {/* play button */}
