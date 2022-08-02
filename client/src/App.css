@@ -875,6 +875,47 @@ p {
   bottom: 4.5%;  
 }
 
+/*Moon Styling*/
+.moonsphere {
+  border-radius: 100%;
+  width: 20vw;
+  height: 20vw;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  margin: 5vh;
+}
+.hemisphere{
+  width: 50%;
+  height: 100%;
+}
+.moonlight {
+  background-color: var(--comp-col-03);
+}
+.moondark {
+  background-color: var(--comp-col-02);
+} 
+.moondivider,
+.moondivider:after {
+  top: 0;
+  left: 0;
+  width: 20vw;
+  height: 20vw;
+  position: absolute;
+  border-radius: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+.moondivider {
+  background-color: var(--comp-col-02); /* Dark */
+}
+.moondivider:after {
+  content: '';
+  background-color: var(--comp-col-03); /* Light */
+  transform: rotateY(180deg);
+}
+
 /* Mobile Rules */
 @media all and (any-hover: none) {
   /* Modal Style */
