@@ -21,7 +21,17 @@
 /*General Font*/
 @font-face{
   font-family:'IBM Plex Sans Condensed', sans-serif;
-  src: url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&display=swap'), format('truetype');
+  src: url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&display=swap') format('truetype');
+}
+
+@font-face{
+  font-family: 'Compagnon Roman';
+  src: url('./content/Compagnon-Roman.woff') format("woff");
+}
+
+@font-face{
+  font-family: 'Compagnon Medium';
+  src: url('./content/Compagnon-Medium.woff') format("woff");
 }
 
 /*Preset Colours*/
@@ -52,6 +62,10 @@ code {
     monospace;
 }
 
+p {
+  margin: 0;
+}
+
 .VerticalAlignWrap {
   position: absolute;
   width: 100%;
@@ -71,7 +85,6 @@ code {
   grid-template-rows: repeat(20, 1fr);
   width: 100%;
   height: 100%;
-  
 }
 
 
@@ -91,7 +104,7 @@ code {
 }
  */
 /* Modal Style */
-#modal-wrapper{
+.ModalWrapper{
   position: absolute;
   top: 10vh;
   left: 10vw;
@@ -99,66 +112,44 @@ code {
   bottom: 10vh;
   background-color: #222323;
   border-radius: 4px;
-  padding: 1vw;
+  padding: 1vw 2.5vw;
   z-index: 6;
 }
-#modal-title-wrapper{
-  position: absolute;
-  top: 0vh;
-  left: 0vw;
-  height: 15%;
-  width: 100%;
-}
-#modal-title{
-  position: absolute;
-  bottom: 0vh;
-  left: 0vw;
-  padding: 0 2.5vw;
-  padding-bottom: min(0.5vw, 2vh);
-  font-size: min(2.5vw, 8vh);
-  color: white;
-  user-select: none;
-}
-#modal-text-wrapper{
-  overflow: auto;
-  position: absolute;
-  top: 15%;
-  left: 0%;
-  height: 70%;
-  width: 100%;
-}
-#modal-text-wrapper.modal-text-wrapper-aoc{
-  top: 0%;
-  height: 85%;
-}
-#modal-text-vert-align{
-  position: absolute;
+.ModalBox{
   width: 100%;
   height: 100%;
-  display: table;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+#modal-title-wrapper{
+ width: 100%;
+}
+#modal-title{
+  /* position: absolute;
+  bottom: 0; */
+  font-size: 3rem;
+  color: white;
+  font-family: 'Compagnon Medium';
+}
+#modal-text-wrapper{
+  overflow: hidden;
+  flex-grow: 1;
+  padding: 1.5vw 0;
 }
 #modal-text{
+  overflow: auto;
   color: white;
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
-  font-size: min(1.5vw, 6vh);
-  display: table-cell;
-  vertical-align: middle;
-  max-height: 100%;
-  padding: 0 2.5vw;
-}
-#modal-text.modal-text-aoc{
-  font-size: min(2vw, 9vh);
-  padding-top: min(1.5vw, 2vh);
+  font-size: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .ModalTextSmall{
-  font-size: min(1.25vw, 6vh);
-}
-#modal-button-wrapper{
-  position: absolute;
-  bottom: 0vh;
-  left: 0vw;
-  height: 15%;
-  width: 100%;
+  font-size: 1.5rem;
+  text-align: center;
 }
 #modal-continue-button{
   border-left: 1px solid #fff;
@@ -166,16 +157,13 @@ code {
   border-right: 1px solid #848484;
   border-bottom: 1px dashed #848484;
   background-color: transparent;
-  padding: 0.2vw 1vw 0.2vw 1vw;
+/*   padding: 0.2vw 1vw 0.2vw 1vw;
   width: 9vw;
-  height: min(3vw, 7vh);
-  font-size: min(1.5vw, 4vh);
+  height: min(3vw, 7vh); */
+  padding: 0 1rem;
+  font-size: 2.5rem;
   color: white;
-  user-select: none;
-  position: absolute;
-  bottom: min(1vw, 2.5vh);
-  left: 35.5vw;
-  font-family: 'IBM Plex Sans Condensed', sans-serif;  
+  user-select: none;  
 }
 #modal-continue-button:hover{
   color: #5252ff;
@@ -192,7 +180,6 @@ code {
 #text-logo{
   color: aliceblue;
   padding: 1vw auto;
-  overflow: auto;
 }
 #pre-logo-wrapper{
   font-size: 1vw;
@@ -211,19 +198,19 @@ code {
 /* Text Logo Animations */
 #logo-line-1{ animation: 0.4s ease-out 0s 1 slideIn1; }
 @keyframes slideIn1 { 0% { transform: translateX(-1%); } 100% { transform: translateX(0); } }
-#logo-line-2{ animation: 0.4s ease-out 0s 1 slideIn2; }
+#logo-line-2{ animation: 0.4s ease-out 0.4s 1 slideIn2; }
 @keyframes slideIn2 { 0% { transform: translateX(0.5%); } 100% { transform: translateX(0); } }
-#logo-line-3{ animation: 0.4s ease-out 0s 1 slideIn3; }
+#logo-line-3{ animation: 0.4s ease-out 0.8s 1 slideIn3; }
 @keyframes slideIn3 { 0% { transform: translateX(-2%); } 100% { transform: translateX(0); } }
-#logo-line-4{ animation: 0.4s ease-out 0s 1 slideIn4; }
+#logo-line-4{ animation: 0.4s ease-out 1.2s 1 slideIn4; }
 @keyframes slideIn4 { 0% { transform: translateX(0.75%); } 100% { transform: translateX(0); } }
-#logo-line-5{ animation: 0.4s ease-out 0s 1 slideIn5; }
+#logo-line-5{ animation: 0.4s ease-out 1.6s 1 slideIn5; }
 @keyframes slideIn5 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
-#logo-line-6{ animation: 0.4s ease-out 0s 1 slideIn6; }
+#logo-line-6{ animation: 0.4s ease-out 2s 1 slideIn6; }
 @keyframes slideIn6 { 0% { transform: translateX(0.5%); } 100% { transform: translateX(0); } }
-#logo-line-7{ animation: 0.4s ease-out 0s 1 slideIn7; }
+#logo-line-7{ animation: 0.4s ease-out 2.4s 1 slideIn7; }
 @keyframes slideIn7 { 0% { transform: translateX(-1%); } 100% { transform: translateX(0); } }
-#logo-line-8{ animation: 0.4s ease-out 0s 1 slideIn8; }
+#logo-line-8{ animation: 0.4s ease-out 2.8s 1 slideIn8; }
 @keyframes slideIn8 { 0% { transform: translateX(1%); } 100% { transform: translateX(0); } }
 #logo-line-9{ animation: 0.4s ease-out 0s 1 slideIn9; }
 @keyframes slideIn9 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
@@ -272,7 +259,6 @@ code {
   }
 #marquee-text-scroll{
   color: var(--comp-col-03);
-  font-family: 'Nunito', sans-serif;
   font-size: 3vw; 
   animation: scroll-left 18s linear infinite;
   white-space: nowrap;
@@ -326,10 +312,10 @@ code {
 /* Responses from the Server */
 #response-wrapper{
   position: absolute;
-  width: 75%;
-  height: 68%;
+  width: 100%;
+  height: 100%;
   left: 0%;
-  top: 7%;
+  top: 0%;
   z-index: 2;
   pointer-events: none;
   /* background-color: #ffffff55;
@@ -338,33 +324,22 @@ code {
 .TextResponseBox{
   /* background-color: #007dff;
   border: solid white 1px; */
+  max-width: 20vw;
   font-size: max(1.0vw, 0.8em);
   color: white;  
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
   opacity: 0;
   position: absolute;
-  transition: 1.5s;
+  /* transition: 1.5s; */
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-.TextResponseBox.FadeIn{
-  opacity: 1;
-}
-.TextResponseBox.FadeOut{
-  opacity: 0;
+  margin: 0;
 }
 .ImageResponseBox{
   opacity: 0;
-  opacity: 1;
-  width: 25vw;
+  width: 20vw;
   position: absolute;
-  transition: 1.5s;
+  /* transition: 1.5s; */
 }
-.ImageResponseBox.FadeIn{
-  opacity: 1;
-}
-.ImageResponseBox.FadeOut{
-  opacity: 0;
-}
+
 
 /* Settings Menu */
 #settings-menu-wrapper{
@@ -400,7 +375,6 @@ code {
   max-width: 100%;
   font-size: 1.5vw;  
   color: white;  
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
   user-select: none;
   text-align: center;
   padding: 0 1vw;
@@ -418,7 +392,6 @@ code {
   width: 15vw;
   min-height: 3vw;
   font-size: 1.5vw;
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
   color: var(--comp-col-01);
   text-shadow: 0.5px 0.5px 1px var(--comp-col-03), -0.5px -0.5px 1px var(--comp-col-02);
   user-select: none;
@@ -450,7 +423,6 @@ code {
   width: 100%;
   font-size: 1.5vw;  
   color: white;  
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
   user-select: none;
   text-align: center;
   padding: 0 1vw;
@@ -459,7 +431,6 @@ code {
   background-color: rgb(31, 33, 28);
   color: white;
   font-size: max(1.0vw, 0.8em);
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
   margin-bottom: 2px;
   border: 1px white;
   border-style: dotted solid;
@@ -605,7 +576,6 @@ code {
   width: 37.5%;
   pointer-events: none;
   font-size: min(1.5vw, 2vh);
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
   color: var(--comp-col-01);
 }
 #word-colour{
@@ -618,13 +588,11 @@ code {
   width: 37.5%;
   pointer-events: none;
   font-size: min(1.5vw, 2vh);
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
   color: var(--comp-col-01);
 }
 .RightUIButton{
   background-color: var(--comp-col-03);
   font-size: min(1.5vw, 2vh);
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
   width: 100%;
   height: 20%;
   display: flex;
@@ -711,7 +679,6 @@ code {
   border: none;
   background-color: var(--comp-col-03);
   font-size: min(.85vw, 8vh);
-  font-family: 'IBM Plex Sans Condensed', sans-serif; 
   color: var(--comp-col-01);
 }
 
