@@ -6,6 +6,7 @@ import AudioTrackPlayer from './audioTrackPlayer';
 import DrawingTools from './drawingTools';
 import DrawingCanvas from './drawingCanvas';
 import ColourPicker from './colourPicker';
+import SettingsMenu from './settingsMenu';
 
 /* set timer refresh rate in ms */
 const timerRefreshRate = 50;
@@ -28,8 +29,11 @@ export default function DesktopApp(props) {
             toggleModal={props.toggleModal} />
         /* else show the desktop app */
         : <>
+          {/* Settings Menu */}
+          <SettingsMenu
+            toggleFocus={props.toggleFocus} />
           {/* Daily Prompt */}
-          <div id="current-prompt-wrapper">
+          <div id="current-prompt-wrapper" className="Collider">
             <div id="current-prompt">
               Take a deep breath. As you exhale, what feelings linger for you?
               <br />
@@ -79,7 +83,10 @@ export default function DesktopApp(props) {
                   <ColourPicker 
                     colours={props.colours}
                     setCurrentColours={props.setCurrentColours} />
-                  <button onClick={props.submitResponse}>submit</button>
+                  <button onClick={() => {
+                    props.submitResponse();
+                    setReadyToRespond(false);
+                  }}>submit</button>
                 </div>               
               </div>
             </>            

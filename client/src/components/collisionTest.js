@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function CollisionTest() {
 
-  let colliderArray = [];
-  let first = false;
-  
   const wrapperStyle = {
     width: '100vw',
     height: '100vh',
@@ -39,26 +36,37 @@ export default function CollisionTest() {
   return (
     <div id="collision-wrapper"style={wrapperStyle}>
       <button style={buttonStyle} onClick={generateNewBox}>divgen</button>
-      {/* <div id="red-box" style={redBox}></div> */}
+      <div id="red-box" className="Collider" style={redBox}></div>
     </div>
   )
 
   function generateNewBox(){
     let newBox = document.createElement("div");
+    let collision = false;
     newBox.style.position = 'absolute';
-    newBox.style.left = Math.random() * 95 + '%';
-    newBox.style.top = Math.random() * 95 + '%';
-    newBox.style.width = '5vw';
-    newBox.style.height = '5vh';
+    newBox.style.left = Math.random() * 80 + '%';
+    newBox.style.top = Math.random() * 80 + '%';
+    newBox.style.width = '20vw';
+    newBox.style.height = '20vh';
     newBox.style.backgroundColor = 'green';
     newBox.style.zIndex = 2;
     document.getElementById("collision-wrapper").appendChild(newBox);
-    console.log(colliderArray);
-    for (let i = 0; i < colliderArray.length; i++) { 
-      console.log("check");
-      detect2DBoxCollision(newBox.getBoundingClientRect(), colliderArray[i]);
-    }    
-    colliderArray.push(newBox.getBoundingClientRect());
+    let colliderArray = Array.from(document.getElementsByClassName("Collider"));
+    // colliderArray[0] is always the middle so we never remove that
+    if(colliderArray.length > 3) { colliderArray[1].remove(); }
+    for (let i = 0; i < colliderArray.length; i++) {
+      if(detect2DBoxCollision(newBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
+        collision = true;
+      }
+    }
+    if(collision){
+      newBox.remove();
+      window.requestAnimationFrame(generateNewBox);
+      console.log("loop");
+    } else {
+      newBox.classList.add("Collider");
+      newBox.classList.add("Destroyable");
+    }  
   }
 
   function detect2DBoxCollision(box1, box2){
@@ -68,7 +76,7 @@ export default function CollisionTest() {
        box1.top < box1.bottom &&
        box1.bottom > box2.top) {
         collision = true;
-        console.log("hit")
+        console.log("hit");
       }
     return collision;
   }

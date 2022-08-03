@@ -15,3 +15,13 @@ This is my refactoring of the room2 code base to set it up for continued use
 - reduncdency on artist info before modal toggle
 - set up online server app and replace url in app.js submitResponse
 - error handling returning server responses
+- collision detection edge cases - too many rerolls, too much text
+- change web credits for Bec
+- break points for rem
+
+# For meeting 3/8
+- text pages
+- parameters in
+- weather/tidal/moon data on page
+- how many intro pages
+- updating AOC
