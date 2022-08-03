@@ -41,7 +41,7 @@ export default function IntroModal(props) {
     </>,
 
     //BF working on time stuff
-    /*<>
+    <>
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm live!
@@ -57,7 +57,7 @@ export default function IntroModal(props) {
         </div>
       </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>, */
+    </>,
   
     //page 3 Welcome
     <>
