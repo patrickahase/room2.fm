@@ -79,8 +79,8 @@ export default function App() {
         redoDrawing={redoDrawing}
         submitResponse={submitResponse}
         responseData={responseData}
+        toggleFocus={toggleFocus}
         />
-        /* <CollisionTest /> */
       }
     </div>
   )
@@ -258,6 +258,24 @@ export default function App() {
     }
   }
 
+  function toggleFocus(){
+    let textResponseRule = getCSSRule('.TextResponseBox');
+    let imageResponseRule = getCSSRule('.ImageResponseBox');
+    if(!focusMode){
+      setFocusMode(true);
+      textResponseRule.style.backgroundColor = "rgb(31, 33, 28)";
+      textResponseRule.style.border = "solid white 1px";
+      imageResponseRule.style.backgroundColor = "white";
+      imageResponseRule.style.border = "solid rgb(31, 33, 28) 1px";
+    } else {
+      setFocusMode(false);
+      textResponseRule.style.backgroundColor = "";
+      textResponseRule.style.border = "";
+      imageResponseRule.style.backgroundColor = "";
+      imageResponseRule.style.border = "";
+    }
+  }
+
   function dataURLtoFile(dataurl, filename){
     var arr = dataurl.split(','),
       mime = arr[0].match(/:(.*?);/)[1],
@@ -270,5 +288,20 @@ export default function App() {
     return new File([u8arr], filename, {
       type: mime
     });
+  }
+
+  function getCSSRule(ruleName) {
+    ruleName = ruleName.toLowerCase();
+    var result = null;
+    var find = Array.prototype.find;
+
+    find.call(document.styleSheets, styleSheet => {
+        result = find.call(styleSheet.cssRules, cssRule => {
+            return cssRule instanceof CSSStyleRule 
+                && cssRule.selectorText.toLowerCase() === ruleName;
+        });
+        return result != null;
+    });
+    return result;
   }
 }

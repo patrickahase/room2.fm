@@ -33,11 +33,9 @@ export default function IntroModal(props) {
     //page 2 AOC
     <>
       <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
-        <div id="modal-text-vert-align">
-          <div id="modal-text" className="modal-text-aoc">
+          <div id="modal-text" style={{fontSize: "2.5rem", justifyContent: "space-around"}}>
             {acknowledgementOfCountryText}
           </div>
-        </div>
       </div>
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
     </>,
@@ -66,15 +64,14 @@ export default function IntroModal(props) {
     <>
       <div id="modal-title-wrapper">
         <div id="modal-title">
-          Welcome to room2.fm live!
+          Welcome to room2.fm async
         </div>
+        <hr />
       </div>
       <div id="modal-text-wrapper">
-        <div id="modal-text-vert-align">
           <div id="modal-text">
             {introText}
           </div>
-        </div>
       </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
     </>,
@@ -83,15 +80,14 @@ export default function IntroModal(props) {
     <>
       <div id="modal-title-wrapper">
         <div id="modal-title">
-          Welcome to room2.fm live!
+          Welcome to room2.fm async
         </div>
+        <hr />
       </div>
       <div id="modal-text-wrapper">
-        <div id="modal-text-vert-align">
           <div id="modal-text">
             {instructionsText}
           </div>
-        </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.toggleModal()}> Continue </button>
     </>
