@@ -120,3 +120,17 @@ export const liveMoonShape = <>
 <div class="moondivider" style={liveDividerStyle}></div>
 </div>
 </>
+
+//using this to play w/ JSON for arranging calendar
+//can't put zeroes in front of times because those numbers are being treated as 'octal literals'? 
+var calendar = {
+  "dates":[
+  {"Sun Aug 28 2022":{},}, //listing the day before as object 0 in the array, day 0 of the async
+  {"Mon Aug 29 2022":{"tides":[{"time": 341, "height": 80, "high": true}, {"time": 1025, "height": 28, "high": false}, {"time": 1652, "height": 89, "high": true}, {"time": 2305, "height": 42, "high": false}]}},
+  {"Tue Aug 30 2022":{},},
+  {"Wed Aug 31 2022":{},},
+
+
+  {"Sun Sep 25 2022":{},},
+]
+}
