@@ -1,4 +1,10 @@
-# Brainstorming possibilities 
+# Notes
+- 29/08/22 beginning of async 
+- 25/09/22 live event(s?) begin
+
+- Archive 
+    > weather will be an 'archived' version rather than continually updated
+
 - Tides (Narrm/Port Phillip Bay)
     > "the tide is currently rising"/falling
 - Weather 
@@ -33,26 +39,16 @@ something like "there's x time left to listen/comment on this track. it'll chang
         > Are you hydrated? 
         > Wind/barometric pressure
         > Are you sheltered/insulated?
-    Moving away from yes/no questions
-    But I'm conscious that these sorts of prompts maybe deviate too much from the listening experience prompts that you're working on? Keen to talk this through with you
-- thematically 
+
 - Procedural values could drive some of the visuals  
     > maybe putting the dates of the changeovers in an array of timestamped date object and then calculations can be done from those values
-- async is happening at the beginning of 'Spring', time of transition and warming up - this could be brought into the interface in some way 
+- async is happening at the beginning of 'Spring', time of transition and warming up - this could be brought into the interface in some way; maybe 
 - New moon: 27 Aug + 26 Sep; the async streams cover *almost* a full moon cycle from new moon to new moon
     > maybe tracking the moon phase b/w different phases of the cycle. 
 - Location settings to Arts House GPS (eg. for weather info, sunrise/set info)
 
-# Notes
-- 29/08/22 beginning of async 
-- 25/09/22 live event(s?) begin
-- the moon phase pics probably look too much like Rising graphics lol
-- approx 4 weeks of async web stuff leading up to the event. ~~6-8 sounds/tracks will be programmed cyclically and run for 24ish hour periods.~~
-- Raag is writing the prompts 
-- Tracks changing over at sunrise? 
-    > now changing every 3 days, maybe still at sunrise tho 
 
-# Time log - total 9ish hours
+# Time log - total 11ish hours
 - 06/07 1ish hour setting up pages + copying in some code + cloned PH's github repo 
 - 10/07 1ish hour copying some code from dot net homepage
 - 1ish hour working on timezone stuff 
@@ -61,6 +57,9 @@ something like "there's x time left to listen/comment on this track. it'll chang
 - 28/07 another 1.5ish hours spent working on moon phase illustration
 - 29/07 adding another moon phase illustration for 3 days in the future + looking at tide calendars
 - 29/07 1-2 hours working on weather data, looking at tide charts and finding BOM docs, working on Open Weather API for now
+- 03/08 meeting + 1ish hour coding
+- 04/08 working on JSON 
+- 05/08 1ish hour
 
 # From PH
 - had a chat to Raag - they want to catch up in the next couple of weeks

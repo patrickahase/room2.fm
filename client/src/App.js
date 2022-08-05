@@ -6,6 +6,7 @@ import './App.css';
 import DesktopApp from './components/desktopApp';
 import { cyclePresets } from './content/cyclePresets';
 import CollisionTest from './components/collisionTest';
+import { artsHouseDate } from './components/timeCalc';
 
 export default function App() {
   // is accessed on mobile
@@ -190,7 +191,7 @@ export default function App() {
     // work out days in between now and start, divide by 3 for cycle
     // before return round down with floor
     /* !! maybe worth working out edge cases outside of total cycles here? */
-    return Math.floor((Date.now() - startDate) / (1000 * 3600 * 24) / 3);
+    return Math.floor((artsHouseDate - startDate) / (1000 * 3600 * 24) / 3);
   }
 
   function submitResponse(){

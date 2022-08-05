@@ -1,27 +1,31 @@
 import React from 'react';
 import SunCalc from 'suncalc'; 
 
-var date = new Date(); //local date
+var date = new Date(); 
 var nowhours = date.getUTCHours() + 10; 
-if (nowhours > 24) {date.setDate(date.getUTCDate() + 1)}; 
+export const artsHouseDate = getArtsHouseDate();
 
-//need to reorganise 'new date' stuff into a function; won't always be adding 3 days, instead it should check an array of dates
+function getArtsHouseDate () {
+  if (nowhours > 24) {date.setDate(date.getUTCDate() + 1)};
+  return date;
+}
+
 var newdate = new Date();
-var nextdate = newdate.setDate(date.getDate() + 3);
+var nextdate = newdate.setDate(artsHouseDate.getDate() + 3);
 
 const lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
 const long = 144.94984320919224;
 
-var suncalctimes = SunCalc.getTimes(date, lat, long);  
+var suncalctimes = SunCalc.getTimes(artsHouseDate, lat, long);  
 
 let suntimes = [
     checknum(suncalctimes.sunrise.getUTCHours() + 10),
     suncalctimes.sunrise.getMinutes()
   ]
-  //maybe set up a list of dates and times in one of the 'content' docs that refers to the date/time of the changeover - like a calendar array
+
 var sunsethours = checknum(suncalctimes.sunset.getUTCHours() + 10);
 var sunsetmins = suncalctimes.sunset.getMinutes();
-var moontimes = SunCalc.getMoonIllumination(date, lat, long);
+var moontimes = SunCalc.getMoonIllumination(artsHouseDate, lat, long);
 var phase = moontimes.phase; 
 phase = Math.round(phase * 100);
 var phasedeg = 3.6 * phase;
@@ -134,3 +138,10 @@ var calendar = {
   {"Sun Sep 25 2022":{},},
 ]
 }
+
+/* SunCalc values for sunset changeover (maybe use these values for transitioning b/w tracks) — 
+goldenHour | evening golden hour starts
+sunsetStart | sunset starts (bottom edge of the sun touches the horizon)
+sunset | sunset (sun disappears below the horizon, evening civil twilight starts)
+dusk | dusk (evening nautical twilight starts)
+*/
