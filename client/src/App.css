@@ -818,13 +818,13 @@ body {
 /*Moon Styling*/
 .moonsphere {
   border-radius: 100%;
-  width: 20vw;
-  height: 20vw;
+  width: 10vw;
+  height: 10vw;
   overflow: hidden;
   display: inline-flex;
   align-items: center;
   position: relative;
-  margin: 5vh;
+  margin: 2vh;
 }
 .hemisphere{
   width: 50%;
@@ -840,8 +840,8 @@ body {
 .moondivider:after {
   top: 0;
   left: 0;
-  width: 20vw;
-  height: 20vw;
+  width: 10vw;
+  height: 10vw;
   position: absolute;
   border-radius: 100%;
   transform-style: preserve-3d;

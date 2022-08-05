@@ -19,7 +19,8 @@ let suntimes = [
     suncalctimes.sunrise.getMinutes()
   ]
   //maybe set up a list of dates and times in one of the 'content' docs that refers to the date/time of the changeover - like a calendar array
-
+var sunsethours = checknum(suncalctimes.sunset.getUTCHours() + 10);
+var sunsetmins = suncalctimes.sunset.getMinutes();
 var moontimes = SunCalc.getMoonIllumination(date, lat, long);
 var phase = moontimes.phase; 
 phase = Math.round(phase * 100);
@@ -31,6 +32,14 @@ var nextphase = nextmoon.phase;
 nextphase = Math.round(nextphase * 100);
 var nextphasedeg = 3.6 * nextphase; 
 var nextdividerstyle = {transform: "rotate3d(0, 1, 0, " + nextphasedeg + "deg)",}
+
+var liveDate = new Date('Sun Sep 25 2022');
+var liveSun = SunCalc.getTimes(liveDate, lat, long);
+var liveMoon = SunCalc.getMoonIllumination(liveDate, lat, long);
+var livePhase = liveMoon.phase;
+livePhase = Math.round(livePhase * 100);
+var livePhaseDeg = 3.6 * phase;
+var liveDividerStyle = {transform: "rotate3d(0, 1, 0, " + livePhaseDeg + "deg)",}
 
 //checking whether hours evaluations are above 24, if so removing 24 to get their AM time value in hours; also reevaluates date object if UTC date is yesterday
 function checknum (num) {
@@ -44,7 +53,10 @@ function checknum (num) {
   }
 
 export const sunriseText = <>
-<p>The track changes at sunrise. Today, the sun rose at {suntimes[0]}:{suntimes[1]}am.</p>
+<p>Today, the sun rose at {suntimes[0]}:{suntimes[1]}am.</p>
+</>
+
+export const sunSetText = <><p>The track changes at sunset. Today, the sun sets at {sunsethours}:{sunsetmins}pm.</p>
 </>
 
 export const moonShape = <>
@@ -88,3 +100,37 @@ export const nextMoonShape = <>
 <div class="moondivider" style={nextdividerstyle}></div>
 </div>
 </>
+
+export const liveMoonShape = <>
+<div class="moonsphere">
+<div class=
+{nextphasedeg > 180 
+    ? "moondark hemisphere"
+    : "moonlight hemisphere"
+  }
+></div>
+  
+<div class=
+  {nextphasedeg > 180 
+  ? "moonlight hemisphere"
+  : "moondark hemisphere"
+  }
+></div>
+  
+<div class="moondivider" style={liveDividerStyle}></div>
+</div>
+</>
+
+//using this to play w/ JSON for arranging calendar
+//can't put zeroes in front of times because those numbers are being treated as 'octal literals'? 
+var calendar = {
+  "dates":[
+  {"Sun Aug 28 2022":{},}, //listing the day before as object 0 in the array, day 0 of the async
+  {"Mon Aug 29 2022":{"tides":[{"time": 341, "height": 80, "high": true}, {"time": 1025, "height": 28, "high": false}, {"time": 1652, "height": 89, "high": true}, {"time": 2305, "height": 42, "high": false}]}},
+  {"Tue Aug 30 2022":{},},
+  {"Wed Aug 31 2022":{},},
+
+
+  {"Sun Sep 25 2022":{},},
+]
+}
