@@ -4,8 +4,7 @@ import { fabric } from 'fabric';
 import './App.css';
 
 import DesktopApp from './components/desktopApp';
-import { cyclePresets } from './content/cyclePresets';
-import CollisionTest from './components/collisionTest';
+import { cyclePresets, cycleDates } from './content/cyclePresets';
 import { artsHouseDate } from './components/timeCalc';
 
 export default function App() {
@@ -49,6 +48,7 @@ export default function App() {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
+    asyncCycleCalc();
   }, []);
 
   useEffect(() => {isDrawingRef.current = isDrawing}, [isDrawing]);
@@ -183,15 +183,28 @@ export default function App() {
       drawingCanvas.loadFromJSON(newCanvasState);      
     }
   }
-  // work out how many days have passed since the start of async and pick the right cycle
+
+  // if it overshoots it won't return anything
   function asyncCycleCalc(){
-    /* !! work out correct start date */
-    let startDate = new Date('2022-07-10T00:00:00');
-    let daysInCycle = 3;
-    // work out days in between now and start, divide by 3 for cycle
-    // before return round down with floor
-    /* !! maybe worth working out edge cases outside of total cycles here? */
-    return Math.floor((artsHouseDate - startDate) / (1000 * 3600 * 24) / 3);
+    // first grab current UTC
+    let currentDate = Date.now();
+    let currentCycle, tideUp, tideHeight;
+    // then compare to list of changeover times
+    for(let i = 0; i < cycleDates.length; i++){
+      if(currentDate < cycleDates[i].endTime)
+      {
+        currentCycle = i;
+        for(let k = 0; k < cycleDates[i].tidalData.length; k++){
+          if(currentDate < cycleDates[i].tidalData[k].tideEnd){
+            tideUp = cycleDates[i].tidalData[k].tideUp;
+            tideHeight = cycleDates[i].tidalData[k].tideHeight;
+            break;
+          }
+        }
+        break;
+      }
+    }
+    console.log(currentCycle, tideUp, tideHeight)
   }
 
   function submitResponse(){
