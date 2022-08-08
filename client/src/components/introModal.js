@@ -3,7 +3,7 @@ import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
 import {sunriseText, sunSetText, moonShape, nextMoonShape, liveMoonShape} from './timeCalc';
 export default function IntroModal(props) {
-  const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [currentModalPage, setCurrentModalPage] = useState(0);
   
   // run init on load
   useEffect(() => {
