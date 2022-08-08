@@ -25,3 +25,6 @@ This is my refactoring of the room2 code base to set it up for continued use
 - weather/tidal/moon data on page
 - how many intro pages
 - updating AOC
+
+- change asynccyclecalc sunset times
+- build in tide data to asynccyclecalc
