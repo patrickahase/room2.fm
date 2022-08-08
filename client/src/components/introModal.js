@@ -40,13 +40,33 @@ export default function IntroModal(props) {
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
     </>,
 
+    //'Where Are We' Native Land info TBA here
+    <>
+      <div id="modal-title-wrapper">
+        <div id="modal-title">
+          Where are you?
+        </div>
+        <hr />
+      </div>
+      
+      <div id="modal-text-wrapper">
+          <div id="modal-text">
+            <p>Native Land info too go here</p>
+            <span className="ModalTextSmall">Disclaimer text to go here</span>
+          </div>
+      </div>        
+      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+    </>,
+
     //BF working on time stuff
     <>
       <div id="modal-title-wrapper">
         <div id="modal-title">
-          Welcome to room2.fm live!
+          Welcome to room2.fm async
         </div>
+        <hr />
       </div>
+      
       <div id="modal-text-wrapper">
         <div id="modal-text-vert-align">
           <div id="modal-text">
