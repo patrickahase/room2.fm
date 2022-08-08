@@ -5,8 +5,14 @@ var date = new Date();
 var nowhours = date.getUTCHours() + 10; 
 export const artsHouseDate = getArtsHouseDate();
 
-function getArtsHouseDate () {
-  if (nowhours > 24) {date.setDate(date.getUTCDate() + 1)};
+function getArtsHouseDate () {  
+  if (nowhours > 24) {
+    date.setDate(date.getUTCDate() + 1);
+    nowhours = nowhours - 24;
+  };
+  date.setHours(nowhours);
+  date.setMinutes(date.getUTCMinutes());
+  
   return date;
 }
 
@@ -60,7 +66,7 @@ export const sunriseText = <>
 <p>Today, the sun rose at {suntimes[0]}:{suntimes[1]}am.</p>
 </>
 
-export const sunSetText = <><p>The track changes at sunset. Today, the sun sets at {sunsethours}:{sunsetmins}pm.</p>
+export const sunSetText = <><p>It's {date.getHours()}:{date.getMinutes()}. The track changes at sunset. Today, the sun sets at {sunsethours}:{sunsetmins}pm.</p>
 </>
 
 export const moonShape = <>

@@ -13,3 +13,6 @@ const forecastweather = fetch('https://api.openweathermap.org/data/2.5/forecast?
 drawWeather(data); // calling drawWeather function on the JSON object
 });  
 //can use the forecast weather to check for conditions at next changeover
+
+//05/08/22 PH reckons tides are more interesting to work with than weather
+//maybe add tides here instead of timeCalc 
