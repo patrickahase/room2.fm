@@ -1,50 +1,47 @@
-// import './node_modules/promise-polyfill/dist/polyfill.js'
+import React from 'react';
 
 const IP_API = 'https://ipinfo.io/json?token=9f90c3a3f131ff' 
 const NATIVE_LAND_API = 'https://native-land.ca/api/index.php'
 var youlat;
 var youlong; 
-var btn = document.getElementById('wherebutton'); 
-var loadingpar = document.getElementById('currentmoji'); 
-loadingpar.innerHTML = currentMoonEmoji; 
+var lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
+var long = 144.94984320919224;
+//var btn = document.getElementById('wherebutton'); 
+//var loadingpar = document.getElementById('currentmoji'); 
 
-btn.addEventListener('click', getPotentialLocations);
+// btn.addEventListener('click', getPotentialLocations);
+
+const locate = getPotentialLocations();
 
 async function getPotentialLocations() {
-btn.classList.add('noshow');
-loadingpar.classList.remove('noshow');
+// btn.classList.add('noshow');
+//loadingpar.classList.remove('noshow');
 
 const ipData = await getLocationDataFromIp()
 
 if (!ipData) return null
 const territories = await getTerritoriesFromLngLat(youlat, youlong)
-console.log(territories);
+// console.log(territories);
 if (territories.length === 1) {
   document.getElementById('countryinfo').innerHTML = "Your IP suggests that you may be on <a href='" + territories[0].properties.description + "' target='_blank'>" + territories[0].properties.Name + "</a> country, otherwise known as " + ipData.commonName + ".*"; 
-  console.log(territories.length);
-  loadingpar.classList.add('noshow');
-  document.getElementById('countryinfo').classList.remove('noshow');
-  document.getElementById('disclaimer').classList.remove('noshow');
-  document.getElementById('continuebtn').classList.remove('noshow');
+  //console.log(territories.length);
+  //loadingpar.classList.add('noshow');
+  //document.getElementById('countryinfo').classList.remove('noshow');
+  //document.getElementById('disclaimer').classList.remove('noshow');
+  //document.getElementById('continuebtn').classList.remove('noshow');
 } else if (territories.length > 1) {
   document.getElementById('countryinfo').innerHTML = "Your IP suggests that you may be on <a href='" + territories[0].properties.description + "' target='_blank'>" + territories[0].properties.Name + "</a> and/or <a href='" + territories[1].properties.description + "' target='_blank'>"+ territories[1].properties.Name + "</a> country, otherwise known as " + ipData.commonName + ".*"; 
-  loadingpar.classList.add('noshow');
-  document.getElementById('countryinfo').classList.remove('noshow');
-  document.getElementById('disclaimer').classList.remove('noshow');
-  document.getElementById('continuebtn').classList.remove('noshow');
+  //loadingpar.classList.add('noshow');
+  //document.getElementById('countryinfo').classList.remove('noshow');
+  //document.getElementById('disclaimer').classList.remove('noshow');
+  //document.getElementById('continuebtn').classList.remove('noshow');
 } else {
   document.getElementById('countryinfo').innerHTML = "Your IP suggests that you may be in " + ipData.commonName + ". We cannot find information about indigenous nations at this location, this does not mean that there are not any.*"       
-  loadingpar.classList.add('noshow');
-  document.getElementById('countryinfo').classList.remove('noshow');
-  document.getElementById('disclaimer').classList.remove('noshow');
-  document.getElementById('continuebtn').classList.remove('noshow');
+  //loadingpar.classList.add('noshow');
+  //document.getElementById('countryinfo').classList.remove('noshow');
+  //document.getElementById('disclaimer').classList.remove('noshow');
+  //document.getElementById('continuebtn').classList.remove('noshow');
 } 
-
-/*return {
-territories: toTerritoryInfo(territories),
-commonName: ipData.commonName,
-}*/
-
 
 }
 
@@ -73,7 +70,7 @@ const locArray = data.loc.split(',')
 if (locArray.length !== 2) return null
 youlat = parseFloat(locArray[0])
 youlong = parseFloat(locArray[1])
-getdistance(youlat, youlong, lat, long);
+// getdistance(youlat, youlong, lat, long);
 if (youlat == null || youlong == null) return null
 return {
 youlat,
@@ -136,7 +133,7 @@ if(navigator.geolocation) {
   function setcoords(position) {
   youlat = position.coords.latitude; 
   youlong = position.coords.longitude; 
-  getdistance(youlat, youlong, lat, long);
+  //getdistance(youlat, youlong, lat, long);
   geolocatedterritories(youlat, youlong);
   if (youlat == null || youlong == null) return null
   return {
@@ -147,7 +144,7 @@ if(navigator.geolocation) {
     } else {
   youlat = null; 
   youlong = null;
-  getdistance(youlat, youlong, lat, long);
+  //getdistance(youlat, youlong, lat, long);
   loadingpar.classList.add('noshow');
   document.getElementById('continuebtn').classList.remove('noshow');
  
@@ -206,3 +203,5 @@ if (territories.length === 1) {
 function closeaoc() {
   document.getElementById('AOC').classList.add('noshow');
 }
+
+export const landInfo = []
