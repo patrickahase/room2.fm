@@ -13,14 +13,6 @@ export class DrawingCanvas extends Component {
     return (
       <div id="drawing-canvas-wrapper">
         <canvas id="drawing-canvas" />
-        <svg
-          width="10px"
-          height="10px"
-          viewBox="0 0 10 10"
-          xmlns="http://www.w3.org/2000/svg"
-          id="drawing-cursor">
-          <circle  r="5" fill="white"/>
-        </svg>
       </div>
     )
   }
