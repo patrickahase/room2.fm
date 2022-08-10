@@ -14,6 +14,13 @@ export default function App() {
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   // is the intro modal open
   const [modalIsOpen, setModalIsOpen] = useState(true);
+  // current cycle - gets updated on page load
+  const [currentCycle, setCurrentCycle] = useState(0);
+  // tide data - gets updated on page load
+  const [tideData, setTideData] = useState({
+    tideUp: -1.0,
+    tideHeight: 0.8
+  });
   // get current position in cycle
   const cyclePos = 0;
   /* const cyclePos = asyncCycleCalc(); */
@@ -22,7 +29,7 @@ export default function App() {
   // other responses from database
   const [responseData, setResponseData] = useState([]);
   // current drawing colours
-  const [currentColours, setCurrentColours] = useState(cyclePresets[cyclePos].colours);
+  const [currentColours, setCurrentColours] = useState(cyclePresets[currentCycle].colours);
   // drawing settings
   const [brushSize, setBrushSize] = useState(8);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -48,7 +55,7 @@ export default function App() {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    asyncCycleCalc();
+    //updateCyclePosition();
   }, []);
 
   useEffect(() => {isDrawingRef.current = isDrawing}, [isDrawing]);
@@ -68,6 +75,7 @@ export default function App() {
         toggleModal={toggleModal}
         setIsDrawing={setIsDrawing}
         cyclePreset={cyclePresets[cyclePos]}
+        tideData={tideData}
         setInput={setInput}
         colours={currentColours}
         setCurrentColours={setCurrentColours}
@@ -185,26 +193,27 @@ export default function App() {
   }
 
   // if it overshoots it won't return anything
-  function asyncCycleCalc(){
+  function updateCyclePosition(){
     // first grab current UTC
     let currentDate = Date.now();
-    let currentCycle, tideUp, tideHeight;
+    console.log(currentDate);
+    console.log(Date.UTC(currentDate));
     // then compare to list of changeover times
     for(let i = 0; i < cycleDates.length; i++){
-      if(currentDate < cycleDates[i].endTime)
-      {
-        currentCycle = i;
+      if(currentDate < cycleDates[i].endTime){
+        setCurrentCycle(i);
         for(let k = 0; k < cycleDates[i].tidalData.length; k++){
           if(currentDate < cycleDates[i].tidalData[k].tideEnd){
-            tideUp = cycleDates[i].tidalData[k].tideUp;
-            tideHeight = cycleDates[i].tidalData[k].tideHeight;
+            setTideData({
+              tideUp: cycleDates[i].tidalData[k].tideUp,
+              tideHeight: cycleDates[i].tidalData[k].tideHieght
+            })
             break;
           }
         }
         break;
       }
     }
-    console.log(currentCycle, tideUp, tideHeight)
   }
 
   function submitResponse(){

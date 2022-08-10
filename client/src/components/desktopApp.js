@@ -20,6 +20,9 @@ export default function DesktopApp(props) {
   const[timerInterval, setTimerInterval] = useState(0.);
   const[audioSourceRef, setAudioSourceRef] = useState(null);
 
+  // graphics settings  - 1 high 10 medium 20 low
+  const[graphicsSettings, setGraphicsSettings] = useState(1);
+
   return (
     <div id="desktop-wrapper">
       {props.modalIsOpen
@@ -31,6 +34,7 @@ export default function DesktopApp(props) {
         : <>
           {/* Settings Menu */}
           <SettingsMenu
+            setGraphicsSettings={setGraphicsSettings}
             toggleFocus={props.toggleFocus} />
           {/* Daily Prompt */}
           <div id="current-prompt-wrapper" className="Collider">
@@ -83,12 +87,13 @@ export default function DesktopApp(props) {
                   <ColourPicker 
                     colours={props.colours}
                     setCurrentColours={props.setCurrentColours} />
-                  <button onClick={() => {
-                    props.submitResponse();
-                    setReadyToRespond(false);
-                  }}>submit</button>
-                </div>               
+                </div>
               </div>
+              <button id="response-submit-button" 
+                    onClick={() => {
+                      props.submitResponse();
+                      setReadyToRespond(false);
+                  }}>submit my response</button>
             </>            
           }
           {/* External Response Overlay */}
@@ -99,9 +104,11 @@ export default function DesktopApp(props) {
           {/* Background Visuals */}
           <div id="bg-vis-wrapper">              
             <GLVis
+              graphicsSettings={graphicsSettings}
               timer={timer}
               height={props.height}
-              width={props.width} />          
+              width={props.width}
+              tideData={props.tideData} />          
           </div> 
           </>
       }

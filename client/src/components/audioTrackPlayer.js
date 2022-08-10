@@ -7,6 +7,7 @@ export default function AudioTrackPlayer(props) {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const [responded, setResponded] = useState(false);
   const [audioSource, setAudioSource] = useState(null);
 
   useEffect(() => {
@@ -78,7 +79,10 @@ export default function AudioTrackPlayer(props) {
       audioSource.play();
       setIsPlaying(true);
       props.startTimer();
-      props.setAskResponse(true);
+      if(!responded){
+        props.setAskResponse(true);
+        setResponded(true);
+      }
     } else {
       audioSource.pause();
       setIsPlaying(false);

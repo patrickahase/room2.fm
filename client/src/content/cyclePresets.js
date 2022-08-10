@@ -23,22 +23,22 @@ export const cycleDates = [
     tidalData: [
       {
         tideEnd: Date.parse("2022-08-06T13:15+10:00"),
-        tideUp: true,
+        tideUp: 1.0,
         tideHeight: 0.8
       },
       {
         tideEnd: Date.parse("2022-08-06T13:17+10:00"),
-        tideUp: false,
+        tideUp: -1.0,
         tideHeight: 0.2
       },
       {
         tideEnd: Date.parse("2022-08-06T13:19+10:00"),
-        tideUp: true,
+        tideUp: 1.0,
         tideHeight: 0.9
       },
       {
         tideEnd: Date.parse("2022-08-06T13:21+10:00"),
-        tideUp: false,
+        tideUp: -1.0,
         tideHeight: 0.3
       },
     ]
