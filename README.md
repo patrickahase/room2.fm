@@ -9,7 +9,6 @@ This is my refactoring of the room2 code base to set it up for continued use
 # To Do For Async
 - volume noteches to buttons
 - set timer to track total ratio?
-- change colour while on eraser
 - work out start date for cycle calc
 - handle cycle edge cases (more than total cycles)
 - reduncdency on artist info before modal toggle
