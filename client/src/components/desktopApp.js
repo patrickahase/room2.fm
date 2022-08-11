@@ -39,7 +39,7 @@ export default function DesktopApp(props) {
           {/* Daily Prompt */}
           <div id="current-prompt-wrapper" className="Collider">
             <div id="current-prompt">
-              Take a deep breath. As you exhale, what feelings linger for you?
+              Close your eyes. Where do you feel the strongest sensations in your body?
               <br />
               Share as much or as little as you’d like.
             </div>
