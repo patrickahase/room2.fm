@@ -31,17 +31,17 @@ export default function IntroModal(props) {
     </div>,
   
     //page 2 AOC
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
           <div id="modal-text" style={{fontSize: "2.5rem", justifyContent: "space-around"}}>
             {acknowledgementOfCountryText}
           </div>
       </div>
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>,
+    </div>,
 
     //'Where Are We' Native Land info TBA here
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Where are you?
@@ -56,10 +56,10 @@ export default function IntroModal(props) {
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>,
+    </div>,
 
     //BF working on time stuff
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm async
@@ -78,10 +78,10 @@ export default function IntroModal(props) {
         </div>
       </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>,
+    </div>,
   
     //page 3 Welcome
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm async
@@ -94,10 +94,10 @@ export default function IntroModal(props) {
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>,
+    </div>,
   
     //page 4 Instructions
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm async
@@ -110,7 +110,7 @@ export default function IntroModal(props) {
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.toggleModal()}> Continue </button>
-    </>
+    </div>
   ]
 
   return (
@@ -122,7 +122,19 @@ export default function IntroModal(props) {
       <div data-a11y-dialog-hide className="ModalOverlay" ></div>
 
       <div role="document" className="ModalBox">
+        <div id="nine-cycle-wrapper">
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+          <div className="MoonSphereWrapper">{liveMoonShape}</div>
+        </div>
         {modalPages[currentModalPage]}
+        <div id="current-cycle-wrapper"></div>
       </div>
     </div>
   )
