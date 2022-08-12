@@ -60,7 +60,70 @@ export const shaders = Shaders.create({
 
       gl_FragColor = vec4(min(mix(ycol,mix(rcol,lcol,uv.x-0.2),uv.y+0.2), vec3(f,f,f)), 1.0);
     }`
-}});
+}, 
+  newvis: {
+    frag: GLSL`
+    precision highp float;
+    varying vec2 uv;
+    uniform float width;
+    uniform float height;
+    uniform float timer;
+    //const float timer = 15.8;
+    uniform float tideUp;
+    uniform float tideHeight;
+    const float emtriy = 0.7;
+    const float emtrix = 1.5;
+    const vec3 rcol = vec3(0.71,0.91,0.467);
+    const vec3 lcol = vec3(0.322,0.322,1.);
+    const vec3 ycol = vec3(0.937,0.592,0.439);
+   // const vec3 rcol = vec3(0.902,0.733,0.271);
+   // const vec3 lcol = vec3(0.937,0.592,0.439);
+   // const vec3 ycol = vec3(0.835,0.867,0.565);
+
+    float hash( float x ) {
+      return fract(sin(x)*43758.5453);
+    }  
+    float rand(vec2 n) { 
+      return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
+    }        
+    float noise(vec2 p){
+      vec2 ip = floor(p);
+      vec2 u = fract(p);
+      u = u*u*(3.0-2.0*u);          
+      float res = mix(
+        mix(rand(ip),rand(ip+vec2(1.0,0.0)),u.x),
+        mix(rand(ip+vec2(0.0,1.0)),rand(ip+vec2(1.0,1.0)),u.x),u.y);
+      return res*res;
+    }
+    mat2 rotate2d(float _angle){
+      return mat2(cos(_angle),-sin(_angle),
+                  sin(_angle),cos(_angle));
+    }
+    void main() {
+      vec2 res = vec2(width,height);
+      vec2 st = (gl_FragCoord.xy/res)- .5;
+      st.x += 0.45;
+      st.y *= st.x;
+      float stimer = timer*.2;
+      vec2 pos = (vec2(0.0)-st)*rotate2d(stimer+(emtrix*4.));
+      float r = length(pos)*2.0*emtriy;
+      float a = atan(pos.y,pos.x);
+      float f = abs(cos(a*2.5))*.3+(.3*emtrix);
+      vec3 flow = mix(vec3(0.), ycol, ((1.-smoothstep(f-0.,f+0.01,r))*1.2));
+      flow -= 1.-smoothstep(0.04,0.05,distance(st,vec2(0.0)));
+      float mixerx = timer + st.y;
+      st.y += stimer;
+      float noisecol = noise(st*8.);
+      if (noisecol < .6+(sin(timer)*.2))
+        noisecol = noisecol/2.;
+      else noisecol = 1.;
+      float bg = ((sin(timer)/2.)+.5)*noisecol;
+      vec3 bgcol = lcol-flow;
+      vec3 comp = mix(bgcol,flow,f);
+      gl_FragColor = vec4(comp, 1.0);
+    }`
+}, 
+});
 
 export class GLVis extends Component {
   render() {
@@ -68,7 +131,7 @@ export class GLVis extends Component {
     <Surface width={this.props.width} height={this.props.height}>
 
       <NearestCopy>
-        <Node shader={shaders.onecolour} ignoreUnusedUniforms uniforms={{
+        <Node shader={shaders.newvis} ignoreUnusedUniforms uniforms={{
           timer: this.props.timer, 
           width: this.props.width*0.75, 
           height: this.props.width*0.68, 
