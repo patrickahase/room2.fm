@@ -9,7 +9,7 @@ import ColourPicker from './colourPicker';
 import SettingsMenu from './settingsMenu';
 
 /* set timer refresh rate in ms */
-const timerRefreshRate = 50;
+const timerRefreshRate = 15;
 
 export default function DesktopApp(props) {
 
@@ -40,8 +40,6 @@ export default function DesktopApp(props) {
           <div id="current-prompt-wrapper" className="Collider">
             <div id="current-prompt">
               Close your eyes. Where do you feel the strongest sensations in your body?
-              <br />
-              Share as much or as little as you’d like.
             </div>
           </div>
           {/* Audio Player */}
@@ -118,7 +116,7 @@ export default function DesktopApp(props) {
   function startTimer() {
     setTimerInterval(setInterval(() => {
       setTimer(100 * audioSourceRef.currentTime/audioSourceRef.duration)
-    }, timerRefreshRate));
+    }, timerRefreshRate+graphicsSettings));
   }
   function pauseTimer() {
     clearInterval(timerInterval);    
