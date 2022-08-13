@@ -3,13 +3,13 @@ import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
 import {sunriseText, sunSetText, moonShape, nextMoonShape, liveMoonShape} from './timeCalc';
 export default function IntroModal(props) {
-  const [currentModalPage, setCurrentModalPage] = useState(4);
+  const [currentModalPage, setCurrentModalPage] = useState(1);
   
   // run init on load
   useEffect(() => {
     const container = document.getElementById("AOC-modal");
-        const dialog = new A11yDialog(container);
-        dialog.show();
+    const dialog = new A11yDialog(container);
+    dialog.show();
   },[]);
 
   let modalPages = [
@@ -122,19 +122,43 @@ export default function IntroModal(props) {
       <div data-a11y-dialog-hide className="ModalOverlay" ></div>
 
       <div role="document" className="ModalBox">
-        <div id="nine-cycle-wrapper">
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-          <div className="MoonSphereWrapper">{liveMoonShape}</div>
-        </div>
-        {modalPages[currentModalPage]}
-        <div id="current-cycle-wrapper"></div>
+        {currentModalPage === 1
+          ? <>{modalPages[currentModalPage]}</>
+          : <>
+            <NineCycleBar currentCycle={props.currentCycle} />
+            {modalPages[currentModalPage]}
+            <CurrentCycleBar />
+          </>}
+      </div>
+    </div>
+  )
+}
+
+function NineCycleBar (props){
+  // this can be based on an array with the actual moon phases and then connected send out
+  let moonSpheres = Array(9).fill(9).map((num, i) =>
+    { if(i < props.currentCycle){
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>🌕</div>
+      } else if (i === props.currentCycle) {
+        return <div className="MoonSphereWrapper" key={i}>🌕</div>
+      } else {
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.8}}>🌕</div>
+      }  
+    }
+  );
+  return(
+    <div id="nine-cycle-wrapper">
+      {moonSpheres}
+    </div>
+  )
+}
+
+function CurrentCycleBar(props){
+  return(
+    <div id="current-cycle-wrapper">
+      <div className="MoonSphereWrapper">🌕</div>
+      <div id="timeline-gradient">
+        <div id="timeline-marker"></div>
       </div>
     </div>
   )

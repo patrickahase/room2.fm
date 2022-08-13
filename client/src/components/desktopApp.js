@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import IntroModal from './introModal';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
@@ -29,7 +29,8 @@ export default function DesktopApp(props) {
         /* if true show modal */
         ? <IntroModal
             mobile={props.mobile}
-            toggleModal={props.toggleModal} />
+            toggleModal={props.toggleModal}
+            currentCycle={props.currentCycle} />
         /* else show the desktop app */
         : <>
           {/* Settings Menu */}
