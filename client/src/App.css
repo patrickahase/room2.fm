@@ -98,11 +98,26 @@ body {
 .MoonSphereWrapper{
   width: 8vh;
   height: 8vh;
+  padding: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #current-cycle-wrapper{
   width: 8vh;
   height: 72vh;
   background-color: #00c0ee;
+  display: flex;
+  flex-direction: column;
+}
+#timeline-gradient{
+  flex-grow: 1;
+  background-image: linear-gradient(to bottom, red, blue);
+}
+#timeline-marker{
+  width: 100%;
+  border-bottom: solid white 2px;
+  height: 50%;
 }
 
 #modal-title-wrapper{

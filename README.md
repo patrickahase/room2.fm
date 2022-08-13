@@ -17,6 +17,7 @@ This is my refactoring of the room2 code base to set it up for continued use
 - collision detection edge cases - too many rerolls, too much text
 - change web credits for Bec
 - break points for rem
+- colour change error
 
 # For meeting 3/8
 - text pages
