@@ -1,6 +1,65 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react';
 
-export class ColourPicker extends Component {
+export default function ColourPicker(props){
+
+  useEffect(() => {
+    document.getElementById('col1Select').addEventListener("input", colourInputChange, false);
+    document.getElementById('col2Select').addEventListener("input", colourInputChange, false);
+    document.getElementById('col3Select').addEventListener("input", colourInputChange, false);
+  }, []);
+
+  return (
+    <div id="drawing-tools-wrapper">
+      <button id="col-swap-button" onClick={() => colourSwap()}>
+        <SwapIcon />
+      </button>
+      <span id="word-change">CHANGE</span>
+      <span id="word-colour">COLOUR</span>
+      <div id="col-select-wrapper">
+        <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={props.colours[0]} />
+        <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={props.colours[1]} />
+        <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue={props.colours[2]} />
+      </div>
+    </div>      
+  )
+
+  function colourSwap(e){
+    let selectors = document.getElementsByClassName("col-select");
+    for (let i = 0; i < 3; i++){
+      let cl = selectors[i].classList;
+      switch(true){
+        case cl.contains('first'):
+        cl.remove('first');
+        cl.add('third');
+        break;
+        case cl.contains('second'):
+        cl.remove('second');
+        cl.add('first');
+        break;
+        case cl.contains('third'):
+        cl.remove('third');
+        cl.add('second');
+        break;
+        default:
+        break;
+      }
+    }
+    props.setCurrentColours([
+      props.colours[1],
+      props.colours[2],
+      props.colours[0]
+    ]);
+  }
+  function colourInputChange(e){
+    let colNum = parseInt(e.target.id.charAt(3));
+    document.documentElement.style.setProperty('--comp-col-0'+colNum, e.target.value);
+    let newColours = props.colours;
+    newColours[colNum - 1] = e.target.value;
+    props.setCurrentColours(newColours);
+  }
+}
+
+/* export class ColourPickerOld extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,9 +83,7 @@ export class ColourPicker extends Component {
     )
   }
   componentDidMount(){
-    document.getElementById('col1Select').addEventListener("input", this.colorInputChange.bind(this), false);
-    document.getElementById('col2Select').addEventListener("input", this.colorInputChange.bind(this), false);
-    document.getElementById('col3Select').addEventListener("input", this.colorInputChange.bind(this), false);
+    
   }
   click(){
     let selectors = document.getElementsByClassName("col-select");
@@ -72,9 +129,7 @@ export class ColourPicker extends Component {
     }
   }
   
-}
-
-export default ColourPicker
+} */
 
 /* expecting a 5:1 aspect ratio */
 function SwapIcon(){
