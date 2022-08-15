@@ -17,6 +17,9 @@ export const cyclePresets = [
 ]
 
 // these dates are for testing
+//check whether parse will work w/ suncalc 
+//endTime is the end of the cycle
+//this cycle will only check once, but maybe also checking if it's half an hour before an endTime
 export const cycleDates = [
   {
     endTime: Date.parse("2022-08-06T17:52+10:00"),
@@ -94,3 +97,6 @@ export const cycleDates = [
     ]
   },
 ]
+
+//https://docs.google.com/document/d/1q8UpFuTYy_0QZwoyxDSckXssbbEfQcUgIek9xCErQZ0/edit
+//dates and times above to be added to the array w/ tidal data

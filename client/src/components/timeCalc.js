@@ -1,9 +1,11 @@
 import React from 'react';
 import SunCalc from 'suncalc'; 
 
-var date = new Date(); 
+var date = new Date(); //maybe using Date.now
 var nowhours = date.getUTCHours() + 10; 
 export const artsHouseDate = getArtsHouseDate();
+
+//write and export a function in this doc which checks how long til next sunset
 
 function getArtsHouseDate () {  
   if (nowhours > 24) {
