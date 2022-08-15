@@ -72,64 +72,64 @@ export const sunSetText = <><p>It's {date.getHours()}:{date.getMinutes()}. The t
 </>
 
 export const moonShape = <>
-<div class="moonsphere">
-<div class=
+<div className="moonsphere">
+<div className=
 {phasedeg > 180 
     ? "moondark hemisphere"
     : "moonlight hemisphere"
   }
 ></div>
   
-<div class=
+<div className=
   {phasedeg > 180 
   ? "moonlight hemisphere"
   : "moondark hemisphere"
   }
 ></div>
   
-<div class="moondivider" style={dividerstyle}></div>
+<div className="moondivider" style={dividerstyle}></div>
 </div>
 </>
 
 //above is adapted from this code https://dev.to/thormeier/use-your-i-moon-gination-lets-build-a-moon-phase-visualizer-with-css-and-js-aih
 
 export const nextMoonShape = <>
-<div class="moonsphere">
-<div class=
+<div className="moonsphere">
+<div className=
 {nextphasedeg > 180 
     ? "moondark hemisphere"
     : "moonlight hemisphere"
   }
 ></div>
   
-<div class=
+<div className=
   {nextphasedeg > 180 
   ? "moonlight hemisphere"
   : "moondark hemisphere"
   }
 ></div>
   
-<div class="moondivider" style={nextdividerstyle}></div>
+<div className="moondivider" style={nextdividerstyle}></div>
 </div>
 </>
 
 export const liveMoonShape = <>
-<div class="moonsphere">
-<div class=
+<div className="moonsphere">
+<div className=
 {nextphasedeg > 180 
     ? "moondark hemisphere"
     : "moonlight hemisphere"
   }
 ></div>
   
-<div class=
+<div className=
   {nextphasedeg > 180 
   ? "moonlight hemisphere"
   : "moondark hemisphere"
   }
 ></div>
   
-<div class="moondivider" style={liveDividerStyle}></div>
+<div className="moondivider" style={liveDividerStyle}></div>
 </div>
 </>
 

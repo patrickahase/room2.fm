@@ -3,13 +3,13 @@ import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
 import {sunriseText, sunSetText, moonShape, nextMoonShape, liveMoonShape} from './timeCalc';
 export default function IntroModal(props) {
-  const [currentModalPage, setCurrentModalPage] = useState(4);
+  const [currentModalPage, setCurrentModalPage] = useState(1);
   
   // run init on load
   useEffect(() => {
     const container = document.getElementById("AOC-modal");
-        const dialog = new A11yDialog(container);
-        dialog.show();
+    const dialog = new A11yDialog(container);
+    dialog.show();
   },[]);
 
   let modalPages = [
@@ -31,17 +31,17 @@ export default function IntroModal(props) {
     </div>,
   
     //page 2 AOC
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
           <div id="modal-text" style={{fontSize: "2.5rem", justifyContent: "space-around"}}>
             {acknowledgementOfCountryText}
           </div>
       </div>
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>,
+    </div>,
 
     //'Where Are We' Native Land info TBA here
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Where are you?
@@ -56,10 +56,10 @@ export default function IntroModal(props) {
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>,
+    </div>,
 
     //BF working on time stuff
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm async
@@ -78,10 +78,10 @@ export default function IntroModal(props) {
         </div>
       </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>,
+    </div>,
   
     //page 3 Welcome
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm async
@@ -94,10 +94,10 @@ export default function IntroModal(props) {
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </>,
+    </div>,
   
     //page 4 Instructions
-    <>
+    <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm async
@@ -110,7 +110,7 @@ export default function IntroModal(props) {
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.toggleModal()}> Continue </button>
-    </>
+    </div>
   ]
 
   return (
@@ -122,7 +122,43 @@ export default function IntroModal(props) {
       <div data-a11y-dialog-hide className="ModalOverlay" ></div>
 
       <div role="document" className="ModalBox">
-        {modalPages[currentModalPage]}
+        {currentModalPage === 1
+          ? <>{modalPages[currentModalPage]}</>
+          : <>
+            <NineCycleBar currentCycle={props.currentCycle} />
+            {modalPages[currentModalPage]}
+            <CurrentCycleBar />
+          </>}
+      </div>
+    </div>
+  )
+}
+
+function NineCycleBar (props){
+  // this can be based on an array with the actual moon phases and then connected send out
+  let moonSpheres = Array(9).fill(9).map((num, i) =>
+    { if(i < props.currentCycle){
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>🌕</div>
+      } else if (i === props.currentCycle) {
+        return <div className="MoonSphereWrapper" key={i}>🌕</div>
+      } else {
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.8}}>🌕</div>
+      }  
+    }
+  );
+  return(
+    <div id="nine-cycle-wrapper">
+      {moonSpheres}
+    </div>
+  )
+}
+
+function CurrentCycleBar(props){
+  return(
+    <div id="current-cycle-wrapper">
+      <div className="MoonSphereWrapper">🌕</div>
+      <div id="timeline-gradient">
+        <div id="timeline-marker"></div>
       </div>
     </div>
   )
