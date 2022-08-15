@@ -55,7 +55,7 @@ export default function App() {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    //updateCyclePosition();
+    //updateCyclePosition(); //uncomment this so it's called on page load
   }, []);
 
   useEffect(() => {isDrawingRef.current = isDrawing}, [isDrawing]);
@@ -193,6 +193,8 @@ export default function App() {
   }
 
   // if it overshoots it won't return anything
+  //call this function just once and then any dynamic sun/moon stuff happens somewhere else
+  //checking if it's within half an hour of sunset - write a function in here
   function updateCyclePosition(){
     // first grab current UTC
     let currentDate = Date.now();
@@ -201,17 +203,17 @@ export default function App() {
     // then compare to list of changeover times
     for(let i = 0; i < cycleDates.length; i++){
       if(currentDate < cycleDates[i].endTime){
-        setCurrentCycle(i);
+        setCurrentCycle(i); 
         for(let k = 0; k < cycleDates[i].tidalData.length; k++){
           if(currentDate < cycleDates[i].tidalData[k].tideEnd){
             setTideData({
               tideUp: cycleDates[i].tidalData[k].tideUp,
               tideHeight: cycleDates[i].tidalData[k].tideHieght
             })
-            break;
+            break; 
           }
         }
-        break;
+        break; 
       }
     }
   }
