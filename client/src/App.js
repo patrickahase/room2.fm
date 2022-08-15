@@ -55,7 +55,7 @@ export default function App() {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    //updateCyclePosition(); //uncomment this so it's called on page load
+    updateCyclePosition();
   }, []);
 
   useEffect(() => {isDrawingRef.current = isDrawing}, [isDrawing]);
@@ -75,6 +75,7 @@ export default function App() {
         toggleModal={toggleModal}
         setIsDrawing={setIsDrawing}
         cyclePreset={cyclePresets[cyclePos]}
+        currentCycle={currentCycle}
         tideData={tideData}
         setInput={setInput}
         colours={currentColours}
@@ -198,10 +199,9 @@ export default function App() {
   function updateCyclePosition(){
     // first grab current UTC
     let currentDate = Date.now();
-    console.log(currentDate);
-    console.log(Date.UTC(currentDate));
     // then compare to list of changeover times
     for(let i = 0; i < cycleDates.length; i++){
+      // check current time vs the end of the cycle, if before the end time then set the cycle int and break the for loop
       if(currentDate < cycleDates[i].endTime){
         setCurrentCycle(i); 
         for(let k = 0; k < cycleDates[i].tidalData.length; k++){

@@ -68,17 +68,58 @@ body {
   bottom: 10vh;
   background-color: var(--comp-col-01);
   border-radius: 4px;
-  padding: 1vw 2.5vw;
+  padding: 1vw 1.25vw;
   z-index: 6;
 }
 .ModalBox{
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
+#modal-page-wrapper{
+  width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.25vw;
+  flex-grow: 1;
+}
+#nine-cycle-wrapper{
+  width: 8vh;
+  height: 72vh;
+  background-color: #00c0ee;
+  display: flex;
+  flex-direction: column;
+}
+.MoonSphereWrapper{
+  width: 8vh;
+  height: 8vh;
+  padding: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#current-cycle-wrapper{
+  width: 8vh;
+  height: 72vh;
+  background-color: #00c0ee;
+  display: flex;
+  flex-direction: column;
+}
+#timeline-gradient{
+  flex-grow: 1;
+  background-image: linear-gradient(to bottom, red, blue);
+}
+#timeline-marker{
+  width: 100%;
+  border-bottom: solid white 2px;
+  height: 50%;
+}
+
 #modal-title-wrapper{
  width: 100%;
 }
