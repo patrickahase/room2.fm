@@ -5,7 +5,6 @@ import './App.css';
 
 import DesktopApp from './components/desktopApp';
 import { cyclePresets, cycleDates } from './content/cyclePresets';
-import { artsHouseDate } from './components/timeCalc';
 
 export default function App() {
   // is accessed on mobile
