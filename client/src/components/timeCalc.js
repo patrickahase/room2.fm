@@ -10,16 +10,16 @@ const long = 144.94984320919224;
 
 //write and export a function in this doc which checks how long til next sunset
 
-var cycleEndDates = [
-  'August 31, 2022 18:00 GMT+10:00', 
-  'September 3, 2022 18:00 GMT+10:00',
-  'September 6, 2022 18:00 GMT+10:00',
-  'September 9, 2022 18:00 GMT+10:00',
-  'September 12, 2022 18:00 GMT+10:00',
-  'September 15, 2022 18:00 GMT+10:00',
-  'September 18, 2022 18:00 GMT+10:00',
-  'September 21, 2022 18:00 GMT+10:00',
-  'September 24, 2022 18:00 GMT+10:00'
+var cycleEndDates = [ //change this to maybe refer to cyclePresets info
+  'Wed Aug 31 2022 17:58:51 GMT+1000 (Australian Eastern Standard Time)',
+  'Sat Sep 03 2022 18:01:21 GMT+1000 (Australian Eastern Standard Time)',
+  'Tue Sep 06 2022 18:03:50 GMT+1000 (Australian Eastern Standard Time)',
+  'Fri Sep 09 2022 18:06:18 GMT+1000 (Australian Eastern Standard Time)',
+  'Mon Sep 12 2022 18:08:47 GMT+1000 (Australian Eastern Standard Time)',
+  'Thu Sep 15 2022 18:11:16 GMT+1000 (Australian Eastern Standard Time)',
+  'Sun Sep 18 2022 18:13:45 GMT+1000 (Australian Eastern Standard Time)',
+  'Wed Sep 21 2022 18:16:15 GMT+1000 (Australian Eastern Standard Time)',
+  'Sat Sep 24 2022 18:18:46 GMT+1000 (Australian Eastern Standard Time)'
 ]
 
 function getCycleSun (end) {
@@ -58,9 +58,8 @@ function getCycleMoon (end) {
   )
 }
 
-console.log(getCycleSun(cycleEndDates[0]))
 
-var newdate = new Date();
+//var newdate = new Date();
 //var nextdate = newdate.setDate(artsHouseDate.getDate() + 3);
 
 var suncalctimes = SunCalc.getTimes(date, lat, long);  

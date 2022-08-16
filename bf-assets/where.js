@@ -75,7 +75,7 @@ if (territories.length === 1) {
   document.getElementById('countryinfo').classList.remove('noshow');
   document.getElementById('disclaimer').classList.remove('noshow');
   document.getElementById('continuebtn').classList.remove('noshow');
-  
+  //change this to return statements
 } else if (territories.length > 1) {
   document.getElementById('countryinfo').innerHTML = "Your geolocation suggests that you may be on <a href='" + territories[0].properties.description + "' target='_blank'>" + territories[0].properties.Name + "</a> and/or <a href='" + territories[1].properties.description + "' target='_blank'>"+ territories[1].properties.Name + "</a> country.*"; 
   loadingpar.classList.add('noshow');
