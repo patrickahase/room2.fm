@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
-import {sunriseText, sunSetText, moonShape, nextMoonShape, liveMoonShape} from './timeCalc';
+import {sunSetText, currentMoonShape, firstMoonShape, secondMoonShape, thirdMoonShape, fourthMoonShape, fifthMoonShape, sixthMoonShape, seventhMoonShape, eighthMoonShape, ninthMoonShape} from './timeCalc';
 export default function IntroModal(props) {
   const [currentModalPage, setCurrentModalPage] = useState(1);
   
@@ -71,9 +71,16 @@ export default function IntroModal(props) {
         <div id="modal-text-vert-align">
           <div id="modal-text">
             {sunSetText}
-            {moonShape}
-            {nextMoonShape}
-            {liveMoonShape} 
+            {currentMoonShape}
+            {firstMoonShape}
+            {secondMoonShape}
+            {thirdMoonShape}
+            {fourthMoonShape}
+            {fifthMoonShape}
+            {sixthMoonShape}
+            {seventhMoonShape}
+            {eighthMoonShape}
+            {ninthMoonShape}
           </div>
         </div>
       </div>        

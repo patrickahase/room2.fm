@@ -5,7 +5,6 @@ import './App.css';
 
 import DesktopApp from './components/desktopApp';
 import { cyclePresets, cycleDates } from './content/cyclePresets';
-import { artsHouseDate } from './components/timeCalc';
 
 export default function App() {
   // is accessed on mobile
@@ -194,6 +193,8 @@ export default function App() {
   }
 
   // if it overshoots it won't return anything
+  //call this function just once and then any dynamic sun/moon stuff happens somewhere else
+  //checking if it's within half an hour of sunset - write a function in here
   function updateCyclePosition(){
     // first grab current UTC
     let currentDate = Date.now();
@@ -201,17 +202,17 @@ export default function App() {
     for(let i = 0; i < cycleDates.length; i++){
       // check current time vs the end of the cycle, if before the end time then set the cycle int and break the for loop
       if(currentDate < cycleDates[i].endTime){
-        setCurrentCycle(i);
+        setCurrentCycle(i); 
         for(let k = 0; k < cycleDates[i].tidalData.length; k++){
           if(currentDate < cycleDates[i].tidalData[k].tideEnd){
             setTideData({
               tideUp: cycleDates[i].tidalData[k].tideUp,
               tideHeight: cycleDates[i].tidalData[k].tideHieght
             })
-            break;
+            break; 
           }
         }
-        break;
+        break; 
       }
     }
   }
