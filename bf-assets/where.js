@@ -1,19 +1,108 @@
 import React from 'react';
 
-const IP_API = 'https://ipinfo.io/json?token=9f90c3a3f131ff' 
+//const IP_API = 'https://ipinfo.io/json?token=9f90c3a3f131ff' 
 const NATIVE_LAND_API = 'https://native-land.ca/api/index.php'
 var youlat;
 var youlong; 
 var lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
 var long = 144.94984320919224;
-//var btn = document.getElementById('wherebutton'); 
-//var loadingpar = document.getElementById('currentmoji'); 
 
-// btn.addEventListener('click', getPotentialLocations);
+function extractLngLat(data) {
+if (!data) return null
+if (!data.loc || typeof data.loc !== 'string') return null
+const locArray = data.loc.split(',')
+if (locArray.length !== 2) return null
+youlat = parseFloat(locArray[0])
+youlong = parseFloat(locArray[1])
+// getdistance(youlat, youlong, lat, long);
+if (youlat == null || youlong == null) return null
+return {
+youlat,
+youlong,
+}
+}
 
-const locate = getPotentialLocations();
+function getTerritoriesFromLngLat(x, y) {
+return fetch(
+`${NATIVE_LAND_API}?maps=territories&position=${x},${y}`
+)
+.then((res) => res.json())
+.catch((e) => {
+console.error(e)
+return []
+})
+}
 
-async function getPotentialLocations() {
+geolocate(); 
+function geolocate () {
+  
+if(navigator.geolocation) { //how does this evaluate w/ react? 
+  navigator.geolocation.getCurrentPosition(setcoords);
+  if (GeolocationPositionError = true) {
+    geolocatedterritories(youlat, youlong);
+    //document.getElementById('local-conditions').innerHTML = "We're not sure how far away you are from our server";
+    
+  }
+  function setcoords(position) {
+  youlat = position.coords.latitude; 
+  youlong = position.coords.longitude; 
+  
+  geolocatedterritories(youlat, youlong);
+  if (youlat == null || youlong == null) return null
+  return {
+  youlat,
+  youlong,
+  }
+  } 
+    } else {
+  youlat = null; 
+  youlong = null;
+  
+  loadingpar.classList.add('noshow');
+  document.getElementById('continuebtn').classList.remove('noshow');
+ 
+}
+}
+
+
+
+async function geolocatedterritories (locatedlat, locatedlong) {
+const territories = await getTerritoriesFromLngLat(locatedlat, locatedlong);
+
+if (territories.length === 1) {
+  document.getElementById('countryinfo').innerHTML = "Your geolocation suggests that you may be on <a href='" + territories[0].properties.description + "' target='_blank'>" + territories[0].properties.Name + "</a> country.*"; 
+  loadingpar.classList.add('noshow');
+  document.getElementById('countryinfo').classList.remove('noshow');
+  document.getElementById('disclaimer').classList.remove('noshow');
+  document.getElementById('continuebtn').classList.remove('noshow');
+  //change this to return statements
+} else if (territories.length > 1) {
+  document.getElementById('countryinfo').innerHTML = "Your geolocation suggests that you may be on <a href='" + territories[0].properties.description + "' target='_blank'>" + territories[0].properties.Name + "</a> and/or <a href='" + territories[1].properties.description + "' target='_blank'>"+ territories[1].properties.Name + "</a> country.*"; 
+  loadingpar.classList.add('noshow');
+  document.getElementById('countryinfo').classList.remove('noshow');
+  document.getElementById('disclaimer').classList.remove('noshow');
+  document.getElementById('continuebtn').classList.remove('noshow');
+
+} else if (territories.length === 0) {
+  
+  document.getElementById('countryinfo').innerHTML = "We cannot find information about indigenous nations at this location, this does not mean that there are not any.*"       
+  loadingpar.classList.add('noshow');
+  document.getElementById('countryinfo').classList.remove('noshow');
+  document.getElementById('disclaimer').classList.remove('noshow');
+  document.getElementById('continuebtn').classList.remove('noshow');
+} else {
+  document.getElementById('continuebtn').classList.remove('noshow');
+  loadingpar.classList.add('noshow');
+}
+}
+
+
+export const landInfo = []
+
+
+//const locate = getPotentialLocations();
+
+/*async function getPotentialLocations() {
 // btn.classList.add('noshow');
 //loadingpar.classList.remove('noshow');
 
@@ -43,9 +132,9 @@ if (territories.length === 1) {
   //document.getElementById('continuebtn').classList.remove('noshow');
 } 
 
-}
+}*/
 
-function getLocationDataFromIp() {
+/*function getLocationDataFromIp() {
   
 return fetch(IP_API)
 .then((response) => response.json())
@@ -61,97 +150,9 @@ return latLng
 })
 .catch(err => geolocate())
 
-}
-
-function extractLngLat(data) {
-if (!data) return null
-if (!data.loc || typeof data.loc !== 'string') return null
-const locArray = data.loc.split(',')
-if (locArray.length !== 2) return null
-youlat = parseFloat(locArray[0])
-youlong = parseFloat(locArray[1])
-// getdistance(youlat, youlong, lat, long);
-if (youlat == null || youlong == null) return null
-return {
-youlat,
-youlong,
-}
-}
-
-function getTerritoriesFromLngLat(x, y) {
-return fetch(
-`${NATIVE_LAND_API}?maps=territories&position=${x},${y}`
-)
-.then((res) => res.json())
-.catch((e) => {
-console.error(e)
-return []
-})
-}
-
-/*function toTerritoryInfo (features) {
-return features
-.map((feature) => {
-const name = feature.properties.Name
-const link = feature.properties.description
-
-
-return name
-  ? {
-      name,
-      link,
-    }
-  : undefined
-}).filter(isDefined)
-
-}
-
-function isDefined (v) {
-return v != null
 }*/
 
-
-function extractLocationString(data) {
-if (!data) return null
-if (!data.city && !data.region) return null
-const strings = []
-data.city && strings.push(data.city)
-data.region && strings.push(data.region)
-data.country && strings.push(data.country)
-return strings.join(', ')
-}
-
-function geolocate () {
-  
-if(navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(setcoords);
-  if (GeolocationPositionError = true) {
-    geolocatedterritories(youlat, youlong);
-    //document.getElementById('local-conditions').innerHTML = "We're not sure how far away you are from our server";
-    
-  }
-  function setcoords(position) {
-  youlat = position.coords.latitude; 
-  youlong = position.coords.longitude; 
-  //getdistance(youlat, youlong, lat, long);
-  geolocatedterritories(youlat, youlong);
-  if (youlat == null || youlong == null) return null
-  return {
-  youlat,
-  youlong,
-  }
-  } 
-    } else {
-  youlat = null; 
-  youlong = null;
-  //getdistance(youlat, youlong, lat, long);
-  loadingpar.classList.add('noshow');
-  document.getElementById('continuebtn').classList.remove('noshow');
- 
-}
-}
-
-  function getdistance(lat1, lon1, lat2, lon2) {
+  /*function getdistance(lat1, lon1, lat2, lon2) {
       var R = 6371; // Radius of the earth in km
       var dLat = deg2rad(lat2-lat1);  // deg2rad below
       var dLon = deg2rad(lon2-lon1); 
@@ -168,40 +169,14 @@ if(navigator.geolocation) {
     
     function deg2rad(deg) {
       return deg * (Math.PI/180)
-    }
+    }*/
 
-    async function geolocatedterritories (locatedlat, locatedlong) {
-    const territories = await getTerritoriesFromLngLat(locatedlat, locatedlong);
-
-if (territories.length === 1) {
-  document.getElementById('countryinfo').innerHTML = "Your geolocation suggests that you may be on <a href='" + territories[0].properties.description + "' target='_blank'>" + territories[0].properties.Name + "</a> country.*"; 
-  loadingpar.classList.add('noshow');
-  document.getElementById('countryinfo').classList.remove('noshow');
-  document.getElementById('disclaimer').classList.remove('noshow');
-  document.getElementById('continuebtn').classList.remove('noshow');
-  
-} else if (territories.length > 1) {
-  document.getElementById('countryinfo').innerHTML = "Your geolocation suggests that you may be on <a href='" + territories[0].properties.description + "' target='_blank'>" + territories[0].properties.Name + "</a> and/or <a href='" + territories[1].properties.description + "' target='_blank'>"+ territories[1].properties.Name + "</a> country.*"; 
-  loadingpar.classList.add('noshow');
-  document.getElementById('countryinfo').classList.remove('noshow');
-  document.getElementById('disclaimer').classList.remove('noshow');
-  document.getElementById('continuebtn').classList.remove('noshow');
-
-} else if (territories.length === 0) {
-  
-  document.getElementById('countryinfo').innerHTML = "We cannot find information about indigenous nations at this location, this does not mean that there are not any.*"       
-  loadingpar.classList.add('noshow');
-  document.getElementById('countryinfo').classList.remove('noshow');
-  document.getElementById('disclaimer').classList.remove('noshow');
-  document.getElementById('continuebtn').classList.remove('noshow');
-} else {
-  document.getElementById('continuebtn').classList.remove('noshow');
-  loadingpar.classList.add('noshow');
-}
-}
-
-function closeaoc() {
-  document.getElementById('AOC').classList.add('noshow');
-}
-
-export const landInfo = []
+    /*function extractLocationString(data) {
+if (!data) return null
+if (!data.city && !data.region) return null
+const strings = []
+data.city && strings.push(data.city)
+data.region && strings.push(data.region)
+data.country && strings.push(data.country)
+return strings.join(', ')
+}*/
