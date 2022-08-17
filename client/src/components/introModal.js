@@ -1,68 +1,18 @@
-import React, { Component } from 'react';
-
+import React, { useEffect, useState, Component } from 'react';
+import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
+export default function IntroModal(props) {
+  const [currentModalPage, setCurrentModalPage] = useState(1);
+  
+  // run init on load
+  useEffect(() => {
+    const container = document.getElementById("AOC-modal");
+    const dialog = new A11yDialog(container);
+    dialog.show();
+  },[]);
 
-export class IntroModal extends Component {
-
-  constructor(props) {
-    super(props)    
-    this.state = {
-      modalPages: 4,
-      currentPage: 0,
-    }
-    this.continueClick = this.continueClick.bind(this);
-  }
-
-  render() {
-    return (
-      <div id="modal-wrapper">
-
-        {modalContentSelector(this.state.currentPage)}
-
-        {this.state.currentPage !== 0 &&
-          <button id="modal-continue-button" onClick={this.continueClick}> Continue </button>
-        }
-
-      </div>
-    )
-  }
-
-  continueClick(){
-    // if still pages left to view - else close modal
-    if(this.state.currentPage < this.state.modalPages-1){
-      this.setState(prevState => ({
-        currentPage: prevState.currentPage + 1
-      }))
-    } else {
-      this.props.toggleModal();
-    }    
-  }
-}
-export default IntroModal
-
-/* Select from modal content based on currentPage state */
-function modalContentSelector(currentPage, string){
-  switch(currentPage){
-    // 0 - closed
-    case 0:
-      return <Closed />;
-    // 1 - Acknowledgement of Country
-    case 1:
-      return <Acknowledgement />;
-    // 2 - Introduction Text
-    case 2:
-      return <Intro />;
-    // 3 - Instruction Text
-    case 3:
-      return <Instructions />;
-    default:
-      return <Closed />;
-  }
-}
-
-//0
-function Closed(props) {
-  return (
+  let modalPages = [
+    //page 1 Logo - no continue button on this one if the site needs to get closed
     <div id="logo-wrapper">
       <div id="text-logo">
         <pre id="pre-logo-wrapper">
@@ -77,65 +27,84 @@ function Closed(props) {
           <div id="logo-line-9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-9">\///</u>_____________<u className="text-gradient-9">\/////</u>________<u className="text-gradient-9">\/////</u>_____<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>__<u className="text-gradient-9">\///////////////</u>__<br/></div>
         </pre>            
       </div>
-    </div>
-  )
-}
+    </div>,
+  
+    //page 2 AOC
+    <div id="modal-page-wrapper">
+      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
+          <div id="modal-text" style={{fontSize: "2.5rem", justifyContent: "space-around"}}>
+            {acknowledgementOfCountryText}
+          </div>
+      </div>
+      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+    </div>,
 
-//1
-function Acknowledgement(props) {
+    //'Where Are We' Native Land info TBA here
+    <div id="modal-page-wrapper">
+      <div id="modal-title-wrapper">
+        <div id="modal-title">
+          Where are you?
+        </div>
+        <hr />
+      </div>
+      
+      <div id="modal-text-wrapper">
+          <div id="modal-text">
+            <p>Native Land info too go here</p>
+            <span className="ModalTextSmall">Disclaimer text to go here</span>
+          </div>
+      </div>        
+      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+    </div>,
+    
+    //page 3 Welcome
+    <div id="modal-page-wrapper">
+      <div id="modal-title-wrapper">
+        <div id="modal-title">
+          Welcome to room2.fm async
+        </div>
+        <hr />
+      </div>
+      <div id="modal-text-wrapper">
+          <div id="modal-text">
+            {introText}
+          </div>
+      </div>        
+      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+    </div>,
+  
+    //page 4 Instructions
+    <div id="modal-page-wrapper">
+      <div id="modal-title-wrapper">
+        <div id="modal-title">
+          Welcome to room2.fm async
+        </div>
+        <hr />
+      </div>
+      <div id="modal-text-wrapper">
+          <div id="modal-text">
+            {instructionsText}
+          </div>
+      </div>        
+      <button id="modal-continue-button" onClick={() => props.toggleModal()}> Continue </button>
+    </div>
+  ]
+
   return (
-    <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
-      <div id="modal-text-vert-align">
-        <div id="modal-text" className="modal-text-aoc">
-          {acknowledgementOfCountryText}
-        </div>
-      </div>
-    </div>
-  )
-}
+    <div id="AOC-modal"
+         className="ModalWrapper"
+         aria-labelledby="modal-title"
+         aria-hidden="false" >
 
-//2
-function Intro(props) {
-  return (<>
-    <div id="modal-title-wrapper">
-      <div id="modal-title">
-        Welcome to room2.fm live!
-      </div>
-    </div>
-    <div id="modal-text-wrapper">
-      <div id="modal-text-vert-align">
-        <div id="modal-text">
-          {introText}
-        </div>
-      </div>
-    </div>        
-    <div id="modal-button-wrapper"></div>
-  </>
-  )
-}
+      <div data-a11y-dialog-hide className="ModalOverlay" ></div>
 
-//3
-function Instructions(props) {
-  return (<>
-    <div id="modal-title-wrapper">
-      <div id="modal-title">
-        Welcome to room2.fm live!
+      <div role="document" className="ModalBox">
+        {currentModalPage === 1
+          ? <>{modalPages[currentModalPage]}</>
+          : <>
+            {modalPages[currentModalPage]}
+          </>}
       </div>
     </div>
-    <div id="modal-text-wrapper">
-      <div id="modal-text-vert-align">
-        <div id="modal-text">
-          {instructionsText}
-        </div>
-      </div>
-    </div>        
-    <div id="modal-button-wrapper"></div>
-  </>
   )
 }
-//Warning not currently assigned
-/* function Warning(props) {
-  return (
-    <div> aoc </div>
-  )
-} */
