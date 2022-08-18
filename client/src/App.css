@@ -89,6 +89,19 @@ body {
   flex-grow: 1;
   overflow: auto;
 }
+
+.astrix {
+  font-size: 1.5em;
+}
+
+a {
+  color: var(--comp-col-04);
+}
+
+a:hover {
+  color: var(--comp-col-03);
+}
+
 #nine-cycle-wrapper{
   width: 8vh;
   height: 72vh;
@@ -641,13 +654,12 @@ body {
 /*Moon Styling*/
 .moonsphere {
   border-radius: 100%;
-  width: 4vw;
-  height: 4vw;
+  width: 4vh;
+  height: 4vh;
   overflow: hidden;
   display: inline-flex;
   align-items: center;
   position: relative;
-  margin: 2vh;
 }
 .hemisphere{
   width: 50%;
@@ -663,8 +675,8 @@ body {
 .moondivider:after {
   top: 0;
   left: 0;
-  width: 4vw;
-  height: 4vw;
+  width: 4vh;
+  height: 4vh;
   position: absolute;
   border-radius: 100%;
   transform-style: preserve-3d;
