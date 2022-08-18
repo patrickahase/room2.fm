@@ -2,8 +2,8 @@ import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
 import {sunSetText, currentMoonShape, firstMoonShape, secondMoonShape, thirdMoonShape, fourthMoonShape, fifthMoonShape, sixthMoonShape, seventhMoonShape, eighthMoonShape, ninthMoonShape} from './timeCalc';
+
 export default function IntroModal(props) {
-  const [currentModalPage, setCurrentModalPage] = useState(1);
   
   // run init on load
   useEffect(() => {
@@ -37,7 +37,7 @@ export default function IntroModal(props) {
             {acknowledgementOfCountryText}
           </div>
       </div>
-      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+      <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
 
     //'Where Are We' Native Land info TBA here
@@ -55,7 +55,7 @@ export default function IntroModal(props) {
             <span className="ModalTextSmall">Disclaimer text to go here</span>
           </div>
       </div>        
-      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+      <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
 
     //BF working on time stuff
@@ -84,7 +84,7 @@ export default function IntroModal(props) {
           </div>
         </div>
       </div>        
-      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+      <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
   
     //page 3 Welcome
@@ -100,7 +100,7 @@ export default function IntroModal(props) {
             {introText}
           </div>
       </div>        
-      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
+      <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
   
     //page 4 Instructions
@@ -129,11 +129,11 @@ export default function IntroModal(props) {
       <div data-a11y-dialog-hide className="ModalOverlay" ></div>
 
       <div role="document" className="ModalBox">
-        {currentModalPage === 1
-          ? <>{modalPages[currentModalPage]}</>
+        {props.currentModalPage === 1
+          ? <>{modalPages[props.currentModalPage]}</>
           : <>
             <NineCycleBar currentCycle={props.currentCycle} />
-            {modalPages[currentModalPage]}
+            {modalPages[props.currentModalPage]}
             <CurrentCycleBar />
           </>}
       </div>

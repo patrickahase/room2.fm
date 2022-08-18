@@ -13,6 +13,8 @@ const timerRefreshRate = 15;
 
 export default function DesktopApp(props) {
 
+  const [currentModalPage, setCurrentModalPage] = useState(1);
+
   const[askResponse, setAskResponse] = useState(false);
   const[readyToRespond, setReadyToRespond] = useState(false);  
 
@@ -28,13 +30,15 @@ export default function DesktopApp(props) {
       {props.modalIsOpen
         /* if true show modal */
         ? <IntroModal
-            mobile={props.mobile}
+            currentModalPage={currentModalPage}
+            setCurrentModalPage={setCurrentModalPage}
             toggleModal={props.toggleModal}
             currentCycle={props.currentCycle} />
         /* else show the desktop app */
         : <>
           {/* Settings Menu */}
           <SettingsMenu
+            toggleModal={props.toggleModal}
             setGraphicsSettings={setGraphicsSettings}
             toggleFocus={props.toggleFocus} />
           {/* Daily Prompt */}

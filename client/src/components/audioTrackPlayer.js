@@ -100,7 +100,7 @@ let volNotchGen = Array(notchNumber).fill('');
 /* can this be changed to button? */
 
 const VolumeNotches = volNotchGen.map((nothing, index) =>
-  <div className='VolumeNotch VolumeActive' id={index}
+  <button className='VolumeNotch VolumeActive' id={index}
        key={index+nothing} 
        onMouseDown={clickVolumeNotch}
        onMouseEnter={(e) => {if(isMouseDown){clickVolumeNotch(e)}}}

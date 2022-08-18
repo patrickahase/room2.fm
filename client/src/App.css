@@ -582,6 +582,8 @@ body {
   transform-origin: bottom;
   transform: scaleY(0%);
   transition: transform ease-out 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 #volume-section-wrapper:hover #volume-wrapper{
   transform: scaleY(100%);
@@ -617,6 +619,7 @@ body {
 }
 .VolumeNotch{
   width: 100%;
+  border: 0;
   background-color: var(--comp-col-03);
   opacity: 0.5;
   border-radius: 3px;
@@ -675,43 +678,23 @@ body {
   transform: rotateY(180deg);
 }
 
-/* Mobile Rules */
-@media all and (any-hover: none) {
-  /* Modal Style */
-  #modal-wrapper{
-    top: 0vh;
-    left: 0vw;
-    right: 0vw;
-    bottom: 0vh;
-  }
-  #modal-title-wrapper{
-    height: 10%;
-  }
-  #modal-title{
-    position: absolute;
-    bottom: 0vh;
-    left: 0vw;
-    padding: 0 2.5vw;
-    padding-bottom: min(0.5vw, 2vh);
-    font-size: min(5vw, 8vh);
-    color: var(--comp-col-02);
-    user-select: none;
-  }
-  #modal-text{
-    font-size: min(3vh, 6vw);
-    padding: 4vh;
-    text-align: center;
-  }
-  #modal-text.modal-text-aoc{
-    font-size: min(4vh, 6vw);
-    padding: 4vh;
-  }
-  #modal-continue-button{
-    width: 40vw;
-    height: min(12vw, 30vh);
-    font-size: min(3vh, 6vw);
-    bottom: 7vh;
-    left: 30vw;
-  }
-}
 
+/* Mobile Text */
+#mobile-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  height: 100%;
+}
+#mobile-text {
+  font-size: 2rem;
+  color: var(--comp-col-02);
+  user-select: none;
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  text-align: center;
+  white-space: pre-line;
+  margin: auto 0;
+}
