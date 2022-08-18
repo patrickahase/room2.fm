@@ -1,7 +1,9 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
-import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
+import { acknowledgementOfCountryText, introText, instructionsText, whereDisclaimer/* warningText */ } from '../content/modalText';
 import {sunSetText, currentMoonShape, firstMoonShape, secondMoonShape, thirdMoonShape, fourthMoonShape, fifthMoonShape, sixthMoonShape, seventhMoonShape, eighthMoonShape, ninthMoonShape} from './timeCalc';
+
+import WhereAreYou from './whereModal';
 
 export default function IntroModal(props) {
   
@@ -33,12 +35,17 @@ export default function IntroModal(props) {
     //page 2 AOC
     <div id="modal-page-wrapper">
       <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
-          <div id="modal-text" style={{fontSize: "2.5rem", justifyContent: "space-around"}}>
+          <div id="modal-text">
             {acknowledgementOfCountryText}
+            <WhereAreYou />
+            <br />
+            {whereDisclaimer}
           </div>
+          
       </div>
       <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
+
 
     //'Where Are We' Native Land info TBA here
     <div id="modal-page-wrapper">
@@ -70,7 +77,6 @@ export default function IntroModal(props) {
       <div id="modal-text-wrapper">
           <div id="modal-text">
             {sunSetText}
-            {currentMoonShape}
             {firstMoonShape}
             {secondMoonShape}
             {thirdMoonShape}
@@ -141,13 +147,14 @@ export default function IntroModal(props) {
 
 function NineCycleBar (props){
   // this can be based on an array with the actual moon phases and then connected send out
+    
   let moonSpheres = Array(9).fill(9).map((num, i) =>
     { if(i < props.currentCycle){
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>🌕</div>
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>{thirdMoonShape}</div>
       } else if (i === props.currentCycle) {
-        return <div className="MoonSphereWrapper" key={i}>🌕</div>
+        return <div className="MoonSphereWrapper" key={i}>{fourthMoonShape}</div>
       } else {
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.8}}>🌕</div>
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.8}}>{sixthMoonShape}</div>
       }  
     }
   );
@@ -161,7 +168,7 @@ function NineCycleBar (props){
 function CurrentCycleBar(props){
   return(
     <div id="current-cycle-wrapper">
-      <div className="MoonSphereWrapper">🌕</div>
+      <div className="MoonSphereWrapper">{currentMoonShape}</div>
       <div id="timeline-gradient">
         <div id="timeline-marker"></div>
       </div>

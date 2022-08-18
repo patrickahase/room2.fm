@@ -144,7 +144,7 @@ export const cycleDates = [
 //http://www.bom.gov.au/ntc/IDO59001/IDO59001_2022_VIC_TP003.pdf
 //BF - have got the cycle dates + tide data in this const below, can be copied into the above but didn't want to mess with your testing dates
 
-const realCycleDates = [
+export const realCycleDates = [
   {
     endTime: Date.parse("2022-08-31T17:58:51+10:00"),
     tidalData: [
