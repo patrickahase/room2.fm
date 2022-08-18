@@ -1,6 +1,6 @@
 # Notes
 - 29/08/22 beginning of async 
-- 25/09/22 live event(s?) begin
+- 25/09/22 live event begin
 
 - Archive 
     > weather will be an 'archived' version rather than continually updated
@@ -21,7 +21,14 @@ something like "there's x time left to listen/comment on this track. it'll chang
 - calculate distance b/w visitor and Arts House Nth Melb **maybe not including this, too much primacy of the live event**
     > how do we feel about requesting geolocation tho 
         **feel good about this option, maybe add Where Are We to AoC modal**
-        
+
+# 19/09/22 meet w/ PH 
+- haven't done sunset calc stuff yet but have noted some ideas in the modal
+    > talk about possibilities for changeover 
+- moon calendar 
+    > styling 
+    > writing moon illos into an array
+
 
 # 03/08/22 meeting w/ Raag and PH 
 - Done so far: setting times to UTC+10, moon phase calculations, checking sunrise times, added a weather API/library but haven't started using this yet 
