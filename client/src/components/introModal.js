@@ -129,13 +129,14 @@ export default function IntroModal(props) {
 
 function NineCycleBar (props){
   // this can be based on an array with the actual moon phases and then connected send out
+    
   let moonSpheres = Array(9).fill(9).map((num, i) =>
     { if(i < props.currentCycle){
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>🌕</div>
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>{thirdMoonShape}</div>
       } else if (i === props.currentCycle) {
-        return <div className="MoonSphereWrapper" key={i}>🌕</div>
+        return <div className="MoonSphereWrapper" key={i}>{fourthMoonShape}</div>
       } else {
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.8}}>🌕</div>
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.8}}>{sixthMoonShape}</div>
       }  
     }
   );

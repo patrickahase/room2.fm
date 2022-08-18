@@ -1,6 +1,6 @@
 import React from 'react';
 import SunCalc from 'suncalc'; 
-
+import {realCycleDates } from '../content/cyclePresets'
 var date = Date.now(); 
 //date = date.now();
 //var nowhours = date.getUTCHours() + 10; 
@@ -10,16 +10,16 @@ const long = 144.94984320919224;
 
 //write and export a function in this doc which checks how long til next sunset
 
-var cycleEndDates = [ //change this to maybe refer to cyclePresets info
-  'Wed Aug 31 2022 17:58:51 GMT+1000 (Australian Eastern Standard Time)',
-  'Sat Sep 03 2022 18:01:21 GMT+1000 (Australian Eastern Standard Time)',
-  'Tue Sep 06 2022 18:03:50 GMT+1000 (Australian Eastern Standard Time)',
-  'Fri Sep 09 2022 18:06:18 GMT+1000 (Australian Eastern Standard Time)',
-  'Mon Sep 12 2022 18:08:47 GMT+1000 (Australian Eastern Standard Time)',
-  'Thu Sep 15 2022 18:11:16 GMT+1000 (Australian Eastern Standard Time)',
-  'Sun Sep 18 2022 18:13:45 GMT+1000 (Australian Eastern Standard Time)',
-  'Wed Sep 21 2022 18:16:15 GMT+1000 (Australian Eastern Standard Time)',
-  'Sat Sep 24 2022 18:18:46 GMT+1000 (Australian Eastern Standard Time)'
+var cycleEndDates = [ 
+  realCycleDates[0].endTime,
+  realCycleDates[1].endTime,
+  realCycleDates[2].endTime,
+  realCycleDates[3].endTime,
+  realCycleDates[4].endTime,
+  realCycleDates[5].endTime,
+  realCycleDates[6].endTime,
+  realCycleDates[7].endTime,
+  realCycleDates[8].endTime
 ]
 
 function getCycleSun (end) {
@@ -75,9 +75,17 @@ function checknum (num) {
       return num
   }
 
-export const sunSetText = <><p>The track changes at sunset. Today, the sun sets at {sunsethours}:{sunsetmins}pm, in {countdownMilli} milliseconds. *turn this value into a more legible countdown* Maybe countdown could happen based on how many sunsets b/w now and next change</p>
+export const sunSetText = <>
+  <p>The track changes at sunset. 
+    Today, the sun sets at {sunsethours}:{sunsetmins}pm, in {countdownMilli} milliseconds. 
+    *turn this value into a more legible countdown* 
+    Maybe countdown could happen based on how many sunsets b/w now and next change
+  Track changed tonight and will change again in three day's time
+  Track changes today, tomorrow or day after tomorrow
+  </p>
 </>
-
+//rewrite this array so it's cleaner and can be accessed in the vertical timeline
+//currently the moon calendar is based on the END TIMES of each cycle
 export const currentMoonShape = getCycleMoon(date);
 export const firstMoonShape = getCycleMoon(cycleEndDates[0]);
 export const secondMoonShape = getCycleMoon(cycleEndDates[1]);

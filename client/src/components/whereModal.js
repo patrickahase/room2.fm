@@ -25,8 +25,8 @@ export default function WhereAreYou () {
 async function getPotentialLocations() {  
   const ipData = await getLocationDataFromIp()
   if (!ipData) return <>
-  <span>We either couldn't access your IP, or couldn't find information about where you are. 
-    This doesn't mean you're not on indigenous land.*
+  <span>We couldn't access your IP, and couldn't find information information about indigenous nations at your location, but this does not mean that there aren't any.
+    Do you know whose land you're on?*
   </span>
   </>
   const territories = await getTerritoriesFromLngLat(youlat, youlong)
@@ -38,7 +38,7 @@ async function getPotentialLocations() {
   } else if (territories.length > 1) {
     return <><span>Your IP suggests that you may be on <a href={territories[0].properties.description} target='_blank'> {territories[0].properties.Name}</a> and/or <a href={territories[1].properties.description} target='_blank'> {territories[1].properties.Name}</a> country, otherwise known as {ipData.commonName}.*</span></>
   } else {
-    return <><span>Your IP suggests that you may be in {ipData.commonName}. We cannot find information about indigenous nations at this location, but this does not mean that there aren't any.*</span></>
+    return <><span>Your IP suggests that you may be in {ipData.commonName}. We cannot find information about indigenous nations at this location, but this does not mean that there aren't any. Do you know whose land you're on?*</span></>
   }
   
   }
