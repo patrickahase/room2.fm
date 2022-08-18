@@ -66,30 +66,37 @@ export default function App() {
   return (
     <div id="global-wrapper">
       {onMobile
-      ?<div>I'm on Mobile</div>
-      :<DesktopApp      
-        width={windowSize[0]}
-        height={windowSize[1]}
-        modalIsOpen={modalIsOpen}
-        toggleModal={toggleModal}
-        setIsDrawing={setIsDrawing}
-        cyclePreset={cyclePresets[cyclePos]}
-        currentCycle={currentCycle}
-        tideData={tideData}
-        setInput={setInput}
-        colours={currentColours}
-        setCurrentColours={setCurrentColours}
-        brushSize={brushSize}
-        setBrushSize={setBrushSize}
-        toggleEraser={toggleEraser}
-        setDrawingCanvas={setDrawingCanvas}
-        setCurrentCanvasState={setCurrentCanvasState}
-        undoDrawing={undoDrawing}
-        redoDrawing={redoDrawing}
-        submitResponse={submitResponse}
-        responseData={responseData}
-        toggleFocus={toggleFocus}
-        />
+      ?
+        <div id="mobile-wrapper">
+          <span id="mobile-text">
+            Unfortunately room2.fm is currently not able to operate on mobile devices due to technical restrictions. 
+            Please try again on a desktop or laptop computer if you are able to.
+          </span>
+        </div>
+      :
+        <DesktopApp      
+          width={windowSize[0]}
+          height={windowSize[1]}
+          modalIsOpen={modalIsOpen}
+          toggleModal={toggleModal}
+          setIsDrawing={setIsDrawing}
+          cyclePreset={cyclePresets[cyclePos]}
+          currentCycle={currentCycle}
+          tideData={tideData}
+          setInput={setInput}
+          colours={currentColours}
+          setCurrentColours={setCurrentColours}
+          brushSize={brushSize}
+          setBrushSize={setBrushSize}
+          toggleEraser={toggleEraser}
+          setDrawingCanvas={setDrawingCanvas}
+          setCurrentCanvasState={setCurrentCanvasState}
+          undoDrawing={undoDrawing}
+          redoDrawing={redoDrawing}
+          submitResponse={submitResponse}
+          responseData={responseData}
+          toggleFocus={toggleFocus}
+          />
       }
     </div>
   )
