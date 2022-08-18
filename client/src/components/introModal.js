@@ -1,7 +1,8 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
-import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
+import { acknowledgementOfCountryText, introText, instructionsText, whereDisclaimer/* warningText */ } from '../content/modalText';
 import {sunSetText, currentMoonShape, firstMoonShape, secondMoonShape, thirdMoonShape, fourthMoonShape, fifthMoonShape, sixthMoonShape, seventhMoonShape, eighthMoonShape, ninthMoonShape} from './timeCalc';
+import WhereAreYou from './whereModal';
 export default function IntroModal(props) {
   const [currentModalPage, setCurrentModalPage] = useState(1);
   
@@ -33,28 +34,14 @@ export default function IntroModal(props) {
     //page 2 AOC
     <div id="modal-page-wrapper">
       <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
-          <div id="modal-text" style={{fontSize: "2.5rem", justifyContent: "space-around"}}>
-            {acknowledgementOfCountryText}
-          </div>
-      </div>
-      <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
-    </div>,
-
-    //'Where Are We' Native Land info TBA here
-    <div id="modal-page-wrapper">
-      <div id="modal-title-wrapper">
-        <div id="modal-title">
-          Where are you?
-        </div>
-        <hr />
-      </div>
-      
-      <div id="modal-text-wrapper">
           <div id="modal-text">
-            <p>Native Land info too go here</p>
-            <span className="ModalTextSmall">Disclaimer text to go here</span>
+            {acknowledgementOfCountryText}
+            <WhereAreYou />
+            <br />
+            {whereDisclaimer}
           </div>
-      </div>        
+          
+      </div>
       <button id="modal-continue-button" onClick={() => setCurrentModalPage(currentModalPage + 1)}> Continue </button>
     </div>,
 
@@ -71,7 +58,6 @@ export default function IntroModal(props) {
         <div id="modal-text-vert-align">
           <div id="modal-text">
             {sunSetText}
-            {currentMoonShape}
             {firstMoonShape}
             {secondMoonShape}
             {thirdMoonShape}
@@ -163,7 +149,7 @@ function NineCycleBar (props){
 function CurrentCycleBar(props){
   return(
     <div id="current-cycle-wrapper">
-      <div className="MoonSphereWrapper">🌕</div>
+      <div className="MoonSphereWrapper">{currentMoonShape}</div>
       <div id="timeline-gradient">
         <div id="timeline-marker"></div>
       </div>
