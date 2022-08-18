@@ -68,7 +68,6 @@ export default function IntroModal(props) {
       </div>
       
       <div id="modal-text-wrapper">
-        <div id="modal-text-vert-align">
           <div id="modal-text">
             {sunSetText}
             {currentMoonShape}
@@ -82,7 +81,6 @@ export default function IntroModal(props) {
             {eighthMoonShape}
             {ninthMoonShape}
           </div>
-        </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
