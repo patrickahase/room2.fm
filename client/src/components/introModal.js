@@ -46,25 +46,6 @@ export default function IntroModal(props) {
       <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
 
-
-    //'Where Are We' Native Land info TBA here
-    <div id="modal-page-wrapper">
-      <div id="modal-title-wrapper">
-        <div id="modal-title">
-          Where are you?
-        </div>
-        <hr />
-      </div>
-      
-      <div id="modal-text-wrapper">
-          <div id="modal-text">
-            <p>Native Land info too go here</p>
-            <span className="ModalTextSmall">Disclaimer text to go here</span>
-          </div>
-      </div>        
-      <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
-    </div>,
-
     //BF working on time stuff
     <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
