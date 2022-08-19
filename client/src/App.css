@@ -105,7 +105,6 @@ a:hover {
 #nine-cycle-wrapper{
   width: 8vh;
   height: 72vh;
-  background-color: #00c0ee;
   display: flex;
   flex-direction: column;
 }
@@ -120,7 +119,6 @@ a:hover {
 #current-cycle-wrapper{
   width: 8vh;
   height: 72vh;
-  background-color: #00c0ee;
   display: flex;
   flex-direction: column;
 }
