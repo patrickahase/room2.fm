@@ -23,7 +23,7 @@ export default function DesktopApp(props) {
   const[audioSourceRef, setAudioSourceRef] = useState(null);
 
   // graphics settings  - 1 high 10 medium 20 low
-  const[graphicsSettings, setGraphicsSettings] = useState(1);
+  const[graphicsSettings, setGraphicsSettings] = useState(0);
 
   return (
     <div id="desktop-wrapper">
