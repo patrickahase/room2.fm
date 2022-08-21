@@ -114,7 +114,7 @@ export default function IntroModal(props) {
       <div data-a11y-dialog-hide className="ModalOverlay" ></div>
 
       <div role="document" className="ModalBox">
-        {props.currentModalPage === 1
+        {props.currentModalPage < 2
           ? <>{modalPages[props.currentModalPage]}</>
           : <>
             <NineCycleBar currentCycle={props.currentCycle} />

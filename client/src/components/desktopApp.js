@@ -13,7 +13,7 @@ const timerRefreshRate = 15;
 
 export default function DesktopApp(props) {
 
-  const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [currentModalPage, setCurrentModalPage] = useState(0);
 
   const[askResponse, setAskResponse] = useState(false);
   const[readyToRespond, setReadyToRespond] = useState(false);  
@@ -23,7 +23,7 @@ export default function DesktopApp(props) {
   const[audioSourceRef, setAudioSourceRef] = useState(null);
 
   // graphics settings  - 1 high 10 medium 20 low
-  const[graphicsSettings, setGraphicsSettings] = useState(0);
+  const[graphicsSettings, setGraphicsSettings] = useState(1);
 
   return (
     <div id="desktop-wrapper">
