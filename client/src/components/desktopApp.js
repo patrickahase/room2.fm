@@ -33,7 +33,8 @@ export default function DesktopApp(props) {
             currentModalPage={currentModalPage}
             setCurrentModalPage={setCurrentModalPage}
             toggleModal={props.toggleModal}
-            currentCycle={props.currentCycle} />
+            currentCycle={props.currentCycle}
+            setCurrentCycle={props.setCurrentCycle} />
         /* else show the desktop app */
         : <>
           {/* Settings Menu */}

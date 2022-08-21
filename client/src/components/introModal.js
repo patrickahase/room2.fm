@@ -12,6 +12,14 @@ export default function IntroModal(props) {
     const container = document.getElementById("AOC-modal");
     const dialog = new A11yDialog(container);
     dialog.show();
+    window.addEventListener("keydown", (e) => {
+      if(e.altKey){
+        if(e.key !== "Alt"){
+         props.setCurrentCycle(parseInt(e.key) - 1);
+         props.setCurrentModalPage(props.currentModalPage + 1);
+        }
+      }      
+    })
   },[]);
 
   let modalPages = [
