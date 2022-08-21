@@ -87,7 +87,6 @@ body {
   align-items: center;
   padding: 0 1.25vw;
   flex-grow: 1;
-  overflow: auto;
 }
 
 .astrix {
@@ -144,6 +143,7 @@ a:hover {
   overflow: hidden;
   flex-grow: 1;
   padding: 1.5vw 0;
+  overflow: auto;
 }
 #modal-text{
   overflow: auto;
