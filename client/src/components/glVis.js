@@ -142,35 +142,36 @@ export const shaders = Shaders.create({
                   sin(_angle),cos(_angle));
     }
 
-    float hash( float x ) {
-      return fract(sin(x)*43758.5453);
-    }  
-    float rand(vec2 n) { 
-      return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
-    }        
-    float noise(vec2 p){
-      vec2 ip = floor(p);
-      vec2 u = fract(p);
-      u = u*u*(3.0-2.0*u);          
-      float res = mix(
-        mix(rand(ip),rand(ip+vec2(1.0,0.0)),u.x),
-        mix(rand(ip+vec2(0.0,1.0)),rand(ip+vec2(1.0,1.0)),u.x),u.y);
-      return res*res;
+    float ring(vec2 uv, float radius, float stimer){
+      float width = 1.+radius;
+      float blurTime = abs(sin(timer+radius));
+      if (mod(radius, 2.0)==0.0){
+        uv *= rotate2d(-1.*stimer*(radius/10.));
+      } else {
+        uv *= rotate2d(stimer+(radius/10.));
+      }
+      radius *= radius;
+      float outerRadius = radius + width;
+      float theta = 1.001*(atan(uv.y,uv.x)/pi);
+      return  (smoothstep(radius-(radius*blurTime*.1),
+                        radius+(radius*blurTime*.1),
+                        dot(uv,uv)*3.5) -
+              smoothstep(outerRadius-(outerRadius*blurTime*.1),
+                        outerRadius+(outerRadius*blurTime*.1),
+                        dot(uv,uv)*3.5)) / 
+              (1.5 - abs(mod(theta+1.0,45.0)-1.0));
     }
 
     void main() {
       vec2 res = vec2(width,height);
       vec2 st = (gl_FragCoord.xy/res)-.3;
-      float stimer = timer/4.;
-      // distance field
-      float theta = (180.0+timer)*(atan(st.y,st.x)/pi);
-      //st += noise((st+.08)*10.)*.02;
-      st = rotate2d(stimer) * st;
-      float d = length(abs(st-.01));
-      float c = abs(mod(timer,45.0)-(55.-sin(timer)*5.));
-      //vec3 comp = vec3(fract(d*stimer)/(c-2.));
-      vec3 comp = mix(rcol, lcol,fract(d*stimer)/c);
-      //vec3 comp = vec3(c);
+      float stimer = timer/20.;
+      st *= 40.*(rotate2d(stimer)*st.x)*stimer;
+      float col = 0.;
+      for (float i = 1.; i < 180. ; i++){
+        col += ring(st,i, stimer);
+      }
+      vec3 comp = mix(rcol,lcol,col*.5);
       gl_FragColor = vec4(comp, 1.0);
     }`
 }, 
