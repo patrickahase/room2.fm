@@ -200,7 +200,6 @@ export default function App() {
   }
   
   // if it overshoots it won't return anything
-  //call this function just once and then any dynamic sun/moon stuff happens somewhere else
   //checking if it's within half an hour of sunset - write a function in here
   function updateCyclePosition(){
     // first grab current UTC
@@ -213,6 +212,7 @@ export default function App() {
         setCurrentCycle(i); 
         if (cycleDates[i].endTime - currentDate < halfHour) {
           //return something here to trigger sunset changeover
+          //make the current moon shape pulse, and maybe make the one on the left pulse too? 
         } 
         for(let k = 0; k < cycleDates[i].tidalData.length; k++){
           if(currentDate < cycleDates[i].tidalData[k].tideEnd){

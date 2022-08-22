@@ -64,87 +64,25 @@ export const cyclePresets = [
 //this cycle will only check once, but maybe also checking if it's half an hour before an endTime
 export const cycleDates = [
   {
-    endTime: Date.parse("2022-08-06T17:52+10:00"),
+    endTime: Date.parse("2022-08-22T15:00+10:00"),
     tidalData: [
       {
-        tideEnd: Date.parse("2022-08-06T13:15+10:00"),
-        tideUp: 1.0,
-        tideHeight: 0.8
-      },
-      {
-        tideEnd: Date.parse("2022-08-06T13:17+10:00"),
-        tideUp: -1.0,
-        tideHeight: 0.2
-      },
-      {
-        tideEnd: Date.parse("2022-08-06T13:19+10:00"),
-        tideUp: 1.0,
-        tideHeight: 0.9
-      },
-      {
-        tideEnd: Date.parse("2022-08-06T13:21+10:00"),
-        tideUp: -1.0,
-        tideHeight: 0.3
-      },
+      tideEnd: Date.parse("2022-08-21T16:00+10:00"),
+      tideUp: 1.0,
+      tideHeight: 0.7
+      }
     ]
   },
   {
-    endTime: Date.parse("2022-08-07T17:52+10:00"),
+    endTime: Date.parse("2022-08-28T17:55+10:00"),
     tidalData: [
       {
-        tideEnd: Date.parse("2022-08-06T12:52+10:00"),
-        tideUp: true,
-        tideHeight: 0.8
-      },
-      {
-        tideEnd: Date.parse("2022-08-06T12:52+10:00"),
-        tideUp: false,
-        tideHeight: 0.2
-      },
-      {
-        tideEnd: Date.parse("2022-08-06T12:52+10:00"),
-        tideUp: true,
-        tideHeight: 0.9
-      },
-      {
-        tideEnd: Date.parse("2022-08-06T12:52+10:00"),
-        tideUp: false,
-        tideHeight: 0.3
-      },
+      tideEnd: Date.parse("2022-08-27T16:00+10:00"),
+      tideUp: 1.0,
+      tideHeight: 0.7
+      }
     ]
   },
-  {
-    endTime: Date.parse("2022-09-08T17:52+10:00"),
-    tidalData: [
-      {
-        tideEnd: Date.parse("2022-09-06T12:52+10:00"),
-        tideUp: true,
-        tideHeight: 0.8
-      },
-      {
-        tideEnd: Date.parse("2022-09-06T12:52+10:00"),
-        tideUp: false,
-        tideHeight: 0.2
-      },
-      {
-        tideEnd: Date.parse("2022-09-06T12:52+10:00"),
-        tideUp: true,
-        tideHeight: 0.9
-      },
-      {
-        tideEnd: Date.parse("2022-09-06T12:52+10:00"),
-        tideUp: false,
-        tideHeight: 0.3
-      },
-    ]
-  }
-]
-
-//https://docs.google.com/document/d/1q8UpFuTYy_0QZwoyxDSckXssbbEfQcUgIek9xCErQZ0/edit
-//http://www.bom.gov.au/ntc/IDO59001/IDO59001_2022_VIC_TP003.pdf
-//BF - have got the cycle dates + tide data in this const below, can be copied into the above but didn't want to mess with your testing dates
-
-export const realCycleDates = [
   {
     endTime: Date.parse("2022-08-31T17:58:51+10:00"),
     tidalData: [
@@ -706,3 +644,58 @@ export const realCycleDates = [
     ]
   }
 ]
+
+
+//https://docs.google.com/document/d/1q8UpFuTYy_0QZwoyxDSckXssbbEfQcUgIek9xCErQZ0/edit
+//http://www.bom.gov.au/ntc/IDO59001/IDO59001_2022_VIC_TP003.pdf
+
+/*  {
+    endTime: Date.parse("2022-08-06T17:52+10:00"),
+    tidalData: [
+      {
+        tideEnd: Date.parse("2022-08-06T13:15+10:00"),
+        tideUp: 1.0,
+        tideHeight: 0.8
+      },
+      {
+        tideEnd: Date.parse("2022-08-06T13:17+10:00"),
+        tideUp: -1.0,
+        tideHeight: 0.2
+      },
+      {
+        tideEnd: Date.parse("2022-08-06T13:19+10:00"),
+        tideUp: 1.0,
+        tideHeight: 0.9
+      },
+      {
+        tideEnd: Date.parse("2022-08-06T13:21+10:00"),
+        tideUp: -1.0,
+        tideHeight: 0.3
+      },
+    ]
+  },
+  {
+    endTime: Date.parse("2022-08-07T17:52+10:00"),
+    tidalData: [
+      {
+        tideEnd: Date.parse("2022-08-07T12:52+10:00"),
+        tideUp: true,
+        tideHeight: 0.8
+      },
+      {
+        tideEnd: Date.parse("2022-08-07T12:52+10:00"),
+        tideUp: false,
+        tideHeight: 0.2
+      },
+      {
+        tideEnd: Date.parse("2022-08-07T12:52+10:00"),
+        tideUp: true,
+        tideHeight: 0.9
+      },
+      {
+        tideEnd: Date.parse("2022-08-07T12:52+10:00"),
+        tideUp: false,
+        tideHeight: 0.3
+      },
+    ]
+  }, */

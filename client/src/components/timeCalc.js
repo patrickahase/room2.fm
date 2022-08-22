@@ -1,6 +1,7 @@
 import React from 'react';
 import SunCalc from 'suncalc'; 
-import {realCycleDates } from '../content/cyclePresets'
+//import {realCycleDates } from '../content/cyclePresets'
+
 var date = Date.now(); 
 //date = date.now();
 //var nowhours = date.getUTCHours() + 10; 
@@ -9,24 +10,34 @@ const lat = -37.803193437556054; //latitude and longitude set to Arts House Nth 
 const long = 144.94984320919224;
 
 //write and export a function in this doc which checks how long til next sunset
-
-var cycleEndDates = [ 
-  realCycleDates[0].endTime,
-  realCycleDates[1].endTime,
-  realCycleDates[2].endTime,
-  realCycleDates[3].endTime,
-  realCycleDates[4].endTime,
-  realCycleDates[5].endTime,
-  realCycleDates[6].endTime,
-  realCycleDates[7].endTime,
-  realCycleDates[8].endTime
-]
+var cycleStartDates = [
+  Date.parse("2022-08-28T17:55+10:00"),
+  Date.parse("2022-08-31T17:58:51+10:00"),
+  Date.parse("2022-09-03T18:01:21+10:00"),
+  Date.parse("2022-09-06T18:03:50+10:00"),
+  Date.parse("2022-09-09T18:06:18+10:00"),
+  Date.parse("2022-09-12T18:08:47+10:00"),
+  Date.parse("2022-09-15T18:11:16+10:00"),
+  Date.parse("2022-09-18T18:13:45+10:00"),
+  Date.parse("2022-09-21T18:16:15+10:00"),
+  Date.parse("2022-09-24T18:18:46+10:00")
+]; //manually entered these dates so test dates don't mess with it
 
 function getCycleSun (end) {
   var cycleEndTime = new Date(end);
   var endSun = SunCalc.getTimes(cycleEndTime, lat, long);
   return endSun.sunset;
 }
+
+
+
+/*function CountdownCalc (props) {
+  console.log(props.currentCycle);
+}*/
+
+//CountdownCalc();
+
+
 
 function getCycleMoon (end) {
   var cycleEndTime = new Date(end);
@@ -84,19 +95,12 @@ export const sunSetText = <>
   Track changes today, tomorrow or day after tomorrow
   </p>
 </>
-//rewrite this array so it's cleaner and can be accessed in the vertical timeline
-//currently the moon calendar is based on the END TIMES of each cycle
-export const currentMoonShape = getCycleMoon(date);
-export const firstMoonShape = getCycleMoon(cycleEndDates[0]);
-export const secondMoonShape = getCycleMoon(cycleEndDates[1]);
-export const thirdMoonShape = getCycleMoon(cycleEndDates[2]);
-export const fourthMoonShape = getCycleMoon(cycleEndDates[3]);
-export const fifthMoonShape = getCycleMoon(cycleEndDates[4]);
-export const sixthMoonShape = getCycleMoon(cycleEndDates[5]);
-export const seventhMoonShape = getCycleMoon(cycleEndDates[6]);
-export const eighthMoonShape = getCycleMoon(cycleEndDates[7]);
-export const ninthMoonShape = getCycleMoon(cycleEndDates[8]);
 
+export const currentMoonShape = getCycleMoon(date);
+
+export const moonShapeArray = cycleStartDates.map(i =>
+  {return getCycleMoon(i)}
+)
 /* SunCalc values for sunset changeover (maybe use these values for transitioning b/w tracks) — 
 goldenHour | evening golden hour starts
 sunsetStart | sunset starts (bottom edge of the sun touches the horizon)
