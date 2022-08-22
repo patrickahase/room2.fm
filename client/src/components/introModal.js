@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
-import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
-import {sunSetText, currentMoonShape, moonShapeArray} from './timeCalc';
+import { acknowledgementOfCountryText, introText, instructionsText, creditsText, /* warningText */ } from '../content/modalText';
+import CountdownCalc, {/*sunSetText,*/ currentMoonShape, moonShapeArray} from './timeCalc';
 import { cycleDates } from '../content/cyclePresets';
 import WhereAreYou from './whereModal';
 
@@ -11,6 +11,7 @@ export default function IntroModal(props) {
   useEffect(() => {
     const container = document.getElementById("AOC-modal");
     const dialog = new A11yDialog(container);
+    props.setCurrentModalPage(1);
     dialog.show();
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
@@ -57,23 +58,6 @@ export default function IntroModal(props) {
       </div>
       <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
-
-    //BF working on time stuff
-    <div id="modal-page-wrapper">
-      <div id="modal-title-wrapper">
-        <div id="modal-title">
-          Welcome to room2.fm async
-        </div>
-        <hr />
-      </div>
-      
-      <div id="modal-text-wrapper">
-          <div id="modal-text">
-            {sunSetText}
-          </div>
-      </div>        
-      <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
-    </div>,
   
     //page 3 Welcome
     <div id="modal-page-wrapper">
@@ -102,6 +86,10 @@ export default function IntroModal(props) {
       <div id="modal-text-wrapper">
           <div id="modal-text">
             {instructionsText}
+            <CountdownCalc />
+            <br />
+            <br />
+            {creditsText}
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.toggleModal()}> Continue </button>
@@ -122,12 +110,7 @@ export default function IntroModal(props) {
           : <>
             <NineCycleBar currentCycle={props.currentCycle} />
             {modalPages[props.currentModalPage]}
-            
-              <div id="current-cycle-wrapper">
-              <div className="CurrentMoonWrapper" style={{marginTop: 50}}>{currentMoonShape}</div>
-              <div id="timeline-gradient">
-              </div>
-              </div>
+            <CurrentCycleBar currentCycle={props.currentCycle} />
             </>
           }
       </div>
@@ -137,7 +120,10 @@ export default function IntroModal(props) {
 
 function NineCycleBar (props){
   let moonSpheres = moonShapeArray.map((num, i) =>
-    { if(i < props.currentCycle){
+    { 
+      //currently the highlighted moon shows the end time of the cycle, not the start time
+      //rewrite this as a for loop so that while currentCycle = 1, moonshape = 0
+      if(i < props.currentCycle){
         return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.4}}>{moonShapeArray[i]}</div>
       } else if (i === props.currentCycle) {
         return <div className="MoonSphereWrapper" key={i}>{moonShapeArray[i]}</div>
@@ -154,19 +140,23 @@ function NineCycleBar (props){
   )
 }
 
-//working on this to get percentage of cycle duration to set the styling to the current moon shape
-/*function CurrentCycleBar(){
-  const [whatPercentage, getPercentage] = useState();
-
-  useEffect(() => {
-    var cycleDuration = cycleDates[1].endTime - cycleDates[0].endTime;
-  var currentPos = cycleDates[1].tidalData[2].tideEnd - cycleDates[0].endTime;
+function CurrentCycleBar(props){
+  let currentDate = Date.now();
+  var cycleDuration = cycleDates[props.currentCycle].endTime - cycleDates[props.currentCycle - 1].endTime;
+  var currentPos = currentDate - cycleDates[props.currentCycle - 1].endTime;
   var cents = 80 / cycleDuration;
-  var percentage = 50;
-  getPercentage(percentage);
-   }, [])
-
+  var percentage = cents * currentPos;
+  if (percentage >= 76) {
+    percentage = 76;
+    //add animation here as well
+  }
+  var marginstyle = {marginTop: percentage + "vh"}
   return(
-    {whatPercentage} //this is the vh percentage that should be applied to marginTop of the current moon shape
+    <>
+    <div id="current-cycle-wrapper">
+      <div className="CurrentMoonWrapper" style={marginstyle}>{currentMoonShape}</div>
+      <div id="timeline-gradient"></div>
+    </div>
+    </>
   )
-}*/
+}

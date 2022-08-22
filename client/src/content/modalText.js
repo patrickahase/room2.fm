@@ -41,6 +41,9 @@ export const introText = <>
 export const instructionsText = <>
 <p>
   <span>
+    For four weeks across the course of BLEED, room2 will offer a suite of digital spaces to encourage reflection and encounter works to listen, view, reflect on and respond to.
+  </span>
+  <span>
     You can share your response to the music, prompts and visuals in a number of ways.
   </span>
   <br />
@@ -66,10 +69,18 @@ export const instructionsText = <>
   </span>
   <br />
   <br />
+  <span>
+    Nine compositions will be presented across the four weeks of room2 async. The music selection will change approximately every three days, while the sun is setting in Narrm — with times set to 'Australian Eastern Standard Time' or GMT+10.
+  </span>
+  <br />
+  <br />
 </p>
-  <span className="ModalTextSmall">
+</>
+
+export const creditsText = <>
+<span className="ModalTextSmall">
     room2.fm was created by Patrick Hase and Anuraag Bhatia. We welcome your thoughts, feedback, or questions - please send them through to room2fm@gmail.com
-  </span>            
+  </span> 
 </>
 
 export const warningText = <>

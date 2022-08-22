@@ -1,6 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import SunCalc from 'suncalc'; 
-//import {realCycleDates } from '../content/cyclePresets'
+import {cycleDates } from '../content/cyclePresets'
+
+export default function CountdownCalc () {
+  //have written this func using cycleDates[1], need to input props.currentCycle there instead
+  /*useEffect(() => {
+    //
+  },[]);*/
+  let currentDate = Date.now();
+  var remainingMilli = cycleDates[1].endTime - currentDate;
+  var countdownDays = Math.round(remainingMilli / 1000 / 60 / 60 / 24);
+  if (countdownDays >= 3) {
+    return (
+      <>
+      <span>
+        The track will change the day after tomorrow.
+      </span>
+      </>
+    )
+  } else if (countdownDays == 2) {
+    return (
+      <>
+      <span>
+        The track will change tomorrow.
+      </span>
+      </>
+    )
+  } else if (countdownDays <= 1) {
+    return (
+      <>
+      <span>
+        The track will change today.
+      </span>
+      </>
+    )
+  }
+}
 
 var date = Date.now(); 
 //date = date.now();
@@ -20,7 +55,7 @@ var cycleStartDates = [
   Date.parse("2022-09-15T18:11:16+10:00"),
   Date.parse("2022-09-18T18:13:45+10:00"),
   Date.parse("2022-09-21T18:16:15+10:00"),
-  Date.parse("2022-09-24T18:18:46+10:00")
+  //Date.parse("2022-09-24T18:18:46+10:00")
 ]; //manually entered these dates so test dates don't mess with it
 
 function getCycleSun (end) {
@@ -28,15 +63,6 @@ function getCycleSun (end) {
   var endSun = SunCalc.getTimes(cycleEndTime, lat, long);
   return endSun.sunset;
 }
-
-
-
-/*function CountdownCalc (props) {
-  console.log(props.currentCycle);
-}*/
-
-//CountdownCalc();
-
 
 
 function getCycleMoon (end) {
@@ -86,7 +112,7 @@ function checknum (num) {
       return num
   }
 
-export const sunSetText = <>
+/*export const sunSetText = <>
   <p>The track changes at sunset. 
     Today, the sun sets at {sunsethours}:{sunsetmins}pm, in {countdownMilli} milliseconds. 
     *turn this value into a more legible countdown* 
@@ -94,13 +120,14 @@ export const sunSetText = <>
   Track changed tonight and will change again in three day's time
   Track changes today, tomorrow or day after tomorrow
   </p>
-</>
+</>*/
 
 export const currentMoonShape = getCycleMoon(date);
 
 export const moonShapeArray = cycleStartDates.map(i =>
   {return getCycleMoon(i)}
 )
+
 /* SunCalc values for sunset changeover (maybe use these values for transitioning b/w tracks) — 
 goldenHour | evening golden hour starts
 sunsetStart | sunset starts (bottom edge of the sun touches the horizon)

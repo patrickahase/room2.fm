@@ -149,7 +149,7 @@ a:hover {
 
 #nine-cycle-wrapper{
   width: 8vh;
-  height: 80vh;
+  height: 72vh;
   display: flex;
   flex-direction: column;
 }
@@ -165,13 +165,22 @@ a:hover {
   width: 4vh;
   height: 4vh;
   padding: 0vh;
-  margin-top: 0vh;
+  margin-top: 0vh; /*this value to be programmed w/ percentage of cycle elapsed*/
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
   z-index: 7;
-  top: 0; /*this value to be programmed w/ percentage of cycle elapsed*/
+  top: 0; 
+  animation-name: pulse;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes pulse {
+  from {opacity: 0.6}
+  to {opacity: 1}
 }
 #current-cycle-wrapper{
   width: 6vh;
