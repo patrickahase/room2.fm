@@ -139,7 +139,7 @@ export const cycleDates = [
       }
     ]
   },
-  {
+  /*{
     endTime: Date.parse("2022-08-28T17:55+10:00"),
     tidalData: [
       {
@@ -148,7 +148,7 @@ export const cycleDates = [
       tideHeight: 0.7
       }
     ]
-  },
+  },*/
   {
     endTime: Date.parse("2022-08-31T17:58:51+10:00"),
     tidalData: [

@@ -22,7 +22,17 @@ something like "there's x time left to listen/comment on this track. it'll chang
     > how do we feel about requesting geolocation tho 
         **feel good about this option, maybe add Where Are We to AoC modal**
 
-# 19/09/22 meet w/ PH 
+# 23/08/22
+- pulse animation on the current moon is an option for the final half-hour 
+- maybe the NEXT moon in the nine cycle array could also pulse, when it's about to change over?
+- need to change the opacity for the nine cycles, so that the one that's full opacity is the one before that in the array
+- final half-hour; trigger a function with setInterval that checks whether the time changeover has passed; if it has, pop up/trigger a marquee that says the track has changed, refresh page to show the new one?
+# optional to-do 
+- add geolocation to Native Land info
+- add current text time relative to sunset, eg. the sun sets in _ hours today
+- add something to the text time inviting visitors to check in with their own local time? currently no prompts in the opening pages
+
+# 19/08/22 meet w/ PH 
 - haven't done sunset calc stuff yet but have noted some ideas in the modal
     > talk about possibilities for changeover 
 - moon calendar 
