@@ -13,12 +13,18 @@ export default function IntroModal(props) {
     const dialog = new A11yDialog(container);
     dialog.show();
     window.addEventListener("keydown", (e) => {
-      if(e.altKey){
-        if(e.key !== "Alt"){
-         props.setCurrentCycle(parseInt(e.key) - 1);
-         props.setCurrentModalPage(props.currentModalPage + 1);
-        }
-      }      
+      switch (e.key) {
+        case "!": 
+        props.setCurrentCycle(0);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "$": 
+        props.setCurrentCycle(3);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        default:
+          return; // Quit when this doesn't handle the key event.
+      }
     })
   },[]);
 
