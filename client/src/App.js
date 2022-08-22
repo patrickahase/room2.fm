@@ -33,18 +33,23 @@ export default function App() {
   const [brushSize, setBrushSize] = useState(8);
   const [isDrawing, setIsDrawing] = useState(false);
   var isDrawingRef = useRef(isDrawing);
+  useEffect(() => {isDrawingRef.current = isDrawing}, [isDrawing]);
   const [isEraser, setIsEraser] = useState(false);
   const [savedBrush, setSavedBrush] = useState(null);
   // undo/redo settings
   const maxUndo = 10;
   const [drawingCanvas, setDrawingCanvas] = useState(null);
   var drawingCanvasRef = useRef(drawingCanvas);
+  useEffect(() => {drawingCanvasRef.current = drawingCanvas}, [drawingCanvas]);
   const [currentCanvasState, setCurrentCanvasState] = useState(null);
   var currentCanvasStateRef = useRef(currentCanvasState);
+  useEffect(() => {currentCanvasStateRef.current = currentCanvasState}, [currentCanvasState]);
   const [undoStack, setUndoStack] = useState([]);
   const [redoStack, setRedoStack] = useState([]);
   var undoStackRef = useRef(undoStack);
   var redoStackRef = useRef(redoStack);
+  useEffect(() => {undoStackRef.current = undoStack}, [undoStack]);
+  useEffect(() => {redoStackRef.current = redoStack}, [redoStack]);
   // is focus mode active
   const [focusMode, setFocusMode] = useState(false);
 
@@ -57,11 +62,10 @@ export default function App() {
     updateCyclePosition();
   }, []);
 
-  useEffect(() => {isDrawingRef.current = isDrawing}, [isDrawing]);
-  useEffect(() => {drawingCanvasRef.current = drawingCanvas}, [drawingCanvas]);
-  useEffect(() => {currentCanvasStateRef.current = currentCanvasState}, [currentCanvasState]);
-  useEffect(() => {undoStackRef.current = undoStack}, [undoStack]);
-  useEffect(() => {redoStackRef.current = redoStack}, [redoStack]);
+  
+  useEffect(() => {
+    setCurrentColours(cyclePresets[currentCycle].colours);
+  }, [currentCycle])
 
   return (
     <div id="global-wrapper">
@@ -80,8 +84,9 @@ export default function App() {
           modalIsOpen={modalIsOpen}
           toggleModal={toggleModal}
           setIsDrawing={setIsDrawing}
-          cyclePreset={cyclePresets[cyclePos]}
+          cyclePreset={cyclePresets[currentCycle]}
           currentCycle={currentCycle}
+          setCurrentCycle={setCurrentCycle}
           tideData={tideData}
           setInput={setInput}
           colours={currentColours}

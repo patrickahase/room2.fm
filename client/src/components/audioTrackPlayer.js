@@ -44,7 +44,7 @@ export default function AudioTrackPlayer(props) {
   return (
     <div id="audio-player-wrapper" className="Collider">
       {/* audio source */}
-      <audio src={require("../content/sade.mp3").default} id="audio-source" />
+      <audio src={props.trackSrc} id="audio-source" onEnded={() => setIsPlaying(false)} />
       {/* play button */}
       <button id="play-pause-button" className="AudioPlayerButton" onClick={playPauseAudio}>
         {isPlaying

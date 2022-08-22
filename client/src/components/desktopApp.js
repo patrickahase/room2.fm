@@ -13,7 +13,7 @@ const timerRefreshRate = 15;
 
 export default function DesktopApp(props) {
 
-  const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [currentModalPage, setCurrentModalPage] = useState(0);
 
   const[askResponse, setAskResponse] = useState(false);
   const[readyToRespond, setReadyToRespond] = useState(false);  
@@ -33,7 +33,8 @@ export default function DesktopApp(props) {
             currentModalPage={currentModalPage}
             setCurrentModalPage={setCurrentModalPage}
             toggleModal={props.toggleModal}
-            currentCycle={props.currentCycle} />
+            currentCycle={props.currentCycle}
+            setCurrentCycle={props.setCurrentCycle} />
         /* else show the desktop app */
         : <>
           {/* Settings Menu */}
@@ -44,11 +45,12 @@ export default function DesktopApp(props) {
           {/* Daily Prompt */}
           <div id="current-prompt-wrapper" className="Collider">
             <div id="current-prompt">
-              Close your eyes. Where do you feel the strongest sensations in your body?
+              {props.cyclePreset.prompt}
             </div>
           </div>
           {/* Audio Player */}
           <AudioTrackPlayer
+            trackSrc={props.cyclePreset.trackSrc}
             setAudioSourceRef={setAudioSourceRef}
             startTimer={startTimer}
             pauseTimer={pauseTimer}
@@ -107,6 +109,7 @@ export default function DesktopApp(props) {
           {/* Background Visuals */}
           <div id="bg-vis-wrapper">              
             <GLVis
+              shaderName={props.cyclePreset.shaderName}
               graphicsSettings={graphicsSettings}
               timer={timer}
               height={props.height}

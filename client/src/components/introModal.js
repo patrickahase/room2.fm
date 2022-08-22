@@ -12,6 +12,20 @@ export default function IntroModal(props) {
     const container = document.getElementById("AOC-modal");
     const dialog = new A11yDialog(container);
     dialog.show();
+    window.addEventListener("keydown", (e) => {
+      switch (e.key) {
+        case "!": 
+        props.setCurrentCycle(0);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "$": 
+        props.setCurrentCycle(3);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        default:
+          return; // Quit when this doesn't handle the key event.
+      }
+    })
   },[]);
 
   let modalPages = [
@@ -103,7 +117,7 @@ export default function IntroModal(props) {
       <div data-a11y-dialog-hide className="ModalOverlay" ></div>
 
       <div role="document" className="ModalBox">
-        {props.currentModalPage === 1
+        {props.currentModalPage < 2
           ? <>{modalPages[props.currentModalPage]}</>
           : <>
             <NineCycleBar currentCycle={props.currentCycle} />
