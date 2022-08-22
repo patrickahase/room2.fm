@@ -1,8 +1,8 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
-import { acknowledgementOfCountryText, introText, instructionsText, whereDisclaimer/* warningText */ } from '../content/modalText';
-import {sunSetText, currentMoonShape, firstMoonShape, secondMoonShape, thirdMoonShape, fourthMoonShape, fifthMoonShape, sixthMoonShape, seventhMoonShape, eighthMoonShape, ninthMoonShape} from './timeCalc';
-
+import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
+import {sunSetText, currentMoonShape, moonShapeArray} from './timeCalc';
+import { cycleDates } from '../content/cyclePresets';
 import WhereAreYou from './whereModal';
 
 export default function IntroModal(props) {
@@ -38,8 +38,6 @@ export default function IntroModal(props) {
           <div id="modal-text">
             {acknowledgementOfCountryText}
             <WhereAreYou />
-            <br />
-            {whereDisclaimer}
           </div>
           
       </div>
@@ -58,15 +56,6 @@ export default function IntroModal(props) {
       <div id="modal-text-wrapper">
           <div id="modal-text">
             {sunSetText}
-            {firstMoonShape}
-            {secondMoonShape}
-            {thirdMoonShape}
-            {fourthMoonShape}
-            {fifthMoonShape}
-            {sixthMoonShape}
-            {seventhMoonShape}
-            {eighthMoonShape}
-            {ninthMoonShape}
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
@@ -119,26 +108,31 @@ export default function IntroModal(props) {
           : <>
             <NineCycleBar currentCycle={props.currentCycle} />
             {modalPages[props.currentModalPage]}
-            <CurrentCycleBar />
-          </>}
+            
+              <div id="current-cycle-wrapper">
+              <div className="CurrentMoonWrapper" style={{marginTop: 50}}>{currentMoonShape}</div>
+              <div id="timeline-gradient">
+              </div>
+              </div>
+            </>
+          }
       </div>
     </div>
   )
 }
 
 function NineCycleBar (props){
-  // this can be based on an array with the actual moon phases and then connected send out
-    
-  let moonSpheres = Array(9).fill(9).map((num, i) =>
+  let moonSpheres = moonShapeArray.map((num, i) =>
     { if(i < props.currentCycle){
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>{thirdMoonShape}</div>
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.4}}>{moonShapeArray[i]}</div>
       } else if (i === props.currentCycle) {
-        return <div className="MoonSphereWrapper" key={i}>{fourthMoonShape}</div>
+        return <div className="MoonSphereWrapper" key={i}>{moonShapeArray[i]}</div>
       } else {
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.8}}>{sixthMoonShape}</div>
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.6}}>{moonShapeArray[i]}</div>
       }  
     }
   );
+  
   return(
     <div id="nine-cycle-wrapper">
       {moonSpheres}
@@ -146,13 +140,19 @@ function NineCycleBar (props){
   )
 }
 
-function CurrentCycleBar(props){
+//working on this to get percentage of cycle duration to set the styling to the current moon shape
+/*function CurrentCycleBar(){
+  const [whatPercentage, getPercentage] = useState();
+
+  useEffect(() => {
+    var cycleDuration = cycleDates[1].endTime - cycleDates[0].endTime;
+  var currentPos = cycleDates[1].tidalData[2].tideEnd - cycleDates[0].endTime;
+  var cents = 80 / cycleDuration;
+  var percentage = 50;
+  getPercentage(percentage);
+   }, [])
+
   return(
-    <div id="current-cycle-wrapper">
-      <div className="MoonSphereWrapper">{currentMoonShape}</div>
-      <div id="timeline-gradient">
-        <div id="timeline-marker"></div>
-      </div>
-    </div>
+    {whatPercentage} //this is the vh percentage that should be applied to marginTop of the current moon shape
   )
-}
+}*/

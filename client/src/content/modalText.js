@@ -75,13 +75,3 @@ export const instructionsText = <>
 export const warningText = <>
 
 </>
-
-export const whereDisclaimer = <>
-<span className="ModalTextSmall">
-<span className="astrix">*</span> 
-    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank">ipinfo.io</a>. 
-    Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
-    This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank">GitHub</a>.
-</span>
-</>

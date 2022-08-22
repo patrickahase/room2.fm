@@ -87,7 +87,6 @@ body {
   align-items: center;
   padding: 0 1.25vw;
   flex-grow: 1;
-  overflow: auto;
 }
 
 .astrix {
@@ -100,11 +99,57 @@ a {
 
 a:hover {
   color: var(--comp-col-03);
+  background-color: var(--comp-col-04);
+}
+
+::selection {
+  color: var(--comp-col-03);
+  background-color: var(--comp-col-04);
+}
+
+/*Moon Styling*/
+.moonsphere {
+  border-radius: 100%;
+  width: 4vh;
+  height: 4vh;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+.hemisphere{
+  width: 50%;
+  height: 100%;
+}
+.moonlight {
+  background-color: var(--comp-col-03);
+}
+.moondark {
+  background-color: var(--comp-col-04);
+} 
+.moondivider,
+.moondivider:after {
+  top: 0;
+  left: 0;
+  width: 4vh;
+  height: 4vh;
+  position: absolute;
+  border-radius: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+.moondivider {
+  background-color: var(--comp-col-04); /* Dark */
+}
+.moondivider:after {
+  content: '';
+  background-color: var(--comp-col-03); /* Light */
+  transform: rotateY(180deg);
 }
 
 #nine-cycle-wrapper{
   width: 8vh;
-  height: 72vh;
+  height: 80vh;
   display: flex;
   flex-direction: column;
 }
@@ -116,20 +161,39 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+.CurrentMoonWrapper{
+  width: 4vh;
+  height: 4vh;
+  padding: 0vh;
+  margin-top: 0vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 7;
+  top: 0; /*this value to be programmed w/ percentage of cycle elapsed*/
+}
 #current-cycle-wrapper{
-  width: 8vh;
+  width: 6vh;
   height: 72vh;
   display: flex;
   flex-direction: column;
+  /*background-color: var(--comp-col-04);*/
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  
 }
 #timeline-gradient{
-  flex-grow: 1;
-  background-image: linear-gradient(to bottom, red, blue);
-}
-#timeline-marker{
-  width: 100%;
-  border-bottom: solid white 2px;
-  height: 50%;
+  /*flex-grow: 1;
+  background-color: var(--comp-col-04);
+  width: 0.5vh;*/
+  border-left: 0.3vh solid var(--comp-col-04);
+  border-right: 0.3vh solid var(--comp-col-03);
+  opacity: 0.6;
+  height: 80vh;
+  position: absolute;
+  /*background-image: linear-gradient(to bottom, red, blue);*/
 }
 
 #modal-title-wrapper{
@@ -144,6 +208,7 @@ a:hover {
   overflow: hidden;
   flex-grow: 1;
   padding: 1.5vw 0;
+  overflow: auto;
 }
 #modal-text{
   overflow: auto;
@@ -648,47 +713,6 @@ a:hover {
 #volume-wrapper:active .VolumeHover{
   opacity: 0.7;
 }
-
-/*Moon Styling*/
-.moonsphere {
-  border-radius: 100%;
-  width: 4vh;
-  height: 4vh;
-  overflow: hidden;
-  display: inline-flex;
-  align-items: center;
-  position: relative;
-}
-.hemisphere{
-  width: 50%;
-  height: 100%;
-}
-.moonlight {
-  background-color: var(--comp-col-03);
-}
-.moondark {
-  background-color: var(--comp-col-04);
-} 
-.moondivider,
-.moondivider:after {
-  top: 0;
-  left: 0;
-  width: 4vh;
-  height: 4vh;
-  position: absolute;
-  border-radius: 100%;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-.moondivider {
-  background-color: var(--comp-col-04); /* Dark */
-}
-.moondivider:after {
-  content: '';
-  background-color: var(--comp-col-03); /* Light */
-  transform: rotateY(180deg);
-}
-
 
 /* Mobile Text */
 #mobile-wrapper {
