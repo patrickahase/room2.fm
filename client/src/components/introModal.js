@@ -120,16 +120,24 @@ export default function IntroModal(props) {
 
 function NineCycleBar (props){
   let moonSpheres = moonShapeArray.map((num, i) =>
-    { 
+    { /*var moonOpacity;*/
+      if(i < props.currentCycle){
+        //moonOpacity = {opacity: 0.4}
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.4}}>{moonShapeArray[i]}</div>
+        //return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.4}}>{moonShapeArray[i]}</div>
+      } else if (i === props.currentCycle) {
+        //moonOpacity = {opacity: 1}
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 1}}>{moonShapeArray[i]}</div>
+        //return <div className="MoonSphereWrapper" key={i}>{moonShapeArray[i]}</div>
+      } else {
+        //moonOpacity = {opacity: 0.6}
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.6}}>{moonShapeArray[i]}</div>
+        //return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.6}}>{moonShapeArray[i]}</div>
+      }
       //currently the highlighted moon shows the end time of the cycle, not the start time
       //rewrite this as a for loop so that while currentCycle = 1, moonshape = 0
-      if(i < props.currentCycle){
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.4}}>{moonShapeArray[i]}</div>
-      } else if (i === props.currentCycle) {
-        return <div className="MoonSphereWrapper" key={i}>{moonShapeArray[i]}</div>
-      } else {
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.6}}>{moonShapeArray[i]}</div>
-      }  
+      //<div className="MoonSphereWrapper" key={i} style={{moonOpacity}}>{moonShapeArray[i]}</div>
+      
     }
   );
   
@@ -146,11 +154,12 @@ function CurrentCycleBar(props){
   var currentPos = currentDate - cycleDates[props.currentCycle - 1].endTime;
   var cents = 80 / cycleDuration;
   var percentage = cents * currentPos;
-  if (percentage >= 76) {
-    percentage = 76;
-    //add animation here as well
-  }
   var marginstyle = {marginTop: percentage + "vh"}
+  if (percentage >= 76) { //this is approx 3 hours at the end of the cycle
+    percentage = 76; //so that the moon doesn't overshoot the modal box
+    marginstyle = {marginTop: percentage + "vh", animationName: "pulse"} //pulse to indicate changeover is soon
+  }
+  
   return(
     <>
     <div id="current-cycle-wrapper">

@@ -172,7 +172,7 @@ a:hover {
   position: absolute;
   z-index: 7;
   top: 0; 
-  animation-name: pulse;
+  /*animation-name: pulse;*/
   animation-duration: 3s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
@@ -197,8 +197,8 @@ a:hover {
   /*flex-grow: 1;
   background-color: var(--comp-col-04);
   width: 0.5vh;*/
-  border-left: 0.3vh solid var(--comp-col-04);
-  border-right: 0.3vh solid var(--comp-col-03);
+  border-left: 0.2vh solid var(--comp-col-04);
+  border-right: 0.2vh solid var(--comp-col-03);
   opacity: 0.6;
   height: 80vh;
   position: absolute;

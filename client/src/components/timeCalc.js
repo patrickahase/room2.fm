@@ -10,6 +10,7 @@ export default function CountdownCalc () {
   let currentDate = Date.now();
   var remainingMilli = cycleDates[1].endTime - currentDate;
   var countdownDays = Math.round(remainingMilli / 1000 / 60 / 60 / 24);
+  //need to work on countdowncalc so that edge cases (eg. before midnight on night of changeover) is more accurate
   if (countdownDays >= 3) {
     return (
       <>
