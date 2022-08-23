@@ -2,7 +2,7 @@ import React, { useEffect, useState, Component } from 'react';
 import SunCalc from 'suncalc'; 
 import {cycleDates } from '../content/cyclePresets'
 
-export default function CountdownCalc () {
+export default function CountdownCalc (props) {
   //have written this func using cycleDates[1], need to input props.currentCycle there instead
   /*useEffect(() => {
     //

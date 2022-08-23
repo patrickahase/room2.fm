@@ -129,7 +129,7 @@ export const cyclePresets = [
 
 //this cycle will only check once, but maybe also checking if it's half an hour before an endTime
 export const cycleDates = [
-  {
+  /* {
     endTime: Date.parse("2022-08-22T15:00+10:00"),
     tidalData: [
       {
@@ -138,7 +138,7 @@ export const cycleDates = [
       tideHeight: 0.7
       }
     ]
-  },
+  }, */
   /*{
     endTime: Date.parse("2022-08-28T17:55+10:00"),
     tidalData: [

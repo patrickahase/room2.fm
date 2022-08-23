@@ -13,6 +13,10 @@ export default function App() {
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   // is the intro modal open
   const [modalIsOpen, setModalIsOpen] = useState(true);
+  // has the track updated
+  const [trackHasUpdated, setTrackHasUpdated] = useState(true);
+  // check update interval
+  let checkEndInterval;
   // current cycle - gets updated on page load
   const [currentCycle, setCurrentCycle] = useState(0);
   // tide data - gets updated on page load
@@ -82,6 +86,7 @@ export default function App() {
           width={windowSize[0]}
           height={windowSize[1]}
           modalIsOpen={modalIsOpen}
+          trackHasUpdated={trackHasUpdated}
           toggleModal={toggleModal}
           setIsDrawing={setIsDrawing}
           cyclePreset={cyclePresets[currentCycle]}
@@ -216,7 +221,7 @@ export default function App() {
       if(currentDate < cycleDates[i].endTime){
         setCurrentCycle(i); 
         if (cycleDates[i].endTime - currentDate < halfHour) {
-          setInterval(checkEnd(cycleDates[i].endTime), 300000);
+          checkEndInterval = setInterval(checkEnd(cycleDates[i].endTime), 300000);
         } 
         for(let k = 0; k < cycleDates[i].tidalData.length; k++){
           if(currentDate < cycleDates[i].tidalData[k].tideEnd){
@@ -235,12 +240,8 @@ export default function App() {
   function checkEnd(end) {
     var updatedTime = Date.now();
     if (updatedTime >= end) {
-      //clearInterval()
-      return <>
-      <span>
-        The selected track has been updated. Refresh the page to listen and respond to the new music and prompts.
-      </span>
-      </>
+      clearInterval(checkEndInterval);
+      setTrackHasUpdated(true);
     }
 
   }

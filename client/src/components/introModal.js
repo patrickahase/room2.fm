@@ -53,8 +53,7 @@ export default function IntroModal(props) {
           <div id="modal-text">
             {acknowledgementOfCountryText}
             <WhereAreYou />
-          </div>
-          
+          </div>          
       </div>
       <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
     </div>,
@@ -85,8 +84,11 @@ export default function IntroModal(props) {
       </div>
       <div id="modal-text-wrapper">
           <div id="modal-text">
-            {instructionsText}
-            <CountdownCalc />
+            {props.trackHasUpdated
+            ? <TrackUpdateMessage />
+            : <CountdownCalc currentCycle={props.currentCycle} />            
+            }
+            {instructionsText}            
             <br />
             <br />
             {creditsText}
@@ -119,25 +121,16 @@ export default function IntroModal(props) {
 }
 
 function NineCycleBar (props){
+
   let moonSpheres = moonShapeArray.map((num, i) =>
-    { /*var moonOpacity;*/
+    {
       if(i < props.currentCycle){
-        //moonOpacity = {opacity: 0.4}
         return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.4}}>{moonShapeArray[i]}</div>
-        //return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.4}}>{moonShapeArray[i]}</div>
       } else if (i === props.currentCycle) {
-        //moonOpacity = {opacity: 1}
         return <div className="MoonSphereWrapper" key={i} style={{opacity: 1}}>{moonShapeArray[i]}</div>
-        //return <div className="MoonSphereWrapper" key={i}>{moonShapeArray[i]}</div>
       } else {
-        //moonOpacity = {opacity: 0.6}
         return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.6}}>{moonShapeArray[i]}</div>
-        //return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.6}}>{moonShapeArray[i]}</div>
       }
-      //currently the highlighted moon shows the end time of the cycle, not the start time
-      //rewrite this as a for loop so that while currentCycle = 1, moonshape = 0
-      //<div className="MoonSphereWrapper" key={i} style={{moonOpacity}}>{moonShapeArray[i]}</div>
-      
     }
   );
   
@@ -150,8 +143,8 @@ function NineCycleBar (props){
 
 function CurrentCycleBar(props){
   let currentDate = Date.now();
-  var cycleDuration = cycleDates[props.currentCycle].endTime - cycleDates[props.currentCycle - 1].endTime;
-  var currentPos = currentDate - cycleDates[props.currentCycle - 1].endTime;
+  var cycleDuration = cycleDates[props.currentCycle].endTime - cycleDates[props.currentCycle].endTime;
+  var currentPos = currentDate - cycleDates[props.currentCycle].endTime;
   var cents = 80 / cycleDuration;
   var percentage = cents * currentPos;
   var marginstyle = {marginTop: percentage + "vh"}
@@ -167,5 +160,13 @@ function CurrentCycleBar(props){
       <div id="timeline-gradient"></div>
     </div>
     </>
+  )
+}
+
+function TrackUpdateMessage(){
+  return(
+    <p style={{marginBottom: "1rem"}}>
+      The selected track has been updated. Refresh the page to listen and respond to the new music and prompts.
+    </p>
   )
 }
