@@ -32,6 +32,7 @@ export default function DesktopApp(props) {
         ? <IntroModal
             currentModalPage={currentModalPage}
             setCurrentModalPage={setCurrentModalPage}
+            trackHasUpdated={props.trackHasUpdated}
             toggleModal={props.toggleModal}
             currentCycle={props.currentCycle}
             setCurrentCycle={props.setCurrentCycle} />
