@@ -216,8 +216,7 @@ export default function App() {
       if(currentDate < cycleDates[i].endTime){
         setCurrentCycle(i); 
         if (cycleDates[i].endTime - currentDate < halfHour) {
-          //return something here to trigger sunset changeover
-          //make the current moon shape pulse, and maybe make the one on the left pulse too? 
+          setInterval(checkEnd(cycleDates[i].endTime), 300000);
         } 
         for(let k = 0; k < cycleDates[i].tidalData.length; k++){
           if(currentDate < cycleDates[i].tidalData[k].tideEnd){
@@ -233,6 +232,18 @@ export default function App() {
     }
   }
 
+  function checkEnd(end) {
+    var updatedTime = Date.now();
+    if (updatedTime >= end) {
+      //clearInterval()
+      return <>
+      <span>
+        The selected track has been updated. Refresh the page to listen and respond to the new music and prompts.
+      </span>
+      </>
+    }
+
+  }
   function submitResponse(){
     // set up array to push other responses to
     let returnedResponses = [];
