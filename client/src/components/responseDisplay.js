@@ -1,19 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 
 export default function ResponseDisplay(props) {
-  
-  //length between displaying the responses
-  const responseLoopDelay = 1000;
 
   // time for fade in/out and for how long the response is visible in ms
   const responseFadeTime = 1500;
-  const responseHangTime = 15000;
+  const responseHangTime = 12000;
 
   const [responsesToDisplay, setResponsesToDisplay] = useState([]);
   const responsesToDisplayRef = useRef();
   const responsesDisplaying = useRef(false);
 
-  const displaysOnScreen = 3;
+  const displaysOnScreen = 4;
 
   // useeffect to run only after the first time responses to display is updated to contain responses, not the following times it's order is updated
   useEffect(() => {
@@ -28,6 +25,7 @@ export default function ResponseDisplay(props) {
 
   // run loop once new response data arrives
   useEffect(() => {
+    console.log(props.responseData)
     if(props.responseData.length > 0){
       setResponsesToDisplay(props.responseData);
       responsesToDisplayRef.current = props.responseData;
@@ -70,7 +68,6 @@ export default function ResponseDisplay(props) {
       if(collision){
         newResponseBox.remove();
         window.requestAnimationFrame(() => createImageResponseDisplay(imageResponse));
-        console.log("loop");
       } else {
         newResponseBox.classList.add("Collider");
         responseFadeInOut(newResponseBox);
@@ -123,7 +120,6 @@ function detect2DBoxCollision(box1, box2){
      box1.top < box2.bottom &&
      box1.bottom > box2.top) {
       collision = true;
-      console.log("hit");
     }
   return collision;
 }

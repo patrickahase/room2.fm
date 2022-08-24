@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from 'react';
+import React from 'react';
 import SunCalc from 'suncalc'; 
 import {cycleDates } from '../content/cyclePresets'
 
@@ -19,7 +19,7 @@ export default function CountdownCalc (props) {
       </span>
       </>
     )
-  } else if (countdownDays == 2) {
+  } else if (countdownDays === 2) {
     return (
       <>
       <span>

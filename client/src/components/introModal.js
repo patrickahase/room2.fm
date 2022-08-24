@@ -12,20 +12,53 @@ export default function IntroModal(props) {
     const container = document.getElementById("AOC-modal");
     const dialog = new A11yDialog(container);
     dialog.show();
-    window.addEventListener("keydown", (e) => {
+    function secretKey(e){
       switch (e.key) {
         case "!": 
         props.setCurrentCycle(0);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "@": 
+        props.setCurrentCycle(1);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "#": 
+        props.setCurrentCycle(2);
         props.setCurrentModalPage(props.currentModalPage + 1);
           break;
         case "$": 
         props.setCurrentCycle(3);
         props.setCurrentModalPage(props.currentModalPage + 1);
           break;
+        case "%": 
+        props.setCurrentCycle(4);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "^": 
+        props.setCurrentCycle(5);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "&": 
+        props.setCurrentCycle(6);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "*": 
+        props.setCurrentCycle(7);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "(": 
+        props.setCurrentCycle(8);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
         default:
           return; // Quit when this doesn't handle the key event.
       }
-    })
+    }
+    window.addEventListener("keydown", secretKey);
+
+    return function cleanup(){
+      window.removeEventListener("keydown", secretKey);
+    }
   },[]);
 
   let modalPages = [
