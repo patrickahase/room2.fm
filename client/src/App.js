@@ -271,7 +271,8 @@ export default function App() {
       .then(res => res.json())
       .then(res => {
         try{
-          for(const response of res.data) {
+          for(const response of res.data[0]) {
+            console.log(response);
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
           }
           setResponseData(returnedResponses);
@@ -296,10 +297,10 @@ export default function App() {
       .then(res => res.json())
       .then(res => {
         try{
-          for(const response of res.data) {
+          for(const response of res.data[0]) {
+            console.log(response);
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);         
           }
-          console.log(res.data)
           setResponseData(returnedResponses);
         } catch(e) {
           // if response not the data
