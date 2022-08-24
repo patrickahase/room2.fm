@@ -18,7 +18,6 @@ export default function DrawingCanvas(props){
     newCanvas.freeDrawingCursor = getCustomCursor();
     newCanvas.on('mouse:down', () => props.setIsDrawing(true));
     setCanvas(newCanvas);
-    console.log("check")
     window.addEventListener('resize', updateCanvasDimensions);
     props.setDrawingCanvas(newCanvas);
     props.setCurrentCanvasState(newCanvas.toDatalessJSON());
@@ -45,9 +44,11 @@ export default function DrawingCanvas(props){
   )
 
   function updateCanvasDimensions() {
-    let canvasWrapper = document.getElementById("drawing-canvas-wrapper");
-    canvasRef.current.setWidth(canvasWrapper.offsetWidth);
-    canvasRef.current.setHeight(canvasWrapper.offsetHeight);    
+    if(document.getElementById("drawing-canvas-wrapper")){
+      let canvasWrapper = document.getElementById("drawing-canvas-wrapper");
+      canvasRef.current.setWidth(canvasWrapper.offsetWidth);
+      canvasRef.current.setHeight(canvasWrapper.offsetHeight); 
+    }   
   }
 
   function getCustomCursor() {
