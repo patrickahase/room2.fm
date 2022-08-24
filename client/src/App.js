@@ -263,7 +263,7 @@ export default function App() {
       let imageFile = dataURLtoFile(dataURL, 'response.png');
       drawingCanvas.clear();
       // we add one to cycle pos to keep start from 1
-      formData.append('upload', imageFile, 'cycle_'+ (cyclePos+1) +'_response.png');
+      formData.append('upload', imageFile, 'cycle_'+ (currentCycle) +'_response.png');
       fetch(`https://room2.fm/api/insertImageReflectionGetResponses`, {
         method: 'PUT',
         body: formData
@@ -291,7 +291,7 @@ export default function App() {
           method: 'POST',
           mode: 'cors',
           // we add one to cycle pos to keep start from 1
-          body: JSON.stringify({reflection: responseText, cycleTable: cyclePos+1})
+          body: JSON.stringify({reflection: responseText, cycleTable: currentCycle})
         })
       .then(res => res.json())
       .then(res => {
@@ -299,6 +299,7 @@ export default function App() {
           for(const response of res.data) {
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);         
           }
+          console.log(res.data)
           setResponseData(returnedResponses);
         } catch(e) {
           // if response not the data
