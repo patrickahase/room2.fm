@@ -286,8 +286,8 @@ export default function App() {
       let responseText = textInput.value;
       if(responseText.length > 0){
         textInput.value = '';
-        /* fetch(`http://localhost:33061/api/insertTextReflectionGetResponses`, { */
-        fetch(`http://localhost:33061/api/testLookup`, {
+        fetch(`http://localhost:33061/api/insertTextReflectionGetResponses`, {
+        /* fetch(`http://localhost:33061/api/testLookup`, { */
           headers: { 'Content-type': 'application/json' },
           method: 'POST',
           mode: 'cors',
