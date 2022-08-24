@@ -44,7 +44,10 @@ export default function AudioTrackPlayer(props) {
   return (
     <div id="audio-player-wrapper" className="Collider">
       {/* audio source */}
-      <audio src={props.trackSrc} id="audio-source" onEnded={() => setIsPlaying(false)} />
+      <audio src={props.trackSrc} id="audio-source" onEnded={() => {
+        setIsPlaying(false);
+        props.pauseTimer();
+        }} />
       {/* play button */}
       <button id="play-pause-button" className="AudioPlayerButton" onClick={playPauseAudio}>
         {isPlaying

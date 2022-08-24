@@ -31,10 +31,10 @@ async function getPotentialLocations() {
   <br />
   <span className="ModalTextSmall">
   <span className="astrix">*</span> 
-    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank">ipinfo.io</a>. 
+    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank" rel="noreferrer">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank" rel="noreferrer">ipinfo.io</a>. 
     Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
     This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank">GitHub</a>.
+    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>.
   </span>
   </>
   const territories = await getTerritoriesFromLngLat(youlat, youlong)
@@ -42,27 +42,27 @@ async function getPotentialLocations() {
   if (territories.length === 1) {
     return (
     <>
-    <span>Your IP suggests that you may be on <a href={territories[0].properties.description} target='_blank'>{territories[0].properties.Name}</a> country, otherwise known as {ipData.commonName}.*</span>
+    <span>Your IP suggests that you may be on <a href={territories[0].properties.description} target='_blank' rel="noreferrer">{territories[0].properties.Name}</a> country, otherwise known as {ipData.commonName}.*</span>
     <br />
     <span className="ModalTextSmall">
     <span className="astrix">*</span> 
-    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank">ipinfo.io</a>. 
+    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank" rel="noreferrer">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank" rel="noreferrer">ipinfo.io</a>. 
     Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
     This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank">GitHub</a>.
+    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>.
     </span>
     </>
     )
   } else if (territories.length > 1) {
     return <>
-    <span>Your IP suggests that you may be on <a href={territories[0].properties.description} target='_blank'> {territories[0].properties.Name}</a> and/or <a href={territories[1].properties.description} target='_blank'> {territories[1].properties.Name}</a> country, otherwise known as {ipData.commonName}.*</span>
+    <span>Your IP suggests that you may be on <a href={territories[0].properties.description} target='_blank' rel="noreferrer"> {territories[0].properties.Name}</a> and/or <a href={territories[1].properties.description} target='_blank' rel="noreferrer"> {territories[1].properties.Name}</a> country, otherwise known as {ipData.commonName}.*</span>
     <br />
     <span className="ModalTextSmall">
     <span className="astrix">*</span> 
-    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank">ipinfo.io</a>. 
+    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank" rel="noreferrer">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank" rel="noreferrer">ipinfo.io</a>. 
     Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
     This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank">GitHub</a>.
+    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>.
     </span>
     </>
   } else {
@@ -71,10 +71,10 @@ async function getPotentialLocations() {
     <br />
     <span className="ModalTextSmall">
     <span className="astrix">*</span> 
-    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank">ipinfo.io</a>. 
+    The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank" rel="noreferrer">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank" rel="noreferrer">ipinfo.io</a>. 
     Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
     This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank">GitHub</a>.
+    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>.
     </span>
     </>
   }

@@ -19,7 +19,7 @@ export default function DesktopApp(props) {
   const[readyToRespond, setReadyToRespond] = useState(false);  
 
   const[timer, setTimer] = useState(0.);
-  const[timerInterval, setTimerInterval] = useState(0.);
+  const[timerInterval, setTimerInterval] = useState(null);
   const[audioSourceRef, setAudioSourceRef] = useState(null);
 
   // graphics settings  - 1 high 10 medium 20 low
@@ -123,9 +123,16 @@ export default function DesktopApp(props) {
   )
   /* update timer value (based on track position) */
   function startTimer() {
-    setTimerInterval(setInterval(() => {
-      setTimer(100 * audioSourceRef.currentTime/audioSourceRef.duration)
-    }, timerRefreshRate+graphicsSettings));
+    if(timerInterval !== null){
+      clearInterval(timerInterval); 
+      setTimerInterval(setInterval(() => {
+        setTimer(100 * audioSourceRef.currentTime/audioSourceRef.duration)
+      }, timerRefreshRate+graphicsSettings));
+    } else {
+      setTimerInterval(setInterval(() => {
+        setTimer(100 * audioSourceRef.currentTime/audioSourceRef.duration)
+      }, timerRefreshRate+graphicsSettings));
+    }
   }
   function pauseTimer() {
     clearInterval(timerInterval);    
