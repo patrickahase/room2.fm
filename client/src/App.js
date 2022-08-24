@@ -264,7 +264,7 @@ export default function App() {
       drawingCanvas.clear();
       // we add one to cycle pos to keep start from 1
       formData.append('upload', imageFile, 'cycle_'+ (cyclePos+1) +'_response.png');
-      fetch(`http://localhost:33061/api/insertImageReflectionGetResponses`, {
+      fetch(`http://room2.fm/api/insertImageReflectionGetResponses`, {
         method: 'PUT',
         body: formData
       })
@@ -286,8 +286,7 @@ export default function App() {
       let responseText = textInput.value;
       if(responseText.length > 0){
         textInput.value = '';
-        fetch(`http://localhost:33061/api/insertTextReflectionGetResponses`, {
-        /* fetch(`http://localhost:33061/api/testLookup`, { */
+        fetch(`http://room2.fm/api/insertTextReflectionGetResponses`, {
           headers: { 'Content-type': 'application/json' },
           method: 'POST',
           mode: 'cors',
