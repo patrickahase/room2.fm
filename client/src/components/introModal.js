@@ -11,7 +11,6 @@ export default function IntroModal(props) {
   useEffect(() => {
     const container = document.getElementById("AOC-modal");
     const dialog = new A11yDialog(container);
-    props.setCurrentModalPage(1);
     dialog.show();
     window.addEventListener("keydown", (e) => {
       switch (e.key) {
