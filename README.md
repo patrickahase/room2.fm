@@ -26,9 +26,9 @@ This is my refactoring of the room2 code base to set it up for continued use
 - build in tide data to asynccyclecalc
 
 # for integration with Bec
-- raised current page state
-- moon array
-
-- on track finsih switch icon
-- timer start stop
 - track ends updated
+
+
+
+- update salllvage track
+- raag modal link

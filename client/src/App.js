@@ -14,7 +14,7 @@ export default function App() {
   // is the intro modal open
   const [modalIsOpen, setModalIsOpen] = useState(true);
   // has the track updated
-  const [trackHasUpdated, setTrackHasUpdated] = useState(true);
+  const [trackHasUpdated, setTrackHasUpdated] = useState(false);
   // check update interval
   let checkEndInterval;
   // current cycle - gets updated on page load

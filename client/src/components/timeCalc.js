@@ -15,7 +15,7 @@ export default function CountdownCalc (props) {
     return (
       <>
       <span>
-        The track will change the day after tomorrow.
+        The track/prompt/visual cycle will change the day after tomorrow.
       </span>
       </>
     )
@@ -23,7 +23,7 @@ export default function CountdownCalc (props) {
     return (
       <>
       <span>
-        The track will change tomorrow.
+        The track/prompt/visual cycle will change tomorrow.
       </span>
       </>
     )
@@ -31,7 +31,7 @@ export default function CountdownCalc (props) {
     return (
       <>
       <span>
-        The track will change today.
+        The track/prompt/visual cycle will change today.
       </span>
       </>
     )

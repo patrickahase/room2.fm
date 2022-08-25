@@ -2,7 +2,8 @@ export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 1",
-    trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
+    artistDetails: "j",
+    trackDetails: "cadence felt between our bodies (with Angelina Nonaj)",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
     artistLink: "https://daisart.press/",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
@@ -16,11 +17,12 @@ export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 2",
-    trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.press/",
-    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
-    shaderName: "cycleOne",
+    artistDetails: "Aarti Jadu",
+    trackDetails: "IT / THAT",
+    trackLink: "https://aartijadu.bandcamp.com/track/it-that",
+    artistLink: "https://aartijadu.bandcamp.com/",
+    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/AJ.mp3",
+    shaderName: "cycleTwo",
     colours: [
       "#222323",
       "#5252ff",
@@ -30,6 +32,22 @@ export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 3",
+    artistDetails: "amby downs",
+    trackDetails: "a lightning ridge opal mine anxiety",
+    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
+    artistLink: "https://daisart.press/",
+    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/AD.mp3",
+    shaderName: "cycleThree",
+    colours: [
+      "#222323",
+      "#5252ff",
+      "#b5e877"
+    ]
+  },
+  {
+    introStatement: "if you're seeing this the server is having some trouble",
+    prompt: "this is prompt 4",
+    artistDetails: "Alexandra Spence",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
     artistLink: "",
@@ -43,21 +61,8 @@ export const cyclePresets = [
   },
   {
     introStatement: "if you're seeing this the server is having some trouble",
-    prompt: "this is prompt 4",
-    trackDetails: "Aarti Jadu - IT / THAT",
-    trackLink: "https://aartijadu.bandcamp.com/track/it-that",
-    artistLink: "https://aartijadu.bandcamp.com/",
-    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/AJ.mp3",
-    shaderName: "cycleTwo",
-    colours: [
-      "#222323",
-      "#5252ff",
-      "#b5e877"
-    ]
-  },
-  {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 5",
+    artistDetails: "E Fishpool",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
     artistLink: "https://daisart.press/",
@@ -72,6 +77,7 @@ export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 6",
+    artistDetails: "ShaYu",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
     artistLink: "https://daisart.press/",
@@ -86,11 +92,12 @@ export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 7",
-    trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
+    artistDetails: "salllvage",
+    trackDetails: "bells for him",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
     artistLink: "https://daisart.press/",
-    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
-    shaderName: "cycleOne",
+    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/S.mp3",
+    shaderName: "cycleSeven",
     colours: [
       "#222323",
       "#5252ff",
@@ -100,6 +107,7 @@ export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 8",
+    artistDetails: "R. Rebeiro",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
     artistLink: "https://daisart.press/",
@@ -113,7 +121,8 @@ export const cyclePresets = [
   },
   {
     introStatement: "if you're seeing this the server is having some trouble",
-    prompt: "this is prompt 0",
+    prompt: "this is prompt 9",
+    artistDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
     artistLink: "https://daisart.press/",
@@ -129,26 +138,6 @@ export const cyclePresets = [
 
 //this cycle will only check once, but maybe also checking if it's half an hour before an endTime
 export const cycleDates = [
-  /* {
-    endTime: Date.parse("2022-08-22T15:00+10:00"),
-    tidalData: [
-      {
-      tideEnd: Date.parse("2022-08-21T16:00+10:00"),
-      tideUp: 1.0,
-      tideHeight: 0.7
-      }
-    ]
-  }, */
-  /*{
-    endTime: Date.parse("2022-08-28T17:55+10:00"),
-    tidalData: [
-      {
-      tideEnd: Date.parse("2022-08-27T16:00+10:00"),
-      tideUp: 1.0,
-      tideHeight: 0.7
-      }
-    ]
-  },*/
   {
     endTime: Date.parse("2022-08-31T17:58:51+10:00"),
     tidalData: [
