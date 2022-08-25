@@ -8,22 +8,29 @@ var youlong;
 export default function WhereAreYou () {
   const [whereTerritories, getTerritories] = useState([]);
   
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     getPotentialLocations()
-    .then(data =>
-      getTerritories(data)
+    .then(data => {
+      setIsLoading(false);
+      getTerritories(data);
+    }      
     );
    }, [])
 
-  return (
-  <>
-  {whereTerritories}
-  </>
-  )
+  return (<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <p>Where are you visiting from?</p>
+  {isLoading
+    ? <WhereThrobber />
+    : <>{whereTerritories}</> 
+    }
+    
+  </div>)
 }
 
 async function getPotentialLocations() {  
-  const ipData = await getLocationDataFromIp()
+  const ipData = await getLocationDataFromIp();
   if (!ipData) return <>
   <span>We couldn't access your IP, and couldn't find information information about indigenous nations at your location, but this does not mean that there aren't any.
     Do you know whose land you're on?*
@@ -34,7 +41,7 @@ async function getPotentialLocations() {
     The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank" rel="noreferrer">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank" rel="noreferrer">ipinfo.io</a>. 
     Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
     This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>.
+    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>. Your IP data is not stored.
   </span>
   </>
   const territories = await getTerritoriesFromLngLat(youlat, youlong)
@@ -49,7 +56,7 @@ async function getPotentialLocations() {
     The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank" rel="noreferrer">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank" rel="noreferrer">ipinfo.io</a>. 
     Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
     This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>.
+    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>. Your IP data is not stored.
     </span>
     </>
     )
@@ -62,7 +69,7 @@ async function getPotentialLocations() {
     The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank" rel="noreferrer">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank" rel="noreferrer">ipinfo.io</a>. 
     Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
     This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>.
+    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>. Your IP data is not stored.
     </span>
     </>
   } else {
@@ -74,7 +81,7 @@ async function getPotentialLocations() {
     The information presented here is derived from the maps at <a href="https://native-land.ca/" target="_blank" rel="noreferrer">Native Land Digital</a>, cross-referenced with data from <a href="https://ipinfo.io/" target="_blank" rel="noreferrer">ipinfo.io</a>. 
     Note that this is based on your internet service provider's location, and may be incorrect for your actual physical location. 
     This is not authoritative or representative and should be approached critically.
-    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>.
+    Code is adapted from <i>Where Are We</i>, which you can learn more about on <a href="https://github.com/e-e-e/where-are-we" target="_blank" rel="noreferrer">GitHub</a>. Your IP data is not stored.
     </span>
     </>
   }
@@ -148,4 +155,35 @@ async function getPotentialLocations() {
   return strings.join(', ')
   }
 
-
+  function WhereThrobber(){
+    return (
+      <div id="modal-throbber">
+        <svg
+          width="100%"
+          height="100%"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+          transform="">
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#b5e877"/>
+                <stop offset="100%" stopColor="#5252ff"/>
+              </linearGradient>
+            </defs>
+            
+            <circle cx="50" cy="50" r="40" stroke="url(#grad1)" strokeWidth="10" fill="transparent">
+              <animateTransform
+                attributeName="transform"
+                begin="0s"
+                dur="1s"
+                type="rotate"
+                from="0 50 50"
+                to="360 50 50"
+                repeatCount="indefinite"
+              />
+            </circle>                
+        </svg>
+      </div>
+      
+    )
+  }

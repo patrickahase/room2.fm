@@ -35,7 +35,8 @@ export default function DesktopApp(props) {
             trackHasUpdated={props.trackHasUpdated}
             toggleModal={props.toggleModal}
             currentCycle={props.currentCycle}
-            setCurrentCycle={props.setCurrentCycle} />
+            setCurrentCycle={props.setCurrentCycle}
+            cyclePreset={props.cyclePreset} />
         /* else show the desktop app */
         : <>
           {/* Settings Menu */}

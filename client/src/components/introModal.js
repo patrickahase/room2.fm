@@ -81,8 +81,8 @@ export default function IntroModal(props) {
   
     //page 2 AOC
     <div id="modal-page-wrapper">
-      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc">
-          <div id="modal-text">
+      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc" style={{textAlign: 'center'}}>
+          <div id="modal-text" style={{alignItems: 'center', justifyContent: 'space-around'}}>
             {acknowledgementOfCountryText}
             <WhereAreYou />
           </div>          
@@ -116,13 +116,25 @@ export default function IntroModal(props) {
       </div>
       <div id="modal-text-wrapper">
           <div id="modal-text">
+            The current cycle's track is:
+            <br />
+            <p style={{fontSize: '3rem'}}>{props.cyclePreset.trackDetails} by {props.cyclePreset.artistDetails}</p>        
+            <br />
+            <br />
+            <p>Support {props.cyclePreset.artistDetails} <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">here</a>.</p>        
+            <br />
+            <br />
             {props.trackHasUpdated
             ? <TrackUpdateMessage />
             : <CountdownCalc currentCycle={props.currentCycle} />            
             }
-            {instructionsText}            
             <br />
             <br />
+            <p>
+            room2 @ <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> will culminate in a live 
+            event on Sunday 25 September, 14:00 – 19:00 AEST held both here at this URL and at Arts House - <a href="https://artshouse.sales.ticketsearch.com/sales/salesevent/76403" target="_blank" rel="noreferrer">tickets
+              for the in person event can be found here</a>.
+            </p>
             {creditsText}
           </div>
       </div>        
@@ -202,3 +214,5 @@ function TrackUpdateMessage(){
     </p>
   )
 }
+
+

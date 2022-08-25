@@ -243,6 +243,10 @@ a:hover {
   color: #5252ff;
   background-color: #202121;
 }
+#modal-throbber{
+  width: 3rem;
+  height: 3rem;
+}
 
 /* Door Closed - Text Logo */
 #logo-wrapper{
@@ -741,4 +745,10 @@ a:hover {
   text-align: center;
   white-space: pre-line;
   margin: auto 0;
+}
+
+@media screen and (max-width: 1080px) {
+  :root{
+    font-size: 12px;
+  }
 }
