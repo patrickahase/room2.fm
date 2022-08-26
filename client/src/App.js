@@ -144,12 +144,14 @@ export default function App() {
   // toggle eraser on/off - save brush if toggled on - reset old brush if toggled off
   function toggleEraser(){
     if(isEraser){
-      drawingCanvas.freeDrawingBrush = savedBrush;
+      drawingCanvasRef.current.freeDrawingBrush = savedBrush;
       document.getElementById("erase-brush-button").classList.remove("Active");
     } else {
-      setSavedBrush(drawingCanvas.freeDrawingBrush);
-      drawingCanvas.freeDrawingBrush = new fabric.EraserBrush(drawingCanvas);
-      drawingCanvas.freeDrawingBrush.width = brushSize;
+      setSavedBrush(drawingCanvasRef.current.freeDrawingBrush);
+      console.log(drawingCanvasRef.current.freeDrawingBrush);
+      /* drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
+      drawingCanvasRef.current.freeDrawingBrush.width = brushSize; */
+      drawingCanvasRef.current.freeDrawingBrush.color = "#00000000";
       document.getElementById("erase-brush-button").classList.add("Active");
     }
     setIsEraser(!isEraser);
