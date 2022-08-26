@@ -34,6 +34,7 @@
   --comp-col-03:#b5e877;
   --comp-col-04:#5252ff;
   --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+  font-size: 1vw;
 }
 
 body {
@@ -226,6 +227,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1rem;
 }
 .ModalTextSmall{
   font-size: 1rem;
@@ -744,16 +746,4 @@ a:hover {
   text-align: center;
   white-space: pre-line;
   margin: auto 0;
-}
-
-@media screen and (max-width: 1260px) {
-  :root{
-    font-size: 12px;
-  }
-}
-
-@media screen and (max-width: 1080px) {
-  :root{
-    font-size: 8px;
-  }
 }
