@@ -1,4 +1,4 @@
-export const acknowledgementOfCountryText = <><p style={{fontSize: "2.5rem"}}>
+export const acknowledgementOfCountryText = <><p style={{fontSize: "1.75rem"}}>
   This website was created and is maintained on the unceded territory of the Wurundjeri People of the Eastern Kulin Nation, 
   the Traditional Custodians of the land. We recognise their ongoing legacy of connection to land, waters and culture 
   and pay respect to their Elders past and present. We extend this respect to all other First Nations peoples 
