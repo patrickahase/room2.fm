@@ -220,16 +220,15 @@ a:hover {
   overflow: auto;
 }
 #modal-text{
-  overflow: auto;
   color: var(--comp-col-02);
-  font-size: 2rem;
+  font-size: 1.5rem;
   min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .ModalTextSmall{
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-align: center;
 }
 #modal-continue-button{
