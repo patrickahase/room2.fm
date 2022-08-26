@@ -38,3 +38,4 @@ This is my refactoring of the room2 code base to set it up for continued use
 - chrome button border
 - chrome scroll bar
 - scroll reset on modal page turn
+- audio buffering animation
