@@ -87,7 +87,7 @@ export default function IntroModal(props) {
             <WhereAreYou />
           </div>          
       </div>
-      <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
+      <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
     </div>,
   
     //page 3 Welcome
@@ -103,7 +103,7 @@ export default function IntroModal(props) {
             {introText}
           </div>
       </div>        
-      <button id="modal-continue-button" onClick={() => props.setCurrentModalPage(props.currentModalPage + 1)}> Continue </button>
+      <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
     </div>,
   
     //page 4 Instructions
@@ -120,15 +120,12 @@ export default function IntroModal(props) {
             <br />
             <p style={{fontSize: '1.75rem'}}>{props.cyclePreset.trackDetails} by {props.cyclePreset.artistDetails}</p>        
             <br />
-            <br />
             <p>Support {props.cyclePreset.artistDetails} <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">here</a>.</p>        
-            <br />
             <br />
             {props.trackHasUpdated
             ? <TrackUpdateMessage />
             : <CountdownCalc currentCycle={props.currentCycle} />            
             }
-            <br />
             <br />
             <p>
             room2 @ <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> will culminate in a live 
@@ -162,6 +159,11 @@ export default function IntroModal(props) {
       </div>
     </div>
   )
+
+  function nextModalPage(){
+    props.setCurrentModalPage(props.currentModalPage + 1);
+    document.getElementById("modal-text-wrapper").scrollTop = 0;
+  }
 }
 
 function NineCycleBar (props){
