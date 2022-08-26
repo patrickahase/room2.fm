@@ -33,16 +33,15 @@ export const introText = <>
     the four weeks of BLEED. The only information we store is the response itself and the time it was submitted. If you would 
     like to remove your personal response from the archive please contact us.
   </span>
+  <br />    
+  <br />
 </p>
   <span className="ModalTextSmall">
     This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
     If you are having issues, please try one of these browsers.
     <br />
     <br />
-    If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.
-    <br />    
-    <br />    
-    We will be moderating responses that we feel are intentionally disruptive or may make others feel unsafe in the space.
+    If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.    
   </span>
 </>
 

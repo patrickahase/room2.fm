@@ -118,7 +118,7 @@ export default function IntroModal(props) {
           <div id="modal-text">
             The current cycle's track is:
             <br />
-            <p style={{fontSize: '3rem'}}>{props.cyclePreset.trackDetails} by {props.cyclePreset.artistDetails}</p>        
+            <p style={{fontSize: '1.75rem'}}>{props.cyclePreset.trackDetails} by {props.cyclePreset.artistDetails}</p>        
             <br />
             <br />
             <p>Support {props.cyclePreset.artistDetails} <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">here</a>.</p>        
