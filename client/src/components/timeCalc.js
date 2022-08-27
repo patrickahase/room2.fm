@@ -2,12 +2,12 @@ import React from 'react';
 import SunCalc from 'suncalc'; 
 import {cycleDates } from '../content/cyclePresets'
 
+const currentDate = Date.now(); 
+
+const lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
+const long = 144.94984320919224;
+
 export default function CountdownCalc (props) {
-  //have written this func using cycleDates[1], need to input props.currentCycle there instead
-  /*useEffect(() => {
-    //
-  },[]);*/
-  let currentDate = Date.now();
   var remainingMilli = cycleDates[props.currentCycle].endTime - currentDate;
   
   var countdownDays = Math.round(remainingMilli / 1000 / 60 / 60 / 24);
@@ -39,13 +39,6 @@ export default function CountdownCalc (props) {
   }
 }
 
-var date = Date.now(); 
-//var nowhours = date.getUTCHours() + 10; 
-
-const lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
-const long = 144.94984320919224;
-
-//write and export a function in this doc which checks how long til next sunset
 var cycleStartDates = [
   Date.parse("2022-08-28T17:55+10:00"),
   Date.parse("2022-08-31T17:58:51+10:00"),
@@ -61,9 +54,14 @@ var cycleStartDates = [
 function getCycleSun (end) {
   var cycleEndTime = new Date(end);
   var endSun = SunCalc.getTimes(cycleEndTime, lat, long);
-  return endSun.sunset;
+  return (
+  <>
+  <span>
+  {endSun.sunset.getHours()}
+  </span>
+  </>
+  )
 }
-console.log(getCycleSun(date));
 
 
 function getCycleMoon (end) {
@@ -96,34 +94,9 @@ function getCycleMoon (end) {
   )
 }
 
-var suncalctimes = SunCalc.getTimes(date, lat, long);  
-var sunsetMilliseconds = Date.parse(suncalctimes.sunset);
-var countdownMilli = sunsetMilliseconds - date;
+export const sunsetText = getCycleSun(currentDate);
 
-var sunsethours = checknum(suncalctimes.sunset.getUTCHours() + 10);
-var sunsetmins = suncalctimes.sunset.getMinutes();
-
-//checking whether hours evaluations are above 24, if so removing 24 to get their AM time value in hours; also reevaluates date object if UTC date is yesterday
-function checknum (num) {
-    if (num > 24) {
-      num = num - 24;
-    } else {
-      num = num; 
-    }
-      return num
-  }
-
-/*export const sunSetText = <>
-  <p>The track changes at sunset. 
-    Today, the sun sets at {sunsethours}:{sunsetmins}pm, in {countdownMilli} milliseconds. 
-    *turn this value into a more legible countdown* 
-    Maybe countdown could happen based on how many sunsets b/w now and next change
-  Track changed tonight and will change again in three day's time
-  Track changes today, tomorrow or day after tomorrow
-  </p>
-</>*/
-
-export const currentMoonShape = getCycleMoon(date);
+export const currentMoonShape = getCycleMoon(currentDate);
 
 export const moonShapeArray = cycleStartDates.map(i =>
   {return getCycleMoon(i)}
