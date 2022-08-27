@@ -25,7 +25,6 @@ export default function ResponseDisplay(props) {
 
   // run loop once new response data arrives
   useEffect(() => {
-    console.log(props.responseData)
     if(props.responseData.length > 0){
       setResponsesToDisplay(props.responseData);
       responsesToDisplayRef.current = props.responseData;
