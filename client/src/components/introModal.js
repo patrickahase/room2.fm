@@ -119,8 +119,6 @@ export default function IntroModal(props) {
             The current cycle's track is:
             <br />
             <p style={{fontSize: '1.75rem'}}>{props.cyclePreset.trackDetails} by {props.cyclePreset.artistDetails}</p>        
-            {instructionsText}
-            <CountdownCalc currentCycle={props.currentCycle} />
             <br />
             <p>Support {props.cyclePreset.artistDetails} <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">here</a>.</p>        
             <br />
@@ -135,6 +133,13 @@ export default function IntroModal(props) {
               for the in person event can be found here</a>.
             </p>
             {creditsText}
+            <span className="ModalTextSmall">
+              This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
+              If you are having issues, please try one of these browsers.
+              <br />
+              <br />
+              If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.    
+            </span>
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.toggleModal()}> Continue </button>

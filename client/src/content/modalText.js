@@ -1,8 +1,9 @@
 export const acknowledgementOfCountryText = <><p style={{fontSize: "1.75rem"}}>
-  This website was created and is maintained on the unceded territory of the Wurundjeri People of the Eastern Kulin Nation, 
-  the Traditional Custodians of the land. We recognise their ongoing legacy of connection to land, waters and culture 
-  and pay respect to their Elders past and present. We extend this respect to all other First Nations peoples 
-  of this continent, whose stolen land the material pathways that allow our digital connectivity are built upon.
+  This website was produced and is maintained on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi 
+  Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
+  of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
+  all other First Nations peoples and Traditional Custodians of this continent, whose land the material pathways that allow 
+  our digital connectivity are built upon.
   </p>
 </>
 
@@ -30,19 +31,11 @@ export const introText = <>
   <br />
   <span>
     While anonymous the responses will be collected as part of a digital archive which will be online for a longer period than 
-    the four weeks of BLEED. The only information we store is the response itself and the time it was submitted. If you would 
-    like to remove your personal response from the archive please contact us.
+    the four weeks of BLEED. The only information we store is the response itself and the time it was submitted.
   </span>
   <br />    
   <br />
 </p>
-  <span className="ModalTextSmall">
-    This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
-    If you are having issues, please try one of these browsers.
-    <br />
-    <br />
-    If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.    
-  </span>
 </>
 
 export const instructionsText = <>
