@@ -2,10 +2,10 @@ export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 1",
-    artistDetails: "j",
+    artistDetails: "J",
     trackDetails: "cadence felt between our bodies (with Angelina Nonaj)",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.press/",
+    artistLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
     shaderName: "cycleOne",
     colours: [
