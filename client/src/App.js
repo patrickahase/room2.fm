@@ -149,9 +149,9 @@ export default function App() {
     } else {
       setSavedBrush(drawingCanvasRef.current.freeDrawingBrush);
       console.log(drawingCanvasRef.current.freeDrawingBrush);
-      /* drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
-      drawingCanvasRef.current.freeDrawingBrush.width = brushSize; */
-      drawingCanvasRef.current.freeDrawingBrush.color = "#00000000";
+      drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
+      drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
+      /* drawingCanvasRef.current.freeDrawingBrush.color = "#00000000"; */
       document.getElementById("erase-brush-button").classList.add("Active");
     }
     setIsEraser(!isEraser);
