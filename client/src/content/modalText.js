@@ -48,9 +48,7 @@ export const introText = <>
 export const instructionsText = <>
 <p>
   <span>
-    For four weeks across the course of BLEED, room2 will offer a suite of digital spaces to encourage reflection and encounter works to listen, view, reflect on and respond to.
-  </span>
-  <span>
+    For four weeks across the course of BLEED, room2 will offer a suite of digital spaces to encourage reflection and encounter works to listen, view, reflect on and respond to. 
     You can share your response to the music, prompts and visuals in a number of ways.
   </span>
   <br />
@@ -77,9 +75,8 @@ export const instructionsText = <>
   <br />
   <br />
   <span>
-    Nine compositions will be presented across the four weeks of room2 async. The music selection will change approximately every three days, while the sun is setting in Narrm — with times set to 'Australian Eastern Standard Time' or GMT+10.
+    Nine cycles of sound, prompts and visuals will be presented across the four weeks of room2 async. The music selection will change approximately every three days, while the sun is setting in Narrm — with times set to 'Australian Eastern Standard Time' or GMT+10, and location and climate info set to the approximate coordinates of Arts House in North Melbourne on Wurundjeri Country.
   </span>
-  <br />
   <br />
 </p>
 </>

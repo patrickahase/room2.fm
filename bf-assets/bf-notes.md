@@ -6,11 +6,12 @@
 # to-do
 - add more accurate info to the countdown, incl edge cases and also add more 
 ~~- add startTime to each object, then use startTime for countdowns/durations~~
-- add tide is rising / tide is falling to the introModal text
-- can now access props.currentCycle in introModal; update this in the countdown calc
+~~- add tide is rising / tide is falling to the introModal text~~
+~~- can now access props.currentCycle in introModal; update this in the countdown calc~~
 
 # optional to-do 
 - add geolocation to Native Land info
+- tide rising/falling could be illustrated thru a transparency gradient on the timeline
 - add current text time relative to sunset, eg. the sun sets in _ hours today
 - add something to the text time inviting visitors to check in with their own local time? currently no prompts in the opening pages
 ~~- maybe the NEXT moon in the nine cycle array could also pulse, when it's about to change over? maybe too much pulsing tho~~

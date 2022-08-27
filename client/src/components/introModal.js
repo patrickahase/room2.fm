@@ -120,14 +120,21 @@ export default function IntroModal(props) {
             <br />
             <p style={{fontSize: '1.75rem'}}>{props.cyclePreset.trackDetails} by {props.cyclePreset.artistDetails}</p>        
             {instructionsText}
-            <CountdownCalc currentCycle={props.currentCycle} />
-            <br />
-            <p>Support {props.cyclePreset.artistDetails} <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">here</a>.</p>        
-            <br />
+            <p>
+            {props.tideData.tideUp === 1
+            ? <>In nearby waterways, the tide is rising.</>
+            : <>In nearby waterways, the tide is falling.</>
+            }
+            </p>
             {props.trackHasUpdated
             ? <TrackUpdateMessage />
-            : <CountdownCalc currentCycle={props.currentCycle} />            
+            : <CountdownCalc currentCycle={props.currentCycle}/>            
             }
+            <br />
+            
+            <p>Support {props.cyclePreset.artistDetails} <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">here</a>.</p>        
+            <br />
+            
             <br />
             <p>
             room2 @ <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> will culminate in a live 
