@@ -118,11 +118,14 @@ export default function IntroModal(props) {
             </p>
             <p>
               There is no right or wrong way for you to listen, respond to, or feel a piece of music or sound. We encourage you to 
-                trust your ears and intuition and respond sincerely and in whatever way feels true to your experience.
+              trust your ears and intuition and respond sincerely and in whatever way feels true to your experience.
             </p>
             <p className="ModalTextSmall">
+              This iteration of room2.fm is part of the wider <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> program.
+              <br />
+              <br />
               This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
-              If you are having issues, please try one of these browsers.
+              If you are having issues, please try using one of these browsers or changing the graphics settings.
               <br />
               <br />
               If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.
@@ -136,47 +139,63 @@ export default function IntroModal(props) {
     <div id="modal-page-wrapper">
       <div id="modal-title-wrapper">
         <div id="modal-title">
-          Welcome to room2.fm async
+          room2.fm async
         </div>
         <hr />
       </div>
       <div id="modal-text-wrapper">
           <div id="modal-text">
+            <p style={{fontSize: '1.2rem'}}>
             The current cycle's track is:
             <br />
-            <p style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails} by <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">{props.cyclePreset.artistDetails}</a></p>        
-            <p>
-            {sunsetText} {props.tideData.tideUp === 1
-            ? <>In nearby waterways, the tide is rising. </>
-            : <>In nearby waterways, the tide is falling. </>
+            <span style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails} by <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">{props.cyclePreset.artistDetails}</a></span>
+            <br />  
+            <br />
+            {sunsetText}
+            {props.tideData.tideUp === 1
+            ? <> In nearby waterways, the tide is rising. </>
+            : <> In nearby waterways, the tide is falling. </>
             }
             {props.trackHasUpdated
             ? <TrackUpdateMessage />
             : <CountdownCalc currentCycle={props.currentCycle}/>            
-            }
-            </p>
-            <br />       
+            }            
             <br />
+            <br />
+            <span>
+              room2.fm is a digital space for collective reflection, sharing, and vulnerability. For four weeks across the course 
+              of <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> room2 will be presenting nine  
+              cycles of music accompanied by reflective writen prompts and generative graphics. The cycles will change approximately 
+              every three days, while the sun is setting in Narrm — with times set to 'Australian Eastern Standard Time' or GMT+10, and 
+              location and climate info set to the approximate coordinates of Arts House in North Melbourne on Wurundjeri Country.
+            </span>            
+            <br />  
+            <br />
+            <span>
+              The only information we record from your visit to room2 is the response itself and the time it was submitted.
+            </span>
+            </p>
+
             <span className="ModalTextSmall">
-    This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
-    If you are having issues, please try one of these browsers.
-    <br />
-    <br />
-    If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.   
-    <br />
-    <br /> 
-    room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and Anuraag Bhatia. This 
-    iteration contains additional development work and creative consultation from <a href="https://becfary.com/" target="_blank" rel="noreferrer">
-    BF/Local Time</a> and was commissioned as part of <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a>. 
-    Sunrise, sunset and moon phases calculated with Volodymyr Agafonkin's JavaScript library <a href="https://github.com/mourner/suncalc" target="_blank">SunCalc</a>.
-    Additional credits can be viewed in the head tag.
-    <br />
-    <br />
-    We welcome your thoughts, feedback, or questions - please send them through to room2fm@gmail.com
-</span> 
+              This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
+              If you are having issues, please try using one of these browsers or changing the graphics settings.
+              <br />
+              <br />
+              If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.   
+              <br />
+              <br /> 
+              room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and Anuraag Bhatia. This 
+              iteration contains additional development work and creative consultation from <a href="https://becfary.com/" target="_blank" rel="noreferrer">
+              BF/Local Time</a> and was commissioned as part of <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a>. 
+              Sunrise, sunset and moon phases calculated with Volodymyr Agafonkin's JavaScript library <a href="https://github.com/mourner/suncalc" target="_blank">SunCalc</a>.
+              Additional credits can be viewed in the site's head tag.
+              <br />
+              <br />
+              We welcome your thoughts, feedback, or questions - please send them through to room2fm@gmail.com
+            </span> 
           </div>
       </div>        
-      <button id="modal-continue-button" onClick={() => props.toggleModal()}> Continue </button>
+      <button id="modal-continue-button" onClick={() => props.toggleModal()}> Return</button>
     </div>,
     //page 3 Welcome
     <div id="modal-page-wrapper">
@@ -189,15 +208,7 @@ export default function IntroModal(props) {
       <div id="modal-text-wrapper">
           <div id="modal-text">
             <p>
-              <span>
-                room2.fm is a digital space for collective reflection, sharing, and vulnerability. For four weeks across the course 
-                of <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> room2 will be presenting nine different 
-                cycles of music and sound accompanied by a reflective writen prompt and generative graphics. The cycles will change approximately 
-                every three days, while the sun is setting in Narrm — with times set to 'Australian Eastern Standard Time' or GMT+10, and 
-                location and climate info set to the approximate coordinates of Arts House in North Melbourne on Wurundjeri Country.
-              </span>
-              <br />  
-              <br />
+              
               <span>
                 While listening to the audio you will be asked to respond to the prompt through either writing or drawing before anonymously 
                 submitting it to the room2 server. Once you've shared your own response you will be able to see the previous responses of other
@@ -211,10 +222,7 @@ export default function IntroModal(props) {
               </span>
               <br />
               <br />
-              <span>
-                While anonymous the responses will be collected as part of a digital archive which will be online for a longer period than 
-                the four weeks of BLEED. The only information we store is the response itself and the time it was submitted.
-              </span>
+              
               <br />    
               <br />
             </p>
