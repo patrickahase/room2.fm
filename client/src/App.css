@@ -190,7 +190,7 @@ a:hover {
   to {opacity: 1}
 }
 #current-cycle-wrapper{
-  width: 6vh;
+  width: 8vh;
   height: 72vh;
   display: flex;
   flex-direction: column;

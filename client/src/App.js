@@ -11,6 +11,8 @@ export default function App() {
   const onMobile = window.matchMedia('all and (any-hover: none)').matches;
   // current window size
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
+  // intro modal instance
+  const [introModal, setIntroModal] = useState(null);
   // is the intro modal open
   const [modalIsOpen, setModalIsOpen] = useState(true);
   // has the track updated
@@ -88,6 +90,7 @@ export default function App() {
           modalIsOpen={modalIsOpen}
           trackHasUpdated={trackHasUpdated}
           toggleModal={toggleModal}
+          setIntroModal={setIntroModal}
           setIsDrawing={setIsDrawing}
           cyclePreset={cyclePresets[currentCycle]}
           currentCycle={currentCycle}
@@ -116,8 +119,13 @@ export default function App() {
     // add and remove event listener that triggers after drawing to save canvas to undo stack
     if(modalIsOpen){
       document.addEventListener('mouseup', saveCanvasState);
+      //console.log(introModal)
+      introModal.hide();
+      document.getElementById("AOC-modal").style.display = "none";
     } else {
       document.removeEventListener('mouseup', saveCanvasState);
+      introModal.show();
+      document.getElementById("AOC-modal").style.display = "unset";
     }
     // toggle state
     setModalIsOpen(!modalIsOpen);

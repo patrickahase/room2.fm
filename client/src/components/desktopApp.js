@@ -27,100 +27,98 @@ export default function DesktopApp(props) {
 
   return (
     <div id="desktop-wrapper">
-      {props.modalIsOpen
-        /* if true show modal */
-        ? <IntroModal
-            currentModalPage={currentModalPage}
-            setCurrentModalPage={setCurrentModalPage}
-            trackHasUpdated={props.trackHasUpdated}
-            toggleModal={props.toggleModal}
-            currentCycle={props.currentCycle}
-            setCurrentCycle={props.setCurrentCycle}
-            cyclePreset={props.cyclePreset}
-            tideData={props.tideData} />
-        /* else show the desktop app */
-        : <>
-          {/* Settings Menu */}
-          <SettingsMenu
-            toggleModal={props.toggleModal}
-            setGraphicsSettings={setGraphicsSettings}
-            toggleFocus={props.toggleFocus} />
-          {/* Daily Prompt */}
-          <div id="current-prompt-wrapper" className="Collider">
-            <div id="current-prompt">
-              {props.cyclePreset.prompt}
+      {/* Intro Modal */}
+      <IntroModal
+        currentModalPage={currentModalPage}
+        setCurrentModalPage={setCurrentModalPage}
+        trackHasUpdated={props.trackHasUpdated}
+        toggleModal={props.toggleModal}
+        modalIsOpen={props.modalIsOpen}
+        setIntroModal={props.setIntroModal}
+        currentCycle={props.currentCycle}
+        setCurrentCycle={props.setCurrentCycle}
+        cyclePreset={props.cyclePreset}
+        tideData={props.tideData} />
+      {/* Settings Menu */}
+      {!props.modalIsOpen &&
+      <SettingsMenu
+        toggleModal={props.toggleModal}
+        setGraphicsSettings={setGraphicsSettings}
+        toggleFocus={props.toggleFocus} />}
+      {/* Daily Prompt */}
+      <div id="current-prompt-wrapper" className="Collider">
+        <div id="current-prompt">
+          {props.cyclePreset.prompt}
+        </div>
+      </div>
+      {/* Audio Player */}
+      <AudioTrackPlayer
+        trackSrc={props.cyclePreset.trackSrc}
+        setAudioSourceRef={setAudioSourceRef}
+        startTimer={startTimer}
+        pauseTimer={pauseTimer}
+        restartTimer={restartTimer}
+        setAskResponse={setAskResponse}
+        />
+      {/* Ask if ready to respond */} 
+      {askResponse &&
+        <button id="ready-submission-button" onClick={() => {setReadyToRespond(true); setAskResponse(false);}}> i'm ready to respond </button>
+      }
+      {/* Show response input */}
+      {readyToRespond &&
+        <>                           
+          <div id="input-wrapper">
+            <div id="input-select-wrapper">
+              <span id="input-select">
+                I would like to&nbsp;
+                <button id="draw-input-select" className="InputSelectButton" onClick={() => props.setInput(true)}>draw</button>
+                &nbsp;/&nbsp;
+                <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => props.setInput(false)}>write</button>
+                &nbsp;a response
+              </span>
+            </div>
+            <div id="input-area">
+              <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
+              <DrawingTools
+                undoDrawing={props.undoDrawing}
+                redoDrawing={props.redoDrawing}
+                toggleEraser={props.toggleEraser}
+                colours={props.colours}
+                brushSize={props.brushSize}
+                setBrushSize={props.setBrushSize} />
+              <DrawingCanvas 
+                brushColour={props.colours[0]}
+                brushSize={props.brushSize}
+                setDrawingCanvas={props.setDrawingCanvas}
+                setCurrentCanvasState={props.setCurrentCanvasState}
+                setIsDrawing={props.setIsDrawing} />
+              <ColourPicker 
+                colours={props.colours}
+                setCurrentColours={props.setCurrentColours} />
             </div>
           </div>
-          {/* Audio Player */}
-          <AudioTrackPlayer
-            trackSrc={props.cyclePreset.trackSrc}
-            setAudioSourceRef={setAudioSourceRef}
-            startTimer={startTimer}
-            pauseTimer={pauseTimer}
-            restartTimer={restartTimer}
-            setAskResponse={setAskResponse}
-            />
-          {/* Ask if ready to respond */} 
-          {askResponse &&
-            <button id="ready-submission-button" onClick={() => {setReadyToRespond(true); setAskResponse(false);}}> i'm ready to respond </button>
-          }
-          {/* Show response input */}
-          {readyToRespond &&
-            <>                           
-              <div id="input-wrapper">
-                <div id="input-select-wrapper">
-                  <span id="input-select">
-                    I would like to&nbsp;
-                    <button id="draw-input-select" className="InputSelectButton" onClick={() => props.setInput(true)}>draw</button>
-                    &nbsp;/&nbsp;
-                    <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => props.setInput(false)}>write</button>
-                    &nbsp;a response
-                  </span>
-                </div>
-                <div id="input-area">
-                  <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
-                  <DrawingTools
-                    undoDrawing={props.undoDrawing}
-                    redoDrawing={props.redoDrawing}
-                    toggleEraser={props.toggleEraser}
-                    colours={props.colours}
-                    brushSize={props.brushSize}
-                    setBrushSize={props.setBrushSize} />
-                  <DrawingCanvas 
-                    brushColour={props.colours[0]}
-                    brushSize={props.brushSize}
-                    setDrawingCanvas={props.setDrawingCanvas}
-                    setCurrentCanvasState={props.setCurrentCanvasState}
-                    setIsDrawing={props.setIsDrawing} />
-                  <ColourPicker 
-                    colours={props.colours}
-                    setCurrentColours={props.setCurrentColours} />
-                </div>
-              </div>
-              <button id="response-submit-button" 
-                    onClick={() => {
-                      props.submitResponse();
-                      setReadyToRespond(false);
-                  }}>submit my response</button>
-            </>            
-          }
-          {/* External Response Overlay */}
-          <ResponseDisplay 
-            responseData={props.responseData}
-            height={props.height}
-            width={props.width} />
-          {/* Background Visuals */}
-          <div id="bg-vis-wrapper">              
-            <GLVis
-              shaderName={props.cyclePreset.shaderName}
-              graphicsSettings={graphicsSettings}
-              timer={timer}
-              height={props.height}
-              width={props.width}
-              tideData={props.tideData} />          
-          </div> 
-          </>
+          <button id="response-submit-button" 
+                onClick={() => {
+                  props.submitResponse();
+                  setReadyToRespond(false);
+              }}>submit my response</button>
+        </>            
       }
+      {/* External Response Overlay */}
+      <ResponseDisplay 
+        responseData={props.responseData}
+        height={props.height}
+        width={props.width} />
+      {/* Background Visuals */}
+      <div id="bg-vis-wrapper">              
+        <GLVis
+          shaderName={props.cyclePreset.shaderName}
+          graphicsSettings={graphicsSettings}
+          timer={timer}
+          height={props.height}
+          width={props.width}
+          tideData={props.tideData} />          
+      </div> 
     </div>
   )
   /* update timer value (based on track position) */
