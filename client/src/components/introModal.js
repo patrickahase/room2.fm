@@ -129,14 +129,8 @@ export default function IntroModal(props) {
             : <CountdownCalc currentCycle={props.currentCycle}/>            
             }
             </p>
-            
             <br />       
             <br />
-            {/* <p>
-            room2 @ <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> will culminate in a live 
-            event on Sunday 25 September, 14:00 – 19:00 AEST held both here at this URL and at Arts House - <a href="https://artshouse.sales.ticketsearch.com/sales/salesevent/76403" target="_blank" rel="noreferrer">tickets
-              for the in person event can be found here</a>.
-            </p> */}
             {creditsText}
           </div>
       </div>        

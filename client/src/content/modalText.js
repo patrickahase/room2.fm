@@ -2,8 +2,8 @@ export const acknowledgementOfCountryText = <><p style={{fontSize: "1.75rem"}}>
   This website was produced and is maintained on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi 
   Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
   of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
-  all other First Nations peoples and Traditional Custodians of this continent, whose land the material pathways that allow 
-  our digital connectivity are built upon.
+  all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
+  connectivity are built upon.
   </p>
 </>
 
