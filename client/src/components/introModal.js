@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Component } from 'react';
 import A11yDialog from 'a11y-dialog';
 import { acknowledgementOfCountryText, introText, instructionsText, creditsText, /* warningText */ } from '../content/modalText';
-import CountdownCalc, {/*sunSetText,*/ currentMoonShape, moonShapeArray} from './timeCalc';
+import CountdownCalc, {sunsetText, currentMoonShape, moonShapeArray} from './timeCalc';
 import { cycleDates } from '../content/cyclePresets';
 import WhereAreYou from './whereModal';
 
@@ -120,6 +120,7 @@ export default function IntroModal(props) {
             <br />
             <p style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails} by <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">{props.cyclePreset.artistDetails}</a></p>        
             <p>
+            {sunsetText}
             {props.tideData.tideUp === 1
             ? <>In nearby waterways, the tide is rising. </>
             : <>In nearby waterways, the tide is falling. </>
