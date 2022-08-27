@@ -137,8 +137,8 @@ export const cyclePresets = [
 ]
 
 export const cycleDates = [
-  { //change this startTime to 2022-08-28 on launch, 25th is in there for testing the current moon
-    startTime: Date.parse("2022-08-25T17:55+10:00"), 
+  { 
+    startTime: Date.parse("2022-08-28T17:55+10:00"), 
     endTime: Date.parse("2022-08-31T17:58:51+10:00"),
     tidalData: [
       {
