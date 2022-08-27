@@ -4,7 +4,8 @@
 ~~- final half-hour; trigger a function with setInterval that checks whether the time changeover has passed; if it has, pop up/trigger a marquee that says the track has changed, refresh page to show the new one?~~
 
 # to-do
-- add more accurate info to the countdown, incl edge cases and also add more 
+~~- add more accurate info to the countdown, incl edge cases and also add more ~~
+~~- add SunCalc to credits~~
 ~~- add startTime to each object, then use startTime for countdowns/durations~~
 ~~- add tide is rising / tide is falling to the introModal text~~
 ~~- can now access props.currentCycle in introModal; update this in the countdown calc~~
