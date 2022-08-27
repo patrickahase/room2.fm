@@ -136,9 +136,9 @@ export const cyclePresets = [
   }
 ]
 
-//this cycle will only check once, but maybe also checking if it's half an hour before an endTime
 export const cycleDates = [
-  {
+  { //change this startTime to 2022-08-28 on launch, 25th is in there for testing the current moon
+    startTime: Date.parse("2022-08-25T17:55+10:00"), 
     endTime: Date.parse("2022-08-31T17:58:51+10:00"),
     tidalData: [
       {
@@ -199,6 +199,7 @@ export const cycleDates = [
     ]
   },
   {
+    startTime: Date.parse("2022-08-31T17:58:51+10:00"),
     endTime: Date.parse("2022-09-03T18:01:21+10:00"),
     tidalData: [
       {
@@ -259,6 +260,7 @@ export const cycleDates = [
     ]
   },
   {
+    startTime: Date.parse("2022-09-03T18:01:21+10:00"),
     endTime: Date.parse("2022-09-06T18:03:50+10:00"),
     tidalData: [
       {
@@ -324,6 +326,7 @@ export const cycleDates = [
     ]
   },
   {
+    startTime: Date.parse("2022-09-06T18:03:50+10:00"),
     endTime: Date.parse("2022-09-09T18:06:18+10:00"),
     tidalData: [
       {
@@ -384,6 +387,7 @@ export const cycleDates = [
     ]
   },
   {
+    startTime: Date.parse("2022-09-09T18:06:18+10:00"),
     endTime: Date.parse("2022-09-12T18:08:47+10:00"),
     tidalData: [
       {
@@ -449,6 +453,7 @@ export const cycleDates = [
     ]
   },
   {
+    startTime: Date.parse("2022-09-12T18:08:47+10:00"),
     endTime: Date.parse("2022-09-15T18:11:16+10:00"),
     tidalData: [
       {
@@ -514,6 +519,7 @@ export const cycleDates = [
     ]
   },
   {
+    startTime: Date.parse("2022-09-15T18:11:16+10:00"),
     endTime: Date.parse("2022-09-18T18:13:45+10:00"),
     tidalData: [
       {
@@ -574,6 +580,7 @@ export const cycleDates = [
     ]
   },
   {
+    startTime: Date.parse("2022-09-18T18:13:45+10:00"),
     endTime: Date.parse("2022-09-21T18:16:15+10:00"),
     tidalData: [
       {
@@ -639,6 +646,7 @@ export const cycleDates = [
     ]
   },
   {
+    startTime: Date.parse("2022-09-21T18:16:15+10:00"),
     endTime: Date.parse("2022-09-24T18:18:46+10:00"),
     tidalData: [
       {

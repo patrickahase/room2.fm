@@ -1,13 +1,19 @@
 # 23/08/22
-- pulse animation on the current moon is an option for the final half-hour 
-- maybe the NEXT moon in the nine cycle array could also pulse, when it's about to change over?
-- need to change the opacity for the nine cycles, so that the one that's full opacity is the one before that in the array
-- final half-hour; trigger a function with setInterval that checks whether the time changeover has passed; if it has, pop up/trigger a marquee that says the track has changed, refresh page to show the new one?
+~~- pulse animation on the current moon is an option for the final half-hour~~
+~~- need to change the opacity for the nine cycles, so that the one that's full opacity is the one before that in the array~~
+~~- final half-hour; trigger a function with setInterval that checks whether the time changeover has passed; if it has, pop up/trigger a marquee that says the track has changed, refresh page to show the new one?~~
+
+# to-do
+- add more accurate info to the countdown, incl edge cases and also add more 
+~~- add startTime to each object, then use startTime for countdowns/durations~~
+- add tide is rising / tide is falling to the introModal text
+- can now access props.currentCycle in introModal; update this in the countdown calc
 
 # optional to-do 
 - add geolocation to Native Land info
 - add current text time relative to sunset, eg. the sun sets in _ hours today
 - add something to the text time inviting visitors to check in with their own local time? currently no prompts in the opening pages
+~~- maybe the NEXT moon in the nine cycle array could also pulse, when it's about to change over? maybe too much pulsing tho~~
 
 # Notes
 - 29/08/22 beginning of async 

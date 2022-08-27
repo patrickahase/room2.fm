@@ -119,6 +119,8 @@ export default function IntroModal(props) {
             The current cycle's track is:
             <br />
             <p style={{fontSize: '1.75rem'}}>{props.cyclePreset.trackDetails} by {props.cyclePreset.artistDetails}</p>        
+            {instructionsText}
+            <CountdownCalc currentCycle={props.currentCycle} />
             <br />
             <p>Support {props.cyclePreset.artistDetails} <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">here</a>.</p>        
             <br />
@@ -189,8 +191,8 @@ function NineCycleBar (props){
 
 function CurrentCycleBar(props){
   let currentDate = Date.now();
-  var cycleDuration = cycleDates[props.currentCycle].endTime - cycleDates[props.currentCycle].endTime;
-  var currentPos = currentDate - cycleDates[props.currentCycle].endTime;
+  var cycleDuration = cycleDates[props.currentCycle].endTime - cycleDates[props.currentCycle].startTime;
+  var currentPos = currentDate - cycleDates[props.currentCycle].startTime;
   var cents = 80 / cycleDuration;
   var percentage = cents * currentPos;
   var marginstyle = {marginTop: percentage + "vh"}
