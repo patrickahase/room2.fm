@@ -8,7 +8,8 @@ export default function CountdownCalc (props) {
     //
   },[]);*/
   let currentDate = Date.now();
-  var remainingMilli = cycleDates[1].endTime - currentDate;
+  var remainingMilli = cycleDates[props.currentCycle].endTime - currentDate;
+  
   var countdownDays = Math.round(remainingMilli / 1000 / 60 / 60 / 24);
   //need to work on countdowncalc so that edge cases (eg. before midnight on night of changeover) is more accurate
   if (countdownDays >= 3) {
@@ -39,7 +40,6 @@ export default function CountdownCalc (props) {
 }
 
 var date = Date.now(); 
-//date = date.now();
 //var nowhours = date.getUTCHours() + 10; 
 
 const lat = -37.803193437556054; //latitude and longitude set to Arts House Nth Melbourne
@@ -55,8 +55,7 @@ var cycleStartDates = [
   Date.parse("2022-09-12T18:08:47+10:00"),
   Date.parse("2022-09-15T18:11:16+10:00"),
   Date.parse("2022-09-18T18:13:45+10:00"),
-  Date.parse("2022-09-21T18:16:15+10:00"),
-  //Date.parse("2022-09-24T18:18:46+10:00")
+  Date.parse("2022-09-21T18:16:15+10:00")
 ]; //manually entered these dates so test dates don't mess with it
 
 function getCycleSun (end) {
@@ -64,6 +63,7 @@ function getCycleSun (end) {
   var endSun = SunCalc.getTimes(cycleEndTime, lat, long);
   return endSun.sunset;
 }
+console.log(getCycleSun(date));
 
 
 function getCycleMoon (end) {

@@ -118,28 +118,26 @@ export default function IntroModal(props) {
           <div id="modal-text">
             The current cycle's track is:
             <br />
-            <p style={{fontSize: '1.75rem'}}>{props.cyclePreset.trackDetails} by {props.cyclePreset.artistDetails}</p>        
-            <br />
-            <p>Support {props.cyclePreset.artistDetails} <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">here</a>.</p>        
-            <br />
+            <p style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails} by <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">{props.cyclePreset.artistDetails}</a></p>        
+            <p>
+            {props.tideData.tideUp === 1
+            ? <>In nearby waterways, the tide is rising. </>
+            : <>In nearby waterways, the tide is falling. </>
+            }
             {props.trackHasUpdated
             ? <TrackUpdateMessage />
-            : <CountdownCalc currentCycle={props.currentCycle} />            
+            : <CountdownCalc currentCycle={props.currentCycle}/>            
             }
+            </p>
+            
+            <br />       
             <br />
-            <p>
+            {/* <p>
             room2 @ <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> will culminate in a live 
             event on Sunday 25 September, 14:00 – 19:00 AEST held both here at this URL and at Arts House - <a href="https://artshouse.sales.ticketsearch.com/sales/salesevent/76403" target="_blank" rel="noreferrer">tickets
               for the in person event can be found here</a>.
-            </p>
+            </p> */}
             {creditsText}
-            <span className="ModalTextSmall">
-              This website has been optimised to run with the window maximised on Chrome and Firefox on a desktop or laptop screen. 
-              If you are having issues, please try one of these browsers.
-              <br />
-              <br />
-              If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.    
-            </span>
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.toggleModal()}> Continue </button>
@@ -218,9 +216,9 @@ function CurrentCycleBar(props){
 
 function TrackUpdateMessage(){
   return(
-    <p style={{marginBottom: "1rem"}}>
+    <span style={{marginBottom: "1rem"}}>
       The selected track has been updated. Refresh the page to listen and respond to the new music and prompts.
-    </p>
+    </span>
   )
 }
 
