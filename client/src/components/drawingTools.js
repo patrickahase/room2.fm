@@ -2,13 +2,6 @@ import React, { useEffect } from 'react';
 
 export default function DrawingTools(props){
 
-/*   useEffect(() => {
-    // increase brush size on click if within limit
-    document.getElementById("increase-brush-button").addEventListener('click', );
-    // decrease brush size on click if within limit
-    document.getElementById("decrease-brush-button").addEventListener('click', );
-  }, []); */
-
   return (
     <>
       <div id="drawing-buttons-wrapper">
