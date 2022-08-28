@@ -194,22 +194,17 @@ a:hover {
   height: 72vh;
   display: flex;
   flex-direction: column;
-  /*background-color: var(--comp-col-04);*/
   align-items: center;
   justify-content: center;
   align-items: center;
   
 }
 #timeline-gradient{
-  /*flex-grow: 1;
-  background-color: var(--comp-col-04);
-  width: 0.5vh;*/
   border-left: 0.2vh solid var(--comp-col-04);
   border-right: 0.2vh solid var(--comp-col-03);
   opacity: 0.6;
   height: 80vh;
   position: absolute;
-  /*background-image: linear-gradient(to bottom, red, blue);*/
 }
 
 #modal-title-wrapper{
@@ -356,7 +351,7 @@ a:hover {
   min-width: fit-content;
   padding: 0 1rem;
   background-color: var(--comp-col-01);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: var(--comp-col-02);
   user-select: none;  
 }
@@ -374,6 +369,9 @@ a:hover {
 #graphics-dropdown{
   display: none;
   flex-direction: column;
+}
+#settings-focus-button.Active{
+  filter: invert();
 }
 
 /* Current Prompt */
@@ -403,7 +401,7 @@ a:hover {
   background-color: var(--comp-col-01);
   padding: 0.5rem 1rem;
   margin: 0 auto;
-  font-size: 2.0rem;
+  font-size: 1.5rem;
   color: var(--comp-col-02);
   user-select: none;
   display: inline;
@@ -639,7 +637,7 @@ a:hover {
   background-color: var(--comp-col-01);
   padding: 0.5rem 1rem;
   margin: 0 auto;
-  font-size: 2.0rem;
+  font-size: 1.5rem;
   color: var(--comp-col-02);
   user-select: none;
   display: inline;

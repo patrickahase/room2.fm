@@ -331,18 +331,21 @@ export default function App() {
   function toggleFocus(){
     let textResponseRule = getCSSRule('.TextResponseBox');
     let imageResponseRule = getCSSRule('.ImageResponseBox');
+    console.log("focus")
     if(!focusMode){
       setFocusMode(true);
       textResponseRule.style.backgroundColor = "rgb(31, 33, 28)";
       textResponseRule.style.border = "solid white 1px";
       imageResponseRule.style.backgroundColor = "white";
       imageResponseRule.style.border = "solid rgb(31, 33, 28) 1px";
+      document.getElementById("settings-focus-button").classList.add("Active");
     } else {
       setFocusMode(false);
       textResponseRule.style.backgroundColor = "";
       textResponseRule.style.border = "";
       imageResponseRule.style.backgroundColor = "";
       imageResponseRule.style.border = "";
+      document.getElementById("settings-focus-button").classList.remove("Active");
     }
   }
 

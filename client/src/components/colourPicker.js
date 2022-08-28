@@ -52,7 +52,7 @@ export default function ColourPicker(props){
   }
   function colourInputChange(e){
     let colNum = parseInt(e.target.id.charAt(3));
-    document.documentElement.style.setProperty('--comp-col-0'+colNum, e.target.value);
+    //document.documentElement.style.setProperty('--comp-col-0'+colNum, e.target.value);
     let newColours = props.colours;
     newColours[colNum - 1] = e.target.value;
     props.setCurrentColours(newColours);
