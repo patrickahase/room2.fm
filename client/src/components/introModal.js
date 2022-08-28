@@ -188,7 +188,8 @@ export default function IntroModal(props) {
               the Eastern Kulin Nation and we pay respect to their Elders past and present.
               <br />
               <br /> 
-              room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and Anuraag Bhatia. This 
+              room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and 
+              <a href="https://soundcloud.com/anuraag69" target="_blank" rel="noreferrer">Anuraag Bhatia</a>. This 
               iteration contains additional development work and creative consultation from <a href="https://becfary.com/" target="_blank" rel="noreferrer">
               BF/Local Time</a> and was commissioned as part of <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a>. 
               Additional credits can be viewed in the site's head tag.

@@ -1,7 +1,7 @@
 export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
-    prompt: "this is prompt 1",
+    prompt: <>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>,
     artistDetails: "J",
     trackDetails: "cadence felt between our bodies (with Angelina Nonaj)",
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
