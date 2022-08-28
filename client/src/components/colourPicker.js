@@ -67,11 +67,9 @@ export default function ColourPicker(props){
         default:
         break;
       }
-    //document.documentElement.style.setProperty('--comp-col-0'+colNum, e.target.value);
     let newColours = props.colours;
     newColours[colNum] = e.target.value;
     props.setCurrentColours(newColours);
-    console.log(colNum);
   }
 }
 
