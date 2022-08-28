@@ -149,73 +149,73 @@ function checkhours(num) {
 }
 
 function textNum (num) {
-  if (num == 1) {
+  if (num === 1) {
     return (
       <>
       one
       </>
     )
-  } else if (num == 2) {
+  } else if (num === 2) {
     return (
       <>
       two 
       </>
     )
-  } else if (num == 3) {
+  } else if (num === 3) {
     return (
       <>
       three
       </>
     )
-  } else if (num == 4) {
+  } else if (num === 4) {
     return (
       <>
       four
       </>
     ) 
-  } else if (num == 5) {
+  } else if (num === 5) {
     return (
       <>
       five
       </>
     )
-  } else if (num == 6) {
+  } else if (num === 6) {
     return (
       <>
       six
       </>
     )
-  } else if (num == 7) {
+  } else if (num === 7) {
     return (
       <>
       seven
       </>
     )
-  } else if (num == 8) {
+  } else if (num === 8) {
     return (
       <>
       eight
       </>
     )
-  } else if (num == 9) {
+  } else if (num === 9) {
     return (
       <>
       nine
       </>
     )
-  } else if (num == 10) {
+  } else if (num === 10) {
     return (
       <>
       ten
       </>
     )
-  } else if (num == 11) {
+  } else if (num === 11) {
     return (
       <>
       eleven
       </>
     )
-  } else if (num == 12) {
+  } else if (num === 12) {
     return (
       <>
       twelve

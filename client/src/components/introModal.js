@@ -184,10 +184,13 @@ export default function IntroModal(props) {
               If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.   
               <br />
               <br /> 
+              This website was produced on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi Wurrung peoples of 
+              the Eastern Kulin Nation and we pay respect to their Elders past and present.
+              <br />
+              <br /> 
               room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and Anuraag Bhatia. This 
               iteration contains additional development work and creative consultation from <a href="https://becfary.com/" target="_blank" rel="noreferrer">
               BF/Local Time</a> and was commissioned as part of <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a>. 
-              Sunrise, sunset and moon phases calculated with Volodymyr Agafonkin's JavaScript library <a href="https://github.com/mourner/suncalc" target="_blank">SunCalc</a>.
               Additional credits can be viewed in the site's head tag.
               <br />
               <br />

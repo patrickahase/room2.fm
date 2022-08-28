@@ -94,7 +94,7 @@ async function getPotentialLocations() {
   .then((response) => response.json())
   .then((data) => {
   const latLng = extractLngLat(data)
-  console.log(latLng)
+  //console.log(latLng)
   return latLng
     ? {
         ...latLng,
