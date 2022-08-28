@@ -19,7 +19,7 @@ const upload = multer({
     s3: s3,
     bucket: 'thelongesthumstore',
     acl: 'public-read',
-    key: (req, file, callBack) => { callBack(null, 'room2-async-cycle_'+ (parseInt(file.originalname.replace(/ /g,'-').substr(6,1))-1) +'/' + Date.now() + file.originalname.replace(/ /g,'-')) }
+    key: (req, file, callBack) => { callBack(null, 'room2-async-cycle_'+ (parseInt(file.originalname.replace(/ /g,'-').substr(6,1))) +'/' + Date.now() + file.originalname.replace(/ /g,'-')) }
   })
 }).array('upload', 1);
 
