@@ -24,6 +24,7 @@ export default function ColourPicker(props){
   )
 
   function colourSwap(e){
+    console.log(props.colours)
     let selectors = document.getElementsByClassName("col-select");
     for (let i = 0; i < 3; i++){
       let cl = selectors[i].classList;
@@ -51,11 +52,26 @@ export default function ColourPicker(props){
     ]);
   }
   function colourInputChange(e){
-    let colNum = parseInt(e.target.id.charAt(3));
+    let colNum = 0;
+    let cl = e.target.classList;
+      switch(true){
+        case cl.contains('first'):
+        colNum = 0;
+        break;
+        case cl.contains('second'):
+        colNum = 1;
+        break;
+        case cl.contains('third'):
+        colNum = 2;
+        break;
+        default:
+        break;
+      }
     //document.documentElement.style.setProperty('--comp-col-0'+colNum, e.target.value);
     let newColours = props.colours;
-    newColours[colNum - 1] = e.target.value;
+    newColours[colNum] = e.target.value;
     props.setCurrentColours(newColours);
+    console.log(colNum);
   }
 }
 
