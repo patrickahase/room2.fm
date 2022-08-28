@@ -35,6 +35,7 @@ export default function App() {
   const [responseData, setResponseData] = useState([]);
   // current drawing colours
   const [currentColours, setCurrentColours] = useState(cyclePresets[currentCycle].colours);
+  const[selectedColour, setSelectedColour] = useState(0);
   // drawing settings
   const [brushSize, setBrushSize] = useState(8);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -71,7 +72,27 @@ export default function App() {
   
   useEffect(() => {
     setCurrentColours(cyclePresets[currentCycle].colours);
-  }, [currentCycle])
+  }, [currentCycle]);
+
+  // update brush colour and cursor on colour change
+  useEffect(() => {
+    if(drawingCanvasRef.current && !isEraser){
+      drawingCanvasRef.current.freeDrawingBrush.color = currentColours[selectedColour];
+      drawingCanvasRef.current.freeDrawingCursor = getCustomCursor();
+    }    
+  }, [selectedColour]);
+
+  useEffect(() => {
+    if(drawingCanvasRef.current){
+      drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
+      if(isEraser){
+        drawingCanvasRef.current.freeDrawingCursor = getCustomEraserCursor();
+      } else {
+        drawingCanvasRef.current.freeDrawingCursor = getCustomCursor();
+      }
+      
+    }    
+  }, [brushSize]);
 
   return (
     <div id="global-wrapper">
@@ -98,6 +119,8 @@ export default function App() {
           tideData={tideData}
           setInput={setInput}
           colours={currentColours}
+          selectedColour={selectedColour}
+          setSelectedColour={setSelectedColour}
           setCurrentColours={setCurrentColours}
           brushSize={brushSize}
           setBrushSize={setBrushSize}
@@ -153,12 +176,15 @@ export default function App() {
   function toggleEraser(){
     if(isEraser){
       drawingCanvasRef.current.freeDrawingBrush = savedBrush;
+      drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
+      drawingCanvasRef.current.freeDrawingBrush.color = currentColours[selectedColour];
+      drawingCanvasRef.current.freeDrawingCursor = getCustomCursor();
       document.getElementById("erase-brush-button").classList.remove("Active");
     } else {
       setSavedBrush(drawingCanvasRef.current.freeDrawingBrush);
       drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
       drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
-      /* drawingCanvasRef.current.freeDrawingBrush.color = "#00000000"; */
+      drawingCanvasRef.current.freeDrawingCursor = getCustomEraserCursor();
       document.getElementById("erase-brush-button").classList.add("Active");
     }
     setIsEraser(!isEraser);
@@ -287,7 +313,6 @@ export default function App() {
       .then(res => res.json())
       .then(res => {
         try{
-          //returnedResponses.push([responseText, 'image']);
           console.log(res.data);
           for(const response of res.data[1]) {
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
@@ -313,7 +338,6 @@ export default function App() {
       .then(res => res.json())
       .then(res => {
         try{
-          //returnedResponses.push([responseText, 'text']);
           for(const response of res.data[1]) {
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);         
           }
@@ -375,5 +399,37 @@ export default function App() {
         return result != null;
     });
     return result;
+  }
+
+  function getCustomEraserCursor() {
+    const circle = 
+      `<svg height="${brushSize}"
+            viewBox="0 0 ${brushSize * 2} ${brushSize * 2}"
+            width="${brushSize}"
+            xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50%"
+                cy="50%"
+                fill="#000000"
+                r="${brushSize}" />
+        <circle cx="50%"
+                cy="50%"
+                fill="#ffffff"
+                r="${brushSize-2}" />
+      </svg>`;      
+    return `url(data:image/svg+xml;base64,${window.btoa(circle)}) ${brushSize / 2} ${brushSize / 2}, move`;
+  }
+
+  function getCustomCursor() {
+    const circle = 
+      `<svg height="${brushSize}"
+            fill="${currentColours[selectedColour]}"
+            viewBox="0 0 ${brushSize * 2} ${brushSize * 2}"
+            width="${brushSize}"
+            xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50%"
+                cy="50%"
+                r="${brushSize}" />
+      </svg>`;      
+    return `url(data:image/svg+xml;base64,${window.btoa(circle)}) ${brushSize / 2} ${brushSize / 2}, move`;
   }
 }

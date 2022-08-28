@@ -22,8 +22,6 @@ export default function DesktopApp(props) {
   const[timerInterval, setTimerInterval] = useState(null);
   const[audioSourceRef, setAudioSourceRef] = useState(null);
 
-  const[selectedColour, setSelectedColour] = useState(0);
-
   // graphics settings  - 1 high 10 medium 20 low
   const[graphicsSettings, setGraphicsSettings] = useState(1);
 
@@ -89,14 +87,14 @@ export default function DesktopApp(props) {
                 brushSize={props.brushSize}
                 setBrushSize={props.setBrushSize} />
               <DrawingCanvas 
-                brushColour={props.colours[selectedColour]}
+                brushColour={props.colours[props.selectedColour]}
                 brushSize={props.brushSize}
                 setDrawingCanvas={props.setDrawingCanvas}
                 setCurrentCanvasState={props.setCurrentCanvasState}
                 setIsDrawing={props.setIsDrawing} />
               <ColourPicker 
                 colours={props.colours}
-                setSelectedColour={setSelectedColour}
+                setSelectedColour={props.setSelectedColour}
                 setCurrentColours={props.setCurrentColours} />
             </div>
           </div>
