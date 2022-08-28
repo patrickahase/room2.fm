@@ -123,7 +123,7 @@ export default function IntroModal(props) {
               of <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a> room2 will be presenting nine  
               cycles of music accompanied by reflective writen prompts and generative graphics. The cycles will change approximately 
               every three days, while the sun is setting in Narrm — with times set to 'Australian Eastern Standard Time' or GMT+10, and 
-              location and climate info set to the approximate coordinates of Arts House in North Melbourne on Wurundjeri Country.
+              location and climate info set to the approximate coordinates of Arts House in North Melbourne on Boon Wurrung and Wurundjeri Country.
             </span>            
             <br />  
             <br />
