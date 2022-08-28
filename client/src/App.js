@@ -156,7 +156,6 @@ export default function App() {
       document.getElementById("erase-brush-button").classList.remove("Active");
     } else {
       setSavedBrush(drawingCanvasRef.current.freeDrawingBrush);
-      console.log(drawingCanvasRef.current.freeDrawingBrush);
       drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
       drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
       /* drawingCanvasRef.current.freeDrawingBrush.color = "#00000000"; */
@@ -288,8 +287,9 @@ export default function App() {
       .then(res => res.json())
       .then(res => {
         try{
+          //returnedResponses.push([responseText, 'image']);
+          console.log(res.data);
           for(const response of res.data[0]) {
-            console.log(response);
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
           }
           setResponseData(returnedResponses);
@@ -308,14 +308,13 @@ export default function App() {
           headers: { 'Content-type': 'application/json' },
           method: 'POST',
           mode: 'cors',
-          // we add one to cycle pos to keep start from 1
           body: JSON.stringify({reflection: responseText, cycleTable: currentCycle})
         })
       .then(res => res.json())
       .then(res => {
         try{
+          returnedResponses.push([responseText, 'text']);
           for(const response of res.data[0]) {
-            console.log(response);
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);         
           }
           setResponseData(returnedResponses);
