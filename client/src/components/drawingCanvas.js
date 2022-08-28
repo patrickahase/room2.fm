@@ -23,20 +23,6 @@ export default function DrawingCanvas(props){
     props.setCurrentCanvasState(newCanvas.toDatalessJSON());
   }, [setCanvas]);
 
-  useEffect(() => {
-    if(canvasRef.current){
-      canvasRef.current.freeDrawingBrush.color = props.brushColour;
-      canvasRef.current.freeDrawingCursor = getCustomCursor();
-    }    
-  }, [props.brushColour]);
-
-  useEffect(() => {
-    if(canvasRef.current){
-      canvasRef.current.freeDrawingBrush.width = props.brushSize;
-      canvasRef.current.freeDrawingCursor = getCustomCursor();
-    }    
-  }, [props.brushSize]);
-
   return (
     <div id="drawing-canvas-wrapper">
       <canvas id="drawing-canvas" />
