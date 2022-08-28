@@ -12,53 +12,8 @@ export default function IntroModal(props) {
     const dialog = new A11yDialog(container);
     dialog.show();
     props.setIntroModal(dialog);
-    function secretKey(e){
-      switch (e.key) {
-        case "!": 
-        props.setCurrentCycle(0);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "@": 
-        props.setCurrentCycle(1);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "#": 
-        props.setCurrentCycle(2);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "$": 
-        props.setCurrentCycle(3);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "%": 
-        props.setCurrentCycle(4);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "^": 
-        props.setCurrentCycle(5);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "&": 
-        props.setCurrentCycle(6);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "*": 
-        props.setCurrentCycle(7);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "(": 
-        props.setCurrentCycle(8);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        default:
-          return; // Quit when this doesn't handle the key event.
-      }
-    }
-    window.addEventListener("keydown", secretKey);
-
-    return function cleanup(){
-      window.removeEventListener("keydown", secretKey);
-    }
+    
+   // window.addEventListener("keydown", secretKey);
   },[]);
 
   let modalPages = [
@@ -109,8 +64,9 @@ export default function IntroModal(props) {
             <p>
               The current cycle's track is:
               <br />
-              <span style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails} by <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">{props.cyclePreset.artistDetails}</a></span>
+              <span style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails}</span>
             </p>
+            <p>{props.cyclePreset.artistDetails}</p>
             <p>
               room2.fm is a digital space for collective reflection, sharing, and vulnerability. Upon entering you will be presented with 
               an audio track and a written prompt which you can respond to via your choice of writing or drawing. You can then anonymously 
@@ -148,7 +104,7 @@ export default function IntroModal(props) {
             <p style={{fontSize: '1.2rem'}}>
             The current cycle's track is:
             <br />
-            <span style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails} by <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">{props.cyclePreset.artistDetails}</a></span>
+            <span style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails}</span>
             <br />  
             <br />
             {sunsetText}
@@ -307,6 +263,50 @@ export default function IntroModal(props) {
   function nextModalPage(){
     props.setCurrentModalPage(props.currentModalPage + 1);
     document.getElementById("modal-text-wrapper").scrollTop = 0;
+    window.removeEventListener("keydown", secretKey);
+  }
+
+  function secretKey(e){
+    switch (e.key) {
+      case "!": 
+      props.setCurrentCycle(0);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      case "@": 
+      props.setCurrentCycle(1);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      case "#": 
+      props.setCurrentCycle(2);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      case "$": 
+      props.setCurrentCycle(3);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      case "%": 
+      props.setCurrentCycle(4);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      case "^": 
+      props.setCurrentCycle(5);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      case "&": 
+      props.setCurrentCycle(6);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      case "*": 
+      props.setCurrentCycle(7);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      case "(": 
+      props.setCurrentCycle(8);
+      props.setCurrentModalPage(props.currentModalPage + 1);
+        break;
+      default:
+        return; // Quit when this doesn't handle the key event.
+    }
   }
 }
 

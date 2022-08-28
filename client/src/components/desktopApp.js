@@ -13,7 +13,7 @@ const timerRefreshRate = 15;
 
 export default function DesktopApp(props) {
 
-  const [currentModalPage, setCurrentModalPage] = useState(0);
+  const [currentModalPage, setCurrentModalPage] = useState(1);
 
   const[askResponse, setAskResponse] = useState(false);
   const[readyToRespond, setReadyToRespond] = useState(false);  

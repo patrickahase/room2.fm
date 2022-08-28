@@ -33,6 +33,5 @@ This is my refactoring of the room2 code base to set it up for continued use
 - update salllvage track
 - raag modal link
 - additional credits in build
-- focus mode toggle
 - handle secret button
 

@@ -2,10 +2,10 @@ export const cyclePresets = [
   {
     introStatement: "if you're seeing this the server is having some trouble",
     prompt: <>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>,
-    artistDetails: "J",
-    trackDetails: "cadence felt between our bodies (with Angelina Nonaj)",
+    trackDetails: "cadence felt between our bodies (with Angelina Nonaj) by J",
+    artistDetails: <><a href="Link: https://soundcloud.com/user-29348158" target="_blank" rel="noreferrer">J</a> (picnic, ju ca) communicates a unique understanding of intimacy, tenderness, and familiarity throughout his work. We have been inspired by his sonic output as well as his record label and publishing platform, Daisart, where he has carved out new spaces and frameworks to explore the intersection of sound, word, and image. We are very grateful to have this tender piece from J and Angelina Nonaj opening this season of room2 async.</>,
     trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
+    artistLink: "Link: https://soundcloud.com/user-29348158",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
     shaderName: "cycleOne",
     colours: [
