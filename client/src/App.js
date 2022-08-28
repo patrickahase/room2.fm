@@ -289,7 +289,7 @@ export default function App() {
         try{
           //returnedResponses.push([responseText, 'image']);
           console.log(res.data);
-          for(const response of res.data[0]) {
+          for(const response of res.data[1]) {
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
           }
           setResponseData(returnedResponses);
@@ -313,8 +313,8 @@ export default function App() {
       .then(res => res.json())
       .then(res => {
         try{
-          returnedResponses.push([responseText, 'text']);
-          for(const response of res.data[0]) {
+          //returnedResponses.push([responseText, 'text']);
+          for(const response of res.data[1]) {
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);         
           }
           setResponseData(returnedResponses);
