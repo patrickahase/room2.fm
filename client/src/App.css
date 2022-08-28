@@ -387,7 +387,7 @@ a:hover {
 #current-prompt{
   background-color: rgb(31, 33, 28);
   max-width: 100%;
-  font-size: 1.5vw;  
+  font-size: 1.25vw;  
   color: var(--comp-col-02);  
   user-select: none;
   text-align: center;
