@@ -8,26 +8,32 @@ var youlong;
 export default function WhereAreYou () {
   const [whereTerritories, getTerritories] = useState([]);
   
+  const [isChecking, setIsChecking] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  return (<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <p>Where are you visiting from?</p>    
+    {isChecking
+      ?<>{isLoading
+        ? <WhereThrobber />
+        : <>{whereTerritories}</> 
+        }</>
+      :<button id="ip-check-button" onClick={() => runCheck()}>Check with my IP</button>      
+    }    
+  </div>)
+
+  function runCheck(){
+    setIsChecking(true);
     getPotentialLocations()
     .then(data => {
       setIsLoading(false);
       getTerritories(data);
     }      
     );
-   }, [])
-
-  return (<div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-    <p>Where are you visiting from?</p>
-  {isLoading
-    ? <WhereThrobber />
-    : <>{whereTerritories}</> 
-    }
-    
-  </div>)
+  }
 }
+
+
 
 async function getPotentialLocations() {  
   const ipData = await getLocationDataFromIp();

@@ -246,10 +246,22 @@ a:hover {
   background-color: #202121;
 }
 #modal-throbber{
+  margin-top: 1rem;
   width: 3rem;
   height: 3rem;
 }
-
+#ip-check-button{
+  background-color: var(--comp-col-01);
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: var(--comp-col-02);
+  user-select: none; 
+  margin-top: 1rem;
+}
+#ip-check-button:hover{
+  color: #5252ff;
+  background-color: #202121;
+}
 /* Door Closed - Text Logo */
 #logo-wrapper{
   display: flex;
