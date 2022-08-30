@@ -143,12 +143,12 @@ export default function App(){
   function setInput(changeToDraw){
     if(changeToDraw){
       setInputIsDraw(true);
-      document.getElementById("drawing-canvas-wrapper").style.zIndex = "6";
+      document.getElementById("drawing-canvas-wrapper").style.left= "0%";
       document.getElementById("draw-input-select").classList.add("ActiveInputButton");
       document.getElementById("text-input-select").classList.remove("ActiveInputButton");
     } else {
       setInputIsDraw(false);
-      document.getElementById("drawing-canvas-wrapper").style.zIndex = "4";
+      document.getElementById("drawing-canvas-wrapper").style.left = "-100%";
       document.getElementById("draw-input-select").classList.remove("ActiveInputButton");
       document.getElementById("text-input-select").classList.add("ActiveInputButton");
     }
@@ -646,15 +646,13 @@ export class App2 extends Component {
   }
   setDrawInput(){
     this.setState({drawingResponse: true});
-    document.getElementById("drawing-canvas-wrapper").style.zIndex = "4";
-    document.getElementById("text-input").style.zIndex = "3";
+    document.getElementById("drawing-canvas-wrapper").style.left = "0%";
     document.getElementsByClassName("ActiveInputButton")[0].classList.remove("ActiveInputButton");
     document.getElementById("draw-input-select").classList.add("ActiveInputButton");
   }
   setWriteInput(){
     this.setState({drawingResponse: false});
-    document.getElementById("drawing-canvas-wrapper").style.zIndex = "3";
-    document.getElementById("text-input").style.zIndex = "4";
+    document.getElementById("drawing-canvas-wrapper").style.left = "-100%";
     document.getElementsByClassName("ActiveInputButton")[0].classList.remove("ActiveInputButton");
     document.getElementById("text-input-select").classList.add("ActiveInputButton");
   }
