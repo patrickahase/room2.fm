@@ -14,7 +14,7 @@ export default function App(){
   //const [modalIsOpen, setModalIsOpen] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   // current text prompt
-  const [currentPrompt, setCurrentPrompt] = useState("Test Prompt")
+  const [currentPrompt, setCurrentPrompt] = useState(<>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>);
   // if false it's assumed to be text instead
   const[inputIsDraw, setInputIsDraw] = useState(false);
   // other responses from database
@@ -162,6 +162,7 @@ export default function App(){
     } else {
       setSavedBrush(drawingCanvas.freeDrawingBrush);
       drawingCanvas.freeDrawingBrush = new fabric.EraserBrush(drawingCanvas);
+      console.log(new fabric.EraserBrush(drawingCanvas));
       drawingCanvas.freeDrawingBrush.width = brushSize;
       document.getElementById("erase-brush-button").classList.add("Active");
     }

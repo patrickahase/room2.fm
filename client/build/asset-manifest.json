@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.26af9244.chunk.css",
-    "main.js": "/static/js/main.b6fca194.chunk.js",
-    "main.js.map": "/static/js/main.b6fca194.chunk.js.map",
+    "main.css": "/static/css/main.6a509200.chunk.css",
+    "main.js": "/static/js/main.791dac06.chunk.js",
+    "main.js.map": "/static/js/main.791dac06.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.0f16f66c.js",
     "runtime-main.js.map": "/static/js/runtime-main.0f16f66c.js.map",
-    "static/js/2.b2a9a59c.chunk.js": "/static/js/2.b2a9a59c.chunk.js",
-    "static/js/2.b2a9a59c.chunk.js.map": "/static/js/2.b2a9a59c.chunk.js.map",
+    "static/js/2.0fb25a29.chunk.js": "/static/js/2.0fb25a29.chunk.js",
+    "static/js/2.0fb25a29.chunk.js.map": "/static/js/2.0fb25a29.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.26af9244.chunk.css.map": "/static/css/main.26af9244.chunk.css.map",
-    "static/js/2.b2a9a59c.chunk.js.LICENSE.txt": "/static/js/2.b2a9a59c.chunk.js.LICENSE.txt",
+    "static/css/main.6a509200.chunk.css.map": "/static/css/main.6a509200.chunk.css.map",
+    "static/js/2.0fb25a29.chunk.js.LICENSE.txt": "/static/js/2.0fb25a29.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/static/media/brush_plus.280bde6c.svg",
     "static/media/alien.png": "/static/media/alien.381f0676.png",
     "static/media/blossoming-flower.png": "/static/media/blossoming-flower.5f78e6a8.png",
-    "static/media/App.css": "/static/media/undo.73a1b145.svg",
     "static/media/butterfly.png": "/static/media/butterfly.22ba9572.png",
     "static/media/desert.png": "/static/media/desert.afb4dc6a.png",
     "static/media/leaf-in-wind.png": "/static/media/leaf-in-wind.b5dea42c.png",
@@ -24,8 +24,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.0f16f66c.js",
-    "static/js/2.b2a9a59c.chunk.js",
-    "static/css/main.26af9244.chunk.css",
-    "static/js/main.b6fca194.chunk.js"
+    "static/js/2.0fb25a29.chunk.js",
+    "static/css/main.6a509200.chunk.css",
+    "static/js/main.791dac06.chunk.js"
   ]
 }

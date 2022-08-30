@@ -47,6 +47,12 @@ body {
   overflow: hidden;
 }
 
+button {
+  border: 2px solid #e3e3e3;
+  border-bottom-color: #979797; 
+  border-right-color: #979797; 
+}
+
 #global-wrapper{
   width: 100vw;
   height: 100vh;
@@ -377,11 +383,11 @@ body {
 /* Current Prompt */
 #current-prompt-wrapper{
   position: absolute;
-  left: 25vh;
+  left: 20vh;
   bottom: 25%;
-  width: calc(75vw - 50vh);
+  width: calc(75vw - 45vh);
   z-index: 3;
-  font-size: max(1.0vw, 0.8em);
+  font-size: 1.7rem;
   background-color: rgb(31, 33, 28);
   color: white;  
   font-family: 'IBM Plex Sans Condensed', sans-serif;
@@ -410,17 +416,24 @@ body {
 
 }
 #input-select-wrapper{
-  padding-top: 1vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#input-select{
+  background-color: rgb(31, 33, 28);
+  width: 100%;
+  font-size: 1.7rem;  
+  color: var(--comp-col-02);  
+  user-select: none;
+  text-align: center;
+  padding: 0 1vw;
 }
 .InputSelectButton{
   background-color: rgb(31, 33, 28);
-  color: white;
-  font-size: max(1.0vw, 0.8em);
-  font-family: 'IBM Plex Sans Condensed', sans-serif;
-  margin-bottom: 2px;
-  border: 1px white;
-  border-style: dotted solid;
-  border-radius: 3px 0px;
+  color: var(--comp-col-02);
+  font-size: 1.7rem;
+  margin: 2px 0;
 }
 .ActiveInputButton{
   /* color: #5252ff; */
@@ -481,10 +494,10 @@ body {
 #input-wrapper{
   background-color: var(--comp-col-03);
   position: absolute;
-  left: 40vh;
+  left: 20vh;
   bottom: 0%;
   height: 25%;
-  width: calc(75vw - 65vh);
+  width: calc(75vw - 45vh);
 }
 #input-wrapper::after{
   content: " ";
@@ -548,9 +561,9 @@ body {
 }
 #drawing-buttons-wrapper{
   position: absolute;
-  width: 15vh;
+  width: 20vh;
   height: 25vh;
-  left: 25vh;
+  left: 0%;
   bottom: 0%;
   background-color: var(--comp-col-02);
   display: flex;
@@ -660,19 +673,17 @@ body {
   background: no-repeat center/50vh url('./content/media/brush_minus.svg');
 }
 #eraser-icon{
-  height: 5vh;
-  width: 5vh;
-  background: no-repeat center/50vh url('./content/media/eraser_pic.svg');
+  height: 10vw;
+  width: 10vw;
+  background-size: 2500% 2500%;
 }
 #undo-icon{
-  height: 5vh;
-  width: 5vh;
-  background: no-repeat center/50vh url('./content/media/undo.svg');
+  height: 10vw;
+  width: 10vw;
 }
 #redo-icon{
-  height: 5vh;
-  width: 5vh;
-  background: no-repeat center/50vh url('./content/media/redo.svg');
+  height: 10vw;
+  width: 10vw;
 }
 #increase-brush-circle{
   transition: 0.5s;
@@ -805,6 +816,8 @@ body {
   grid-row: 1/5;
   background-color: #222323;
   border: 2px solid var(--comp-col-01);
+  display: flex;
+  flex-direction: column;
 }
 #volume-wrapper::after{
   content: " ";
@@ -816,7 +829,8 @@ body {
   border: 2px var(--comp-col-01);
   border-style: none solid;
   transition: 0.2s;
-  background: #22232311;  
+  background: #22232311;
+  pointer-events: none;
 }
 #volume-wrapper:hover::after{
   background: transparent;  
@@ -826,15 +840,13 @@ body {
   background-color: var(--comp-col-03);
   opacity: 0.5;
   border-radius: 3px;
-  pointer-events: none;
-  /* border: 1px dotted var(--comp-col-02); */
+  border: 0;
 }
 .VolumeActive{
   opacity: 0.9;
 }
-.VolumeHover{
+.VolumeNotch:hover{
   opacity: 1;
-  /* border: 1.5px solid var(--comp-col-02); */
 }
 #volume-wrapper:active{
   border: 4px solid var(--comp-col-01); 
@@ -926,6 +938,13 @@ body {
   bottom: 4.5%;  
 }
 
+#mobile-wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 /* Mobile Rules */
 @media all and (any-hover: none) {
   /* Modal Style */
@@ -964,5 +983,85 @@ body {
     bottom: 7vh;
     left: 30vw;
   }
+
+  /* prompt section */
+  #current-prompt-wrapper{
+    position: unset;
+    left: unset;
+    bottom: unset;
+    width: 100%;
+    font-size: 1.25rem;
+  }
+  #current-prompt{
+    padding: 1rem;
+  }
+  .InputSelectButton{
+    width: 50%;
+  }
+  #input-wrapper{
+    position: unset;
+    left: unset;
+    bottom: unset;
+    width: 100%;
+    flex-grow: 1;
+  }
+  #input-wrapper::after{
+    display: none;
+  }
+
+  #drawing-buttons-wrapper{
+    position: unset;
+    width: 100%;
+    height: 16.67vw;
+    flex-direction: row;
+  }
+  .DrawingUIButton{
+    width: 16.67vw;
+    height: 16.67vw;
+    background-color: rgb(31, 33, 28);
+    color: var(--comp-col-02);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+  }
+  #mobile-col-select{
+    width: 30vw;
+  }
+  #brush-col-label{
+    flex-grow: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(31, 33, 28);
+    color: var(--comp-col-02);
+  }
+  #brush-size-wrapper{
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(31, 33, 28);
+    color: var(--comp-col-02);
+    padding: 0.5rem 0;
+  }
+  #brush-size-slider-wrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  #brush-size-slider{
+    width: 80%;
+  }
+
+  #mobile-response-submit-button{
+    width: 100%;
+    padding: 1rem 0;
+  }
+
 }
 

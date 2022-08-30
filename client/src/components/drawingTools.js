@@ -1,132 +1,100 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
-
-export class DrawingTools extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    frameColour: "#ffffff88"
-    }
-    
-  }
-  render() {
-    return (
-      <>
-      
-              <div id="drawing-buttons-wrapper">
-                {/* <button>bigger brush</button>
-                <button>smaller brush</button>
-                <button>eraser</button>
-                <button>undo</button>
-                <button>redo</button> */}
-                <button id="increase-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> BRUSH + <div id="brush-up-icon" /></button>
-                <button id="decrease-brush-button" className="RightUIButton" onClick={this.props.changeBrushSize}> BRUSH - <div id="brush-down-icon" /></button>
-                <button id="erase-brush-button" className="RightUIButton" onClick={this.props.toggleEraser}> ERASER <div id="eraser-icon" /></button>
-                <button id="undo-button" className="RightUIButton" onClick={this.props.undoDrawing}> UNDO <div id="undo-icon" /></button>
-                <button id="redo-button" className="RightUIButton" onClick={this.props.redoDrawing}> REDO <div id="redo-icon" /></button>
-              
-              </div>
+export default function DrawingTools(props){
+  return (<>
+    {props.mobile
+      ?<>
+        <div id="drawing-buttons-wrapper">
+          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> ERASER <div id="eraser-icon"><EraserIcon /></div></button>
+          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> UNDO <div id="undo-icon"><UndoIcon /></div></button>
+          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> REDO <div id="redo-icon"><RedoIcon /></div></button>
+          <span id="brush-col-label">Brush<br />Colour</span>
+          <input type="color" id="mobile-col-select" className="DrawingUIButton" name="col1Select" defaultValue={props.colours[0]} />              
+        </div>
+        <div id="brush-size-wrapper">
+            <div id="brush-size-slider-wrapper">
+              <span style={{position: 'relative', top: '-0.1rem'}}>-</span>
+              <input type="range" id="brush-size-slider" name="brush-size-slider" min="4" max="40" />
+              <span style={{position: 'relative', top: '-0.1rem'}}>+</span>
+            </div>
+            <span>Brush Size</span>
+          </div>
       </>
-    )
-  }
-  componentDidMount() {
-    
-  }
-  componentDidUpdate(prevProps){
-    if (prevProps.colours.colour1 !== this.props.colours.colour1) {
-      var c = this.props.colours.colour1.substring(1);      // strip #
-      var rgb = parseInt(c, 16);   // convert rrggbb to decimal
-      var r = (rgb >> 16) & 0xff;  // extract red
-      var g = (rgb >>  8) & 0xff;  // extract green
-      var b = (rgb >>  0) & 0xff;  // extract blue
-      
-      var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
-      
-      if (luma < 40) {
-          this.setState({ frameColour: "#ffffff88" })
-      } else {
-          this.setState({ frameColour: "#00000088" })
-      }
-    }
-  }
-
-  /* getCSSRule(ruleName) {
-    ruleName = ruleName.toLowerCase();
-    var result = null;
-    var find = Array.prototype.find;
-
-    find.call(document.styleSheets, styleSheet => {
-        result = find.call(styleSheet.cssRules, cssRule => {
-            return cssRule instanceof CSSStyleRule 
-                && cssRule.selectorText.toLowerCase() === ruleName;
-        });
-        return result != null;
-    });
-    return result;
-  } */
+      :<>
+        <div id="drawing-buttons-wrapper">
+          <button id="increase-brush-button" className="DrawingUIButton" onClick={() => {if(props.brushSize < 60){ props.setBrushSize(props.brushSize + 2 ) }}}> BRUSH + <div id="brush-up-icon" /></button>
+          <button id="decrease-brush-button" className="DrawingUIButton" onClick={() => {if(props.brushSize > 2){ props.setBrushSize(props.brushSize - 2 ) }}}> BRUSH - <div id="brush-down-icon" /></button>
+          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> ERASER <div id="eraser-icon" /></button>
+          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> UNDO <div id="undo-icon" /></button>
+          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> REDO <div id="redo-icon" /></button>              
+        </div>
+      </>
+    }    
+    </>)
 }
-
-export default DrawingTools
-
-/* expecting a 1:1 aspect ratio */
-function IncreaseBrushSize(props){
-  return (<>
-  <svg
-      width="83%"
-      height="100%"
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg" >
-        <rect id="increase-brush-circle" width="100%" height="100%" x="0" y="0" fill="url(#increase-brush-gradient" />
-        <defs>
-          <radialGradient id="increase-brush-gradient">
-            <stop offset="60%" stopColor={props.colour1} />
-            <stop offset="60%" stopColor={props.colour1} />
-            <stop offset="65%" stopColor={props.colour2} />
-            <stop offset="85%" stopColor="transparent" />            
-          </radialGradient>
-        </defs>        
-    </svg>
-  <svg
-      width="17%"
-      height="100%"
-      viewBox="0 0 20 100"
-      xmlns="http://www.w3.org/2000/svg" >
-        {/* <rect id="increase-brush-circle" width="100%" height="100%" x="0" y="0" cX="50%" cY="50%" fill="url(#increase-brush-gradient" /> */}
-        <polyline points="10,20 10,80" fill="none" stroke="black" strokeWidth="4" />   
-        <polyline points="0,30 10,20 20,30" fill="none" stroke="black" strokeWidth="4" />   
-    </svg>  
-  </>    
-  )
-}
-/* expecting a 1:1 aspect ratio */
-function DecreaseBrushSize(props){
-  return (<>
+function UndoIcon(){
+  return (
     <svg
-      width="83%"
+      width="100%"
       height="100%"
       viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg" >
-        <rect id="decrease-brush-circle" width="100%" height="100%" x="0" y="0" cx="50%" cy="50%" fill="url(#decrease-brush-gradient)">
-        </rect>
+      xmlns="http://www.w3.org/2000/svg"
+      className="AudioPlayerIcon">
         <defs>
-          <radialGradient id="decrease-brush-gradient">
-            <stop offset="30%" stopColor={props.colour1} />
-            <stop offset="30%" stopColor={props.colour1} />
-            <stop offset="35%" stopColor={props.colour2} />
-            <stop offset="55%" stopColor="transparent" />            
-          </radialGradient>
+          <marker id="arrowhead" markerWidth="5" markerHeight="5" strokeWidth="0" fill="white"
+          refX="0" refY="2.5" orient="auto">
+            <polygon points="0 0, 5 2.5, 0 5" />
+          </marker>
         </defs>
-        
+        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke="white" marker-end="url(#arrowhead)"
+              d=" M 30,80
+                  L 65,80
+                  A 15 15 0 1 0 65,28
+                  L 30,28
+                  " />
     </svg>
-    <svg
-      width="17%"
-      height="100%"
-      viewBox="0 0 20 100"
-      xmlns="http://www.w3.org/2000/svg" >
-        {/* <rect id="increase-brush-circle" width="100%" height="100%" x="0" y="0" cX="50%" cY="50%" fill="url(#increase-brush-gradient" /> */}
-        <polyline points="10,20 10,80" fill="none" stroke="black" strokeWidth="4" />   
-        <polyline points="0,70 10,80 20,70" fill="none" stroke="black" strokeWidth="4" />   
-    </svg>  
-  </>
   )
 }
+function RedoIcon(){
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      className="AudioPlayerIcon">
+        <defs>
+          <marker id="arrowhead2" markerWidth="5" markerHeight="5" strokeWidth="0" fill="white"
+          refX="0" refY="2.5" orient="auto">
+            <polygon points="0 0, 5 2.5, 0 5" />
+          </marker>
+        </defs>
+        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke="white" marker-end="url(#arrowhead2)"
+              d=" M 70,80
+                  L 35,80
+                  A 15 15 0 0 1 35,28
+                  L 70,28
+                  " />
+    </svg>
+  )
+}
+function EraserIcon(){
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      className="AudioPlayerIcon"
+      fill='none'
+      stroke='white'
+      strokeWidth='3'
+      >
+        <rect x="10" y="60" width="40" height="20" />
+        <polygon points="10,60 50,60 85,20 45,20" fill="yellow" stroke-linejoin="bevel" />
+        <polygon points="50,80 50,60 85,20 85,40" fill="yellow" stroke-linejoin="bevel" />
+      
+    </svg>
+  )
+}
+

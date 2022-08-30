@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 export default function AudioControls(props){
 
-  const volumeNotches = 12;
-  const [lastNotchHovered, setLastNotchHovered] = useState(null);
+  const notchNumber = 12;
 
-  useEffect(() => {
-    let volumeWrapper = document.getElementById('volume-wrapper');
-    volumeWrapper.addEventListener('mousemove', detectVolumeHover);
-    volumeWrapper.addEventListener('mouseenter', detectVolumeHover);
-    volumeWrapper.addEventListener('mousedown', detectVolumeClick);
-    volumeWrapper.addEventListener('mouseleave', exitVolumeWrapper);
-    for(let i = 0; i < volumeNotches; i++){
-      let newNotch = document.createElement('div');
-      newNotch.classList.add('VolumeNotch');
-      newNotch.classList.add('VolumeActive');     
-      newNotch.id = volumeNotches - i;
-      newNotch.style.height = 100/volumeNotches + "%";
-      volumeWrapper.appendChild(newNotch);
-    }
-  }, []);
+  let volNotchGen = Array(notchNumber).fill('');
+
+  /* keep track of mouse down for volume drag event */
+  var isMouseDown = false;
+  document.addEventListener("mouseup", () => {isMouseDown = false});
+
+  const VolumeNotches = volNotchGen.map((nothing, index) =>
+    <button className='VolumeNotch VolumeActive' id={index}
+        key={index+nothing} 
+        onMouseDown={clickVolumeNotch}
+        onMouseEnter={(e) => {if(isMouseDown){clickVolumeNotch(e)}}}
+        style={{height: 100/volNotchGen.length + "%"}} />
+  );
 
   return (
     <>              
@@ -30,48 +27,28 @@ export default function AudioControls(props){
         }          
         </button>
       <div id="volume-wrapper">
+        {VolumeNotches}
       </div>
     </> 
   )
 
-  function exitVolumeWrapper(){
-    Array.from(document.getElementsByClassName('VolumeHover')).forEach(function (element) {
-      element.classList.remove('VolumeHover');
-    });    
-  }
-  function detectVolumeHover(e) {
-    let volumeWrapper = e.target;
-    let mousePos = Math.trunc((e.clientY - volumeWrapper.getBoundingClientRect().top) / volumeWrapper.offsetHeight * volumeNotches);
-    if(lastNotchHovered !== mousePos){ 
-      setLastNotchHovered(mousePos);
-      Array.from(document.getElementsByClassName('VolumeHover')).forEach(function (element) {
-        element.classList.remove('VolumeHover');
-      });      
-      e.target.childNodes[mousePos].classList.add('VolumeHover');
-      if(e.buttons === 1) {
-        detectVolumeClick(e);
-      }
-    }
-  }
-  // can this be streamlined?? possibly get a normal value from mouse pos then do other maths to it
-  function detectVolumeClick(e) {
-    let volumeWrapper = e.target;
-    let mousePos = Math.trunc((e.clientY - volumeWrapper.getBoundingClientRect().top) / volumeWrapper.offsetHeight * volumeNotches);
-    Array.from(document.getElementsByClassName('VolumeNotch')).forEach(function (element, index) {
-      if(index+1 > mousePos){ element.classList.add('VolumeActive') }
-      else{ element.classList.remove('VolumeActive') }
-    });
-    let iconLines = document.getElementsByClassName('MuteLines');
-    let lineCutoff = 3 - (mousePos/volumeNotches*3);
-    for (let j = 0; j < 3; j ++){
-      if(j<lineCutoff){
-        iconLines[j].classList.add('active');
+  function clickVolumeNotch(e){
+    e.stopPropagation();
+    isMouseDown = true;
+    let clickedID = parseInt(e.target.id);
+    console.log(clickedID);
+    /* set classes for active notch */
+    let notches = document.getElementsByClassName("VolumeNotch");
+    for (let notch of notches){
+      if(notch.id < clickedID){
+        notch.classList.remove("VolumeActive");
       } else {
-        iconLines[j].classList.remove('active');
-      }
+        notch.classList.add("VolumeActive");
+      }  
     }
-    let newVolume = 1 - mousePos / volumeNotches;
-    props.changeVolume(newVolume);
+    /* set new volume */
+    let newVolume = 1 - (1/notchNumber) * clickedID;
+    //document.getElementById("audio-source").volume = newVolume;
   }
 }
 
