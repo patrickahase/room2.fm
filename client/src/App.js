@@ -34,6 +34,8 @@ export default function App() {
   // current drawing colours
   const [currentColours, setCurrentColours] = useState(cyclePresets[currentCycle].colours);
   const[selectedColour, setSelectedColour] = useState(0);
+  var selectedColourRef = useRef(selectedColour);
+  useEffect(() => {selectedColourRef.current = selectedColour}, [selectedColour]);
   // drawing settings
   const [brushSize, setBrushSize] = useState(8);
   const [isDrawing, setIsDrawing] = useState(false);
@@ -75,20 +77,13 @@ export default function App() {
   // update brush colour and cursor on colour change
   useEffect(() => {
     if(drawingCanvasRef.current && !isEraser){
-      drawingCanvasRef.current.freeDrawingBrush.color = currentColours[selectedColour];
-      drawingCanvasRef.current.freeDrawingCursor = getCustomCursor();
+      updateCanvasBrush();
     }    
   }, [selectedColour]);
 
   useEffect(() => {
     if(drawingCanvasRef.current){
-      drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
-      if(isEraser){
-        drawingCanvasRef.current.freeDrawingCursor = getCustomEraserCursor();
-      } else {
-        drawingCanvasRef.current.freeDrawingCursor = getCustomCursor();
-      }
-      
+      updateCanvasBrush();      
     }    
   }, [brushSize]);
 
@@ -123,6 +118,7 @@ export default function App() {
           selectedColour={selectedColour}
           setSelectedColour={setSelectedColour}
           setCurrentColours={setCurrentColours}
+          updateCanvasBrush={updateCanvasBrush}
           brushSize={brushSize}
           setBrushSize={setBrushSize}
           toggleEraser={toggleEraser}
@@ -170,6 +166,16 @@ export default function App() {
       document.getElementById("drawing-tools-wrapper").style.right = "";
       document.getElementById("drawing-buttons-wrapper").style.left = "";
       document.getElementById("text-input-select").classList.add("ActiveInputButton");
+    }
+  }
+
+  function updateCanvasBrush(){
+    drawingCanvasRef.current.freeDrawingBrush.color = currentColours[selectedColourRef.current];
+    drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
+    if(isEraser){
+      drawingCanvasRef.current.freeDrawingCursor = getCustomEraserCursor();
+    } else {
+      drawingCanvasRef.current.freeDrawingCursor = getCustomCursor();
     }
   }
 
@@ -355,7 +361,6 @@ export default function App() {
   function toggleFocus(){
     let textResponseRule = getCSSRule('.TextResponseBox');
     let imageResponseRule = getCSSRule('.ImageResponseBox');
-    console.log("focus")
     if(!focusMode){
       setFocusMode(true);
       textResponseRule.style.backgroundColor = "rgb(31, 33, 28)";
@@ -423,7 +428,7 @@ export default function App() {
   function getCustomCursor() {
     const circle = 
       `<svg height="${brushSize}"
-            fill="${currentColours[selectedColour]}"
+            fill="${currentColours[selectedColourRef.current]}"
             viewBox="0 0 ${brushSize * 2} ${brushSize * 2}"
             width="${brushSize}"
             xmlns="http://www.w3.org/2000/svg">
