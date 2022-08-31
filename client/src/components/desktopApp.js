@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import IntroModal from './introModal';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
@@ -14,6 +14,8 @@ const timerRefreshRate = 15;
 export default function DesktopApp(props) {
 
   const [currentModalPage, setCurrentModalPage] = useState(1);
+  var currentModalPageRef = useRef(currentModalPage);
+  useEffect(() => {currentModalPageRef.current = currentModalPage}, [currentModalPage]);
 
   const[askResponse, setAskResponse] = useState(false);
   const[readyToRespond, setReadyToRespond] = useState(false);  
@@ -30,6 +32,7 @@ export default function DesktopApp(props) {
       {/* Intro Modal */}
       <IntroModal
         currentModalPage={currentModalPage}
+        currentModalPageRef={currentModalPageRef}
         setCurrentModalPage={setCurrentModalPage}
         trackHasUpdated={props.trackHasUpdated}
         toggleModal={props.toggleModal}
