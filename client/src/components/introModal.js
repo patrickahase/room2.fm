@@ -266,46 +266,49 @@ export default function IntroModal(props) {
   }
 
   function secretKey(e){
-    switch (e.key) {
-      case "!": 
-      props.setCurrentCycle(0);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      case "@": 
-      props.setCurrentCycle(1);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      case "#": 
-      props.setCurrentCycle(2);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      case "$": 
-      props.setCurrentCycle(3);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      case "%": 
-      props.setCurrentCycle(4);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      case "^": 
-      props.setCurrentCycle(5);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      case "&": 
-      props.setCurrentCycle(6);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      case "*": 
-      props.setCurrentCycle(7);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      case "(": 
-      props.setCurrentCycle(8);
-      props.setCurrentModalPage(props.currentModalPage + 1);
-        break;
-      default:
-        return; // Quit when this doesn't handle the key event.
+    if(props.currentModalPageRef.current === 1){
+      switch (e.key) {
+        case "!": 
+        props.setCurrentCycle(0);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "@": 
+        props.setCurrentCycle(1);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "#": 
+        props.setCurrentCycle(2);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "$": 
+        props.setCurrentCycle(3);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "%": 
+        props.setCurrentCycle(4);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "^": 
+        props.setCurrentCycle(5);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "&": 
+        props.setCurrentCycle(6);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "*": 
+        props.setCurrentCycle(7);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        case "(": 
+        props.setCurrentCycle(8);
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        default:
+          return; // Quit when this doesn't handle the key event.
+      }
     }
+    
   }
 }
 

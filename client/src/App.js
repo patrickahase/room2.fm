@@ -20,7 +20,7 @@ export default function App() {
   // check update interval
   let checkEndInterval;
   // current cycle - gets updated on page load
-  const [currentCycle, setCurrentCycle] = useState(1);
+  const [currentCycle, setCurrentCycle] = useState(0);
   // tide data - gets updated on page load
   const [tideData, setTideData] = useState({
     tideUp: -1.0,
@@ -64,7 +64,7 @@ export default function App() {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    //updateCyclePosition();
+    updateCyclePosition();
   }, []);
 
   
