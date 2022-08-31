@@ -20,14 +20,12 @@ export default function App() {
   // check update interval
   let checkEndInterval;
   // current cycle - gets updated on page load
-  const [currentCycle, setCurrentCycle] = useState(0);
+  const [currentCycle, setCurrentCycle] = useState(1);
   // tide data - gets updated on page load
   const [tideData, setTideData] = useState({
     tideUp: -1.0,
     tideHeight: 0.8
   });
-  // get current position in cycle
-  const cyclePos = 0;
   /* const cyclePos = asyncCycleCalc(); */
   /* if false it's assumed to be text instead */
   const[inputIsDraw, setInputIsDraw] = useState(false);
@@ -66,7 +64,7 @@ export default function App() {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    updateCyclePosition();
+    //updateCyclePosition();
   }, []);
 
   
@@ -100,8 +98,11 @@ export default function App() {
       ?
         <div id="mobile-wrapper">
           <span id="mobile-text">
-            Unfortunately room2.fm is currently not able to operate on mobile devices due to technical restrictions. 
+            Unfortunately room2.fm async is currently not able to operate on mobile devices due to technical restrictions. 
             Please try again on a desktop or laptop computer if you are able to.
+            <br />
+            <br />
+            room2 live will run on the 25th of September at Arts House and at this url. For more information and tickets please <a href="https://bleedonline.net/program/room2/#live" target="_blank" rel="noreferrer">click here</a>.
           </span>
         </div>
       :

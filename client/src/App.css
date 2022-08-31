@@ -772,11 +772,11 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 16rem;
   height: 100%;
 }
 #mobile-text {
-  font-size: 2rem;
+  font-size: 6rem;
   color: var(--comp-col-02);
   user-select: none;
   position: absolute;
