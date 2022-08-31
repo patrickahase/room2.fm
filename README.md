@@ -35,3 +35,5 @@ This is my refactoring of the room2 code base to set it up for continued use
 - additional credits in build
 - handle secret button
 
+- mobile live event qr
+
