@@ -97,6 +97,7 @@ export default function DesktopApp(props) {
                 setIsDrawing={props.setIsDrawing} />
               <ColourPicker 
                 colours={props.colours}
+                updateCanvasBrush={props.updateCanvasBrush}
                 setSelectedColour={props.setSelectedColour}
                 setCurrentColours={props.setCurrentColours} />
             </div>
