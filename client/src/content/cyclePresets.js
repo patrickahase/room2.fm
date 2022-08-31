@@ -16,17 +16,17 @@ export const cyclePresets = [
   },
   {
     introStatement: "if you're seeing this the server is having some trouble",
-    prompt: "this is prompt 2",
-    artistDetails: "Aarti Jadu",
-    trackDetails: "IT / THAT",
+    prompt: <>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>,
+    trackDetails: "IT / THAT by Aarti Jadu",
+    artistDetails: <></>,
     trackLink: "https://aartijadu.bandcamp.com/track/it-that",
     artistLink: "https://aartijadu.bandcamp.com/",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/AJ.mp3",
     shaderName: "cycleTwo",
     colours: [
       "#222323",
-      "#5252ff",
-      "#b5e877"
+      "#ebdfdf",
+      "#2c4046"
     ]
   },
   {

@@ -13,7 +13,7 @@ export default function IntroModal(props) {
     dialog.show();
     props.setIntroModal(dialog);
     
-   // window.addEventListener("keydown", secretKey);
+    window.addEventListener("keydown", secretKey);
   },[]);
 
   let modalPages = [
