@@ -358,7 +358,7 @@ function CurrentCycleBar(props){
 function TrackUpdateMessage(){
   return(
     <span style={{marginBottom: "1rem"}}>
-      The selected track has been updated. Refresh the page to listen and respond to the new music and prompts.
+      A new cycle has begun. Refresh the page to listen and respond to the new music and prompts.
     </span>
   )
 }

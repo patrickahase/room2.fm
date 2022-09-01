@@ -262,8 +262,9 @@ export default function App() {
       // check current time vs the end of the cycle, if before the end time then set the cycle int and break the for loop
       if(currentDate < cycleDates[i].endTime){
         setCurrentCycle(i); 
-        if (cycleDates[i].endTime - currentDate < halfHour) {
-          checkEndInterval = setInterval(checkEnd(cycleDates[i].endTime), 300000);
+        var timeRemaining = cycleDates[i].endTime - currentDate;
+        if (timeRemaining <= halfHour) {
+          checkEndInterval = setInterval(checkEnd(cycleDates[i].endTime), 60000);
         } 
         for(let k = 0; k < cycleDates[i].tidalData.length; k++){
           if(currentDate < cycleDates[i].tidalData[k].tideEnd){

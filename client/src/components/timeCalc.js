@@ -17,9 +17,9 @@ const yesterdaySunset = Date.parse (yesterdayTimes.sunset);
 export default function CountdownCalc (props) {
   var remainingMilli = cycleDates[props.currentCycle].endTime - currentDate;
   var countdownDays = remainingMilli / 1000 / 60 / 60 / 24;
+  var hour = 60 * 60 * 1000;
   countdownDays = countdownDays.toFixed(2);
   // b/w sunset and midnight is approx 6 hours = 0.25 of a day
-  //need to work on countdowncalc so that edge cases (eg. before midnight on night of changeover) is more accurate
   if (countdownDays >= 2.75) {
     return (
       <>
@@ -46,6 +46,15 @@ export default function CountdownCalc (props) {
       </>
     )
   } else if (countdownDays <= 0.74) {
+    if (remainingMilli <= hour) {
+      return (
+        <>
+        <span>
+          The next cycle will begin soon, as the sun is setting.
+        </span>
+        </>
+      )
+    } else {
     return (
       <>
       <span>
@@ -54,6 +63,7 @@ export default function CountdownCalc (props) {
       </>
     )
   }
+}
 }
 
 var cycleStartDates = [
