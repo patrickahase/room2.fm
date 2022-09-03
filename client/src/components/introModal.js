@@ -317,7 +317,7 @@ function NineCycleBar (props){
   let moonSpheres = moonShapeArray.map((num, i) =>
     {
       if(i < props.currentCycle){
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.4}}>{moonShapeArray[i]}</div>
+        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>{moonShapeArray[i]}</div>
       } else if (i === props.currentCycle) {
         return <div className="MoonSphereWrapper" key={i} style={{opacity: 1}}>{moonShapeArray[i]}</div>
       } else {

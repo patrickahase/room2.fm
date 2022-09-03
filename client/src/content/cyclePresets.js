@@ -1,11 +1,8 @@
 export const cyclePresets = [
   {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: <>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>,
     trackDetails: "cadence felt between our bodies (with Angelina Nonaj) by J",
     artistDetails: <><a href="https://soundcloud.com/user-29348158" target="_blank" rel="noreferrer">J</a> (picnic, ju ca) communicates a unique understanding of intimacy, tenderness, and familiarity throughout his work. We have been inspired by his sonic output as well as his record label and publishing platform, Daisart, where he has carved out new spaces and frameworks to explore the intersection of sound, word, and image. We are very grateful to have this tender piece from J and Angelina Nonaj opening this season of room2 async.</>,
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "Link: https://soundcloud.com/user-29348158",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
     shaderName: "cycleOne",
     colours: [
@@ -15,12 +12,9 @@ export const cyclePresets = [
     ]
   },
   {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: <>Wait to hear a point of change in the song you perceive as significant.<br/>Draw or write about the sensation(s) you feel in your body after this change happens.</>,
     trackDetails: "IT / THAT by Aarti Jadu",
     artistDetails: <><a href="https://aartijadu.bandcamp.com/" target="_blank" rel="noreferrer">Aarti Jadu</a> is an exceptionally unique artist. She brings together an often disparate set of cultural references - Hindu devotional music, trap, experimental electronic - and forms a new folk music and methodology of engaging with the self and voice. This deep wisdom of relationships between body, sound, and sensation drew us to Aarti's work and we feel so fortunate to be able to feature her work on room2.fm.</>,
-    trackLink: "https://aartijadu.bandcamp.com/track/it-that",
-    artistLink: "https://aartijadu.bandcamp.com/",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/AJ.mp3",
     shaderName: "cycleTwo",
     colours: [
@@ -30,12 +24,9 @@ export const cyclePresets = [
     ]
   },
   {
-    introStatement: "if you're seeing this the server is having some trouble",
-    prompt: "this is prompt 3",
-    artistDetails: "amby downs",
-    trackDetails: "a lightning ridge opal mine anxiety",
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.press/",
+    prompt: <>Take a moment to centre yourself in the place you are logging on from, anchored by the pulse of the track.<br />Draw or write about something you carry that relates to that place - a sensation, a thought, a memory, or something else.<br />Share as much or as little as you'd like.</>,
+    artistDetails: <>To our ears, <a href="https://ambydowns.bandcamp.com/" target="_blank" rel="noreferrer">amby downs</a>' work explores the relationships between history, sound, and place, and how these are situated in the body. Her work carries us into deeply reflective and at times claustrophobic zones, rich with atmosphere, evocative samples, and urgent questions. Tahlia's work has made us continually wonder - what can we learn from the sounds we hear, and how can listening change our relationship with where we are? It is a gift to have such a deeply attuned artist repeatedly engaging and contributing to room2.</>,
+    trackDetails: "a lightning ridge opal mine anxiety by amby downs",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/AD.mp3",
     shaderName: "cycleThree",
     colours: [
@@ -45,14 +36,11 @@ export const cyclePresets = [
     ]
   },
   {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 4",
     artistDetails: "Alexandra Spence",
-    trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "",
-    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
-    shaderName: "cycleOne",
+    trackDetails: "Green Waves by Alexandra Spence",
+    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/AS.mp3",
+    shaderName: "cycleFour",
     colours: [
       "#222323",
       "#5252ff",
@@ -60,14 +48,11 @@ export const cyclePresets = [
     ]
   },
   {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 5",
     artistDetails: "E Fishpool",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.press/",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
-    shaderName: "cycleOne",
+    shaderName: "cycleFive",
     colours: [
       "#222323",
       "#5252ff",
@@ -75,14 +60,11 @@ export const cyclePresets = [
     ]
   },
   {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 6",
     artistDetails: "ShaYu",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.press/",
-    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
-    shaderName: "cycleOne",
+    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/SY.mp3",
+    shaderName: "cycleSix",
     colours: [
       "#222323",
       "#5252ff",
@@ -90,12 +72,9 @@ export const cyclePresets = [
     ]
   },
   {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 7",
     artistDetails: "salllvage",
     trackDetails: "bells for him",
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.press/",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/S.mp3",
     shaderName: "cycleSeven",
     colours: [
@@ -105,12 +84,9 @@ export const cyclePresets = [
     ]
   },
   {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 8",
     artistDetails: "R. Rebeiro",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.press/",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
     shaderName: "cycleOne",
     colours: [
@@ -120,12 +96,9 @@ export const cyclePresets = [
     ]
   },
   {
-    introStatement: "if you're seeing this the server is having some trouble",
     prompt: "this is prompt 9",
     artistDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackLink: "https://daisart.bandcamp.com/album/my-seat-and-weep",
-    artistLink: "https://daisart.press/",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
     shaderName: "cycleOne",
     colours: [
