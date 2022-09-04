@@ -162,14 +162,65 @@ export const shaders = Shaders.create({
     uniform float timer;
     uniform float tideUp;
     uniform float tideHeight;
-    const vec3 rcol = vec3(0.71,0.91,0.467);
-    const vec3 lcol = vec3(0.322,0.322,1.);
+    const vec3 rcol = vec3(0.81,0.91,0.87);
+    const vec3 lcol = vec3(0.322,.5,0.322);
     const vec3 ycol = vec3(0.937,0.592,0.439);
+
+    float random (vec2 st){
+        return fract(sin(dot(st.xy,
+                            vec2(12.9898,78.233)))
+                    * 43758.5453123);
+    }
+    float hash11(float p){
+      p = fract(p * .1031);
+      p *= p + 33.33;
+      p *= p + p;
+      return fract(p);
+    }
+    /* float circle(vec2 st, vec2 pos, float radius){
+      float mod = 20.* radius;
+      st *= mod;
+      float centre = 0.5 * mod;
+      float gradient = 1. - length(st - pos);
+      float innerCut = 1. - step(gradient, 0.125);
+      return max(gradient - innerCut,0.) ;
+    } */
+    float circle(in vec2 _st, in float _radius){
+      vec2 dist = _st-vec2(0.5);
+      float gradientCircle = 1.-smoothstep(_radius-(_radius*0.5),
+                               _radius+(_radius*0.5),
+                               dot(dist,dist)*4.0);
+      float sharpCircle = 1.-smoothstep(_radius-(_radius*0.01),
+                               _radius+(_radius*0.01),
+                               dot(dist,dist)*4.0);
+      return gradientCircle - sharpCircle;
+    }
 
     void main() {
       vec2 res = vec2(width,height);
       vec2 st = (gl_FragCoord.xy/res);
-      vec3 comp = vec3(1.,1.,1.);
+      st += random(st*.005)*.05;
+      st -= vec2(0.8, 0.35);
+      float col = 0.;
+      for (float i = 1.; i < 20. ; i++){
+        //current animation phase
+        float ph = sin(float(i))*.5 + .5;
+        //random size
+        float sz = sin(float(i)*523.6)*.5 + .6;
+        float r = sz/2.;
+        //positon on x axis
+        float posX = sin(float(i)*379.2)*.5 + .75;
+
+        //postion
+        //vec2 pos = st+vec2(1.-posX, mod(timer*.5));
+        vec2 pos = vec2(posX, sin((timer*ph*.05)+hash11(float(i))*3.));
+        //vec2 pos = vec2(posX, 0.5);
+        col += circle(st+pos, sz/4.);
+      }
+      //col += circle(st+vec2(0.,0.1), .3);
+      //col += circle(st+vec2(0.,-0.1), .3);
+      vec3 comp = mix(lcol, rcol, col);
+      //vec3 comp = vec3(circle(st, vec2(.5,.5), .5));
       gl_FragColor = vec4(comp, 1.0);
     }`
   },

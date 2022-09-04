@@ -13,18 +13,8 @@
 }
 
 @font-face{
-  font-family: 'Compagnon Roman';
-  src: url('./content/Compagnon-Roman.woff') format("woff");
-}
-
-@font-face{
-  font-family: 'Compagnon Medium';
-  src: url('./content/Compagnon-Medium.woff') format("woff");
-}
-
-@font-face{
   font-family: 'Work Sans';
-  src: url('./content/WorkSans-Regular.ttf') format("truetype");
+  src: url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap') format("truetype");
 }
 
 /*Preset Colours*/
