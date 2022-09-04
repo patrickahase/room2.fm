@@ -25,84 +25,105 @@ export default function DesktopApp(props){
             setCurrentModalPage={setCurrentModalPage}
             toggleModal={props.toggleModal} />
         : <>
-          {/* Background Visuals */} 
-          <div id="bg-vis-wrapper">
+            <div id="room2-wrapper">
+
+              {/* Top Banner */}
+              <Marquee
+                currentArtist={props.artistPresets.artistname} />
+
+              {/* Visuals */} 
+              <div id="vis-wrapper">
+                {/* Background Visuals */} 
+                <div id="bg-vis-wrapper"></div>
+                {/* Response Overlay */}
+                <ResponseDisplay 
+                  responseData={props.responseData}
+                  height={props.height}
+                  width={props.width} />
+                {/* Menu and Prompt Overlay */}
+                <div id="menu-prompt-wrapper">
+                  {/* Settings Menu Overlay */}
+                  <SettingsMenu
+                    toggleFocus={props.toggleFocus} 
+                    overlayToggle={props.toggleModal} />
+                  {/* Prompt and Input Selection */}
+                  <div id="current-prompt-wrapper">
+                    <div id="prompt-end-timer-wrapper">
+                      <div id="prompt-end-timer" />
+                      <div id="prompt-end-timer-overlay" />
+                    </div>           
+                    <div id="current-prompt">
+                      {props.currentPrompt}
+                    </div>           
+                    <div id="input-select-wrapper">
+                      <span id="input-select">I would like to&nbsp;
+                      <button id="draw-input-select" className="InputSelectButton" onClick={() => props.setInput(true)}>draw</button>&nbsp;/&nbsp;
+                      <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => props.setInput(false)}>write</button>
+                      &nbsp;a response</span>
+                    </div>
+                  </div>
+                </div>                
+              </div>
+
+              {/* Interface */}
+              <div id="interface-wrapper">
+                {/* Left Side Drawing Tools */}
+                <DrawingTools
+                  undoDrawing={props.undoDrawing}
+                  redoDrawing={props.redoDrawing}
+                  toggleEraser={props.toggleEraser}
+                  colours={props.colours}
+                  changeColourOrder={props.changeColourOrder}
+                  changeColours={props.changeColours}
+                  brushSize={props.brushSize}
+                  setBrushSize={props.setBrushSize} /> 
+                {/* Input Section */}
+                <div id="input-wrapper">
+                  {/* Writing Section */}            
+                  <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
+                  {/* Drawing Section */} 
+                  <DrawingCanvas 
+                    brushColour={props.colours[0]}
+                    brushSize={props.brushSize}
+                    setDrawingCanvas={props.setDrawingCanvas}
+                    setCurrentCanvasState={props.setCurrentCanvasState}
+                    setIsDrawing={props.setIsDrawing} />
+                </div>             
+                {/* Right UI Panel */}
+                <div id="right-ui-wrapper">
+                  {/* Colour Picker */}
+                  <div id="col-pick-wrapper">                
+                    <ColourPicker 
+                      colours={props.colours}
+                      updateCanvasBrush={props.updateCanvasBrush}
+                      setSelectedColour={props.setSelectedColour}
+                      setCurrentColours={props.setCurrentColours} />              
+                  </div>
+                  {/* Submit Response Button */}             
+                  <button id="response-submit-button" onClick={props.submitResponse}>
+                    <span>SUBMIT RESPONSE</span>                
+                  </button>
+                  {/* Audio Settings */}
+                  <AudioControls />            
+                </div>
+              </div>
+            
+            
+            
+            
+               
+
+              
+                    
+            
+            
+            
+            {/* Info Overlay */}
+            {/* {this.state.infoOverlay &&
+              <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> } */}
           </div>
           {/* dead simple text chat */}
-          <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>
-          {/* Response Overlay */}
-          <ResponseDisplay 
-            responseData={props.responseData}
-            height={props.height}
-            width={props.width} />
-          {/* Prompt and Input Selection Overlay */}
-          <div id="current-prompt-wrapper">
-            <div id="prompt-end-timer-wrapper">
-              <div id="prompt-end-timer" />
-              <div id="prompt-end-timer-overlay" />
-            </div>           
-            <div id="current-prompt">
-              {props.currentPrompt}
-            </div>           
-            <div id="input-select-wrapper">
-              <span id="input-select">I would like to&nbsp;
-              <button id="draw-input-select" className="InputSelectButton" onClick={() => props.setInput(true)}>draw</button>&nbsp;/&nbsp;
-              <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => props.setInput(false)}>write</button>
-              &nbsp;a response</span>
-            </div>           
-          </div>
-          {/* Input Section */}
-          <div id="input-wrapper">              
-            <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
-            {/* Drawing Input */}
-            <DrawingCanvas 
-              brushColour={props.colours[0]}
-              brushSize={props.brushSize}
-              setDrawingCanvas={props.setDrawingCanvas}
-              setCurrentCanvasState={props.setCurrentCanvasState}
-              setIsDrawing={props.setIsDrawing} />              
-          </div>
-          <DrawingTools
-            undoDrawing={props.undoDrawing}
-            redoDrawing={props.redoDrawing}
-            toggleEraser={props.toggleEraser}
-            colours={props.colours}
-            changeColourOrder={props.changeColourOrder}
-            changeColours={props.changeColours}
-            changeBrushSize={props.changeBrushSize} />  
-          {/* Right UI Panel */}
-          <div id="right-ui-wrapper">
-          <div id="drawing-tools-wrapper">                
-            <ColourPicker 
-              colours={props.colours}
-              setCurrentColours={props.setCurrentColours} />              
-          </div>
-                        
-            <button id="response-submit-button" onClick={props.submitResponse}>
-              <span>SUBMIT RESPONSE</span>                
-            </button>
-            {/* Audio Settings */}
-            <AudioControls />            
-          </div>
-          {/* Menu Overlay */}
-          <SettingsMenu
-            toggleFocus={props.toggleFocus} 
-            overlayToggle={props.toggleModal} />     
-
-          {/* Top Banner */}
-          <Marquee
-            currentArtist={props.artistPresets.artistname} />  
-                   
-          
-          
-          
-          {/* Info Overlay */}
-          {/* {this.state.infoOverlay &&
-            <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> } */}
-                            
-          
-          
-          
+          <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>        
         </>}
     </div>
   )  

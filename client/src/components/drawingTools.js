@@ -3,36 +3,36 @@ import React, { useEffect } from 'react';
 export default function DrawingTools(props){
   return (<>
     {props.mobile
-      ?<>
-        <div id="drawing-buttons-wrapper">
-          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> ERASER <div id="eraser-icon"><EraserIcon /></div></button>
-          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> UNDO <div id="undo-icon"><UndoIcon /></div></button>
-          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> REDO <div id="redo-icon"><RedoIcon /></div></button>
-          <span id="brush-col-label">Brush<br />Colour</span>
-          <input type="color" id="mobile-col-select" className="DrawingUIButton" name="col1Select" defaultValue={props.colours[0]} />              
-        </div>
+      ?<div id="mobile-drawing-tools-wrapper">
         <div id="brush-size-wrapper">
-            <div id="brush-size-slider-wrapper">
-              <span style={{position: 'relative', top: '-0.1rem'}}>-</span>
-              <input type="range" id="brush-size-slider" name="brush-size-slider" min="4" max="40" />
-              <span style={{position: 'relative', top: '-0.1rem'}}>+</span>
-            </div>
-            <span>Brush Size</span>
+          <span>Brush Size</span>
+          <div id="brush-size-slider-wrapper">
+            <span style={{position: 'relative', top: '-0.1rem'}}>-</span>
+            <input type="range" id="brush-size-slider" name="brush-size-slider" min="2" max="60" onInput={e => props.setBrushSize(e.target.value)} />
+            <span style={{position: 'relative', top: '-0.1rem'}}>+</span>
           </div>
-      </>
+        </div>
+        <div id="drawing-buttons-wrapper">
+          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> ERASER <div id="eraser-icon"><EraserIcon strokeColour="white" /></div></button>
+          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> UNDO <div id="undo-icon"><UndoIcon strokeColour="white" /></div></button>
+          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> REDO <div id="redo-icon"><RedoIcon strokeColour="white" /></div></button>
+          <span id="brush-col-label">Brush<br />Colour</span>
+          <input type="color" id="mobile-col-select" className="DrawingUIButton" name="col1Select" defaultValue={props.colours[0]} onInput={e => props.setCurrentColours([e.target.value], "#000000", "#000000")} />              
+        </div>        
+      </div>
       :<>
         <div id="drawing-buttons-wrapper">
-          <button id="increase-brush-button" className="DrawingUIButton" onClick={() => {if(props.brushSize < 60){ props.setBrushSize(props.brushSize + 2 ) }}}> BRUSH + <div id="brush-up-icon" /></button>
-          <button id="decrease-brush-button" className="DrawingUIButton" onClick={() => {if(props.brushSize > 2){ props.setBrushSize(props.brushSize - 2 ) }}}> BRUSH - <div id="brush-down-icon" /></button>
-          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> ERASER <div id="eraser-icon" /></button>
-          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> UNDO <div id="undo-icon" /></button>
-          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> REDO <div id="redo-icon" /></button>              
+          <button id="increase-brush-button" className="DrawingUIButton" onClick={() => {if(props.brushSize < 60){ props.setBrushSize(props.brushSize + 2 ) }}}> BRUSH + <div id="brush-up-icon"><BrushUpIcon strokeColour="black" /></div></button>
+          <button id="decrease-brush-button" className="DrawingUIButton" onClick={() => {if(props.brushSize > 2){ props.setBrushSize(props.brushSize - 2 ) }}}> BRUSH - <div id="brush-down-icon"><BrushDownIcon strokeColour="black" /></div></button>
+          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> ERASER <div id="eraser-icon"><EraserIcon strokeColour="black" /></div></button>
+          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> UNDO <div id="undo-icon"><UndoIcon strokeColour="black" /></div></button>
+          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> REDO <div id="redo-icon"><RedoIcon strokeColour="black" /></div></button>              
         </div>
       </>
     }    
     </>)
 }
-function UndoIcon(){
+function UndoIcon(props){
   return (
     <svg
       width="100%"
@@ -41,12 +41,12 @@ function UndoIcon(){
       xmlns="http://www.w3.org/2000/svg"
       className="AudioPlayerIcon">
         <defs>
-          <marker id="arrowhead" markerWidth="5" markerHeight="5" strokeWidth="0" fill="white"
+          <marker id="arrowhead" markerWidth="5" markerHeight="5" strokeWidth="0" fill={props.strokeColour}
           refX="0" refY="2.5" orient="auto">
             <polygon points="0 0, 5 2.5, 0 5" />
           </marker>
         </defs>
-        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke="white" marker-end="url(#arrowhead)"
+        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke={props.strokeColour} marker-end="url(#arrowhead)"
               d=" M 30,80
                   L 65,80
                   A 15 15 0 1 0 65,28
@@ -55,7 +55,7 @@ function UndoIcon(){
     </svg>
   )
 }
-function RedoIcon(){
+function RedoIcon(props){
   return (
     <svg
       width="100%"
@@ -64,12 +64,12 @@ function RedoIcon(){
       xmlns="http://www.w3.org/2000/svg"
       className="AudioPlayerIcon">
         <defs>
-          <marker id="arrowhead2" markerWidth="5" markerHeight="5" strokeWidth="0" fill="white"
+          <marker id="arrowhead2" markerWidth="5" markerHeight="5" strokeWidth="0" fill={props.strokeColour}
           refX="0" refY="2.5" orient="auto">
             <polygon points="0 0, 5 2.5, 0 5" />
           </marker>
         </defs>
-        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke="white" marker-end="url(#arrowhead2)"
+        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke={props.strokeColour} marker-end="url(#arrowhead2)"
               d=" M 70,80
                   L 35,80
                   A 15 15 0 0 1 35,28
@@ -78,7 +78,7 @@ function RedoIcon(){
     </svg>
   )
 }
-function EraserIcon(){
+function EraserIcon(props){
   return (
     <svg
       width="100%"
@@ -87,13 +87,55 @@ function EraserIcon(){
       xmlns="http://www.w3.org/2000/svg"
       className="AudioPlayerIcon"
       fill='none'
-      stroke='white'
+      stroke={props.strokeColour}
       strokeWidth='3'
       >
         <rect x="10" y="60" width="40" height="20" />
         <polygon points="10,60 50,60 85,20 45,20" fill="yellow" stroke-linejoin="bevel" />
         <polygon points="50,80 50,60 85,20 85,40" fill="yellow" stroke-linejoin="bevel" />
       
+    </svg>
+  )
+}
+function BrushUpIcon(props){
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      className="AudioPlayerIcon"
+      fill='none'
+      stroke={props.strokeColour}
+      strokeWidth='4'
+      stroke-linejoin="round"
+      >
+        <path fill="none" strokeLinecap="round"
+              d="M 15,90 L 65,90 L 65,55 L 25,55 L 25,90 L 35,90 L 35,75 M 45,90 L 45,75" />
+        <polygon points="25,55 35,45 35,15 40,10 50,10 55,15 55,45 65,55" fill="yellow" />
+        <path fill="none" strokeLinecap="round"
+              d="M 65,25 L 81,25 M 73,17 L 73,33" />
+    </svg>
+  )
+}
+function BrushDownIcon(props){
+  return (
+    <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      className="AudioPlayerIcon"
+      fill='none'
+      stroke={props.strokeColour}
+      strokeWidth='4'
+      stroke-linejoin="round"
+      >
+        <path fill="none" strokeLinecap="round"
+              d="M 15,90 L 65,90 L 65,55 L 25,55 L 25,90 L 35,90 L 35,75 M 45,90 L 45,75" />
+        <polygon points="25,55 35,45 35,15 40,10 50,10 55,15 55,45 65,55" fill="yellow" />
+        <path fill="none" strokeLinecap="round"
+              d="M 65,25 L 81,25" />
     </svg>
   )
 }

@@ -18,6 +18,10 @@ export default function MobileApp(props){
             {props.currentPrompt}
           </div>
         </div>
+        {/* Submit Button */}
+        <button id="mobile-response-submit-button" className="InputSelectButton" onClick={props.submitResponse}>
+          <span>SUBMIT RESPONSE</span>                
+        </button>
         {/* input select */}
         <div id="input-select-wrapper">
           <button id="draw-input-select" className="InputSelectButton" onClick={() => props.setInput(true)}>draw</button>
@@ -29,32 +33,26 @@ export default function MobileApp(props){
           <div id="prompt-end-timer-overlay" />
         </div> */}
         {/* input section */}
-        <div id="input-wrapper">              
-          <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
-          {/* Drawing Input */}
-          <DrawingCanvas 
-            brushColour={props.colours[0]}
-            brushSize={props.brushSize}
-            setDrawingCanvas={props.setDrawingCanvas}
-            setCurrentCanvasState={props.setCurrentCanvasState}
-            setIsDrawing={props.setIsDrawing} />              
+        <div style={{flexGrow: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden'}}>
+          <div id="input-wrapper"> 
+            <DrawingCanvas 
+                brushColour={props.colours[0]}
+                brushSize={props.brushSize}
+                setDrawingCanvas={props.setDrawingCanvas}
+                setCurrentCanvasState={props.setCurrentCanvasState}
+                setIsDrawing={props.setIsDrawing} />             
+            <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
+          </div>
+          <DrawingTools
+            undoDrawing={props.undoDrawing}
+            redoDrawing={props.redoDrawing}
+            toggleEraser={props.toggleEraser}
+            colours={props.colours}
+            setCurrentColours={props.setCurrentColours}
+            setBrushSize={props.setBrushSize}
+            mobile={props.mobile} />
         </div>
-        {/* <ColourPicker 
-          colours={props.colours}
-          setCurrentColours={props.setCurrentColours} /> */}
-        <DrawingTools
-          undoDrawing={props.undoDrawing}
-          redoDrawing={props.redoDrawing}
-          toggleEraser={props.toggleEraser}
-          colours={props.colours}
-          changeColourOrder={props.changeColourOrder}
-          changeColours={props.changeColours}
-          changeBrushSize={props.changeBrushSize}
-          mobile={props.mobile} />
-        <button id="mobile-response-submit-button" className="InputSelectButton" onClick={props.submitResponse}>
-          <span>SUBMIT RESPONSE</span>                
-        </button>
-
+        
         </>}
     </div>
   )
