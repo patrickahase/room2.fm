@@ -162,6 +162,71 @@ export const shaders = Shaders.create({
     uniform float timer;
     uniform float tideUp;
     uniform float tideHeight;
+    const vec3 lcol = vec3(0.047,0.373,0.31);
+    const vec3 rcol = vec3(0.663,0.773,0.788);
+    const vec3 ycol = vec3(0.937,0.592,0.439);
+
+    float hash11(float p){
+        p = fract(p * .1031);
+        p *= p + 33.33;
+        p *= p + p;
+        return fract(p);
+    }
+
+    void main() {
+      vec2 res = vec2(width,height);
+      vec2 st = (gl_FragCoord.xy/res)*2.;
+      float col = 0.;
+      for (float i = 0.1; i < .6; i += .1){
+        float yDis = sin(i*(.2*timer)+timer+uv.x*2.)*.9 -.2;
+        st.y += yDis*.08*hash11(8.-i);
+        col += (smoothstep(st.y, i, .1+i) - smoothstep(st.y, i, i+timer*.005))*i;
+      }
+      vec3 comp = mix(lcol, rcol, col);
+      gl_FragColor = vec4(comp, 1.0);
+    }`
+  },
+  cycleFive: {
+    frag: GLSL`
+    precision highp float;
+    varying vec2 uv;
+    uniform float width;
+    uniform float height;
+    uniform float timer;
+    uniform float tideUp;
+    uniform float tideHeight;
+    const vec3 rcol = vec3(.8,.8,0.2);
+    const vec3 lcol = vec3(0.322,0.322,.322);
+    const vec3 ycol = vec3(0.937,0.592,0.439);
+
+    void main() {
+      vec2 res = vec2(width,height);
+      vec2 uv = (gl_FragCoord.xy/res);
+      vec2 st = uv;
+      float col = 0.;
+      float stimer = timer *.2;
+      st *= 100.;
+      if(fract(st.x*.2) > .5){
+        st.y += stimer;
+      } else {
+        st.y -= stimer;
+      }
+      st.y += sin(st.x)*sin(stimer+uv.y+uv.x)*2.;
+      col = abs(cos(st.y))*1.-uv.y;
+      vec3 comp = mix(rcol, lcol, col);
+      gl_FragColor = vec4(comp, 1.0);
+    }`
+  },
+  
+  cycleSix: {
+    frag: GLSL`
+    precision highp float;
+    varying vec2 uv;
+    uniform float width;
+    uniform float height;
+    uniform float timer;
+    uniform float tideUp;
+    uniform float tideHeight;
     const vec3 rcol = vec3(0.81,0.91,0.87);
     const vec3 lcol = vec3(0.322,.5,0.322);
     const vec3 ycol = vec3(0.937,0.592,0.439);
@@ -221,51 +286,6 @@ export const shaders = Shaders.create({
       //col += circle(st+vec2(0.,-0.1), .3);
       vec3 comp = mix(lcol, rcol, col);
       //vec3 comp = vec3(circle(st, vec2(.5,.5), .5));
-      gl_FragColor = vec4(comp, 1.0);
-    }`
-  },
-  cycleFive: {
-    frag: GLSL`
-    precision highp float;
-    varying vec2 uv;
-    uniform float width;
-    uniform float height;
-    uniform float timer;
-    uniform float tideUp;
-    uniform float tideHeight;
-    const vec3 rcol = vec3(0.71,0.91,0.467);
-    const vec3 lcol = vec3(0.322,0.322,1.);
-    const vec3 ycol = vec3(0.937,0.592,0.439);
-
-    void main() {
-      vec2 res = vec2(width,height);
-      vec2 uv = (gl_FragCoord.xy/res);
-      vec2 st = uv;
-      float col = 0.;
-      st *= 100.;
-      st.y += sin(st.x)*sin(timer+uv.y+uv.x)*2.;
-      col = abs(cos(st.y))*1.-uv.y;
-      vec3 comp = vec3(col);
-      gl_FragColor = vec4(comp, 1.0);
-    }`
-  },
-  cycleSix: {
-    frag: GLSL`
-    precision highp float;
-    varying vec2 uv;
-    uniform float width;
-    uniform float height;
-    uniform float timer;
-    uniform float tideUp;
-    uniform float tideHeight;
-    const vec3 rcol = vec3(0.71,0.91,0.467);
-    const vec3 lcol = vec3(0.322,0.322,1.);
-    const vec3 ycol = vec3(0.937,0.592,0.439);
-
-    void main() {
-      vec2 res = vec2(width,height);
-      vec2 st = (gl_FragCoord.xy/res);
-      vec3 comp = vec3(1.,1.,1.);
       gl_FragColor = vec4(comp, 1.0);
     }`
   },

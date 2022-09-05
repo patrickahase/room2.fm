@@ -51,7 +51,7 @@ export const cyclePresets = [
     prompt: "this is prompt 5",
     artistDetails: "E Fishpool",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
+    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/NB.mp3",
     shaderName: "cycleFive",
     colours: [
       "#222323",
@@ -62,7 +62,7 @@ export const cyclePresets = [
   {
     prompt: "this is prompt 6",
     artistDetails: "ShaYu",
-    trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
+    trackDetails: "MANGOES AHEAD by 莎瑜 (ShaYu)",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/SY.mp3",
     shaderName: "cycleSix",
     colours: [
