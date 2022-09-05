@@ -344,6 +344,8 @@ export const shaders = Shaders.create({
     uniform float timer;
     uniform float tideUp;
     uniform float tideHeight;
+    uniform float tideUp;
+    uniform float tideHeight;
     const vec3 ycol = vec3(.824,.953,.91);
     const vec3 lcol = vec3(.961,.652,.266);
     const vec3 rcol = vec3(.184,.219,.297);
@@ -367,6 +369,7 @@ export const shaders = Shaders.create({
     void main() {
       vec2 res = vec2(width,height);
       vec2 st = gl_FragCoord.xy / res;
+      st.y += tideUp*timer/10.;
       st.y += tideUp*timer/10.;
       vec2 translate = vec2(0.,0.5*timer);
       if (fract( st.y * 0.5) > 0.4  || fract( st.y * 0.5) < 0.2){
