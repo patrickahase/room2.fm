@@ -36,8 +36,8 @@ export const cyclePresets = [
     ]
   },
   {
-    prompt: "this is prompt 4",
-    artistDetails: "Alexandra Spence",
+    prompt: <>Listen closely for any motion you perceive in this piece. Try to look for any sense of motion you can perceive within your body.<br />Write or draw about the effect the motion in the music has on your internal sensations.</>,
+    artistDetails: <><a href="https://alexandraspence.net/" target="_blank" rel="noreferrer">Alexandra Spence</a>’s work makes the intersection of sonic and physical texture crystal clear. Her ability to distill stillness from repetition and simplicity reflects a special and rare patience and precision of listening and composition. Her work gracefully blurs and redefines boundaries between the physical and digital, something we aspire to do at room2. Let’s dissolve together…</>,
     trackDetails: "Green Waves by Alexandra Spence",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/AS.mp3",
     shaderName: "cycleFour",
