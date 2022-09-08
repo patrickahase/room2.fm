@@ -196,16 +196,16 @@ export const shaders = Shaders.create({
     uniform float tideUp;
     uniform float tideHeight;
     const vec3 rcol = vec3(.8,.8,0.2);
-    const vec3 lcol = vec3(0.322,0.322,.322);
+    const vec3 lcol = vec3(0.22,0.22,.22);
     const vec3 ycol = vec3(0.937,0.592,0.439);
 
     void main() {
       vec2 res = vec2(width,height);
       vec2 uv = (gl_FragCoord.xy/res);
-      vec2 st = uv;
+      vec2 st = uv - vec2(.5);
       float col = 0.;
-      float stimer = timer *.2;
-      st *= 100.;
+      float stimer = timer *.2043;
+      st *= stimer;
       if(fract(st.x*.2) > .5){
         st.y += stimer;
       } else {
@@ -242,14 +242,6 @@ export const shaders = Shaders.create({
       p *= p + p;
       return fract(p);
     }
-    /* float circle(vec2 st, vec2 pos, float radius){
-      float mod = 20.* radius;
-      st *= mod;
-      float centre = 0.5 * mod;
-      float gradient = 1. - length(st - pos);
-      float innerCut = 1. - step(gradient, 0.125);
-      return max(gradient - innerCut,0.) ;
-    } */
     float circle(in vec2 _st, in float _radius){
       vec2 dist = _st-vec2(0.5);
       float gradientCircle = 1.-smoothstep(_radius-(_radius*0.5),
@@ -275,15 +267,10 @@ export const shaders = Shaders.create({
         float r = sz/2.;
         //positon on x axis
         float posX = sin(float(i)*379.2)*.5 + .75;
-
         //postion
-        //vec2 pos = st+vec2(1.-posX, mod(timer*.5));
         vec2 pos = vec2(posX, sin((timer*ph*.05)+hash11(float(i))*3.));
-        //vec2 pos = vec2(posX, 0.5);
         col += circle(st+pos, sz/4.);
       }
-      //col += circle(st+vec2(0.,0.1), .3);
-      //col += circle(st+vec2(0.,-0.1), .3);
       vec3 comp = mix(lcol, rcol, col);
       //vec3 comp = vec3(circle(st, vec2(.5,.5), .5));
       gl_FragColor = vec4(comp, 1.0);
