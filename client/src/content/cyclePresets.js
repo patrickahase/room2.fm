@@ -48,9 +48,9 @@ export const cyclePresets = [
     ]
   },
   {
-    prompt: "this is prompt 5",
-    artistDetails: "E Fishpool",
-    trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
+    prompt: <>Draw or tell us about a place of sanctuary for you.</>,
+    artistDetails: <><a href="https://ninabuchananmusic.bandcamp.com/" target="_blank" rel="noreferrer">Nina Buchanan</a>’s music is distinctively world-building — her colourful arrangements of sound carry imagination, hope, and act a temporary space of respite to sit in. We’ve been getting lost in her waves of ecstatic, textural synthesis for years. We’re honoured to have an artist with such a distinct and powerful vision, one who is so ubiquitously respected among community, contributing to room2.</>,
+    trackDetails: "Special K by Nina Buchanan",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/NB.mp3",
     shaderName: "cycleFive",
     colours: [

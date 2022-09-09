@@ -54,7 +54,7 @@ class DbService {
   
   async testLookup() {
     try { const response = await new Promise((resolve, reject) => {
-            connection.query(`INSERT INTO CYCLE_5 (RESPONSE, RESPONSE_TYPE) VALUES ('test2', 'text'); SELECT * FROM CYCLE_5;`, (err, results) => {
+            connection.query(`INSERT INTO CYCLE_1 (RESPONSE, RESPONSE_TYPE) VALUES ('test2', 'text'); SELECT * FROM CYCLE_5;`, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
