@@ -9,7 +9,7 @@ const connectSettings = {
   user: process.env.ROOM2_DB_USER,
   multipleStatements: true,
   password: process.env.ROOM2_DB_PASSWORD,
-  database: 'room2live',
+  database: 'room2async',
   supportBigNumbers : true, 
   port: 25060,
   insecureAuth: true
@@ -22,13 +22,22 @@ connection.connect((err) => {
   console.log('db ' + connection.state );
 });
 
-const sqlQueries = {
-  getScheduleQ:       `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt', PROMPT_TYPE AS 'promptType',
-                       EMOJI_1 AS 'emoji1', EMOJI_2 AS 'emoji2', EMOJI_3 AS 'emoji3' FROM LIVE_SCHEDULE WHERE id = 1;`, 
-  getResponseUpdateQ: `SELECT * FROM RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 3 minute) AND (id > ?);`, 
-  getEmojisQ:         `SELECT ALT_TEXT AS 'altText', EMOJI_STRING AS 'emojiString' FROM EMOJI_STORAGE WHERE NAME = (? OR ? OR ?);`,
-  insertResponseQ:    `INSERT INTO RESPONSES (RESPONSE, RESPONSE_TYPE) VALUES (?, ?);`
-}
+// to avoid sql injections use the cycleTable number to select from array of queries
+const sqlAsyncQueries = [ `INSERT INTO CYCLE_1 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_1;`,
+                     `INSERT INTO CYCLE_2 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_2;`,
+                     `INSERT INTO CYCLE_3 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_3;`,
+                     `INSERT INTO CYCLE_4 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_4;`,
+                     `INSERT INTO CYCLE_5 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_5;`,
+                     `INSERT INTO CYCLE_6 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_6;`,
+                     `INSERT INTO CYCLE_7 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_7;`,
+                     `INSERT INTO CYCLE_8 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_8;`,
+                     `INSERT INTO CYCLE_9 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_9;`];
+
+const sqlLiveQueries = {
+  insertLiveResponseQ: `INSERT INTO LIVE_RESPONSES (RESPONSE, RESPONSE_TYPE) VALUES (?, ?);`,
+  getScheduleQ:        `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt' FROM LIVE_SCHEDULE WHERE id = 1;`, 
+  getResponseUpdateQ:  `SELECT * FROM LIVE_RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 3 minute) AND (id > ?);`,
+} 
 
 class DbService {
 
@@ -36,27 +45,52 @@ class DbService {
     return instance ? instance: new DbService();
   }
 
-  async getScheduleInit() {
-    try { const scheduleData = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getScheduleQ, (err, results) => {
+  // run when inputing reflections and return responses
+  async insertReflectionGetResponses(reflection, reflectType, cycleTable) {
+    let insertData = [reflection, reflectType];
+    try { const response = await new Promise((resolve, reject) => {
+            connection.query(sqlAsyncQueries[cycleTable], insertData, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
           });
-          return [scheduleData, []];
+          return response;
+    } catch(error) { console.log(error); }
+  }
+  
+  async testLookup() {
+    try { const response = await new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM CYCLE_5;`, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return response;
     } catch(error) { console.log(error); }
   }
 
-  async getScheduleUpdate(lastResponseID) {
+  async insertLiveReflection(reflection, reflectType) {
+    let insertData = [reflection, reflectType];
+    try { const response = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.insertLiveResponseQ, insertData, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return response;
+    } catch(error) { console.log(error); }
+  }
+
+  async getLiveDBUpdate(lastResponseID) {
     let insertData = [lastResponseID];
     try { const scheduleData = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getScheduleQ, (err, results) => {
+            connection.query(sqlLiveQueries.getScheduleQ, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
           });
           const responseData = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getResponseUpdateQ, insertData, (err, results) => {
+            connection.query(sqlLiveQueries.getResponseUpdateQ, insertData, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
@@ -64,53 +98,6 @@ class DbService {
           return [scheduleData, responseData];
     } catch(error) { console.log(error); }
   }
-
-  async getEmojisUpdate(emoji1, emoji2, emoji3) {
-    let insertData = [emoji1, emoji2, emoji3];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.getEmojisQ, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  }
-
-  async insertNewReflectText(reflectText) {
-    let insertData = [reflectText, "text"];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertResponseQ, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  }
-  async insertNewReflectImage(reflectImage) {
-    let insertData = [reflectImage, "image"];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertResponseQ, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  }
-
- /*  async insertNewReflectImage(reflectImage, reflectTime) {
-    let insertData = [reflectImage, reflectTime, reflectImage, reflectTime];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlQueries.insertImageQuery, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  } */
 
 }
 

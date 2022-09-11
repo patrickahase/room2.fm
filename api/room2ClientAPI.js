@@ -19,95 +19,85 @@ const upload = multer({
     s3: s3,
     bucket: 'thelongesthumstore',
     acl: 'public-read',
-    key: (req, file, callBack) => { callBack(null, 'room2-image-responses/' + Date.now() + file.originalname.replace(/ /g,'-')) }
+    key: (req, file, callBack) => { callBack(null, 'room2-async-cycle_'+ (parseInt(file.originalname.replace(/ /g,'-').substr(6,1))) +'/' + Date.now() + file.originalname.replace(/ /g,'-')) }
   })
 }).array('upload', 1);
 
-// GET api/getScheduleInit
-// Get the current prompt + artist + ??
-router.get('/getScheduleInit', (req, res) => {
+// POST api/insertTextReflectionGetResponses
+// Inserts a new text response into the database and returns that cycles
+// responses
+router.post('/insertTextReflectionGetResponses', (req, res) => {
+  const {reflection, cycleTable} = req.body;
   const db = DbService.getDbServiceInstance();
-  const result = db.getScheduleInit();
+  const result = db.insertReflectionGetResponses(reflection, 'text', parseInt(cycleTable));
   result.then(data => res.json({ data: data }))
         .catch(err => console.log(err));
 });
 
-// POST api/getScheduleUpdate
-// Get the current prompt + artist + ??
-router.post('/getScheduleUpdate', (req, res) => {
-  const {lastResponseID} = req.body;
-  const db = DbService.getDbServiceInstance();
-  const result = db.getScheduleUpdate(lastResponseID);
-  result.then(data => res.json({ data: data }))
-        .catch(err => console.log(err));
-});
-
-// GET api/getEmojisUpdate
-// Get the current prompt + artist + ??
-router.post('/getEmojisUpdate', (req, res) => {
-  const {emoji1, emoji2, emoji3} = req.body;
-  const db = DbService.getDbServiceInstance();
-  const result = db.getEmojisUpdate(emoji1, emoji2, emoji3);
-  result.then(data => res.json({ data: data }))
-        .catch(err => console.log(err));
-});
-
-// POST api/insertText
-// Inserts a new text response into the database
-router.post('/insertTextResponse', (req, res) => {
-  const {reflectText} = req.body;
-  const {reflectTime} = Date.now();
-  const db = DbService.getDbServiceInstance();
-  const result = db.insertNewReflectText(reflectText, reflectTime);
-  result.then(data => res.json({ sucess: true}))
-        .catch(err => console.log(err));
-});
-/* 
-// Could possibly move the Date.now call to the server? not sure it really makes a difference
-submitTextResponse() {
-  // change to take event as way to grab element?
-  const reflecttext = document.getElementById('inputtext').value;
-  document.getElementById('inputtext').value = '';
-  fetch(`/api/insertText`, {
-    headers: {
-      'Content-type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify({reflectText : reflecttext, reflectTime: Date.now() })
-  })
-  .then(response => response.json());
-} */
-
-// POST api/insertImage
-// Inserts a new images response into the database
-router.put('/insertImageResponse', (req, res) => {
+// PUT api/insertImageReflectionGetResponses
+// Inserts a new image response into the storage, send url to database and 
+// returns that cycles responses
+router.put('/insertImageReflectionGetResponses', (req, res) => {
   upload(req, res, (error) => {
     if(error) { console.log(error) } else {
+      // hack to get around multipart form data - we're sending the cycle number
+      // in the name anyway so extract that part and make it an int (and minus 1
+      // to keep our naming convention intact)
+      let cycleTable = parseInt(req.files[0].originalname.substr(6,1));
       const reflectImage = req.files[0].key;
-      console.log(reflectImage)
       const db = DbService.getDbServiceInstance();
-      const result = db.insertNewReflectImage(reflectImage);
-      result.then(data => res.json({ sucess: true}))
+      const result = db.insertReflectionGetResponses(reflectImage, 'image', cycleTable);
+      result.then(data => res.json({ data: data }))
             .catch(err => console.log(err));
     }
   });  
 });
 
-/* 
-// Could possibly move the Date.now call to the server? not sure it really makes a difference
-submitImageResponse() {
-  // change to take event as way to grab element?
-  const reflectdraw = document.getElementById('surface').toDataURL();
-  fetch(`/api/insertText`, {
-    headers: {
-      'Content-type': 'application/json'
-    },
-    method: 'POST',
-    body: JSON.stringify({reflectImage : reflectdraw, reflectTime: Date.now() })
-  })
-  .then(response => response.json());
-  // reset canvas via width? or new function
-  // do I need to send the aspect ratio too?
-} */
+router.post('/testLookup', (req, res) => {
+  const db = DbService.getDbServiceInstance();
+  const result = db.testLookup();
+  result.then(data => res.json({ data: data }))
+        .catch(err => console.log(err));
+});
+
+// LIVE CLIENT API
+
+// POST api/insertLiveTextReflection
+// Inserts a new text response into the live database 
+router.post('/insertLiveTextReflection', (req, res) => {
+  const {reflection} = req.body;
+  const db = DbService.getDbServiceInstance();
+  const result = db.insertLiveReflection(reflection, 'text');
+  result.then(data => res.json({ data: data }))
+        .catch(err => console.log(err));
+});
+
+// PUT api/insertLiveImageReflection
+// Inserts a new image response into the storage, send url to live database
+router.put('/insertLiveImageReflection', (req, res) => {
+  upload(req, res, (error) => {
+    if(error) { console.log(error) } else {
+      const reflectImage = req.files[0].key;
+      const db = DbService.getDbServiceInstance();
+      const result = db.insertLiveReflection(reflectImage, 'image');
+      result.then(data => res.json({ data: data }))
+            .catch(err => console.log(err));
+    }
+  });  
+});
+
+// POST api/getLiveUpdate
+// send the id of the last response received
+// return current prompt, artist & any responses within the last three minutes
+// that have an id > last response received
+router.post('/getLiveUpdate', (req, res) => {
+  const {lastResponseID} = req.body;
+  const db = DbService.getDbServiceInstance();
+  const result = db.getLiveDBUpdate(lastResponseID);
+  result.then(data => res.json({ data: data }))
+        .catch(err => console.log(err));
+});
+
+
 
 module.exports = router;
