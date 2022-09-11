@@ -34,7 +34,9 @@ const sqlAsyncQueries = [ `INSERT INTO CYCLE_1 (RESPONSE, RESPONSE_TYPE) VALUES 
                      `INSERT INTO CYCLE_9 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_9;`];
 
 const sqlLiveQueries = {
-  insertLiveResponseQ: `INSERT INTO LIVE_RESPONSES (RESPONSE, RESPONSE_TYPE) VALUES (?, ?);`
+  insertLiveResponseQ: `INSERT INTO LIVE_RESPONSES (RESPONSE, RESPONSE_TYPE) VALUES (?, ?);`,
+  getScheduleQ:        `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt' FROM LIVE_SCHEDULE WHERE id = 1;`, 
+  getResponseUpdateQ:  `SELECT * FROM LIVE_RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 3 minute) AND (id > ?);`,
 } 
 
 class DbService {
@@ -76,6 +78,24 @@ class DbService {
             });
           });
           return response;
+    } catch(error) { console.log(error); }
+  }
+
+  async getLiveDBUpdate(lastResponseID) {
+    let insertData = [lastResponseID];
+    try { const scheduleData = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.getScheduleQ, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          const responseData = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.getResponseUpdateQ, insertData, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return [scheduleData, responseData];
     } catch(error) { console.log(error); }
   }
 

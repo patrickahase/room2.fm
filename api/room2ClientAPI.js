@@ -34,11 +34,10 @@ router.post('/insertTextReflectionGetResponses', (req, res) => {
         .catch(err => console.log(err));
 });
 
-// POST api/insertImageReflectionGetResponses
+// PUT api/insertImageReflectionGetResponses
 // Inserts a new image response into the storage, send url to database and 
 // returns that cycles responses
 router.put('/insertImageReflectionGetResponses', (req, res) => {
-  console.log(req);
   upload(req, res, (error) => {
     if(error) { console.log(error) } else {
       // hack to get around multipart form data - we're sending the cycle number
@@ -46,9 +45,7 @@ router.put('/insertImageReflectionGetResponses', (req, res) => {
       // to keep our naming convention intact)
       let cycleTable = parseInt(req.files[0].originalname.substr(6,1));
       const reflectImage = req.files[0].key;
-      console.log(reflectImage, cycleTable);
       const db = DbService.getDbServiceInstance();
-      /* console.log(cycleTable); */
       const result = db.insertReflectionGetResponses(reflectImage, 'image', cycleTable);
       result.then(data => res.json({ data: data }))
             .catch(err => console.log(err));
@@ -63,15 +60,40 @@ router.post('/testLookup', (req, res) => {
         .catch(err => console.log(err));
 });
 
-// LIVE API
+// LIVE CLIENT API
 
 // POST api/insertLiveTextReflection
-// Inserts a new text response into the database and returns that cycles
-// responses
+// Inserts a new text response into the live database 
 router.post('/insertLiveTextReflection', (req, res) => {
   const {reflection} = req.body;
   const db = DbService.getDbServiceInstance();
   const result = db.insertLiveReflection(reflection, 'text');
+  result.then(data => res.json({ data: data }))
+        .catch(err => console.log(err));
+});
+
+// PUT api/insertLiveImageReflection
+// Inserts a new image response into the storage, send url to live database
+router.put('/insertLiveImageReflection', (req, res) => {
+  upload(req, res, (error) => {
+    if(error) { console.log(error) } else {
+      const reflectImage = req.files[0].key;
+      const db = DbService.getDbServiceInstance();
+      const result = db.insertLiveReflection(reflectImage, 'image');
+      result.then(data => res.json({ data: data }))
+            .catch(err => console.log(err));
+    }
+  });  
+});
+
+// POST api/getLiveUpdate
+// send the id of the last response received
+// return current prompt, artist & any responses within the last three minutes
+// that have an id > last response received
+router.post('/getLiveUpdate', (req, res) => {
+  const {lastResponseID} = req.body;
+  const db = DbService.getDbServiceInstance();
+  const result = db.getLiveDBUpdate(lastResponseID);
   result.then(data => res.json({ data: data }))
         .catch(err => console.log(err));
 });
