@@ -23,6 +23,16 @@ const upload = multer({
   })
 }).array('upload', 1);
 
+//upload file function
+const uploadLive = multer({
+  storage: multerS3({
+    s3: s3,
+    bucket: 'thelongesthumstore',
+    acl: 'public-read',
+    key: (req, file, callBack) => { callBack(null, 'room2-live/' + Date.now() + file.originalname.replace(/ /g,'-')) }
+  })
+}).array('upload', 1);
+
 // POST api/insertTextReflectionGetResponses
 // Inserts a new text response into the database and returns that cycles
 // responses

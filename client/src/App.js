@@ -303,8 +303,6 @@ export default function App(){
   }
 
   function submitResponse(){
-    // set up array to push other responses to
-    let returnedResponses = [];
     // check if a text or an image response
     if(inputIsDraw){
       //image input
@@ -319,50 +317,25 @@ export default function App(){
       const formData = new FormData();
       let imageFile = dataURLtoFile(dataURL, 'response.png');
       drawingCanvas.clear();
-      // we add one to cycle pos to keep start from 1
-      /* formData.append('upload', imageFile, 'cycle_'+ (cyclePos+1) +'_response.png'); */
-      fetch(`http://localhost:33061/api/insertImageReflectionGetResponses`, {
+      formData.append('upload', imageFile);
+      fetch(`https://room2.fm/api/insertLiveImageReflection`, {
         method: 'PUT',
         body: formData
       })
-      .then(res => res.json())
-      .then(res => {
-        try{
-          for(const response of res.data) {
-            returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
-          }
-          setResponseData(returnedResponses);
-        } catch(e) {
-          // if response not the data
-          console.log(e);
-        }
-        });
+      .then(res => res.json());
     } else {
       // text input
       let textInput = document.getElementById('text-input');
       let responseText = textInput.value;
       if(responseText.length > 0){
         textInput.value = '';
-        /* fetch(`http://localhost:33061/api/insertTextReflectionGetResponses`, { */
-        fetch(`http://localhost:33061/api/testLookup`, {
+        fetch(`https://room2.fm/api/insertLiveTextReflection`, {
           headers: { 'Content-type': 'application/json' },
           method: 'POST',
           mode: 'cors',
-          // we add one to cycle pos to keep start from 1
-          /* body: JSON.stringify({reflection: responseText, cycleTable: cyclePos+1}) */
+          body: JSON.stringify({reflection: responseText})
         })
-      .then(res => res.json())
-      .then(res => {
-        try{
-          for(const response of res.data) {
-            returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);         
-          }
-          setResponseData(returnedResponses);
-        } catch(e) {
-          // if response not the data
-          console.log(e);
-        }
-        });      
+      .then(res => res.json());   
       }
     }
   }
