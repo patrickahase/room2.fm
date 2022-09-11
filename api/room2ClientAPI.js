@@ -63,4 +63,19 @@ router.post('/testLookup', (req, res) => {
         .catch(err => console.log(err));
 });
 
+// LIVE API
+
+// POST api/insertLiveTextReflection
+// Inserts a new text response into the database and returns that cycles
+// responses
+router.post('/insertLiveTextReflection', (req, res) => {
+  const {reflection} = req.body;
+  const db = DbService.getDbServiceInstance();
+  const result = db.insertLiveReflection(reflection, 'text');
+  result.then(data => res.json({ data: data }))
+        .catch(err => console.log(err));
+});
+
+
+
 module.exports = router;

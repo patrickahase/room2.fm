@@ -54,7 +54,6 @@ export default function ColourPicker(props){
     let newColours = props.colours;
     newColours[colNum - 1] = e.target.value;
     props.setCurrentColours(newColours);
-    props.updateCanvasBrush();
   }
 }
 

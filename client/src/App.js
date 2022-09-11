@@ -82,6 +82,12 @@ export default function App() {
   }, [selectedColour]);
 
   useEffect(() => {
+    if(drawingCanvasRef.current && !isEraser){
+      updateCanvasBrush();
+    }    
+  }, [currentColours]);
+
+  useEffect(() => {
     if(drawingCanvasRef.current){
       updateCanvasBrush();      
     }    
