@@ -18,6 +18,7 @@ export default function ResponseDisplay(props) {
   // useeffect to run only after the first time responses to display is updated to contain responses, not the following times it's order is updated
   useEffect(() => {
     if(responsesToDisplay.length > 0 && !responsesDisplaying.current){
+      console.log(responsesToDisplay);
       for(let i = 0; i < displaysOnScreen; i++){
         setTimeout(displayNextResponse, responseFadeTime*i);
       }      

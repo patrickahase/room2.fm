@@ -29,7 +29,7 @@ export default function DesktopApp(props){
 
               {/* Top Banner */}
               <Marquee
-                currentArtist={props.artistPresets.artistname} />
+                currentArtist={props.currentArtist} />
 
               {/* Visuals */} 
               <div id="vis-wrapper">
@@ -47,7 +47,7 @@ export default function DesktopApp(props){
                     toggleFocus={props.toggleFocus} 
                     overlayToggle={props.toggleModal} />
                   {/* Prompt and Input Selection */}
-                  <div id="current-prompt-wrapper">
+                  <div id="current-prompt-wrapper" className="Collider">
                     <div id="prompt-end-timer-wrapper">
                       <div id="prompt-end-timer" />
                       <div id="prompt-end-timer-overlay" />
@@ -107,17 +107,6 @@ export default function DesktopApp(props){
                   <AudioControls />            
                 </div>
               </div>
-            
-            
-            
-            
-               
-
-              
-                    
-            
-            
-            
             {/* Info Overlay */}
             {/* {this.state.infoOverlay &&
               <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> } */}

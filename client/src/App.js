@@ -17,12 +17,18 @@ export default function App(){
   // is the intro modal open
   //const [modalIsOpen, setModalIsOpen] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  // current artist
+  const [currentArtist, setCurrentArtist] = useState(<>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>);
   // current text prompt
   const [currentPrompt, setCurrentPrompt] = useState(<>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>);
   // if false it's assumed to be text instead
   const[inputIsDraw, setInputIsDraw] = useState(false);
   // other responses from database
   const [responseData, setResponseData] = useState([]);
+  // last response id from database
+  const [lastResponseID, setLastResponseID] = useState(0);
+  // response update loop timing
+  const liveUpdateTime = 5000;
   // current drawing colours
   const [currentColours, setCurrentColours] = useState([
     "#222323",
@@ -69,6 +75,9 @@ export default function App(){
     document.addEventListener('mouseup', saveCanvasState);
     document.addEventListener('touchend', saveCanvasState);
     document.addEventListener('touchcancel', saveCanvasState);
+    if(!onMobile){
+      liveUpdate();
+    }
   }, []);
 
   // update brush colour and cursor on colour change
@@ -93,7 +102,7 @@ export default function App(){
           modalIsOpen={modalIsOpen}
           toggleModal={toggleModal}
           currentPrompt={currentPrompt}
-          artistPresets={artistPresets[0]}
+          currentArtist={currentArtist}
           submitResponse={submitResponse}
           setInput={setInput}
           setIsDrawing={setIsDrawing}
@@ -113,7 +122,7 @@ export default function App(){
           toggleModal={toggleModal}
           toggleFocus={toggleFocus}
           currentPrompt={currentPrompt}
-          artistPresets={artistPresets[0]}
+          currentArtist={currentArtist}
           width={windowSize[0]}
           height={windowSize[1]}
           submitResponse={submitResponse}
@@ -163,6 +172,74 @@ export default function App(){
       textResponseRule.style.border = "";
       imageResponseRule.style.backgroundColor = "";
       imageResponseRule.style.border = "";
+    }
+  }
+
+  // get latest info from server
+  function liveUpdate(){
+    fetch(`https://room2.fm/api/getLiveUpdate`, {
+      headers: {
+        'Content-type': 'application/json'
+      },
+      method: 'POST',
+      mode: 'cors',
+      body: JSON.stringify({ lastResponseID: lastResponseID})
+    })
+      .then(res => res.json())
+      .then(res => updateFromServerResponse(res.data));
+    setTimeout(liveUpdate, liveUpdateTime)
+  }
+
+  //update state from latest server info
+  function updateFromServerResponse(serverResponse){
+    // set up array to push other responses to
+    let returnedResponses = [];
+    setCurrentArtist(serverResponse[0][0].currentArtist);
+    setCurrentPrompt(serverResponse[0][0].currentPrompt);
+    if(serverResponse[1].length){
+      serverResponse[1].forEach(response => {
+        returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
+        //setLastResponseID(response.id);
+      });
+      setResponseData(returnedResponses);
+    }    
+  }
+
+  function submitResponse(){
+    // check if a text or an image response
+    if(inputIsDraw){
+      //image input
+      let imageInput = document.getElementById('drawing-canvas');
+      var dataURL = imageInput.toDataURL({
+        format: 'png',
+        left: 0,
+        top: 0,
+        width: imageInput.width,
+        height: imageInput.height
+      });
+      const formData = new FormData();
+      let imageFile = dataURLtoFile(dataURL, 'response.png');
+      drawingCanvas.clear();
+      formData.append('upload', imageFile);
+      fetch(`https://room2.fm/api/insertLiveImageReflection`, {
+        method: 'PUT',
+        body: formData
+      })
+      .then(res => res.json());
+    } else {
+      // text input
+      let textInput = document.getElementById('text-input');
+      let responseText = textInput.value;
+      if(responseText.length > 0){
+        textInput.value = '';
+        fetch(`https://room2.fm/api/insertLiveTextReflection`, {
+          headers: { 'Content-type': 'application/json' },
+          method: 'POST',
+          mode: 'cors',
+          body: JSON.stringify({reflection: responseText})
+        })
+      .then(res => res.json());   
+      }
     }
   }
 
@@ -300,44 +377,6 @@ export default function App(){
         }
       }, 1000);
     }    
-  }
-
-  function submitResponse(){
-    // check if a text or an image response
-    if(inputIsDraw){
-      //image input
-      let imageInput = document.getElementById('drawing-canvas');
-      var dataURL = imageInput.toDataURL({
-        format: 'png',
-        left: 0,
-        top: 0,
-        width: imageInput.width,
-        height: imageInput.height
-      });
-      const formData = new FormData();
-      let imageFile = dataURLtoFile(dataURL, 'response.png');
-      drawingCanvas.clear();
-      formData.append('upload', imageFile);
-      fetch(`https://room2.fm/api/insertLiveImageReflection`, {
-        method: 'PUT',
-        body: formData
-      })
-      .then(res => res.json());
-    } else {
-      // text input
-      let textInput = document.getElementById('text-input');
-      let responseText = textInput.value;
-      if(responseText.length > 0){
-        textInput.value = '';
-        fetch(`https://room2.fm/api/insertLiveTextReflection`, {
-          headers: { 'Content-type': 'application/json' },
-          method: 'POST',
-          mode: 'cors',
-          body: JSON.stringify({reflection: responseText})
-        })
-      .then(res => res.json());   
-      }
-    }
   }
 
   function dataURLtoFile(dataurl, filename){
