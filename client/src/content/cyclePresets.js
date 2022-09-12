@@ -60,9 +60,9 @@ export const cyclePresets = [
     ]
   },
   {
-    prompt: "this is prompt 6",
-    artistDetails: "ShaYu",
-    trackDetails: "MANGOES AHEAD by 莎瑜 (ShaYu)",
+    prompt: <>Draw or tell us: what do you Want?</>,
+    artistDetails: <><a href="https://www.instagram.com/ShaYu.wav/" target="_blank" rel="noreferrer">莎瑜ShāYú</a> is the collaborative project of sound artist 黑芝麻 Hēi Zhī Má and poet/artist Zhi Yi Cham. Together they construct intimate soundscapes from field recordings, synthesis, and poetry. Their work reflects a special understanding of how different artistic disciplines come together and interact, while carrying a rare patience and a strong sense of narrative. We are elated to have their first release premiering on room2, with Zhi taking the reins on the accompanying prompt, too ♥</>,
+    trackDetails: "MANGOES AHEAD by 莎瑜ShāYú",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/SY.mp3",
     shaderName: "cycleSix",
     colours: [
