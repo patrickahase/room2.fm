@@ -34,7 +34,15 @@ export default function DesktopApp(props){
               {/* Visuals */} 
               <div id="vis-wrapper">
                 {/* Background Visuals */} 
-                <div id="bg-vis-wrapper"></div>
+                <div id="bg-vis-wrapper" style={{
+                  display: "flex",
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '4vw',
+                  textAlign: 'center'
+                }}>
+                  {props.currentPrompt}
+                </div>
                 {/* Response Overlay */}
                 <ResponseDisplay 
                   responseData={props.responseData}
