@@ -21,6 +21,7 @@
   --comp-col-03:#b5e877;
   --comp-col-04:#5252ff;
   --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+  font-size: min(1vw, 4vh);
 }
 
 ::after{
@@ -595,13 +596,13 @@ button {
 }
 #word-change{
   pointer-events: none;
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   color: var(--comp-col-01);
 }
 #word-colour{
   pointer-events: none;
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-family: 'IBM Plex Sans Condensed', sans-serif;
   color: var(--comp-col-01);
 }
@@ -613,7 +614,7 @@ button {
   grid-row: 5/6;
   border: none;
   background-color: var(--comp-col-03);
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-family: 'IBM Plex Sans Condensed', sans-serif; 
   color: var(--comp-col-01);
 }
