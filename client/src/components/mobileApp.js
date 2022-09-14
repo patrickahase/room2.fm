@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import IntroModal from './introModal';
 import DrawingCanvas from './drawingCanvas';
 import DrawingTools from './drawingTools';
-import ColourPicker from './colourPicker';
 
 
 export default function MobileApp(props){
+  useEffect(() => {
+    console.log(props.responseTime) 
+  }, [props.responseTime]);
   return (
     <div id="mobile-wrapper">
       {props.modalIsOpen
@@ -16,6 +18,7 @@ export default function MobileApp(props){
         <div id="current-prompt-wrapper">          
           <div id="current-prompt">
             {props.currentPrompt}
+            <span>{props.responseTime}</span>
           </div>
         </div>
         {/* Submit Button */}

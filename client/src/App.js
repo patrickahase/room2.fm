@@ -65,6 +65,8 @@ export default function App(){
   // handle prompt change
   const[isCountdown, setIsCountdown] = useState(false);
 
+  const [responseTime, setResponseTime] = useState(0);
+
   // my init function to run on app load
   useEffect(() => {
     // set up to update window dimensions on resize event
@@ -98,6 +100,7 @@ export default function App(){
       {onMobile
       ? 
         <MobileApp
+          responseTime={responseTime}
           mobile={onMobile}  
           modalIsOpen={modalIsOpen}
           toggleModal={toggleModal}
@@ -206,6 +209,7 @@ export default function App(){
   }
 
   function submitResponse(){
+    let responseTimer;
     // check if a text or an image response
     if(inputIsDraw){
       //image input
@@ -221,24 +225,28 @@ export default function App(){
       let imageFile = dataURLtoFile(dataURL, 'response.png');
       drawingCanvas.clear();
       formData.append('upload', imageFile);
+      responseTimer = Date.now();
       fetch(`https://room2.fm/api/insertLiveImageReflection`, {
         method: 'PUT',
         body: formData
       })
-      .then(res => res.json());
+      .then(res => res.json())
+      .then(() => {setResponseTime(responseTimer - Date.now())});
     } else {
       // text input
       let textInput = document.getElementById('text-input');
       let responseText = textInput.value;
       if(responseText.length > 0){
         textInput.value = '';
+        responseTimer = Date.now();
         fetch(`https://room2.fm/api/insertLiveTextReflection`, {
           headers: { 'Content-type': 'application/json' },
           method: 'POST',
           mode: 'cors',
           body: JSON.stringify({reflection: responseText})
         })
-      .then(res => res.json());   
+      .then(res => res.json())
+      .then(() => {setResponseTime(responseTimer - Date.now())});   
       }
     }
   }

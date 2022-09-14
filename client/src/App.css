@@ -857,6 +857,10 @@ button {
 
 /* Mobile Rules */
 @media all and (any-hover: none) {
+
+  :root{
+    font-size: 12px;
+  }
   /* Modal Style */
   #modal-wrapper{
     top: 0vh;
