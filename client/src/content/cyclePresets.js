@@ -74,7 +74,7 @@ export const cyclePresets = [
   {
     prompt: "this is prompt 7",
     artistDetails: "salllvage",
-    trackDetails: "bells for him",
+    trackDetails: "fronds of iron (bells for him) by salllvage",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/S.mp3",
     shaderName: "cycleSeven",
     colours: [
@@ -87,7 +87,7 @@ export const cyclePresets = [
     prompt: "this is prompt 8",
     artistDetails: "R. Rebeiro",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
+    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/RR.mp3",
     shaderName: "cycleOne",
     colours: [
       "#222323",

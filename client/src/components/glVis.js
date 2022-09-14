@@ -279,6 +279,103 @@ export const shaders = Shaders.create({
   cycleSeven: {
     frag: GLSL`
     #define pi 3.14159265359
+    #define twopithree 2.09439510239
+    precision highp float;
+    varying vec2 uv;
+    uniform float width;
+    uniform float height;
+    uniform float timer;
+    uniform float tideUp;
+    uniform float tideHeight;
+    const vec3 lcol = vec3(0.616,0.039,0.192);
+    const vec3 rcol = vec3(0.761,0.737,0.439);
+    const vec3 ycol = vec3(0.42,0.278,0.392);
+
+    mat2 rotate2d(float _angle){
+      return mat2(cos(_angle),-sin(_angle),
+                  sin(_angle),cos(_angle));
+    }
+    float pcurve(float x, float a, float b){
+      float k = pow(a+b,a+b)/(pow(a,a)*pow(b,b));
+      return k*pow(x,a)*pow(1.0-x,b);
+    }
+    float hash12(vec2 p){
+      return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+    }
+
+    vec3 triTile(vec2 p, float stimer){
+      float id = hash12(floor(p));
+      if(id<.5)
+        p.x *= -1.;
+      p = (fract(p) -.5)*1.6;
+      float a = atan(p.x-pcurve(fract((stimer)+id),2.5,2.), p.y+p.x*2.) + pi;
+      float d = cos(floor(.5+a/twopithree)*twopithree-a)*length(p);
+      vec3 grad = mix(rcol, lcol, p.x);
+      vec3 col = vec3(1.-smoothstep(.4,.45,d)) * grad;
+      return col;
+    }
+
+    void main() {
+      vec2 res = vec2(width,height);
+      vec2 st = ((gl_FragCoord.xy/res) - vec2(.5,.5));
+      vec3 bgrad = mix(ycol, vec3(1.), st.y);
+      float stimer = timer / 4.;
+      st *= stimer+2.;
+      float col = 0.;
+      //col += triTile(st, stimer);
+      vec3 birds = triTile(st, stimer);
+      vec3 comp = mix(bgrad, birds, triTile(st*1.01, stimer));
+      gl_FragColor = vec4(comp, 1.0);
+    }`
+  },
+  cycleEight: {
+    frag: GLSL`
+    #define pi 3.14159265359
+    #define twopi 6.28318530718
+    precision highp float;
+    varying vec2 uv;
+    uniform float width;
+    uniform float height;
+    uniform float timer;
+    uniform float tideUp;
+    uniform float tideHeight;
+    const vec3 rcol = vec3(0.71,0.91,0.467);
+    const vec3 lcol = vec3(0.322,0.322,1.);
+    const vec3 ycol = vec3(0.937,0.592,0.439);
+
+    mat2 rotate2d(float _angle){
+      return mat2(cos(_angle),-sin(_angle),
+                  sin(_angle),cos(_angle));
+    }
+    float pcurve( float x, float a, float b )
+    {
+      float k = pow(a+b,a+b)/(pow(a,a)*pow(b,b));
+      return k*pow(x,a)*pow(1.0-x,b);
+      //return pow(x,a)*pow(1.0-x,b);
+    }
+
+    void main() {
+      vec2 res = vec2(width,height);
+      vec2 uv = gl_FragCoord.xy/res;
+      vec2 st = ((gl_FragCoord.xy/res) - vec2(.5,.25));
+      st *= 3.;
+      float stimer = timer*.1;
+      float col = 0.;
+      /* float a = atan(st.x-fract(timer/5.), st.y) + pi;
+      float r = twopi/3.;
+      float d = cos(floor(.5+a/r)*r-a)*length(st);
+      col += (1.-smoothstep(.4,.45,d))*.8; */
+      float a = atan(st.x-pcurve(fract(timer/5.),2.5,2.), st.y+st.x) + pi;
+      float r = twopi/3.;
+      float d = cos(floor(.5+a/r)*r-a)*length(st);
+      col += (1.-smoothstep(.4,.45,d))*.8;
+      vec3 comp = vec3(col);
+      gl_FragColor = vec4(comp, 1.0);
+    }`
+  },
+  cycleNine: {
+    frag: GLSL`
+    #define pi 3.14159265359
     #define twopi 6.28318530718
     precision highp float;
     varying vec2 uv;

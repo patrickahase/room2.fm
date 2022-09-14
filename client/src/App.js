@@ -327,7 +327,6 @@ export default function App() {
       .then(res => res.json())
       .then(res => {
         try{
-          console.log(res.data);
           for(const response of res.data[1]) {
             returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
           }
