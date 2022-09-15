@@ -72,8 +72,8 @@ export const cyclePresets = [
     ]
   },
   {
-    prompt: "this is prompt 7",
-    artistDetails: "salllvage",
+    prompt: <>What sounds in your day to day life you ground you in where you are?<br/>Write about them, or draw what makes those sounds.</>,
+    artistDetails: <>Rowan Savage AKA <a href="https://powertrip2.bandcamp.com/album/deep-gecko-energy/" target="_blank" rel="noreferrer">salllvage</a> moves through the world with a patience, care, and deliberateness that is reflected in his compositions. He transmutes field recordings into disorienting, hyperreal refractions of the soundscapes of Kombumerri Country where he draws these sounds from. We feel very fortunate to premiere an unreleased track from him on room2 ❤️</>,
     trackDetails: "fronds of iron (bells for him) by salllvage",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/S.mp3",
     shaderName: "cycleSeven",
