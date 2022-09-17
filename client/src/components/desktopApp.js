@@ -7,8 +7,10 @@ import DrawingTools from './drawingTools';
 import SettingsMenu from './settingsMenu';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
+import TextBG from './textBG';
 import { InfoOverlay } from './infoOverlay';
 import ColourPicker from './colourPicker';
+import VideoStreamPlayer from './videoStreamPlayer';
 
 export default function DesktopApp(props){
 
@@ -41,7 +43,9 @@ export default function DesktopApp(props){
                   fontSize: '4vw',
                   textAlign: 'center'
                 }}>
-                  {props.currentPrompt}
+                  {/* {props.currentPrompt} */}
+                  <VideoStreamPlayer />
+                  {/* <TextBG /> */}
                 </div>
                 {/* Response Overlay */}
                 <ResponseDisplay 

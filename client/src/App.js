@@ -16,7 +16,7 @@ export default function App(){
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   // is the intro modal open
   //const [modalIsOpen, setModalIsOpen] = useState(true);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(true);
   // current artist
   const [currentArtist, setCurrentArtist] = useState(<>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>);
   // current text prompt

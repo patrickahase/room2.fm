@@ -14,6 +14,11 @@
   src: url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap') format("truetype");
 }
 
+@font-face{
+  font-family: 'Phase';
+  src: url('./fonts/Phase-AGX.woff2') format("woff2");
+}
+
 /*Preset Colours*/
 :root{
   --comp-col-01:#222323;
@@ -22,6 +27,7 @@
   --comp-col-04:#5252ff;
   --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
   font-size: min(1vw, 4vh);
+  --font-var-one: 0;
 }
 
 ::after{
@@ -1003,4 +1009,10 @@ button {
   }
 
 }
+
+.vfText{
+  font-family: 'Phase';
+  font-variation-settings: "phon" var(--font-var-one);
+}
+
 
