@@ -27,6 +27,8 @@ export default function App(){
   const [responseData, setResponseData] = useState([]);
   // last response id from database
   const [lastResponseID, setLastResponseID] = useState(0);
+  var lastResponseIDRef = useRef(lastResponseID);
+  useEffect(() => {lastResponseIDRef.current = lastResponseID}, [lastResponseID]);
   // response update loop timing
   const liveUpdateTime = 5000;
   // current drawing colours
@@ -186,7 +188,7 @@ export default function App(){
       },
       method: 'POST',
       mode: 'cors',
-      body: JSON.stringify({ lastResponseID: lastResponseID})
+      body: JSON.stringify({ lastResponseID: lastResponseIDRef.current})
     })
       .then(res => res.json())
       .then(res => updateFromServerResponse(res.data));
@@ -202,7 +204,7 @@ export default function App(){
     if(serverResponse[1].length){
       serverResponse[1].forEach(response => {
         returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
-        //setLastResponseID(response.id);
+        setLastResponseID(response.id);
       });
       setResponseData(returnedResponses);
     }    

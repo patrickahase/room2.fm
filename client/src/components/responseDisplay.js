@@ -11,27 +11,19 @@ export default function ResponseDisplay(props) {
 
   const [responsesToDisplay, setResponsesToDisplay] = useState([]);
   const responsesToDisplayRef = useRef();
+  useEffect(() => {
+    responsesToDisplayRef.current = responsesToDisplay;
+    displayNextResponse();
+  }, [responsesToDisplay]);
   const responsesDisplaying = useRef(false);
 
   const displaysOnScreen = 3;
 
-  // useeffect to run only after the first time responses to display is updated to contain responses, not the following times it's order is updated
-  useEffect(() => {
-    if(responsesToDisplay.length > 0 && !responsesDisplaying.current){
-      console.log(responsesToDisplay);
-      for(let i = 0; i < displaysOnScreen; i++){
-        setTimeout(displayNextResponse, responseFadeTime*i);
-      }      
-      responsesDisplaying.current = true;
-    }
-    responsesToDisplayRef.current = responsesToDisplay;
-  }, [responsesToDisplay]);
-
-  // run loop once new response data arrives
+  // when new response data arrives add it to the responsesToDisplay List
   useEffect(() => {
     if(props.responseData.length > 0){
-      setResponsesToDisplay(props.responseData);
-      responsesToDisplayRef.current = props.responseData;
+      let newResponseList = responsesToDisplayRef.current.concat(props.responseData);
+      setResponsesToDisplay(newResponseList);
     }
   }, [props.responseData]);
 
@@ -40,19 +32,28 @@ export default function ResponseDisplay(props) {
   )
 
   function displayNextResponse(){
-    let modOrderResponses = Array.from(responsesToDisplayRef.current);
-    let nextResponse = modOrderResponses.pop();
-    if(nextResponse[1] === 'image'){
-      createImageResponseDisplay(nextResponse[0]);
-    } else {
-      createTextResponseDisplay(nextResponse[0]);
+    if(document.getElementsByClassName("Response").length < displaysOnScreen && responsesToDisplayRef.current.length){
+      let newResponseList = responsesToDisplayRef.current;
+      let newResponse = newResponseList.shift();
+      if(newResponse[1] === "text"){
+        createTextResponseDisplay(newResponse[0]);
+        setResponsesToDisplay(newResponseList);
+      } else if(newResponse[1] === "image"){
+        createImageResponseDisplay(newResponse[0]);
+        setResponsesToDisplay(newResponseList);
+      }
+      if(newResponseList.length){
+        displayNextResponse();
+      }      
+    } else if (document.getElementsByClassName("Response").length >= displaysOnScreen) {
+      setTimeout(displayNextResponse, responseLoopDelay);
     }
-    setResponsesToDisplay([nextResponse].concat(modOrderResponses));
   }
 
   function createImageResponseDisplay(imageResponse){
     let newResponseBox = document.createElement('img');
     let collision = false;
+    newResponseBox.classList.add('Response');
     newResponseBox.classList.add('ImageResponseBox');
     let xRandom = Math.random();
     let yRandom = Math.random();
@@ -84,6 +85,7 @@ export default function ResponseDisplay(props) {
     let newResponseBox = document.createElement('p');
     let collision = false;
     newResponseBox.innerHTML = textResponse;
+    newResponseBox.classList.add('Response');
     newResponseBox.classList.add('TextResponseBox');
     let xRandom = Math.random();
     let yRandom = Math.random();
