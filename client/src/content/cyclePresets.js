@@ -84,9 +84,9 @@ export const cyclePresets = [
     ]
   },
   {
-    prompt: "this is prompt 8",
-    artistDetails: "R. Rebeiro",
-    trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
+    prompt: <>Draw or tell us about the sensations this piece evokes in your body - perhaps consider their location, their texture, their weight...</>,
+    artistDetails: <><a href="https://www.instagram.com/r_rebeiro/" target="_blank" rel="noreferrer">Rohan Rebeiro</a>'s sonic practice holds many things at once. It simultaneously engages  with the deep effect of sound on the body; music's resonance as a cultural and spiritual conduit; and its eternal capability to heal, shift, provoke, and bring people together. The ability to keep so many fundamentals and perspectives in balance is one we aspire to at room2, and having this cycle anchored by Rohan's original composition is a gift.</>,
+    trackDetails: "Untitled by R. Rebeiro",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/RR.mp3",
     shaderName: "cycleEight",
     colours: [
