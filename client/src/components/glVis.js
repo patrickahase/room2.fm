@@ -393,6 +393,7 @@ export const shaders = Shaders.create({
       vec2 st = ((gl_FragCoord.xy/res)-vec2(0.,.25))*4.;
       st.x += hash12(st);
       float stimer = timer*0.02;
+      st.y += timer;
       vec3 varCol = hsv2rgb_smooth(vec3(stimer,1.,.8));
       vec3 comp = mix(hsv2rgb_smooth(vec3(stimer+.3,.3,.4)),lcol,pcurve(fbm(st, 1., timer),.2,.1)*(stimer+.5));
       gl_FragColor = vec4(comp, 1.0);
