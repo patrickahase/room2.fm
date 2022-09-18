@@ -88,7 +88,7 @@ export const cyclePresets = [
     artistDetails: "R. Rebeiro",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/RR.mp3",
-    shaderName: "cycleOne",
+    shaderName: "cycleEight",
     colours: [
       "#222323",
       "#5252ff",

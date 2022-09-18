@@ -339,9 +339,8 @@ export const shaders = Shaders.create({
     uniform float timer;
     uniform float tideUp;
     uniform float tideHeight;
-    const vec3 rcol = vec3(0.71,0.91,0.467);
-    const vec3 lcol = vec3(0.322,0.322,1.);
-    const vec3 ycol = vec3(0.937,0.592,0.439);
+    const vec3 lcol = vec3(0.14,0.14,0.117);
+    const vec3 rcol = vec3(0.888,0.888,0.818);
 
     mat2 rotate2d(float _angle){
       return mat2(cos(_angle),-sin(_angle),
@@ -353,23 +352,43 @@ export const shaders = Shaders.create({
       return k*pow(x,a)*pow(1.0-x,b);
       //return pow(x,a)*pow(1.0-x,b);
     }
+    float hash12(vec2 p){
+      return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+    }
+    // 2D Noise based on Morgan McGuire @morgan3d
+    // https://www.shadertoy.com/view/4dS3Wd
+    float noise (vec2 st){
+        vec2 i = floor(st);
+        vec2 f = fract(st);
+        float a = hash12(i);
+        float b = hash12(i + vec2(1.0, 0.0));
+        float c = hash12(i + vec2(0.0, 1.0));
+        float d = hash12(i + vec2(1.0, 1.0));
+
+        vec2 u = f*f*(3.0-2.0*f);
+        return mix(a, b, u.x) +
+                (c - a)* u.y * (1.0 - u.x) +
+                (d - b) * u.x * u.y;
+    }
+    float fbm(vec2 x, float H){    
+      float G = exp2(-H);
+      float f = 1.0;
+      float a = 1.0;
+      float t = 0.0;
+      for(int i=0; i<8; i++){
+        t += a*noise(f*x);
+        f *= 2.0;
+        a *= G;
+      }
+      return fract(t);
+    }
 
     void main() {
       vec2 res = vec2(width,height);
-      vec2 uv = gl_FragCoord.xy/res;
-      vec2 st = ((gl_FragCoord.xy/res) - vec2(.5,.25));
-      st *= 3.;
-      float stimer = timer*.1;
-      float col = 0.;
-      /* float a = atan(st.x-fract(timer/5.), st.y) + pi;
-      float r = twopi/3.;
-      float d = cos(floor(.5+a/r)*r-a)*length(st);
-      col += (1.-smoothstep(.4,.45,d))*.8; */
-      float a = atan(st.x-pcurve(fract(timer/5.),2.5,2.), st.y+st.x) + pi;
-      float r = twopi/3.;
-      float d = cos(floor(.5+a/r)*r-a)*length(st);
-      col += (1.-smoothstep(.4,.45,d))*.8;
-      vec3 comp = vec3(col);
+      vec2 st = ((gl_FragCoord.xy/res)-vec2(0.,.25))*4.;
+      st.x += hash12(st)*.01;
+      float stimer = timer*0.0025;
+      vec3 comp = mix(lcol,rcol,pcurve(fbm(st, 1.-stimer),.2,.1)*(stimer));
       gl_FragColor = vec4(comp, 1.0);
     }`
   },
