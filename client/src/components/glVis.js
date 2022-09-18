@@ -370,25 +370,31 @@ export const shaders = Shaders.create({
                 (c - a)* u.y * (1.0 - u.x) +
                 (d - b) * u.x * u.y;
     }
-    float fbm(vec2 x, float H){    
+    float fbm(vec2 x, float H, float stimer){    
       float G = exp2(-H);
       float f = 1.0;
       float a = 1.0;
       float t = 0.0;
-      for(int i=0; i<8; i++){
+      for(int i=0; i<6; i++){
         t += a*noise(f*x);
         f *= 2.0;
         a *= G;
       }
-      return fract(t);
+      return fract(t+stimer);
+    }
+    vec3 hsv2rgb_smooth(vec3 c){
+      vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
+      rgb = rgb*rgb*(3.0-2.0*rgb); // cubic smoothing	
+      return c.z * mix( vec3(1.0), rgb, c.y);
     }
 
     void main() {
       vec2 res = vec2(width,height);
       vec2 st = ((gl_FragCoord.xy/res)-vec2(0.,.25))*4.;
-      st.x += hash12(st)*.01;
-      float stimer = timer*0.0025;
-      vec3 comp = mix(lcol,rcol,pcurve(fbm(st, 1.-stimer),.2,.1)*(stimer));
+      st.x += hash12(st);
+      float stimer = timer*0.02;
+      vec3 varCol = hsv2rgb_smooth(vec3(stimer,1.,.8));
+      vec3 comp = mix(hsv2rgb_smooth(vec3(stimer+.3,.3,.4)),lcol,pcurve(fbm(st, 1., timer),.2,.1)*(stimer+.5));
       gl_FragColor = vec4(comp, 1.0);
     }`
   },
