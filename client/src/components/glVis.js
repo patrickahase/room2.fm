@@ -413,34 +413,64 @@ export const shaders = Shaders.create({
     const vec3 rcol = vec3(0.71,0.91,0.467);
     const vec3 lcol = vec3(0.322,0.322,1.);
     const vec3 ycol = vec3(0.937,0.592,0.439);
-
+    #define PI 3.141592
+    
     mat2 rotate2d(float _angle){
       return mat2(cos(_angle),-sin(_angle),
                   sin(_angle),cos(_angle));
     }
-    float pcurve( float x, float a, float b )
+    float polygon(vec2 p, float s, float stimer)
     {
-      float k = pow(a+b,a+b)/(pow(a,a)*pow(b,b));
-      return k*pow(x,a)*pow(1.0-x,b);
-      //return pow(x,a)*pow(1.0-x,b);
+        p *= rotate2d(stimer);
+        float a = ceil(s*(atan(-p.y, -p.x)/PI+1.)*.5);
+        float n = 2.*PI/s;
+        float t = n*a-n*.5;
+        return mix(dot(p, vec2(cos(t), sin(t))), length(p), .3);
     }
+    vec2 hash12(vec2 p){
+      return vec2(fract(sin(dot(p, vec2(92.51, 65.19)))*9219.32),
+                fract(sin(dot(p, vec2(23.34, 15.28)))*6485.32));
+    }
+    
 
     void main() {
       vec2 res = vec2(width,height);
-      vec2 uv = gl_FragCoord.xy/res;
-      vec2 st = ((gl_FragCoord.xy/res) - vec2(.5,.25));
-      st *= 3.;
-      float stimer = timer*.1;
-      float col = 0.;
-      /* float a = atan(st.x-fract(timer/5.), st.y) + pi;
-      float r = twopi/3.;
-      float d = cos(floor(.5+a/r)*r-a)*length(st);
-      col += (1.-smoothstep(.4,.45,d))*.8; */
-      float a = atan(st.x-pcurve(fract(timer/5.),2.5,2.), st.y+st.x) + pi;
-      float r = twopi/3.;
-      float d = cos(floor(.5+a/r)*r-a)*length(st);
-      col += (1.-smoothstep(.4,.45,d))*.8;
-      vec3 comp = vec3(col);
+      vec2 st = ((gl_FragCoord.xy/res) - vec2(.5,.5));
+      st *= 4.;
+
+      vec2 i_st = floor(st);
+      vec2 f_st = fract(st);
+
+      float minDist = .6;
+      float minDist2 = .6;
+      float stimer = timer *.4;
+
+      for (int y= -1; y <= 1; y++) {
+          for (int x= -1; x <= 1; x++) {
+              // Neighbor place in the grid
+              vec2 neighbor = vec2(float(x),float(y));
+
+              // Random position from current + neighbor place in the grid
+              vec2 point = hash12(i_st + neighbor);
+
+              // Animate the point
+              point = 0.5 + 0.5*sin(stimer + 6.2831*point);
+
+              // Vector between the pixel and the point
+              vec2 diff = neighbor + point - f_st;
+
+              // Distance to the point
+              float dist = polygon(neighbor+point - f_st, 3., stimer);
+              float dist2 = polygon(neighbor+point - f_st, 4., stimer);
+
+              // Keep the closer distance
+              minDist = min(minDist, dist*(sin(stimer)+1.)*.5);
+              minDist2 = min(minDist2, dist2);
+          }
+      }
+      //vec3 comp = vec3(minDist);
+      vec3 comp = mix(lcol, rcol, minDist);
+      comp = mix(ycol, comp, minDist2);
       gl_FragColor = vec4(comp, 1.0);
     }`
   },
@@ -504,70 +534,7 @@ export const shaders = Shaders.create({
 
       gl_FragColor = vec4(min(mix(ycol,mix(rcol,lcol,uv.x-0.2),uv.y+0.2), vec3(f,f,f)), 1.0);
     }`
-}, 
-  newvis: {
-    frag: GLSL`
-    precision highp float;
-    varying vec2 uv;
-    uniform float width;
-    uniform float height;
-    uniform float timer;
-    //const float timer = 15.8;
-    uniform float tideUp;
-    uniform float tideHeight;
-    const float emtriy = 0.7;
-    const float emtrix = 1.5;
-    const vec3 rcol = vec3(0.71,0.91,0.467);
-    const vec3 lcol = vec3(0.322,0.322,1.);
-    const vec3 ycol = vec3(0.937,0.592,0.439);
-   // const vec3 rcol = vec3(0.902,0.733,0.271);
-   // const vec3 lcol = vec3(0.937,0.592,0.439);
-   // const vec3 ycol = vec3(0.835,0.867,0.565);
-
-    float hash( float x ) {
-      return fract(sin(x)*43758.5453);
-    }  
-    float rand(vec2 n) { 
-      return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
-    }        
-    float noise(vec2 p){
-      vec2 ip = floor(p);
-      vec2 u = fract(p);
-      u = u*u*(3.0-2.0*u);          
-      float res = mix(
-        mix(rand(ip),rand(ip+vec2(1.0,0.0)),u.x),
-        mix(rand(ip+vec2(0.0,1.0)),rand(ip+vec2(1.0,1.0)),u.x),u.y);
-      return res*res;
-    }
-    mat2 rotate2d(float _angle){
-      return mat2(cos(_angle),-sin(_angle),
-                  sin(_angle),cos(_angle));
-    }
-    void main() {
-      vec2 res = vec2(width,height);
-      vec2 st = (gl_FragCoord.xy/res)- .5;
-      st.x += 0.45;
-      st.y *= st.x;
-      float stimer = timer*.2;
-      vec2 pos = (vec2(0.0)-st)*rotate2d(stimer+(emtrix*4.));
-      float r = length(pos)*2.0*emtriy;
-      float a = atan(pos.y,pos.x);
-      float f = abs(cos(a*2.5))*.3+(.3*emtrix);
-      vec3 flow = mix(vec3(0.), ycol, ((1.-smoothstep(f-0.,f+0.01,r))*1.2));
-      flow -= 1.-smoothstep(0.04,0.05,distance(st,vec2(0.0)));
-      float mixerx = timer + st.y;
-      st.y += stimer;
-      float noisecol = noise(st*8.);
-      if (noisecol < .6+(sin(timer)*.2))
-        noisecol = noisecol/2.;
-      else noisecol = 1.;
-      float bg = ((sin(timer)/2.)+.5)*noisecol;
-      vec3 bgcol = lcol-flow;
-      vec3 comp = mix(bgcol,flow,f);
-      gl_FragColor = vec4(comp, 1.0);
-    }`
-}, 
-  
+},
   
   cycleBlank: {
     frag: GLSL`

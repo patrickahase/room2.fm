@@ -99,8 +99,8 @@ export const cyclePresets = [
     prompt: "this is prompt 9",
     artistDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
     trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/J.mp3",
-    shaderName: "cycleOne",
+    trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/HW.mp3",
+    shaderName: "cycleNine",
     colours: [
       "#222323",
       "#5252ff",
