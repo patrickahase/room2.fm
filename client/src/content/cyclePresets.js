@@ -96,9 +96,12 @@ export const cyclePresets = [
     ]
   },
   {
-    prompt: "this is prompt 9",
-    artistDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
-    trackDetails: "j - cadence felt between our bodies (with Angelina Nonaj)",
+    prompt: <>Please share something you are grateful for. (◕ ‿ ◕ ✿)</>,
+    artistDetails: <>A stunning piece from writer and composer <a href="https://soundcloud.com/hannnahwu" target="_blank" rel="noreferrer">Hannah Wu</a> soundtracked the close of the final night of our room2 lockdown season. It feels fitting to have her grounded, considered, evocative, and rich work for our last piece on room2 async.<br /><br />
+    Thanks to those of you who logged on and shared your thoughts, feelings, ideas and visions in room2. We will trace back over these digital artefacts as memories of this special time for us. Lots of love from Raag and Patrick ❤<br /><br />
+    On Sunday 25th from 2-7pm AEST, the site will transform into room2 live, showing with 4 new collaborative works, online and in-person at Arts House. More information here: <a href="https://www.artshouse.com.au/events/room2-live/" target="_blank" rel="noreferrer">https://www.artshouse.com.au/events/room2-live/</a>
+    </>,
+    trackDetails: "Images by Hannah Wu",
     trackSrc: "https://thelongesthumstore.sgp1.cdn.digitaloceanspaces.com/room2-async-tracks/HW.mp3",
     shaderName: "cycleNine",
     colours: [
