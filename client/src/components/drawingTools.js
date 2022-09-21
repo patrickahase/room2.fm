@@ -5,17 +5,18 @@ export default function DrawingTools(props){
     {props.mobile
       ?<div id="mobile-drawing-tools-wrapper">
         <div id="brush-size-wrapper">
-          <span>Brush Size</span>
+          
           <div id="brush-size-slider-wrapper">
             <span style={{position: 'relative', top: '-0.1rem'}}>-</span>
             <input type="range" id="brush-size-slider" name="brush-size-slider" min="2" max="60" onInput={e => props.setBrushSize(e.target.value)} />
             <span style={{position: 'relative', top: '-0.1rem'}}>+</span>
           </div>
+          <span>Brush Size</span>
         </div>
         <div id="drawing-buttons-wrapper">
-          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> ERASER <div id="eraser-icon"><EraserIcon strokeColour="white" /></div></button>
-          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> UNDO <div id="undo-icon"><UndoIcon strokeColour="white" /></div></button>
-          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> REDO <div id="redo-icon"><RedoIcon strokeColour="white" /></div></button>
+          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> <span className="DrawingUIButtonLabel">ERASER</span> <div id="eraser-icon"><EraserIcon strokeColour="white" /></div></button>
+          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> <span className="DrawingUIButtonLabel">UNDO</span> <div id="undo-icon"><UndoIcon strokeColour="white" /></div></button>
+          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> <span className="DrawingUIButtonLabel">REDO</span> <div id="redo-icon"><RedoIcon strokeColour="white" /></div></button>
           <span id="brush-col-label">Brush<br />Colour</span>
           <input type="color" id="mobile-col-select" className="DrawingUIButton" name="col1Select" defaultValue={props.colours[0]} onInput={e => props.setCurrentColours([e.target.value], "#000000", "#000000")} />              
         </div>        
@@ -24,9 +25,9 @@ export default function DrawingTools(props){
         <div id="drawing-buttons-wrapper">
           <button id="increase-brush-button" className="DrawingUIButton" onClick={() => {if(props.brushSize < 60){ props.setBrushSize(props.brushSize + 2 ) }}}> BRUSH + <div id="brush-up-icon"><BrushUpIcon strokeColour="black" /></div></button>
           <button id="decrease-brush-button" className="DrawingUIButton" onClick={() => {if(props.brushSize > 2){ props.setBrushSize(props.brushSize - 2 ) }}}> BRUSH - <div id="brush-down-icon"><BrushDownIcon strokeColour="black" /></div></button>
-          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> ERASER <div id="eraser-icon"><EraserIcon strokeColour="black" /></div></button>
-          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> UNDO <div id="undo-icon"><UndoIcon strokeColour="black" /></div></button>
-          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> REDO <div id="redo-icon"><RedoIcon strokeColour="black" /></div></button>              
+          <button id="erase-brush-button" className="DrawingUIButton" onClick={() => props.toggleEraser()}> <span>ERASER</span> <div id="eraser-icon"><EraserIcon strokeColour="black" /></div></button>
+          <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> <span>UNDO</span> <div id="undo-icon"><UndoIcon strokeColour="black" /></div></button>
+          <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> <span>REDO</span> <div id="redo-icon"><RedoIcon strokeColour="black" /></div></button>              
         </div>
       </>
     }    

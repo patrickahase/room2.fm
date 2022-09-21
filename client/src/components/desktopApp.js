@@ -16,13 +16,12 @@ export default function DesktopApp(props){
 
   const [currentModalPage, setCurrentModalPage] = useState(1);
 
-  // graphics settings  - 1 high 10 medium 20 low
-  const[graphicsSettings, setGraphicsSettings] = useState(1);
-
   return (
     <div id="desktop-wrapper">
       {props.modalIsOpen
         ? <IntroModal 
+            mobile={props.mobile}
+            setIntroModal={props.setIntroModal}
             currentModalPage={currentModalPage}
             setCurrentModalPage={setCurrentModalPage}
             toggleModal={props.toggleModal} />

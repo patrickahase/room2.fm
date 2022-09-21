@@ -17,6 +17,10 @@ export default function App(){
   // is the intro modal open
   //const [modalIsOpen, setModalIsOpen] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(true);
+  // current modal page - 0 is shut
+  const [currentModalPage, setCurrentModalPage] = useState(1);
+  // intro modal instance
+  const [introModal, setIntroModal] = useState(null);
   // current artist
   const [currentArtist, setCurrentArtist] = useState(<>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>);
   // current text prompt
@@ -105,6 +109,9 @@ export default function App(){
           responseTime={responseTime}
           mobile={onMobile}  
           modalIsOpen={modalIsOpen}
+          setIntroModal={setIntroModal}
+          currentModalPage={currentModalPage}
+          setCurrentModalPage={setCurrentModalPage}
           toggleModal={toggleModal}
           currentPrompt={currentPrompt}
           currentArtist={currentArtist}
@@ -124,7 +131,10 @@ export default function App(){
         <DesktopApp 
           mobile={onMobile}
           modalIsOpen={modalIsOpen}
+          currentModalPage={currentModalPage}
+          setCurrentModalPage={setCurrentModalPage}
           toggleModal={toggleModal}
+          setIntroModal={setIntroModal}
           toggleFocus={toggleFocus}
           currentPrompt={currentPrompt}
           currentArtist={currentArtist}
@@ -155,8 +165,12 @@ export default function App(){
     // add and remove event listener that triggers after drawing to save canvas to undo stack
     if(modalIsOpen){
       document.addEventListener('mouseup', saveCanvasState);
+      introModal.hide();
+      document.getElementById("AOC-modal").style.display = "none";
     } else {
       document.removeEventListener('mouseup', saveCanvasState);
+      introModal.show();
+      document.getElementById("AOC-modal").style.display = "unset";
     }
     // toggle state
     setModalIsOpen(!modalIsOpen);
@@ -212,8 +226,9 @@ export default function App(){
 
   function submitResponse(){
     let responseTimer;
+    let textInput = document.getElementById('text-input');
     // check if a text or an image response
-    if(inputIsDraw){
+    if(inputIsDraw === true && undoStack.length > 0){
       //image input
       let imageInput = document.getElementById('drawing-canvas');
       var dataURL = imageInput.toDataURL({
@@ -234,9 +249,8 @@ export default function App(){
       })
       .then(res => res.json())
       .then(() => {setResponseTime(responseTimer - Date.now())});
-    } else {
+    } else if(inputIsDraw === false && textInput.value.length > 0) {
       // text input
-      let textInput = document.getElementById('text-input');
       let responseText = textInput.value;
       if(responseText.length > 0){
         textInput.value = '';

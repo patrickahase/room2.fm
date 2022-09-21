@@ -11,15 +11,24 @@ export default function MobileApp(props){
   return (
     <div id="mobile-wrapper">
       {props.modalIsOpen
-        ? <IntroModal mobile={props.mobile} toggleModal={props.toggleModal} />
+        ? <IntroModal 
+            mobile={props.mobile}
+            setIntroModal={props.setIntroModal}
+            toggleModal={props.toggleModal}
+            currentModalPage={props.currentModalPage}
+            setCurrentModalPage={props.setCurrentModalPage} />
         : <>
 
         {/* prompt */}
+        {/* <div id="mobile-header-wrapper">          
+          <p>//room2.fm\\</p>
+          <button className="InputSelectButton" onClick={props.submitResponse}>info</button>
+        </div> */}
         <div id="current-prompt-wrapper">          
-          <div id="current-prompt">
+          <p id="current-prompt">
             {props.currentPrompt}
-            <span>{props.responseTime}</span>
-          </div>
+            {/* <span>{props.responseTime}</span> */}
+          </p>
         </div>
         {/* Submit Button */}
         <button id="mobile-response-submit-button" className="InputSelectButton" onClick={props.submitResponse}>
