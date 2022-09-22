@@ -285,7 +285,7 @@ a:hover {
 /* Visuals Section */
 #vis-wrapper{
   width: 100%;
-  background: linear-gradient(90deg, #b5e877, #5252ff);
+  /* background: linear-gradient(90deg, #b5e877, #5252ff); */
   flex-grow: 1;
   position: relative;
   z-index: 2;
@@ -742,6 +742,10 @@ a:hover {
 }
 
 #video-stream-wrapper{
+  width: 100%;
+  height: 100%;
+}
+#video-stream-player{
   width: 100%;
   height: 100%;
 }

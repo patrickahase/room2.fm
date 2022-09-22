@@ -2,7 +2,7 @@ import React from 'react';
 import Sketch from 'react-p5';
 import 'p5/lib/addons/p5.sound';
 
-export default function TextBG() {
+export default function TextBG(props) {
 
   let fft, mic;
 
@@ -10,10 +10,9 @@ export default function TextBG() {
 
   const setup = (p5, canvasParentRef) => {
     p5.createCanvas(0, 0).parent(canvasParentRef);
-    mic = new p5.constructor.AudioIn();
-    mic.start();
+    props.audioInit(p5.getAudioContext());
     fft = new p5.constructor.FFT();
-    fft.setInput(mic);
+    //fft.setInput(props.streamAudio);
   }
   
   const draw = p5 => {
@@ -21,8 +20,6 @@ export default function TextBG() {
     let spectrum = fft.analyze();
     let mid = fft.getEnergy("mid");
     console.log(mid);
-    //console.log(fft.analyze());
-    //col1 = fft.getEnergy("mid");
     document.documentElement.style.setProperty("--font-var-one", mid);
   }
   

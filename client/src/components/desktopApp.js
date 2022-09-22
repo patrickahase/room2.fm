@@ -15,6 +15,13 @@ import VideoStreamPlayer from './videoStreamPlayer';
 export default function DesktopApp(props){
 
   const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [streamAudioInit, setStreamAudioInit] = useState(false);
+
+  useEffect(() => {
+    if(props.streamAudio){
+      setStreamAudioInit(true);
+    }
+  }, [props.streamAudio]);
 
   return (
     <div id="desktop-wrapper">
@@ -43,8 +50,11 @@ export default function DesktopApp(props){
                   textAlign: 'center'
                 }}>
                   {/* {props.currentPrompt} */}
-                  <VideoStreamPlayer />
-                  {/* <TextBG /> */}
+                  <VideoStreamPlayer
+                    analysing={props.analysing}
+                    setAudioCtx={props.setAudioCtx}
+                    />
+                  
                 </div>
                 {/* Response Overlay */}
                 <ResponseDisplay 
@@ -115,7 +125,9 @@ export default function DesktopApp(props){
                     <span>SUBMIT RESPONSE</span>                
                   </button>
                   {/* Audio Settings */}
-                  <AudioControls />            
+                  <AudioControls
+                    audioCtx={props.audioCtx}
+                  />            
                 </div>
               </div>
             {/* Info Overlay */}

@@ -36,7 +36,6 @@ export default function AudioControls(props){
     e.stopPropagation();
     isMouseDown = true;
     let clickedID = parseInt(e.target.id);
-    console.log(clickedID);
     /* set classes for active notch */
     let notches = document.getElementsByClassName("VolumeNotch");
     for (let notch of notches){

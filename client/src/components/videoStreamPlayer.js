@@ -13,10 +13,12 @@ const videoJsOptions = {
   pictureInPictureToggle: false
 }
 
-export default function VideoStreamPlayer(){
+export default function VideoStreamPlayer(props){
   return (
     <>
-      <VideoPlayer { ...videoJsOptions } />
+      <VideoPlayer { ...videoJsOptions } 
+        analysing={props.analysing}
+        setAudioCtx={props.setAudioCtx} />
     </>
   )
 }

@@ -68,6 +68,9 @@ export default function App(){
   // is focus mode active
   const [focusMode, setFocusMode] = useState(false);
 
+  //audio source for text react
+  const [audioCtx, setAudioCtx] = useState(null);
+  const [analysing, setAnalysing] = useState(false);
   // handle prompt change
   const[isCountdown, setIsCountdown] = useState(false);
 
@@ -155,7 +158,11 @@ export default function App(){
           setDrawingCanvas={setDrawingCanvas}
           setCurrentCanvasState={setCurrentCanvasState}
           undoDrawing={undoDrawing}
-          redoDrawing={redoDrawing} />
+          redoDrawing={redoDrawing}
+          audioCtx={audioCtx}
+          setAudioCtx={setAudioCtx}
+          analysing={analysing}
+          />
       }
     </div>
   )
@@ -213,7 +220,12 @@ export default function App(){
   function updateFromServerResponse(serverResponse){
     // set up array to push other responses to
     let returnedResponses = [];
-    setCurrentArtist(serverResponse[0][0].currentArtist);
+    if(currentArtist !== serverResponse[0][0].currentArtist){
+      console.log("check")
+      setCurrentArtist(serverResponse[0][0].currentArtist);
+    }
+   
+
     setCurrentPrompt(serverResponse[0][0].currentPrompt);
     if(serverResponse[1].length){
       serverResponse[1].forEach(response => {
