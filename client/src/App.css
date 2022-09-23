@@ -931,7 +931,7 @@ a:hover {
     flex-grow: unset;
   }
   #modal-text{
-    font-size: min(3vh, 6vw);
+    font-size: 1.4rem;
     padding: 2vh;
     text-align: center;
   }
@@ -941,7 +941,7 @@ a:hover {
   #modal-continue-button{
     width: 40vw;
     height: min(12vw, 30vh);
-    font-size: min(4vh, 8vw);
+    font-size: 1.4rem;
     bottom: 7vh;
     left: 30vw;
   }
@@ -949,7 +949,7 @@ a:hover {
   #mobile-header-wrapper{
     background-color: rgb(31, 33, 28);
     color: var(--comp-col-02);
-    font-size: 2rem;
+    font-size: 1.4rem;
     padding: .4rem;
     display: flex;
     justify-content: space-between;
@@ -960,7 +960,7 @@ a:hover {
     left: unset;
     bottom: unset;
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.4em;
   }
   #current-prompt{
     padding: .4rem;

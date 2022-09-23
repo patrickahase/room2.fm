@@ -77,6 +77,7 @@ export default function App(){
   const [audioCtx, setAudioCtx] = useState(null);
   const [audioGain, setAudioGain] = useState(null);
   const [analysing, setAnalysing] = useState(true);
+  const [colliding, setColliding] = useState(true);
   const [colourCycleTimer, setColourCycleTimer] = useState(0.);
   var colourCycleTimerRef = useRef(colourCycleTimer);
   useEffect(() => {colourCycleTimerRef.current = colourCycleTimer}, [colourCycleTimer]);
@@ -178,6 +179,7 @@ export default function App(){
           audioGain={audioGain}
           setAudioGain={setAudioGain}
           analysing={analysing}
+          colliding={colliding}
           />
       }
     </div>
@@ -239,14 +241,17 @@ export default function App(){
       if(serverResponse[0][0].currentArtist === "Panda Wong & 黑芝麻 (Hei Zhi Ma) & Wei Huan"){
         getCSSRule('#current-prompt-wrapper').style.animation = "unset";
         setAnalysing(true);
+        setColliding(true);
         clearInterval(cycleInterval);
       } else if(serverResponse[0][0].currentArtist === "amby downs & Joel Spring") {
         cycleInterval = setInterval(colourCycle, 100);
         getCSSRule('#current-prompt-wrapper').style.animation = "textCycle 10s linear infinite";
         setAnalysing(false);
+        setColliding(false);
       } else { 
         getCSSRule('#current-prompt-wrapper').style.animation = "unset";
         setAnalysing(false);
+        setColliding(true);
         clearInterval(cycleInterval);
       }
       setCurrentArtist(serverResponse[0][0].currentArtist);
@@ -255,12 +260,13 @@ export default function App(){
     if(newPromptRef.current !== serverResponse[0][0].currentPrompt){
       if(modalIsOpenRef.current){
         setNewPrompt(serverResponse[0][0].currentPrompt);
-        setCurrentPrompt(serverResponse[0][0].currentPrompt);
+        setCurrentPrompt(<>{serverResponse[0][0].currentPrompt}</>);
       } else {
         setNewPrompt(serverResponse[0][0].currentPrompt);
         startPromptCountdown();
       }      
     }
+    console.log(<>{serverResponse[0][0].currentPrompt}</>);
     
     // set up array to push other responses to
     let returnedResponses = [];

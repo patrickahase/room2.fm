@@ -59,7 +59,8 @@ export default function DesktopApp(props){
                 <ResponseDisplay 
                   responseData={props.responseData}
                   height={props.height}
-                  width={props.width} />
+                  width={props.width}
+                  colliding={props.colliding} />
                 {/* Menu and Prompt Overlay */}
                 <div id="menu-prompt-wrapper">
                   {/* Settings Menu Overlay */}

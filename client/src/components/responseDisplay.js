@@ -62,20 +62,24 @@ export default function ResponseDisplay(props) {
       let responseBoxDimensions = newResponseBox.getBoundingClientRect();
       newResponseBox.style.left = (80 * xRandom) + "%";
       newResponseBox.style.top = ((100 - (props.height / responseBoxDimensions.height)) * yRandom) + "%";
-      let colliderArray = Array.from(document.getElementsByClassName("Collider"));
-      for (let i = 0; i < colliderArray.length; i++) {
-        if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
-          collision = true;
+      if(props.colliding){
+        let colliderArray = Array.from(document.getElementsByClassName("Collider"));
+        for (let i = 0; i < colliderArray.length; i++) {
+          if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
+            collision = true;
+          }
         }
-      }
-      if(collision){
-        newResponseBox.remove();
-        window.requestAnimationFrame(() => createImageResponseDisplay(imageResponse));
-        console.log("loop");
+        if(collision){
+          newResponseBox.remove();
+          window.requestAnimationFrame(() => createImageResponseDisplay(imageResponse));
+        } else {
+          newResponseBox.classList.add("Collider");
+          responseFadeInOut(newResponseBox);
+        }
       } else {
-        newResponseBox.classList.add("Collider");
         responseFadeInOut(newResponseBox);
-      } 
+      }
+       
     });
     newResponseBox.src = 'https://humstore.thelongesthum.world/'+imageResponse;
   }
@@ -92,25 +96,29 @@ export default function ResponseDisplay(props) {
     let responseBoxDimensions = newResponseBox.getBoundingClientRect();
     newResponseBox.style.left = (80 * xRandom) + "%";
     newResponseBox.style.top = ((100 - (props.height / responseBoxDimensions.height)) * yRandom) + "%";
-    let colliderArray = Array.from(document.getElementsByClassName("Collider"));
-    for (let i = 0; i < colliderArray.length; i++) {
-      if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
-        collision = true;
+    if(props.colliding){
+      let colliderArray = Array.from(document.getElementsByClassName("Collider"));
+      for (let i = 0; i < colliderArray.length; i++) {
+        if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
+          collision = true;
+        }
       }
-    }
-    if(collision){
-      newResponseBox.remove();
-      window.requestAnimationFrame(() => createTextResponseDisplay(textResponse));
+      if(collision){
+        newResponseBox.remove();
+        window.requestAnimationFrame(() => createTextResponseDisplay(textResponse));
+      } else {
+        newResponseBox.classList.add("Collider");
+        responseFadeInOut(newResponseBox);
+      } 
     } else {
-      newResponseBox.classList.add("Collider");
       responseFadeInOut(newResponseBox);
-    } 
+    }
+    
   }
 
   function responseFadeInOut(responseElement){
     responseElement.style.transition = responseFadeTime + "ms";
     setTimeout(() =>{
-      responseElement.classList.add('FadeIn');
       responseElement.style.opacity = 1;
       setTimeout(() => {responseElement.style.opacity = 0;}, responseHangTime);
       setTimeout(() => {responseElement.remove(); displayNextResponse();}, responseFadeTime + responseHangTime + 100);
