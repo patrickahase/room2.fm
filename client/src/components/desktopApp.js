@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import AudioControls from './audioControls';
 import DrawingCanvas from './drawingCanvas';
 import IntroModal from './introModal';
@@ -7,7 +7,6 @@ import DrawingTools from './drawingTools';
 import SettingsMenu from './settingsMenu';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
-import TextBG from './textBG';
 import { InfoOverlay } from './infoOverlay';
 import ColourPicker from './colourPicker';
 import VideoStreamPlayer from './videoStreamPlayer';
@@ -15,13 +14,7 @@ import VideoStreamPlayer from './videoStreamPlayer';
 export default function DesktopApp(props){
 
   const [currentModalPage, setCurrentModalPage] = useState(1);
-  const [streamAudioInit, setStreamAudioInit] = useState(false);
-
-  useEffect(() => {
-    if(props.streamAudio){
-      setStreamAudioInit(true);
-    }
-  }, [props.streamAudio]);
+  const [showOverlay, setShowOverlay] = useState(true);
 
   return (
     <div id="desktop-wrapper">
@@ -42,18 +35,24 @@ export default function DesktopApp(props){
               {/* Visuals */} 
               <div id="vis-wrapper">
                 {/* Background Visuals */} 
-                <div id="bg-vis-wrapper" style={{
-                  display: "flex",
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '4vw',
-                  textAlign: 'center'
-                }}>
-                  {/* {props.currentPrompt} */}
-                  <VideoStreamPlayer
+                <div id="bg-vis-wrapper">
+                  {/*  */}
+                  {/* <VideoStreamPlayer
                     analysing={props.analysing}
                     setAudioCtx={props.setAudioCtx}
-                    />
+                    setAudioGain={props.setAudioGain}
+                    /> */}
+                    {props.analysing &&
+                      <div id="gl-prompt-wrapper">
+                        <GLVis 
+                          height={props.height}
+                          width={props.width}
+                        />
+                        {/* <p id="gl-prompt">{props.currentPrompt}</p> */}
+                      </div>
+                    }
+                  
+                    
                   
                 </div>
                 {/* Response Overlay */}
@@ -66,9 +65,9 @@ export default function DesktopApp(props){
                   {/* Settings Menu Overlay */}
                   <SettingsMenu
                     toggleFocus={props.toggleFocus} 
-                    overlayToggle={props.toggleModal} />
+                    toggleModal={props.toggleModal} />
                   {/* Prompt and Input Selection */}
-                  <div id="current-prompt-wrapper" className="Collider">
+                  <div id="current-prompt-wrapper" className="Collider PromptCycle">
                     <div id="prompt-end-timer-wrapper">
                       <div id="prompt-end-timer" />
                       <div id="prompt-end-timer-overlay" />
@@ -127,12 +126,13 @@ export default function DesktopApp(props){
                   {/* Audio Settings */}
                   <AudioControls
                     audioCtx={props.audioCtx}
+                    audioGain={props.audioGain}
                   />            
                 </div>
               </div>
             {/* Info Overlay */}
-            {/* {this.state.infoOverlay &&
-              <InfoOverlay overlayToggle={this.toggleInfoOverlay.bind(this)} /> } */}
+            {showOverlay &&
+              <InfoOverlay overlayToggle={() => setShowOverlay(false)} /> }
           </div>
           {/* dead simple text chat */}
           <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>        

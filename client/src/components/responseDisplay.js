@@ -15,7 +15,6 @@ export default function ResponseDisplay(props) {
     responsesToDisplayRef.current = responsesToDisplay;
     displayNextResponse();
   }, [responsesToDisplay]);
-  const responsesDisplaying = useRef(false);
 
   const displaysOnScreen = 3;
 
@@ -111,7 +110,7 @@ export default function ResponseDisplay(props) {
   function responseFadeInOut(responseElement){
     responseElement.style.transition = responseFadeTime + "ms";
     setTimeout(() =>{
-      // responseElement.classList.add('FadeIn');
+      responseElement.classList.add('FadeIn');
       responseElement.style.opacity = 1;
       setTimeout(() => {responseElement.style.opacity = 0;}, responseHangTime);
       setTimeout(() => {responseElement.remove(); displayNextResponse();}, responseFadeTime + responseHangTime + 100);
@@ -126,7 +125,6 @@ function detect2DBoxCollision(box1, box2){
      box1.top < box2.bottom &&
      box1.bottom > box2.top) {
       collision = true;
-      console.log("hit");
     }
   return collision;
 }

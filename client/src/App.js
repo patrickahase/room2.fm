@@ -5,7 +5,6 @@ import './App.css';
 
 import DesktopApp from './components/desktopApp';
 import MobileApp from './components/mobileApp';
-import {artistPresets} from './content/preloadArrays.js';
 
 
 export default function App(){
@@ -17,14 +16,20 @@ export default function App(){
   // is the intro modal open
   //const [modalIsOpen, setModalIsOpen] = useState(true);
   const [modalIsOpen, setModalIsOpen] = useState(true);
+  var modalIsOpenRef = useRef(modalIsOpen);
+  useEffect(() => {modalIsOpenRef.current = modalIsOpen}, [modalIsOpen]);
   // current modal page - 0 is shut
   const [currentModalPage, setCurrentModalPage] = useState(1);
   // intro modal instance
   const [introModal, setIntroModal] = useState(null);
   // current artist
-  const [currentArtist, setCurrentArtist] = useState(<>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>);
+  const [currentArtist, setCurrentArtist] = useState(null);
+  var currentArtistRef = useRef(currentArtist);
+  useEffect(() => {currentArtistRef.current = currentArtist}, [currentArtist]);
   // current text prompt
   const [currentPrompt, setCurrentPrompt] = useState(<>Take a deep breath, then continue to breathe along with the rhythm of the track.<br/>Draw or write your interpretation of the textures you hear.</>);
+  var currentPromptRef = useRef(currentPrompt);
+  useEffect(() => {currentPromptRef.current = currentPrompt}, [currentPrompt]);
   // if false it's assumed to be text instead
   const[inputIsDraw, setInputIsDraw] = useState(false);
   // other responses from database
@@ -70,10 +75,19 @@ export default function App(){
 
   //audio source for text react
   const [audioCtx, setAudioCtx] = useState(null);
-  const [analysing, setAnalysing] = useState(false);
+  const [audioGain, setAudioGain] = useState(null);
+  const [analysing, setAnalysing] = useState(true);
+  const [colourCycleTimer, setColourCycleTimer] = useState(0.);
+  var colourCycleTimerRef = useRef(colourCycleTimer);
+  useEffect(() => {colourCycleTimerRef.current = colourCycleTimer}, [colourCycleTimer]);
+  let cycleInterval;
   // handle prompt change
   const[isCountdown, setIsCountdown] = useState(false);
-
+  var isCountdownRef = useRef(isCountdown);
+  useEffect(() => {isCountdownRef.current = isCountdown}, [isCountdown]);
+  const[newPrompt, setNewPrompt] = useState("a");
+  var newPromptRef = useRef(newPrompt);
+  useEffect(() => {newPromptRef.current = newPrompt}, [newPrompt]);
   const [responseTime, setResponseTime] = useState(0);
 
   // my init function to run on app load
@@ -161,6 +175,8 @@ export default function App(){
           redoDrawing={redoDrawing}
           audioCtx={audioCtx}
           setAudioCtx={setAudioCtx}
+          audioGain={audioGain}
+          setAudioGain={setAudioGain}
           analysing={analysing}
           />
       }
@@ -173,11 +189,11 @@ export default function App(){
     if(modalIsOpen){
       document.addEventListener('mouseup', saveCanvasState);
       introModal.hide();
-      document.getElementById("AOC-modal").style.display = "none";
+      getCSSRule(".ModalWrapper").style.display = "none";
     } else {
       document.removeEventListener('mouseup', saveCanvasState);
       introModal.show();
-      document.getElementById("AOC-modal").style.display = "unset";
+      getCSSRule(".ModalWrapper").style.display = "unset";
     }
     // toggle state
     setModalIsOpen(!modalIsOpen);
@@ -218,15 +234,36 @@ export default function App(){
 
   //update state from latest server info
   function updateFromServerResponse(serverResponse){
-    // set up array to push other responses to
-    let returnedResponses = [];
-    if(currentArtist !== serverResponse[0][0].currentArtist){
-      console.log("check")
+    // if new artist check for particular changes
+    if(currentArtistRef.current !== serverResponse[0][0].currentArtist){
+      if(serverResponse[0][0].currentArtist === "Panda Wong & 黑芝麻 (Hei Zhi Ma) & Wei Huan"){
+        getCSSRule('#current-prompt-wrapper').style.animation = "unset";
+        setAnalysing(true);
+        clearInterval(cycleInterval);
+      } else if(serverResponse[0][0].currentArtist === "amby downs & Joel Spring") {
+        cycleInterval = setInterval(colourCycle, 100);
+        getCSSRule('#current-prompt-wrapper').style.animation = "textCycle 10s linear infinite";
+        setAnalysing(false);
+      } else { 
+        getCSSRule('#current-prompt-wrapper').style.animation = "unset";
+        setAnalysing(false);
+        clearInterval(cycleInterval);
+      }
       setCurrentArtist(serverResponse[0][0].currentArtist);
     }
-   
-
-    setCurrentPrompt(serverResponse[0][0].currentPrompt);
+    // if new prompt init countdown
+    if(newPromptRef.current !== serverResponse[0][0].currentPrompt){
+      if(modalIsOpenRef.current){
+        setNewPrompt(serverResponse[0][0].currentPrompt);
+        setCurrentPrompt(serverResponse[0][0].currentPrompt);
+      } else {
+        setNewPrompt(serverResponse[0][0].currentPrompt);
+        startPromptCountdown();
+      }      
+    }
+    
+    // set up array to push other responses to
+    let returnedResponses = [];
     if(serverResponse[1].length){
       serverResponse[1].forEach(response => {
         returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
@@ -236,7 +273,37 @@ export default function App(){
     }    
   }
 
+  function colourCycle(){
+    setColourCycleTimer(prev => prev + .1);
+    document.documentElement.style.setProperty("--comp-col-cycle", `hsl(${colourCycleTimerRef.current}deg 100% 50%)`);
+  }
+
+  function startPromptCountdown(){
+    if(isCountdownRef.current === false){      
+      setIsCountdown(true);
+      let promptTimer = document.getElementById("prompt-end-timer-wrapper").children[0];
+      let promptTimerOverlay = document.getElementById("prompt-end-timer-wrapper").children[1];
+      promptTimerOverlay.style.transition = "60s linear";
+      promptTimerOverlay.style.width = "100%";
+      let countdown = 60;
+      promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
+      let x = setInterval(() => {    
+        countdown -= 1;        
+        promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
+        if (countdown < 1) {
+          clearInterval(x);
+          promptTimerOverlay.style.transition = "0s linear";
+          promptTimerOverlay.style.width = "0%";
+          promptTimer.innerHTML = "";
+          setCurrentPrompt(newPromptRef.current);
+          setIsCountdown(false);        
+        }
+      }, 1000);
+    }    
+  }
+
   function submitResponse(){
+    /* !!! */
     let responseTimer;
     let textInput = document.getElementById('text-input');
     // check if a text or an image response
@@ -389,30 +456,6 @@ export default function App(){
       // update actual canvas
       drawingCanvas.loadFromJSON(newCanvasState);      
     }
-  }
-  // on prompt update give a timer
-  function startPromptCountdown(newPrompt){
-    if(!isCountdown){
-      setIsCountdown(true);
-      let promptTimer = document.getElementById("prompt-end-timer-wrapper").children[0];
-      let promptTimerOverlay = document.getElementById("prompt-end-timer-wrapper").children[1];
-      promptTimerOverlay.style.transition = "60s linear";
-      promptTimerOverlay.style.width = "100%";
-      let countdown = 60;
-      promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
-      let x = setInterval(() => {    
-        countdown -= 1;
-        promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
-        if (countdown < 1) {
-          clearInterval(x);
-          promptTimerOverlay.style.transition = "0s linear";
-          promptTimerOverlay.style.width = "0%";
-          promptTimer.innerHTML = "";
-          setCurrentPrompt(newPrompt);
-          setIsCountdown(false);   
-        }
-      }, 1000);
-    }    
   }
 
   function dataURLtoFile(dataurl, filename){

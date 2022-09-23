@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css';
 import Sketch from 'react-p5';
 import 'p5/lib/addons/p5.sound';
 
 export default function VideoPlayer(props){
+  const videoRef = React.useRef(null);
+  const playerRef = React.useRef(null);
+  const [fft, setFft] = useState(null);
+  const {options, onReady} = props;
 
-  let player, videoNode, fft, audioContext, audioSource;
+  let audioContext, audioSource;
 
 
   const setup = (p5, canvasParentRef) => {
@@ -14,20 +18,33 @@ export default function VideoPlayer(props){
     audioContext = p5.getAudioContext();
     props.setAudioCtx(audioContext);
     audioSource = audioContext.createMediaElementSource(document.getElementById("video-stream-player"));
-    audioSource.connect(audioContext.destination);
-    fft = new p5.constructor.FFT();
-    fft.setInput(audioSource);
-    /* let player = videojs(videoNode, props, function onPlayerReady() {
-    }); */
+    let newGain = audioContext.createGain();
+    props.setAudioGain(newGain);
+    audioSource.connect(newGain);
+    newGain.connect(audioContext.destination);
+    let newFft = new p5.constructor.FFT();
+    newFft.setInput(audioSource);
+    setFft(newFft);
+    const videoElement = videoRef.current;
+    const player = playerRef.current = videojs(videoElement, options, () => {
+      onReady && onReady(player);
+    });
   }
   
   const draw = p5 => {
     if(props.analysing === true){
-      let spectrum = fft.analyze();
-      let mid = fft.getEnergy("mid");
-      console.log(mid);
-      document.documentElement.style.setProperty("--font-var-one", mid);
+      let spectrum = fft.analyze(512);
+      let mid = remapEnergy(fft.getEnergy(140,400),175,184);
+      let treble = remapEnergy(fft.getEnergy(400,14000),33,43);
+      document.documentElement.style.setProperty("--font-var-two", mid);
+      document.documentElement.style.setProperty("--font-var-three", treble);
     }    
+  }
+
+  function remapEnergy(energyInput, floor, ceiling){
+    // this expects the 0 - 255 range of the getEnergy
+    // return floor + (ceiling - floor) * energyInput/255;
+    return (energyInput - floor)/(ceiling - floor) * 100;
   }
 
   // wrap the player in a div with a `data-vjs-player` attribute
@@ -36,7 +53,7 @@ export default function VideoPlayer(props){
     return (
       <div id="video-stream-wrapper">
         <div data-vjs-player>
-          <video ref={ node => videoNode = node } className="video-js vjs-fill" id="video-stream-player"></video>
+          <video ref={videoRef} className="video-js vjs-fill" id="video-stream-player"></video>
           {/* <video id="video-stream-player2"></video> */}
           <Sketch setup={setup} draw={draw} />
         </div>

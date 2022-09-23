@@ -68,7 +68,7 @@ function SwapIcon(){
       width="100%"
       height="100%"
       viewBox="0 0 100 100"
-      stroke-linejoin="round"
+      strokeLinejoin="round"
       xmlns="http://www.w3.org/2000/svg" >
         {/* Arrow Head */}
         <marker id="arrowhead" markerWidth="10" markerHeight="6" refX="7" refY="3" orient="auto">

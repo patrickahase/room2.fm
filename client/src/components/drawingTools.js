@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export default function DrawingTools(props){
   return (<>
@@ -47,7 +47,7 @@ function UndoIcon(props){
             <polygon points="0 0, 5 2.5, 0 5" />
           </marker>
         </defs>
-        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke={props.strokeColour} marker-end="url(#arrowhead)"
+        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke={props.strokeColour} markerEnd="url(#arrowhead)"
               d=" M 30,80
                   L 65,80
                   A 15 15 0 1 0 65,28
@@ -70,7 +70,7 @@ function RedoIcon(props){
             <polygon points="0 0, 5 2.5, 0 5" />
           </marker>
         </defs>
-        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke={props.strokeColour} marker-end="url(#arrowhead2)"
+        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke={props.strokeColour} markerEnd="url(#arrowhead2)"
               d=" M 70,80
                   L 35,80
                   A 15 15 0 0 1 35,28
@@ -92,8 +92,8 @@ function EraserIcon(props){
       strokeWidth='3'
       >
         <rect x="10" y="60" width="40" height="20" />
-        <polygon points="10,60 50,60 85,20 45,20" fill="yellow" stroke-linejoin="bevel" />
-        <polygon points="50,80 50,60 85,20 85,40" fill="yellow" stroke-linejoin="bevel" />
+        <polygon points="10,60 50,60 85,20 45,20" fill="yellow" strokeLinejoin="bevel" />
+        <polygon points="50,80 50,60 85,20 85,40" fill="yellow" strokeLinejoin="bevel" />
       
     </svg>
   )
@@ -109,7 +109,7 @@ function BrushUpIcon(props){
       fill='none'
       stroke={props.strokeColour}
       strokeWidth='4'
-      stroke-linejoin="round"
+      strokeLinejoin="round"
       >
         <path fill="none" strokeLinecap="round"
               d="M 15,90 L 65,90 L 65,55 L 25,55 L 25,90 L 35,90 L 35,75 M 45,90 L 45,75" />
@@ -130,7 +130,7 @@ function BrushDownIcon(props){
       fill='none'
       stroke={props.strokeColour}
       strokeWidth='4'
-      stroke-linejoin="round"
+      strokeLinejoin="round"
       >
         <path fill="none" strokeLinecap="round"
               d="M 15,90 L 65,90 L 65,55 L 25,55 L 25,90 L 35,90 L 35,75 M 45,90 L 45,75" />

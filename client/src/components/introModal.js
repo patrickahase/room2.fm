@@ -1,6 +1,5 @@
-import React, { useEffect, useState, Component } from 'react';
+import React, { useEffect } from 'react';
 import A11yDialog from 'a11y-dialog';
-import { acknowledgementOfCountryText, introText, instructionsText, /* warningText */ } from '../content/modalText';
 import WhereAreYou from './whereModal';
 
 export default function IntroModal(props) {
@@ -62,7 +61,8 @@ export default function IntroModal(props) {
           <div id="modal-text">
             <p>
               room2.fm is a digital space for collective reflection, sharing, and vulnerability. Today @ 2pm =&gt; 7pm (AEST) we will be 
-              hosting sets from: <br />
+              hosting sets from:
+            </p>
               <p style={{fontSize: '1.95rem', padding: '1rem'}}>
                 amby downs &amp; Joel Spring <br />
                 Hei Zhi Ma, Panda Wong, &amp; Wei Huang <br />
@@ -70,6 +70,7 @@ export default function IntroModal(props) {
                 E Fishpool &amp; Sam Miers <br />
                 w/ interstitial sounds by J <br />
               </p>
+            <p>
               There is no right or wrong way for you to listen, respond to, or feel the work presented @ room2. We encourage you to trust 
               your senses and intuition and respond sincerely and in whatever way feels true to your experience.
             </p>

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import videojs from "video.js";
+import React from 'react';
 import VideoPlayer from './videoPlayer';
 
 const videoJsOptions = {
@@ -14,10 +13,15 @@ const videoJsOptions = {
 }
 
 export default function VideoStreamPlayer(props){
+  const playerRef = React.useRef(null);
+  const handlePlayerReady = (player) => {
+    playerRef.current = player;
+  };
   return (
     <>
-      <VideoPlayer { ...videoJsOptions } 
+      <VideoPlayer options={videoJsOptions} onReady={handlePlayerReady} 
         analysing={props.analysing}
+        setAudioGain={props.setAudioGain}
         setAudioCtx={props.setAudioCtx} />
     </>
   )

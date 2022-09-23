@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function AudioControls(props){
+
+  const [savedVol, setSavedVol] = useState(1.);
+  const [isMuted, setIsMuted] = useState(false);
 
   const notchNumber = 12;
 
@@ -20,8 +23,8 @@ export default function AudioControls(props){
 
   return (
     <>              
-      <button id="mute-button" onClick={props.muteAudio}>
-        {props.isMuted
+      <button id="mute-button" onClick={muteAudio}>
+        {isMuted
           ? <MuteIconOff />
           : <MuteIconOn />
         }          
@@ -47,7 +50,21 @@ export default function AudioControls(props){
     }
     /* set new volume */
     let newVolume = 1 - (1/notchNumber) * clickedID;
-    //document.getElementById("audio-source").volume = newVolume;
+    setSavedVol(newVolume);
+    if(props.audioCtx){
+      props.audioGain.gain.setValueAtTime(newVolume, props.audioCtx.currentTime);      
+      setIsMuted(false);
+    }  
+  }
+
+  function muteAudio(){
+    if(isMuted){
+      props.audioGain.gain.setValueAtTime(savedVol, props.audioCtx.currentTime);
+      setIsMuted(false);
+    } else {
+      props.audioGain.gain.setValueAtTime(0, props.audioCtx.currentTime);
+      setIsMuted(true);
+    }
   }
 }
 
