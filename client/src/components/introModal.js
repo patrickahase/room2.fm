@@ -164,7 +164,7 @@ export default function IntroModal(props) {
       <div id="modal-text-wrapper" className="modal-text-wrapper-aoc" style={{textAlign: 'center'}}>
           <div id="modal-text" style={{alignItems: 'center', justifyContent: 'space-around'}}>
             <p id="aoc-text">
-              This website was produced and is maintained on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi 
+            This website was produced and is maintained on the unceded territory of the Wurundjeri Woi Wurrung and Bunurong Boon 
               Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
               of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
               all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
@@ -190,7 +190,7 @@ export default function IntroModal(props) {
               please do so on a desktop or laptop computer for the full room2 experience.
             </p>
             <p>
-              During room2 prompts will periodically come up on the projection screen. You can share your response to the prompts, music 
+              During room2 prompts will periodically come up on the projection screen and your mobile device. You can share your response to the prompts, music 
               and visuals by either drawing or writing.
             </p>
           </div>
