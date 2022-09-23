@@ -238,7 +238,7 @@ export default function App(){
   function updateFromServerResponse(serverResponse){
     // if new artist check for particular changes
     if(currentArtistRef.current !== serverResponse[0][0].currentArtist){
-      if(serverResponse[0][0].currentArtist === "Panda Wong & 黑芝麻 (Hei Zhi Ma) & Wei Huan"){
+      if(serverResponse[0][0].currentArtist === "Panda Wong & 黑芝麻 (Hēi zhī ma) & Wei Huang"){
         getCSSRule('#current-prompt-wrapper').style.animation = "unset";
         setAnalysing(true);
         setColliding(true);

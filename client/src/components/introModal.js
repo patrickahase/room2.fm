@@ -65,7 +65,7 @@ export default function IntroModal(props) {
             </p>
               <p style={{fontSize: '1.95rem', padding: '1rem'}}>
                 amby downs &amp; Joel Spring <br />
-                Panda Wong &amp; 黑芝麻 (Hēi zhī ma) &amp; Wei Huan <br />
+                Panda Wong &amp; 黑芝麻 (Hēi zhī ma) &amp; Wei Huang <br />
                 Mohamed Chamas &amp; Aarti Jadu <br />
                 E Fishpool &amp; Sam Miers <br />
                 w/ interstitial sounds by J <br />
@@ -188,6 +188,10 @@ export default function IntroModal(props) {
             <p>
               This mobile version of room2.fm is for use at the live event hosted at Arts House. If you are logging in remotely 
               please do so on a desktop or laptop computer for the full room2 experience.
+            </p>
+            <p>
+              During room2 prompts will periodically come up on the projection screen. You can share your response to the prompts, music 
+              and visuals by either drawing or writing.
             </p>
           </div>
       </div>        
