@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function DrawingTools(props){
+
+  useEffect(() => {
+    if(props.mobile){
+      props.setCurrentColours([props.colours[2]], "#000000", "#000000")
+    }
+  }, []);
+
   return (<>
     {props.mobile
       ?<div id="mobile-drawing-tools-wrapper">
@@ -18,7 +25,7 @@ export default function DrawingTools(props){
           <button id="undo-button" className="DrawingUIButton" onClick={props.undoDrawing}> <span className="DrawingUIButtonLabel">UNDO</span> <div id="undo-icon"><UndoIcon strokeColour="white" /></div></button>
           <button id="redo-button" className="DrawingUIButton" onClick={props.redoDrawing}> <span className="DrawingUIButtonLabel">REDO</span> <div id="redo-icon"><RedoIcon strokeColour="white" /></div></button>
           <span id="brush-col-label">Brush<br />Colour</span>
-          <input type="color" id="mobile-col-select" className="DrawingUIButton" name="col1Select" defaultValue={props.colours[0]} onInput={e => props.setCurrentColours([e.target.value], "#000000", "#000000")} />              
+          <input type="color" id="mobile-col-select" className="DrawingUIButton" name="col1Select" defaultValue={props.colours[2]} onInput={e => props.setCurrentColours([e.target.value], "#000000", "#000000")} />              
         </div>        
       </div>
       :<>

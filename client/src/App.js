@@ -260,14 +260,12 @@ export default function App(){
     if(newPromptRef.current !== serverResponse[0][0].currentPrompt){
       if(modalIsOpenRef.current){
         setNewPrompt(serverResponse[0][0].currentPrompt);
-        setCurrentPrompt(<>{serverResponse[0][0].currentPrompt}</>);
+        setCurrentPrompt(serverResponse[0][0].currentPrompt);
       } else {
         setNewPrompt(serverResponse[0][0].currentPrompt);
         startPromptCountdown();
       }      
     }
-    console.log(<>{serverResponse[0][0].currentPrompt}</>);
-    
     // set up array to push other responses to
     let returnedResponses = [];
     if(serverResponse[1].length){
@@ -277,6 +275,16 @@ export default function App(){
       });
       setResponseData(returnedResponses);
     }    
+  }
+
+  function parsePromptString(promptSting){
+    let splitStrings = promptSting.split('<br />');
+    let blankElement = document.createElement('span');
+    splitStrings.forEach(string => {
+      let prevInnerHtml = blankElement.innerHTML;
+      blankElement.innerHTML = prevInnerHtml + string + '<br />';
+    });
+    return blankElement
   }
 
   function colourCycle(){
@@ -419,11 +427,15 @@ export default function App(){
       if(newUndoStack.length === maxUndo){ newUndoStack.shift(); }
       // add last current state stored before updating it to store the new state
       newUndoStack.push(currentCanvasStateRef.current);
-      setCurrentCanvasState(drawingCanvasRef.current.toDatalessJSON());
+      let reloadState = drawingCanvasRef.current.toDatalessJSON();
+      setCurrentCanvasState(reloadState);
       // update undo stack into state, remove redo stack and then toggle isDrawing off
       setUndoStack(newUndoStack);
       setRedoStack([]);
-      setIsDrawing(false);
+      setIsDrawing(false);      
+      setTimeout(() => {
+        drawingCanvasRef.current.loadFromJSON(drawingCanvasRef.current.toDatalessJSON());
+      }, 1);
     }
   }
   function undoDrawing(){

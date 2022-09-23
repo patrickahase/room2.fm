@@ -5,9 +5,6 @@ import DrawingTools from './drawingTools';
 
 
 export default function MobileApp(props){
-  useEffect(() => {
-    console.log(props.responseTime) 
-  }, [props.responseTime]);
   return (
     <div id="mobile-wrapper">
       {props.modalIsOpen
