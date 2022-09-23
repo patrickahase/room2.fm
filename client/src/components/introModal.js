@@ -35,7 +35,7 @@ export default function IntroModal(props) {
       <div id="modal-text-wrapper" className="modal-text-wrapper-aoc" style={{textAlign: 'center'}}>
           <div id="modal-text" style={{alignItems: 'center', justifyContent: 'space-around'}}>
             <p id="aoc-text">
-              This website was produced and is maintained on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi 
+              This website was produced and is maintained on the unceded territory of the Wurundjeri Woi Wurrung and Bunurong Boon 
               Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
               of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
               all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
@@ -60,12 +60,12 @@ export default function IntroModal(props) {
       <div id="modal-text-wrapper">
           <div id="modal-text">
             <p>
-              room2.fm is a digital space for collective reflection, sharing, and vulnerability. Today @ 2pm =&gt; 7pm (AEST) we will be 
-              hosting sets from:
+              room2.fm is a digital space for collective reflection, sharing, and vulnerability. <br/>
+              Today @ 2pm =&gt; 7pm (AEST) we will be hosting works from:
             </p>
               <p style={{fontSize: '1.95rem', padding: '1rem'}}>
                 amby downs &amp; Joel Spring <br />
-                Hei Zhi Ma, Panda Wong, &amp; Wei Huang <br />
+                Panda Wong &amp; 黑芝麻 (Hēi zhī ma) &amp; Wei Huan <br />
                 Mohamed Chamas &amp; Aarti Jadu <br />
                 E Fishpool &amp; Sam Miers <br />
                 w/ interstitial sounds by J <br />
@@ -93,25 +93,20 @@ export default function IntroModal(props) {
       </div>
       <div id="modal-text-wrapper">
           <div id="modal-text">
-            <p>You can share your response to the prompts, music and visuals in a number of ways:</p>
+            <p>During room2 prompts will periodically come up in the lower middle of the screen. You can share your response to the prompts, music and visuals in a number of ways:</p>
             <p>
-              Periodically, prompts will come up in the lower middle of the screen. You can write or draw your response in the white box at the bottom 
-              of the screen before clicking the ‘submit response’ button to share it with others. Your responses to these prompts will be completely 
-              anonymised and not attributable to you in any way. Above the ‘submit response’ button, you can select the colour palette you will be able 
-              to draw responses with.
+            You can write or draw your response in the white box at the bottom of the screen before clicking the ‘submit response’ button to share it with others. Your responses to 
+            these prompts will be completely anonymised and not attributable to you in any way. Above the ‘submit response’ button, you can select the colour palette you will be able 
+            to draw responses with.
             </p>
             <p>
               You can use the chat box on the right of the screen to directly speak to others participating. Select a username and click ‘Join Room’ to 
               engage. Be yourself, be someone else, be whomever you want to be!
             </p>
             <p>
-              Prompt responses from the online and in person event will be intermingled and viewed no matter how you tune into room2
+            Prompt responses from the online and in-person event will be intermingled and viewable for both digital and face-to-face participants.
             </p>
               <span className="ModalTextSmall">
-              This website was produced on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi Wurrung peoples of 
-              the Eastern Kulin Nation and we pay respect to their Elders past and present.
-              <br />
-              <br />
               If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.    
               <br />
               <br /> 
@@ -133,7 +128,7 @@ export default function IntroModal(props) {
       <div id="modal-text-wrapper" className="modal-text-wrapper-aoc" style={{textAlign: 'center'}}>
           <div id="modal-text" style={{alignItems: 'center', justifyContent: 'space-around'}}>
             <p id="aoc-text">
-              This website was produced and is maintained on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi 
+              This website was produced and is maintained on the unceded territory of the Wurundjeri Woi Wurrung and Bunurong Boon 
               Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
               of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
               all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 

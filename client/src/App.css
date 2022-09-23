@@ -941,7 +941,7 @@ a:hover {
   #modal-continue-button{
     width: 40vw;
     height: min(12vw, 30vh);
-    font-size: 1.4rem;
+    font-size: min(4vh, 8vw);
     bottom: 7vh;
     left: 30vw;
   }
