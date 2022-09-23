@@ -108,6 +108,13 @@ router.post('/getLiveUpdate', (req, res) => {
         .catch(err => console.log(err));
 });
 
-
+// GET api/getLiveMobileUpdate
+// return latest prompt for mobile
+router.get('/getLiveMobileUpdate', (req, res) => {
+  const db = DbService.getDbServiceInstance();
+  const result = db.getLiveMobileDBUpdate();
+  result.then(data => res.json({ data: data }))
+        .catch(err => console.log(err));
+});
 
 module.exports = router;
