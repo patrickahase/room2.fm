@@ -78,6 +78,8 @@ export default function App(){
   const [audioGain, setAudioGain] = useState(null);
   const [analysing, setAnalysing] = useState(true);
   const [colliding, setColliding] = useState(true);
+  var collidingRef = useRef(colliding);
+  useEffect(() => {collidingRef.current = colliding}, [colliding]);
   const [colourCycleTimer, setColourCycleTimer] = useState(0.);
   var colourCycleTimerRef = useRef(colourCycleTimer);
   useEffect(() => {colourCycleTimerRef.current = colourCycleTimer}, [colourCycleTimer]);
@@ -231,7 +233,21 @@ export default function App(){
     })
       .then(res => res.json())
       .then(res => updateFromServerResponse(res.data));
-    setTimeout(liveUpdate, liveUpdateTime)
+    setTimeout(liveUpdate, liveUpdateTime);
+  }
+
+  // get latest info from server mobile version
+  function liveMobileUpdate(){
+    fetch(`https://room2.fm/api/getLiveUpdate`, {
+      headers: {
+        'Content-type': 'application/json'
+      },
+      method: 'GET',
+      mode: 'cors'
+    })
+      .then(res => res.json())
+      .then(res => console.log(res.data));
+    setTimeout(liveUpdate, liveUpdateTime);
   }
 
   //update state from latest server info
@@ -258,7 +274,7 @@ export default function App(){
     }
     // if new prompt init countdown
     if(newPromptRef.current !== serverResponse[0][0].currentPrompt){
-      if(modalIsOpenRef.current){
+      if(modalIsOpenRef.current || !collidingRef.current){
         setNewPrompt(serverResponse[0][0].currentPrompt);
         setCurrentPrompt(serverResponse[0][0].currentPrompt);
       } else {

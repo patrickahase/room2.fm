@@ -24,7 +24,6 @@ export default function MobileApp(props){
         <div id="current-prompt-wrapper">          
           <p id="current-prompt">
             {props.currentPrompt}
-            {/* <span>{props.responseTime}</span> */}
           </p>
         </div>
         {/* Submit Button */}
@@ -37,10 +36,10 @@ export default function MobileApp(props){
           <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => props.setInput(false)}>write</button>
         </div>
         {/* end timer */}
-        {/* <div id="prompt-end-timer-wrapper">
-          <div id="prompt-end-timer">this prompt will change in 60 seconds...</div>
+        <div id="prompt-end-timer-wrapper">
+          <div id="prompt-end-timer"></div>
           <div id="prompt-end-timer-overlay" />
-        </div> */}
+        </div>
         {/* input section */}
         <div style={{flexGrow: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden'}}>
           <div id="input-wrapper"> 

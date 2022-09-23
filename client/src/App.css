@@ -954,6 +954,12 @@ a:hover {
     display: flex;
     justify-content: space-between;
   }
+  #prompt-end-timer-wrapper{
+    background-color: rgb(31, 33, 28);
+    font-size: 1.4rem;
+    color: white;
+    text-align: center;
+  }
   /* prompt section */
   #current-prompt-wrapper{
     position: unset;
