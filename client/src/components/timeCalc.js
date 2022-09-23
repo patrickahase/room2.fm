@@ -20,6 +20,7 @@ export default function CountdownCalc (props) {
   var hour = 60 * 60 * 1000;
   countdownDays = countdownDays.toFixed(2);
   // b/w sunset and midnight is approx 6 hours = 0.25 of a day
+  
   if (countdownDays >= 2.75) {
     return (
       <>
@@ -41,16 +42,17 @@ export default function CountdownCalc (props) {
     return (
       <>
       <span>
-        The track/prompt/visual cycle will change tomorrow, as the sun is setting.
+        room2.fm async will end tomorrow, as the sun is setting.
       </span>
       </>
     )
+  
   } else if (countdownDays <= 0.74) {
     if (remainingMilli <= hour) {
       return (
         <>
         <span>
-          The next cycle will begin soon, as the sun is setting.
+          room2.fm async will end soon, as the sun is setting.
         </span>
         </>
       )
@@ -58,7 +60,7 @@ export default function CountdownCalc (props) {
     return (
       <>
       <span>
-        The track/prompt/visual cycle will change today, as the sun is setting.
+        room2.fm async will end today, as the sun is setting.
       </span>
       </>
     )
