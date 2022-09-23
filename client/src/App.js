@@ -433,9 +433,9 @@ export default function App(){
       setUndoStack(newUndoStack);
       setRedoStack([]);
       setIsDrawing(false);      
-      setTimeout(() => {
+      /* setTimeout(() => {
         drawingCanvasRef.current.loadFromJSON(drawingCanvasRef.current.toDatalessJSON());
-      }, 1);
+      }, 1); */
     }
   }
   function undoDrawing(){

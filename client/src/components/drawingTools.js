@@ -15,7 +15,7 @@ export default function DrawingTools(props){
           
           <div id="brush-size-slider-wrapper">
             <span style={{position: 'relative', top: '-0.1rem'}}>-</span>
-            <input type="range" id="brush-size-slider" name="brush-size-slider" min="2" max="60" onInput={e => props.setBrushSize(e.target.value)} />
+            <input type="range" id="brush-size-slider" name="brush-size-slider" min="2" max="60" defaultValue="8" onInput={e => props.setBrushSize(e.target.value)} />
             <span style={{position: 'relative', top: '-0.1rem'}}>+</span>
           </div>
           <span>Brush Size</span>

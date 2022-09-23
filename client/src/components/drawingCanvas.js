@@ -17,6 +17,7 @@ export default function DrawingCanvas(props){
     newCanvas.freeDrawingBrush.width = props.brushSize;
     newCanvas.freeDrawingCursor = getCustomCursor();
     newCanvas.on('mouse:down', () => props.setIsDrawing(true));
+    newCanvas.on('path:created', () => newCanvas.loadFromJSON(newCanvas.toDatalessJSON()));
     setCanvas(newCanvas);
     window.addEventListener('resize', updateCanvasDimensions);
     props.setDrawingCanvas(newCanvas);
