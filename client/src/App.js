@@ -105,6 +105,8 @@ export default function App(){
     document.addEventListener('touchcancel', saveCanvasState);
     if(!onMobile){
       liveUpdate();
+    } else {
+      liveMobileUpdate();
     }
   }, []);
 
@@ -238,7 +240,7 @@ export default function App(){
 
   // get latest info from server mobile version
   function liveMobileUpdate(){
-    fetch(`https://room2.fm/api/getLiveUpdate`, {
+    fetch(`https://room2.fm/api/getLiveMobileUpdate`, {
       headers: {
         'Content-type': 'application/json'
       },
@@ -246,8 +248,8 @@ export default function App(){
       mode: 'cors'
     })
       .then(res => res.json())
-      .then(res => console.log(res.data));
-    setTimeout(liveUpdate, liveUpdateTime);
+      .then(res => updateFromMobileServerResponse(res.data));
+    setTimeout(liveMobileUpdate, liveUpdateTime);
   }
 
   //update state from latest server info
@@ -292,15 +294,31 @@ export default function App(){
       setResponseData(returnedResponses);
     }    
   }
-
-  function parsePromptString(promptSting){
-    let splitStrings = promptSting.split('<br />');
-    let blankElement = document.createElement('span');
-    splitStrings.forEach(string => {
-      let prevInnerHtml = blankElement.innerHTML;
-      blankElement.innerHTML = prevInnerHtml + string + '<br />';
-    });
-    return blankElement
+  //update state from latest server info
+  function updateFromMobileServerResponse(serverResponse){
+    // if new artist check for particular changes
+    if(currentArtistRef.current !== serverResponse[0][0].currentArtist){
+      if(serverResponse[0][0].currentArtist === "amby downs & Joel Spring") {
+        cycleInterval = setInterval(colourCycle, 100);
+        getCSSRule('#current-prompt-wrapper').style.animation = "textCycle 10s linear infinite";
+        setColliding(false);
+      } else { 
+        getCSSRule('#current-prompt-wrapper').style.animation = "unset";
+        setColliding(true);
+        clearInterval(cycleInterval);
+      }
+      setCurrentArtist(serverResponse[0][0].currentArtist);
+    }
+    // if new prompt init countdown
+    if(newPromptRef.current !== serverResponse[0][0].currentPrompt){
+      if(modalIsOpenRef.current || !collidingRef.current){
+        setNewPrompt(serverResponse[0][0].currentPrompt);
+        setCurrentPrompt(serverResponse[0][0].currentPrompt);
+      } else {
+        setNewPrompt(serverResponse[0][0].currentPrompt);
+        startPromptCountdown();
+      }      
+    }   
   }
 
   function colourCycle(){
@@ -357,7 +375,7 @@ export default function App(){
         body: formData
       })
       .then(res => res.json())
-      .then(() => {setResponseTime(responseTimer - Date.now())});
+      .then(() => {if(onMobile){responseSubmittedAnim();}});
     } else if(inputIsDraw === false && textInput.value.length > 0) {
       // text input
       let responseText = textInput.value;
@@ -371,9 +389,19 @@ export default function App(){
           body: JSON.stringify({reflection: responseText})
         })
       .then(res => res.json())
-      .then(() => {setResponseTime(responseTimer - Date.now())});   
+      .then(() => {if(onMobile){responseSubmittedAnim();}});   
       }
     }
+  }
+
+  function responseSubmittedAnim(){
+    let subButton = document.getElementById("mobile-response-submit-button");
+    subButton.classList.add("ResponseSubmitted");
+    subButton.firstChild.innerHTML = "RESPONSE SUBMITTED";
+    setTimeout(() => {
+      subButton.classList.remove("ResponseSubmitted");
+      subButton.firstChild.innerHTML = "SUBMIT RESPONSE";
+    }, 4000);
   }
 
   // to change between draw and write - true = draw - false = text

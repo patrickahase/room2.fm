@@ -1069,6 +1069,10 @@ a:hover {
   #mobile-response-submit-button{
     width: 100%;
   }
+  .ResponseSubmitted{
+    background-color: var(--comp-col-02);
+    color: rgb(31, 33, 28);
+  }
 
 }
 

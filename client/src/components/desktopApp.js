@@ -74,7 +74,9 @@ export default function DesktopApp(props){
                       <div id="prompt-end-timer-overlay" />
                     </div>           
                     <div id="current-prompt">
-                      {props.currentPrompt}
+                      {!props.colliding
+                      ?<pre>{props.currentPrompt}</pre>
+                      :<>{props.currentPrompt}</>}                      
                     </div>           
                     <div id="input-select-wrapper">
                       <span id="input-select">I would like to&nbsp;

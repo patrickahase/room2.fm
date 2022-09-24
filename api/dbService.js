@@ -36,7 +36,6 @@ const sqlAsyncQueries = [ `INSERT INTO CYCLE_1 (RESPONSE, RESPONSE_TYPE) VALUES 
 const sqlLiveQueries = {
   insertLiveResponseQ: `INSERT INTO LIVE_RESPONSES (RESPONSE, RESPONSE_TYPE) VALUES (?, ?);`,
   getScheduleQ:        `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt' FROM LIVE_SCHEDULE WHERE id = 1;`, 
-  getPromptQ:          `SELECT CURRENT_PROMPT AS 'currentPrompt' FROM LIVE_SCHEDULE WHERE id = 1;`, 
   getResponseUpdateQ:  `SELECT * FROM LIVE_RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 3 minute) AND (id > ?);`,
 } 
 
@@ -102,7 +101,7 @@ class DbService {
 
   async getLiveMobileDBUpdate() {
     try { const promptData = await new Promise((resolve, reject) => {
-            connection.query(sqlLiveQueries.getPromptQ, (err, results) => {
+            connection.query(sqlLiveQueries.getScheduleQ, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
