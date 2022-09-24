@@ -10,6 +10,7 @@ export default function IntroModal(props) {
     const dialog = new A11yDialog(container);
     dialog.show();
     props.setIntroModal(dialog);
+    window.addEventListener("keydown", secretKey);
   },[]);
 
   let modalPages = [
@@ -216,5 +217,19 @@ export default function IntroModal(props) {
   function nextModalPage(){
     props.setCurrentModalPage(props.currentModalPage + 1);
     document.getElementById("modal-text-wrapper").scrollTop = 0;
+    window.removeEventListener("keydown", secretKey);
+  }
+
+  function secretKey(e){
+    if(props.currentModalPage === 0){
+      switch (e.key) {
+        case "!": 
+        props.setCurrentModalPage(props.currentModalPage + 1);
+          break;
+        default:
+          return; // Quit when this doesn't handle the key event.
+      }
+    }
+    
   }
 }
