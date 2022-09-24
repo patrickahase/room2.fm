@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css';
-/* import Sketch from 'react-p5';
-import 'p5/lib/addons/p5.sound'; */
+import Sketch from 'react-p5';
+import 'p5/lib/addons/p5.sound';
 
 export default function VideoPlayer(props){
   const videoRef = React.useRef(null);
@@ -12,7 +12,6 @@ export default function VideoPlayer(props){
 
   let audioContext, audioSource;
 
-/* 
   const setup = (p5, canvasParentRef) => {
     p5.createCanvas(0, 0).parent(canvasParentRef);
     audioContext = p5.getAudioContext();
@@ -26,7 +25,9 @@ export default function VideoPlayer(props){
     newFft.setInput(audioSource);
     setFft(newFft);
     const videoElement = videoRef.current;
+    console.log("here")
     const player = playerRef.current = videojs(videoElement, options, () => {
+      console.log("ready")
       onReady && onReady(player);
     });
   }
@@ -39,7 +40,7 @@ export default function VideoPlayer(props){
       document.documentElement.style.setProperty("--font-var-two", mid);
       document.documentElement.style.setProperty("--font-var-three", treble);
     }    
-  } */
+  }
 
   function remapEnergy(energyInput, floor, ceiling){
     // this expects the 0 - 255 range of the getEnergy
@@ -54,8 +55,7 @@ export default function VideoPlayer(props){
       <div id="video-stream-wrapper">
         <div data-vjs-player>
           <video ref={videoRef} className="video-js vjs-fill" id="video-stream-player"></video>
-          {/* <video id="video-stream-player2"></video> */}
-          {/* <Sketch setup={setup} draw={draw} /> */}
+          <Sketch setup={setup} draw={draw} />
         </div>
       </div>
     )
