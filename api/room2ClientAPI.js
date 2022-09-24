@@ -64,6 +64,7 @@ router.put('/insertImageReflectionGetResponses', (req, res) => {
 });
 
 router.post('/testLookup', (req, res) => {
+  console.log("check");
   const db = DbService.getDbServiceInstance();
   const result = db.testLookup();
   result.then(data => res.json({ data: data }))
