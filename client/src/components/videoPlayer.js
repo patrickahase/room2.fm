@@ -25,9 +25,7 @@ export default function VideoPlayer(props){
     newFft.setInput(audioSource);
     setFft(newFft);
     const videoElement = videoRef.current;
-    console.log("here")
     const player = playerRef.current = videojs(videoElement, options, () => {
-      console.log("ready")
       onReady && onReady(player);
     });
   }
