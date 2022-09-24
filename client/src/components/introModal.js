@@ -28,6 +28,9 @@ export default function IntroModal(props) {
           <div id="logo-line-9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-9">\///</u>_____________<u className="text-gradient-9">\/////</u>________<u className="text-gradient-9">\/////</u>_____<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>__<u className="text-gradient-9">\///////////////</u>__<br/></div>
         </pre>            
       </div>
+      <p style={{textAlign: 'centre', color: 'white', fontSize: '1.2rem', padding: '0 2rem'}}>
+        On Sunday 25th from 2-7pm AEST room2 will be live at this site, showing with 4 new collaborative works, online and in-person at Arts House. More information here: <a href="https://www.artshouse.com.au/events/room2-live/" target="_blank" rel="noreferrer">https://www.artshouse.com.au/events/room2-live/</a>
+      </p>
     </div>,
   
     //page 2 AOC
@@ -143,9 +146,9 @@ export default function IntroModal(props) {
   ]
   let mobileModalPages = [
     //page 1 Logo - no continue button on this one if the site needs to get closed
-    <div id="logo-wrapper">
+    <div id="logo-wrapper" style={{justifyContent: 'center', gap: '6rem'}}>
       <div id="text-logo">
-        <pre id="pre-logo-wrapper">
+        <pre id="pre-logo-wrapper" style={{fontSize: '0.6rem'}}>
           <div id="logo-line-1">__________________________________________________________________<u className="text-gradient-1">/\\\\\\\\\</u>_____        <br/></div>
           <div id="logo-line-2">&nbsp;________________________________________________________________<u className="text-gradient-2">/\\\///////\\\</u>___       <br/></div>
           <div id="logo-line-3">&nbsp;&nbsp;_______________________________________________________________<u className="text-gradient-3">\///</u>______<u className="text-gradient-3">\//\\\</u>__      <br/></div>
@@ -157,6 +160,9 @@ export default function IntroModal(props) {
           <div id="logo-line-9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-9">\///</u>_____________<u className="text-gradient-9">\/////</u>________<u className="text-gradient-9">\/////</u>_____<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>__<u className="text-gradient-9">\///////////////</u>__<br/></div>
         </pre>            
       </div>
+      <p style={{textAlign: 'centre', color: 'white', fontSize: '1.4rem', padding: '0 2rem'}}>
+        On Sunday 25th from 2-7pm AEST room2 will be live at this site, showing with 4 new collaborative works, online at this url on a desktop or laptop computer and in-person at Arts House. More information here: <a href="https://www.artshouse.com.au/events/room2-live/" target="_blank" rel="noreferrer">https://www.artshouse.com.au/events/room2-live/</a>
+      </p>
     </div>,
   
     //page 2 AOC

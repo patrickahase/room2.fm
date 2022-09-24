@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AudioControls from './audioControls';
 import DrawingCanvas from './drawingCanvas';
 import IntroModal from './introModal';
@@ -13,7 +13,7 @@ import VideoStreamPlayer from './videoStreamPlayer';
 
 export default function DesktopApp(props){
 
-  const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [currentModalPage, setCurrentModalPage] = useState(0);
   const [showOverlay, setShowOverlay] = useState(true);
 
   return (
@@ -74,7 +74,8 @@ export default function DesktopApp(props){
                       <div id="prompt-end-timer-overlay" />
                     </div>           
                     <div id="current-prompt">
-                      {props.currentPrompt}
+                      <PromptSpan prompt={props.currentPrompt} />
+ 
                     </div>           
                     <div id="input-select-wrapper">
                       <span id="input-select">I would like to&nbsp;
@@ -140,4 +141,15 @@ export default function DesktopApp(props){
         </>}
     </div>
   )  
+}
+
+function PromptSpan(props){
+
+  useEffect(() => {
+    document.getElementById("prompt-span").innerHTML = props.prompt;
+  }, []);
+
+  return(
+    <pre id="prompt-span"></pre>
+  )
 }
