@@ -6,7 +6,7 @@ import DrawingTools from './drawingTools';
 
 export default function MobileApp(props){
 
-  const [currentModalPage, setCurrentModalPage] = useState(0);
+  const [currentModalPage, setCurrentModalPage] = useState(1);
 
   return (
     <div id="mobile-wrapper">
