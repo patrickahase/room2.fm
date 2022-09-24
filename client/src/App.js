@@ -19,7 +19,6 @@ export default function App(){
   var modalIsOpenRef = useRef(modalIsOpen);
   useEffect(() => {modalIsOpenRef.current = modalIsOpen}, [modalIsOpen]);
   // current modal page - 0 is shut
-  const [currentModalPage, setCurrentModalPage] = useState(1);
   // intro modal instance
   const [introModal, setIntroModal] = useState(null);
   // current artist
@@ -132,8 +131,6 @@ export default function App(){
           mobile={onMobile}  
           modalIsOpen={modalIsOpen}
           setIntroModal={setIntroModal}
-          currentModalPage={currentModalPage}
-          setCurrentModalPage={setCurrentModalPage}
           toggleModal={toggleModal}
           currentPrompt={currentPrompt}
           currentArtist={currentArtist}
@@ -153,8 +150,6 @@ export default function App(){
         <DesktopApp 
           mobile={onMobile}
           modalIsOpen={modalIsOpen}
-          currentModalPage={currentModalPage}
-          setCurrentModalPage={setCurrentModalPage}
           toggleModal={toggleModal}
           setIntroModal={setIntroModal}
           toggleFocus={toggleFocus}

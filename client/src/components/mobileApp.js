@@ -1,10 +1,13 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import IntroModal from './introModal';
 import DrawingCanvas from './drawingCanvas';
 import DrawingTools from './drawingTools';
 
 
 export default function MobileApp(props){
+
+  const [currentModalPage, setCurrentModalPage] = useState(0);
+
   return (
     <div id="mobile-wrapper">
       {props.modalIsOpen
@@ -12,8 +15,8 @@ export default function MobileApp(props){
             mobile={props.mobile}
             setIntroModal={props.setIntroModal}
             toggleModal={props.toggleModal}
-            currentModalPage={props.currentModalPage}
-            setCurrentModalPage={props.setCurrentModalPage} />
+            currentModalPage={currentModalPage}
+            setCurrentModalPage={setCurrentModalPage} />
         : <>
 
         {/* prompt */}
