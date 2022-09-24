@@ -37,11 +37,11 @@ export default function DesktopApp(props){
                 {/* Background Visuals */} 
                 <div id="bg-vis-wrapper">
                   {/*  */}
-                  {/* <VideoStreamPlayer
+                  <VideoStreamPlayer
                     analysing={props.analysing}
                     setAudioCtx={props.setAudioCtx}
                     setAudioGain={props.setAudioGain}
-                    /> */}
+                    />
                     {props.analysing &&
                       <div id="gl-prompt-wrapper">
                         <GLVis 
