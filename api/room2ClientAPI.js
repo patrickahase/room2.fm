@@ -85,7 +85,7 @@ router.post('/insertLiveTextReflection', (req, res) => {
 // PUT api/insertLiveImageReflection
 // Inserts a new image response into the storage, send url to live database
 router.put('/insertLiveImageReflection', (req, res) => {
-  upload(req, res, (error) => {
+  uploadLive(req, res, (error) => {
     if(error) { console.log(error) } else {
       const reflectImage = req.files[0].key;
       const db = DbService.getDbServiceInstance();
@@ -116,7 +116,5 @@ router.get('/getLiveMobileUpdate', (req, res) => {
   result.then(data => res.json({ data: data }))
         .catch(err => console.log(err));
 });
-
-
 
 module.exports = router;

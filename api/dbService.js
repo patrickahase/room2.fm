@@ -98,7 +98,7 @@ class DbService {
           return [scheduleData, responseData];
     } catch(error) { console.log(error); }
   }
-
+  
   async getLiveMobileDBUpdate() {
     try { const promptData = await new Promise((resolve, reject) => {
             connection.query(sqlLiveQueries.getScheduleQ, (err, results) => {
