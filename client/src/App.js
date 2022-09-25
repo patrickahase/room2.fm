@@ -271,13 +271,8 @@ export default function App(){
     }
     // if new prompt init countdown
     if(newPromptRef.current !== serverResponse[0][0].currentPrompt){
-      if(modalIsOpenRef.current || !collidingRef.current){
-        setNewPrompt(serverResponse[0][0].currentPrompt);
-        setCurrentPrompt(serverResponse[0][0].currentPrompt);
-      } else {
-        setNewPrompt(serverResponse[0][0].currentPrompt);
-        startPromptCountdown();
-      }      
+      setNewPrompt(serverResponse[0][0].currentPrompt);
+      setCurrentPrompt(serverResponse[0][0].currentPrompt);      
     }
     // set up array to push other responses to
     let returnedResponses = [];
@@ -306,13 +301,8 @@ export default function App(){
     }
     // if new prompt init countdown
     if(newPromptRef.current !== serverResponse[0][0].currentPrompt){
-      if(modalIsOpenRef.current || !collidingRef.current){
-        setNewPrompt(serverResponse[0][0].currentPrompt);
-        setCurrentPrompt(serverResponse[0][0].currentPrompt);
-      } else {
-        setNewPrompt(serverResponse[0][0].currentPrompt);
-        startPromptCountdown();
-      }      
+      setNewPrompt(serverResponse[0][0].currentPrompt);
+      setCurrentPrompt(serverResponse[0][0].currentPrompt);     
     }   
   }
 
