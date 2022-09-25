@@ -13,7 +13,7 @@ import VideoStreamPlayer from './videoStreamPlayer';
 
 export default function DesktopApp(props){
 
-  const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [currentModalPage, setCurrentModalPage] = useState(0);
   const [showOverlay, setShowOverlay] = useState(true);
 
   return (
