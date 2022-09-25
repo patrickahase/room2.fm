@@ -5,7 +5,7 @@ const videoJsOptions = {
   autoplay: true,
   controls: false,
   sources: [{
-    src: 'https://room2service-aueas.streaming.media.azure.net/fe46be4f-68fc-4f7e-b3c7-8d6d3c776504/output-20220924-144838-manifest.ism/manifest(format=m3u8-cmaf)',
+    src: 'https://room2service-aueas.streaming.media.azure.net/10ce3025-a425-4d1c-85fb-23324e70de9a/53cd404a-4808-4cd3-bd1b-d749e8e633a7.ism/manifest(format=m3u8-cmaf)',
     type: 'application/x-mpegURL'
   }],
   fill: true,
