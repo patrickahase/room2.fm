@@ -324,7 +324,7 @@ a:hover {
   grid-row: 1/2;
   grid-column: 1/2;
   font-family: 'Bespoke';
-  animation: breathe 60s ease-in-out 0s infinite both;
+  animation: breathe 8s ease-in-out 0s infinite both;
   z-index: 0;
 }
 #gl-window{

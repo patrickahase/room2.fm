@@ -21,7 +21,7 @@ export default function VideoPlayer(props){
     props.setAudioGain(newGain);
     audioSource.connect(newGain);
     newGain.connect(audioContext.destination);
-    let newFft = new p5.constructor.FFT();
+    let newFft = new p5.constructor.FFT(0.989);
     newFft.setInput(audioSource);
     setFft(newFft);
     const videoElement = videoRef.current;
@@ -32,9 +32,9 @@ export default function VideoPlayer(props){
   
   const draw = p5 => {
     if(props.analysing === true){
-      let spectrum = fft.analyze(512);
-      let mid = remapEnergy(fft.getEnergy(140,400),175,184);
-      let treble = remapEnergy(fft.getEnergy(400,14000),33,43);
+      let spectrum = fft.analyze(256);
+      let mid = remapEnergy(fft.getEnergy(50,220),150,175);
+      let treble = remapEnergy(fft.getEnergy(220,14000),14,26);
       document.documentElement.style.setProperty("--font-var-two", mid);
       document.documentElement.style.setProperty("--font-var-three", treble);
     }    

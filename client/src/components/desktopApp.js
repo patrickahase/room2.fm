@@ -48,7 +48,7 @@ export default function DesktopApp(props){
                           height={props.height}
                           width={props.width}
                         />
-                        {/* <p id="gl-prompt">{props.currentPrompt}</p> */}
+                        <p id="gl-prompt">{props.currentPrompt}</p>
                       </div>
                     }
                   
