@@ -43,13 +43,13 @@ export default function DesktopApp(props){
                     setAudioGain={props.setAudioGain}
                     />
                     {props.analysing &&
-                      {/* <div id="gl-prompt-wrapper">
+                      <div id="gl-prompt-wrapper">
                         <GLVis 
                           height={props.height}
                           width={props.width}
                         />
                         <p id="gl-prompt">{props.currentPrompt}</p>
-                      </div> */}
+                      </div>
                     }
                   
                     
