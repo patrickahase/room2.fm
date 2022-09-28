@@ -1,0 +1,12 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/*Preset Colours*/
+:root{
+  --comp-col-01:#222323;
+  --comp-col-02:#f0f6f0;
+  --comp-col-03:#b5e877;
+  --comp-col-04:#5252ff;
+}
