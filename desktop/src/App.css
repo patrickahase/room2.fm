@@ -10,3 +10,45 @@
   --comp-col-03:#b5e877;
   --comp-col-04:#5252ff;
 }
+
+body{
+  overflow: hidden;
+}
+
+#desktop-wrapper{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#banner-wrapper{
+  width: 100%;
+  height: 10%;
+  display: flex;
+}
+
+#banner-logo{
+  height: 100%;
+}
+
+#bg-wrapper{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+}
+
+#bgShader-wrapper{
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+#bgShader{
+  width: 100%;
+  height: 100%;
+}
+#bg-response-wrapper{
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
