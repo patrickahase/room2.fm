@@ -20,8 +20,8 @@ export default function ResponseDisplay(props) {
       position: 'absolute',
       transition: '1.5s',
       fontSize: '1rem',
-      color: 'white',
-      textShadow: '-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black'     
+      color: 'var(--comp-col-02)',
+      textShadow: '-1px 0 var(--comp-col-01), 0 1px var(--comp-col-01), 1px 0 var(--comp-col-01), 0 -1px var(--comp-col-01)'     
     }
   }
  
@@ -39,6 +39,7 @@ export default function ResponseDisplay(props) {
     displayNextResponse();
   }, [responsesToDisplay]);
 
+  // max responses to display on the screen
   const displaysOnScreen = 3;
 
   // when new response data arrives add it to the responsesToDisplay List

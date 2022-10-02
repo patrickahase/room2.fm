@@ -52,3 +52,23 @@ body{
   grid-column: 1/2;
   grid-row: 1/2;
 }
+
+/* Current Prompt */
+#current-prompt-wrapper{
+  position: absolute;
+  left: 25%;
+  bottom: 50%;
+  width: 50%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+}
+#current-prompt{
+  background-color: var(--comp-col-01);
+  max-width: 100%;
+  font-size: 1.25vw;  
+  color: var(--comp-col-02);  
+  user-select: none;
+  text-align: center;
+  padding: 0 1vw;
+}
