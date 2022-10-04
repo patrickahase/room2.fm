@@ -18,6 +18,10 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname, '/client/build/index.html');
 });
 
+app.get('/desktop', (req, res) => {
+  res.sendFile(__dirname, '/desktop/build/index.html');
+});
+
 // reroute API calls to API endpoints script
 app.use('/api/', endPoints );
 
