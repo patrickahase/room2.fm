@@ -13,12 +13,14 @@ const endPoints = require('./api/room2ClientAPI');
 
 // direct to build folder
 app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'desktop/build')));
 
-app.get('/', (req, res) => {
+app.get('/desk', (req, res) => {
   res.sendFile(__dirname, '/client/build/index.html');
 });
 
 app.get('/desktop', (req, res) => {
+  //res.send('hello world')
   res.sendFile(__dirname, '/desktop/build/index.html');
 });
 
