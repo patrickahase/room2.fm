@@ -110,7 +110,7 @@ router.post('/getLiveUpdate', (req, res) => {
 
 // GET api/getLiveMobileUpdate
 // return latest prompt for mobile
-router.get('/getLiveMobileUpdate', (req, res) => {
+router.post('/getLiveMobileUpdate', (req, res) => {
   const db = DbService.getDbServiceInstance();
   const result = db.getLiveMobileDBUpdate();
   result.then(data => res.json({ data: data }))

@@ -236,7 +236,7 @@ export default function MobileApp() {
       headers: {
         'Content-type': 'application/json'
       },
-      method: 'GET',
+      method: 'POST',
       mode: 'cors'
     })
       .then(res => res.json())
