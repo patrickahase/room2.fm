@@ -18,14 +18,14 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('/', (req, res) => {
   res.sendFile(__dirname, '/desktop/build/index.html');
 });
-
+/* 
 app.get('/mobile/', (req, res) => {
   res.sendFile(__dirname, '/desktop/build/index.html');
 });
 
 app.get('/desktop', (req, res) => {
   res.sendFile(__dirname, '/desktop/build/index.html');
-});
+}); */
 
 // reroute API calls to API endpoints script
 app.use('/api/', endPoints );
