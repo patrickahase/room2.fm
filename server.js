@@ -12,10 +12,18 @@ app.use(cors());
 const endPoints = require('./api/room2ClientAPI');
 
 // direct to build folder
-app.use('/*', express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
+  res.sendFile(__dirname, '/desktop/build/index.html');
+});
+
+app.get('/mobile/', (req, res) => {
+  res.sendFile(__dirname, '/desktop/build/index.html');
+});
+
+app.get('/desktop', (req, res) => {
   res.sendFile(__dirname, '/desktop/build/index.html');
 });
 
