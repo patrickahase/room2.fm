@@ -1,0 +1,11 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root{
+  --comp-col-01:#000000;
+  --comp-col-02:#ffffff;
+  --comp-col-03:#d6f246;
+  --comp-col-04:#2436ff;
+}

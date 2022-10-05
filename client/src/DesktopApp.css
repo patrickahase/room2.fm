@@ -1,0 +1,62 @@
+body{
+  overflow: hidden;
+}
+
+#desktop-wrapper{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#banner-wrapper{
+  width: 100%;
+  height: 10%;
+  display: flex;
+}
+
+#banner-logo{
+  height: 100%;
+  border: 2px white solid;
+}
+
+#bg-wrapper{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+}
+
+#bgShader-wrapper{
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+#bgShader{
+  width: 100%;
+  height: 100%;
+}
+#bg-response-wrapper{
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+/* Current Prompt */
+#current-prompt-wrapper{
+  position: absolute;
+  left: 25%;
+  bottom: 50%;
+  width: 50%;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+}
+#current-prompt{
+  background-color: var(--comp-col-01);
+  max-width: 100%;
+  font-size: 1.25vw;  
+  color: var(--comp-col-02);  
+  user-select: none;
+  text-align: center;
+  padding: 0 1vw;
+}

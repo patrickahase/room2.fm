@@ -1,25 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.7d6bf0ee.chunk.css",
-    "main.js": "/static/js/main.91b45a7a.chunk.js",
-    "main.js.map": "/static/js/main.91b45a7a.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.0f16f66c.js",
-    "runtime-main.js.map": "/static/js/runtime-main.0f16f66c.js.map",
-    "static/css/2.cc641db1.chunk.css": "/static/css/2.cc641db1.chunk.css",
-    "static/js/2.d5885122.chunk.js": "/static/js/2.d5885122.chunk.js",
-    "static/js/2.d5885122.chunk.js.map": "/static/js/2.d5885122.chunk.js.map",
+    "main.css": "/static/css/main.2d00c112.css",
+    "main.js": "/static/js/main.66228342.js",
+    "static/media/today-logo-placeholder.PNG": "/static/media/today-logo-placeholder.d01c9da2a30466bc3bfc.PNG",
     "index.html": "/index.html",
-    "static/css/2.cc641db1.chunk.css.map": "/static/css/2.cc641db1.chunk.css.map",
-    "static/css/main.7d6bf0ee.chunk.css.map": "/static/css/main.7d6bf0ee.chunk.css.map",
-    "static/js/2.d5885122.chunk.js.LICENSE.txt": "/static/js/2.d5885122.chunk.js.LICENSE.txt",
-    "static/media/App.css": "/static/media/WorkSans-Regular.e6f572ce.ttf",
-    "static/media/slowdiscpixel.gif": "/static/media/slowdiscpixel.685ade7f.gif"
+    "main.2d00c112.css.map": "/static/css/main.2d00c112.css.map",
+    "main.66228342.js.map": "/static/js/main.66228342.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.0f16f66c.js",
-    "static/css/2.cc641db1.chunk.css",
-    "static/js/2.d5885122.chunk.js",
-    "static/css/main.7d6bf0ee.chunk.css",
-    "static/js/main.91b45a7a.chunk.js"
+    "static/css/main.2d00c112.css",
+    "static/js/main.66228342.js"
   ]
 }
