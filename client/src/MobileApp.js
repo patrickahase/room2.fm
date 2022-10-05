@@ -106,11 +106,11 @@ export default function MobileApp() {
         <b>SUBMIT RESPONSE</b>
       </button>
 
-      {/* <IntroModal
+      <IntroModal
         setIntroModal={setIntroModal}
         currentModalPage={currentModalPage}
         setCurrentModalPage={setCurrentModalPage}
-        toggleModal={toggleModal} /> */}
+        toggleModal={toggleModal} />
     </div>
   )
 
@@ -269,8 +269,8 @@ export default function MobileApp() {
         method: 'PUT',
         body: formData
       })
-      .then(res => res.json());
-      /* .then(() => {if(onMobile){responseSubmittedAnim();}}); */
+      .then(res => res.json())
+      .then(() => {responseSubmittedAnim();});
     } else if(inputIsDraw === false && textInput.value.length > 0) {
       // text input
       let responseText = textInput.value;
@@ -282,14 +282,14 @@ export default function MobileApp() {
           mode: 'cors',
           body: JSON.stringify({reflection: responseText})
         })
-      .then(res => res.json());
-      /* .then(() => {if(onMobile){responseSubmittedAnim();}});   */ 
+      .then(res => res.json())
+      .then(() => {responseSubmittedAnim();});   
       }
     }
   }
 
   function responseSubmittedAnim(){
-    let subButton = document.getElementById("mobile-response-submit-button");
+    let subButton = document.getElementById("submit-response-button");
     subButton.classList.add("ResponseSubmitted");
     subButton.firstChild.innerHTML = "RESPONSE SUBMITTED";
     setTimeout(() => {

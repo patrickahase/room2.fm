@@ -94,6 +94,11 @@ html, body, #root, .MobileWrapper {
   margin-top: 1rem;
 }
 
+.ResponseSubmitted{
+  transition: 0.2s;
+  background-color: var(--comp-col-04);
+}
+
 input[type=range] {
   height: 31px;
   -webkit-appearance: none;
