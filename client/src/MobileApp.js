@@ -102,7 +102,7 @@ export default function MobileApp() {
       
       
 
-      <button id="submit-response-button" onClick={() => {submitResponse()}}>
+      <button className="SubmitResponseButton" onClick={() => {submitResponse()}}>
         <b>SUBMIT RESPONSE</b>
       </button>
 
@@ -289,7 +289,7 @@ export default function MobileApp() {
   }
 
   function responseSubmittedAnim(){
-    let subButton = document.getElementById("submit-response-button");
+    let subButton = document.getElementsByClassName("SubmitResponseButton")[0];
     subButton.classList.add("ResponseSubmitted");
     subButton.firstChild.innerHTML = "RESPONSE SUBMITTED";
     setTimeout(() => {

@@ -85,7 +85,7 @@ html, body, #root, .MobileWrapper {
   flex-grow: 1;
 }
 
-#submit-response-button{
+.SubmitResponseButton{
   font-size: 1.35em;
   background-color: var(--comp-col-03);
   color: var(--comp-col-01);
