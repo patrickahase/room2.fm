@@ -44,7 +44,6 @@ export default function ResponseDisplay(props) {
 
   // when new response data arrives add it to the responsesToDisplay List
   useEffect(() => {
-    console.log(responsesToDisplay);
     if(props.responseData.length > 0){
       let newResponseList = responsesToDisplayRef.current.concat(props.responseData);
       setResponsesToDisplay(newResponseList);      
@@ -123,24 +122,19 @@ export default function ResponseDisplay(props) {
     let responseBoxDimensions = newResponseBox.getBoundingClientRect();
     newResponseBox.style.left = (80 * xRandom) + "%";
     newResponseBox.style.top = ((100 - (props.height / responseBoxDimensions.height)) * yRandom) + "%";
-    if(props.colliding){
-      let colliderArray = Array.from(document.getElementsByClassName("Collider"));
-      for (let i = 0; i < colliderArray.length; i++) {
-        if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
-          collision = true;
-        }
+    let colliderArray = Array.from(document.getElementsByClassName("Collider"));
+    for (let i = 0; i < colliderArray.length; i++) {
+      if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
+        collision = true;
       }
-      if(collision){
-        newResponseBox.remove();
-        window.requestAnimationFrame(() => createTextResponseDisplay(textResponse));
-      } else {
-        newResponseBox.classList.add("Collider");
-        responseFadeInOut(newResponseBox);
-      } 
-    } else {
-      responseFadeInOut(newResponseBox);
     }
-    
+    if(collision){
+      newResponseBox.remove();
+      window.requestAnimationFrame(() => createTextResponseDisplay(textResponse));
+    } else {
+      newResponseBox.classList.add("Collider");
+      responseFadeInOut(newResponseBox);
+    }     
   }
 
   function responseFadeInOut(responseElement){

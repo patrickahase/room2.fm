@@ -6,6 +6,7 @@ import ResponseDisplay from './components/responseDisplay';
 
 export default function DesktopApp() {
 
+  const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   //how often to call the live update loop
   const liveUpdateTime = 5000;
   // last response id from database
@@ -20,6 +21,9 @@ export default function DesktopApp() {
   // run on init
   useEffect(() => {
     liveUpdate();
+    setWindowSize([window.innerWidth, window.innerHeight]);
+    window.addEventListener('resize', () => {
+      setWindowSize([window.innerWidth, window.innerHeight])});
   }, []);
 
   return (
@@ -35,6 +39,7 @@ export default function DesktopApp() {
         </div>
         <div id="bg-response-wrapper">
           <ResponseDisplay
+            height={windowSize[1]}
             responseData={responseData} />
         </div>
         <div id="current-prompt-wrapper" className="Collider">
@@ -48,6 +53,7 @@ export default function DesktopApp() {
 
   // call to server for latest prompt and responses
   function liveUpdate(){
+    //console.log("twice")
     fetch(`https://room2.fm/api/getLiveUpdate`, {
       headers: {
         'Content-type': 'application/json'
