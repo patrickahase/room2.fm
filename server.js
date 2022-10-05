@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 
 app.get('/*', (req, res) => {
-  res.sendFile(__dirname, '/desktop/build/index.html');
+  res.sendFile(__dirname, '/client/build/index.html');
 });
 
 // reroute API calls to API endpoints script
