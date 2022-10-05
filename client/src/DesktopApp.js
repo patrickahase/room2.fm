@@ -31,7 +31,7 @@ export default function DesktopApp() {
       <div id="banner-wrapper">
         <img id="banner-logo" src={require("./assets/today-logo-placeholder.PNG")} alt="today logo"></img>
         <Marquee
-          text={"room2 x Today is live @ Purpose Conference 2022"} />
+          text={"room2 x Today is live @ Purpose Conference 2022 "} />
       </div>
       <div id="bg-wrapper">
         <div id="bgShader-wrapper">

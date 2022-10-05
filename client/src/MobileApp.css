@@ -96,7 +96,7 @@ html, body, #root, .MobileWrapper {
 
 .ResponseSubmitted{
   transition: 0.2s;
-  background-color: var(--comp-col-04);
+  background-color: #2436ff;
 }
 
 input[type=range] {
