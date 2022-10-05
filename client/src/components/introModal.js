@@ -24,15 +24,15 @@ export default function IntroModal(props) {
       borderTop: 'solid 2px var(--comp-col-02)'
     },
     AOCTitle: {
-      fontSize: '2.5rem',
+      fontSize: '2rem',
       flexGrow: 1
     },
     AOCText: {
-      fontSize: '1.25rem',
+      fontSize: '1rem',
       paddingBottom: '2rem'
     },
     AOCButton: {
-      fontSize: '1.5em',
+      fontSize: '1.25em',
       backgroundColor: 'var(--comp-col-03)',
       color: 'var(--comp-col-01)',
       border: 'none',
