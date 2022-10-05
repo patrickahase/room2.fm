@@ -62,7 +62,7 @@ export default function IntroModal(props) {
       <button style={modalStyle.AOCButton}
               /* onClick={() => {props.setCurrentModalPage(props.currentModalPage + 1)}}> */
               onClick={() => {props.toggleModal()}}>
-        <b>CONTINUE</b>
+        <b>ENTER</b>
       </button>
     </>,
 

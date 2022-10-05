@@ -14,7 +14,7 @@ html, body, #root, .MobileWrapper {
   border-top: solid 2px var(--comp-col-02);
   color: var(--comp-col-02);
   font-size: 1.25rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .InputSelectButton{
@@ -82,6 +82,7 @@ html, body, #root, .MobileWrapper {
 
 #drawing-canvas-wrapper{
   width: 100%;
+  height: 10%;
   flex-grow: 1;
 }
 
@@ -91,7 +92,7 @@ html, body, #root, .MobileWrapper {
   color: var(--comp-col-01);
   border: none;
   padding: 0.4rem;
-  margin-top: 1rem;
+  margin-top: 0.25rem;
 }
 
 .ResponseSubmitted{
@@ -103,6 +104,7 @@ input[type=range] {
   height: 31px;
   -webkit-appearance: none;
   width: 100%;
+  background-color: var(--comp-col-02);
 }
 input[type=range]:focus {
   outline: none;
@@ -113,23 +115,23 @@ input[type=range]::-webkit-slider-runnable-track {
   cursor: pointer;
   animate: 0.2s;
   box-shadow: 0px 0px 0px #002200;
-  background: #FF4F00;
+  background: var(--comp-col-05);
   border-radius: 0px;
   border: 0px solid #18D501;
 }
 input[type=range]::-webkit-slider-thumb {
   box-shadow: 0px 0px 0px #00AA00;
-  border: 0px solid #FF4F00;
+  border: 0px solid var(--comp-col-05);
   height: 25px;
   width: 25px;
   border-radius: 25px;
-  background: #FF4F00;
+  background: var(--comp-col-05);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -11.5px;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #FF4F00;
+  background: var(--comp-col-05);
 }
 input[type=range]::-moz-range-track {
   width: 100%;
@@ -137,17 +139,17 @@ input[type=range]::-moz-range-track {
   cursor: pointer;
   animate: 0.2s;
   box-shadow: 0px 0px 0px #002200;
-  background: #FF4F00;
+  background: var(--comp-col-05);
   border-radius: 0px;
   border: 0px solid #18D501;
 }
 input[type=range]::-moz-range-thumb {
   box-shadow: 0px 0px 0px #00AA00;
-  border: 0px solid #FF4F00;
+  border: 0px solid var(--comp-col-05);
   height: 25px;
   width: 25px;
   border-radius: 25px;
-  background: #FF4F00;
+  background: var(--comp-col-05);
   cursor: pointer;
 }
 input[type=range]::-ms-track {
@@ -160,13 +162,13 @@ input[type=range]::-ms-track {
   color: transparent;
 }
 input[type=range]::-ms-fill-lower {
-  background: #FF4F00;
+  background: var(--comp-col-05);
   border: 0px solid #18D501;
   border-radius: 0px;
   box-shadow: 0px 0px 0px #002200;
 }
 input[type=range]::-ms-fill-upper {
-  background: #FF4F00;
+  background: var(--comp-col-05);
   border: 0px solid #18D501;
   border-radius: 0px;
   box-shadow: 0px 0px 0px #002200;
@@ -174,16 +176,16 @@ input[type=range]::-ms-fill-upper {
 input[type=range]::-ms-thumb {
   margin-top: 1px;
   box-shadow: 0px 0px 0px #00AA00;
-  border: 0px solid #FF4F00;
+  border: 0px solid var(--comp-col-05);
   height: 25px;
   width: 25px;
   border-radius: 25px;
-  background: #FF4F00;
+  background: var(--comp-col-05);
   cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {
-  background: #FF4F00;
+  background: var(--comp-col-05);
 }
 input[type=range]:focus::-ms-fill-upper {
-  background: #FF4F00;
+  background: var(--comp-col-05);
 }

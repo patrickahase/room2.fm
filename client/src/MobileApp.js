@@ -4,6 +4,8 @@ import { fabric } from 'fabric';
 import IntroModal from './components/introModal';
 import DrawingTools from './components/drawingTools';
 import DrawingCanvas from './components/drawingCanvas';
+import IntroAnim from './components/introAnim';
+
 
 export default function MobileApp() {
 
@@ -14,6 +16,9 @@ export default function MobileApp() {
   const [modalIsOpen, setModalIsOpen] = useState(true);
   const [currentModalPage, setCurrentModalPage] = useState(0);
   const [introModal, setIntroModal] = useState(null);
+
+  // intro animation
+  const [introAnimOn, setIntroAnimOn] = useState(false);
 
   // prompt state
   const [currentPrompt, setCurrentPrompt] = useState("this is a test prompt");
@@ -98,13 +103,15 @@ export default function MobileApp() {
           </div>
           <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
         </div>
-      </div>
-      
-      
+      </div>      
 
       <button className="SubmitResponseButton" onClick={() => {submitResponse()}}>
         <b>SUBMIT RESPONSE</b>
       </button>
+      
+        <IntroAnim
+          introAnimOn={introAnimOn}  
+        />     
 
       <IntroModal
         setIntroModal={setIntroModal}
@@ -125,9 +132,11 @@ export default function MobileApp() {
       //document.removeEventListener('mouseup', saveCanvasState);
       introModal.show();
       document.getElementsByClassName("ModalWrapper")[0].style.display = "unset";
+      
     }
     // toggle state
     setModalIsOpen(!modalIsOpen);
+    setIntroAnimOn(true);
   }
 
   function setDrawInput(changeToDraw){

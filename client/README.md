@@ -1,2 +1,3 @@
 - fix error page style
 - update AOC
+- prefers-reduced-motion

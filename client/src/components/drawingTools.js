@@ -5,7 +5,7 @@ export default function DrawingTools(props){
   const drawingToolsStyle = {
     drawingToolsWrapper: {
       backgroundColor: 'var(--comp-col-02)',
-      padding: '0.5rem',
+      padding: '0 0.25rem 0.25rem 0.25rem',
       position: 'relative'
     },
     brushSizeWrapper: {
@@ -22,6 +22,13 @@ export default function DrawingTools(props){
       alignItems: 'center',
       gap: '0.5rem',
       fontSize: '1.5rem'
+    },
+    sliderIcon: {
+      height: '16px',
+      width: '16px',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
     sizeSlider: {
       flexGrow: '1'
@@ -73,9 +80,9 @@ export default function DrawingTools(props){
 
       <div style={drawingToolsStyle.brushSizeWrapper}>          
         <div style={drawingToolsStyle.sizeSliderWrapper}>
-          <span style={{position: 'relative', top: '-0.2rem'}}><b>-</b></span>
+          <div style={drawingToolsStyle.sliderIcon}><MinusIcon strokeColour="black" /></div>
           <input type="range" style={drawingToolsStyle.sizeSlider} name="brush-size-slider" min="2" max="60" defaultValue="8" onInput={e => props.setBrushSize(e.target.value)} />
-          <span style={{position: 'relative'}}><b>+</b></span>
+          <div style={drawingToolsStyle.sliderIcon}><PlusIcon strokeColour="black" /></div>
         </div>
         <span style={drawingToolsStyle.buttonLabel}>Brush Size</span>
       </div>
@@ -106,8 +113,7 @@ function UndoIcon(props){
       width="100%"
       height="100%"
       viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-      className="AudioPlayerIcon">
+      xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="arrowhead" markerWidth="5" markerHeight="5" strokeWidth="0" fill={props.strokeColour}
           refX="0" refY="2.5" orient="auto">
@@ -129,8 +135,7 @@ function RedoIcon(props){
       width="100%"
       height="100%"
       viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-      className="AudioPlayerIcon">
+      xmlns="http://www.w3.org/2000/svg">
         <defs>
           <marker id="arrowhead2" markerWidth="5" markerHeight="5" strokeWidth="0" fill={props.strokeColour}
           refX="0" refY="2.5" orient="auto">
@@ -153,7 +158,6 @@ function EraserIcon(props){
       height="100%"
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
-      className="AudioPlayerIcon"
       fill='none'
       stroke={props.strokeColour}
       strokeWidth='3'
@@ -168,6 +172,39 @@ function EraserIcon(props){
                   L 72,20
                   L 86,20
                   L 86,40
+                  " />
+      
+    </svg>
+  )
+}
+function MinusIcon(props){
+  return (
+    <svg
+      viewBox="0 0 10 10"
+      xmlns="http://www.w3.org/2000/svg"
+      fill='black'
+      stroke={props.strokeColour}
+      >
+        <path fill="none" strokeWidth="2"
+              d=" M 0,5
+                  L 10,5 " />
+      
+    </svg>
+  )
+}
+function PlusIcon(props){
+  return (
+    <svg
+      viewBox="0 0 10 10"
+      xmlns="http://www.w3.org/2000/svg"
+      fill='black'
+      stroke={props.strokeColour}
+      >
+        <path fill="none" strokeWidth="2"
+              d=" M 0,5
+                  L 10,5
+                  M 5,0
+                  L 5,10
                   " />
       
     </svg>

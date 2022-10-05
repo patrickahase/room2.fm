@@ -20,21 +20,7 @@ app.get('/*', function(req, res) {
       res.status(500).send(err)
     }
   })
-})
-/* app.get('/', (req, res) => {
-  res.sendFile(__dirname, '/client/build/index.html');
 });
-app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-}); */
-/* 
-app.get('/mobile/', (req, res) => {
-  res.sendFile(__dirname, '/desktop/build/index.html');
-});
-
-app.get('/desktop', (req, res) => {
-  res.sendFile(__dirname, '/desktop/build/index.html');
-}); */
 
 // reroute API calls to API endpoints script
 app.use('/api/', endPoints );

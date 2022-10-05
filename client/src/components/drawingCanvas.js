@@ -35,7 +35,6 @@ export default function DrawingCanvas(props){
       canvasRef.current.freeDrawingBrush.width = props.brushSize;
       canvasRef.current.freeDrawingCursor = getCustomCursor();
     }   
-    console.log(props.brushSize); 
   }, [props.brushSize]);
 
   return (
