@@ -117,8 +117,4 @@ router.get('/getLiveMobileUpdate', (req, res) => {
         .catch(err => console.log(err));
 });
 
-router.get('/desktop', (req, res) => {
-  res.sendFile(__dirname, '../desktop/build/index.html');
-});
-
 module.exports = router;
