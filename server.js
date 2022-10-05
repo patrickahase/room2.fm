@@ -15,9 +15,9 @@ const endPoints = require('./api/room2ClientAPI');
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 
-/* app.get('/', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(__dirname, '/desktop/build/index.html');
-}); */
+});
 
 // reroute API calls to API endpoints script
 app.use('/api/', endPoints );
