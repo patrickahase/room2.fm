@@ -6,21 +6,25 @@ import room2Logo from '../assets/room2-logo.svg';
 export default function IntroAnim(props) {
 
   useEffect(() => {
-    if(props.introAnimOn){
+    if(props.introAnimStart){
       // get all the elements to animate
-      animateIntro();
+      if(props.animOn){
+        animateIntro();
+      } else {
+        document.getElementById("anim-wrapper").remove();
+      }
     }
     
-  }, [props.introAnimOn])
+  }, [props.introAnimStart])
 
   const introStyle = {
     animWrapper: {
       position: 'absolute',
       left: '0%',
       top: '0%',
-      height: 'calc(100% - 2.9rem)',
-      width: 'calc(100% - 2.9rem)',
-      margin: '1.45rem',
+      height: 'calc(100% - 1.9rem)',
+      width: 'calc(100% - 1.9rem)',
+      margin: '0.95rem',
       backgroundColor: 'var(--comp-col-01)',
       display: 'flex',
       flexDirection: 'column',
@@ -66,8 +70,8 @@ export default function IntroAnim(props) {
     // [0] - top horizontal line
     animateArray[0].animate([
       {top: '120%'}, {top: '0%'}
-    ], { duration: 1200,
-         easing: 'ease-out',
+    ], { duration: 800,
+         easing: 'cubic-bezier(0.665, 0.005, 0.580, 1.000)',
          fill: 'backwards'})
     .onfinish = () => {
       animateArray[0].animate([
@@ -81,9 +85,9 @@ export default function IntroAnim(props) {
     // [1] - Today logo
     animateArray[1].animate([
       {top: '120%'}, {top: '0%'}
-    ], { duration: 1200,
+    ], { duration: 800,
          delay: 60,
-         easing: 'ease-out',
+         easing: 'cubic-bezier(0.665, 0.005, 0.580, 1.000)',
          fill: 'backwards'})
     .onfinish = () => {
     animateArray[1].animate([
@@ -97,9 +101,9 @@ export default function IntroAnim(props) {
     // [2] - X
     animateArray[2].animate([
       {top: '120%'}, {top: '0%'}
-    ], { duration: 1200,
+    ], { duration: 800,
          delay: 120,
-         easing: 'ease-out',
+         easing: 'cubic-bezier(0.665, 0.005, 0.580, 1.000)',
          fill: 'backwards'})
     .onfinish = () => {
     setTimeout(() => {document.getElementById("x-scale-anim").beginElement();}, 2000)
@@ -129,9 +133,9 @@ export default function IntroAnim(props) {
     // [3] - room2 logo
     animateArray[3].animate([
       {top: '120%'}, {top: '0%'}
-    ], { duration: 1200,
+    ], { duration: 800,
          delay: 180,
-         easing: 'ease-out',
+         easing: 'cubic-bezier(0.665, 0.005, 0.580, 1.000)',
          fill: 'backwards'})
     .onfinish = () => {
     animateArray[3].animate([
@@ -145,9 +149,9 @@ export default function IntroAnim(props) {
     // [4] - bottom horizontal line
     animateArray[4].animate([
       {top: '120%'}, {top: '0%'}
-    ], { duration: 1200,
+    ], { duration: 800,
          delay: 240,
-         easing: 'ease-out',
+         easing: 'cubic-bezier(0.665, 0.005, 0.580, 1.000)',
          fill: 'backwards'})
 
   }

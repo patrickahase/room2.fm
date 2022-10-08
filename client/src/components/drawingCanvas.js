@@ -33,8 +33,10 @@ export default function DrawingCanvas(props){
   useEffect(() => {
     if(canvasRef.current){
       canvasRef.current.freeDrawingBrush.width = props.brushSize;
+      console.log(canvasRef.current.freeDrawingBrush.width)
       canvasRef.current.freeDrawingCursor = getCustomCursor();
     }   
+    
   }, [props.brushSize]);
 
   return (

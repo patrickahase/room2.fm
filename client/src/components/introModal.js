@@ -21,11 +21,13 @@ export default function IntroModal(props) {
       flexDirection: 'column',
       justifyContent: 'space-between',
       alignItems: 'stretch',
-      borderTop: 'solid 2px var(--comp-col-02)'
+      borderTop: 'solid 2px var(--comp-col-02)',
+      overflow: 'auto'
     },
     AOCTitle: {
-      fontSize: '2rem',
-      flexGrow: 1
+      fontSize: '2.5rem',
+      flexGrow: 1,
+      fontFamily: 'Marr Sans Semibold'
     },
     AOCText: {
       fontSize: '1rem',
@@ -49,9 +51,16 @@ export default function IntroModal(props) {
   }, []);
 
   const modalPages = [
+    /* Button Test */
+    /* <>
+      <div style ={{
+        width: '10vw', height: '10vh', backgroundColor: 'var(--comp-col-05)', display: 'flex', flexDirection: 'column', justifyContent: 'space-around', alignItems: 'center'
+      }}>
+      </div>
+    </>, */
     /* AOC */
     <>
-      <h2 style={modalStyle.AOCTitle}>Acknowledgement</h2>
+      <p style={modalStyle.AOCTitle}>Acknowledgement</p>
       <p style={modalStyle.AOCText}>
         This website was produced and is maintained on the unceded territory of the Wurundjeri Woi Wurrung and Bunurong Boon 
         Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 

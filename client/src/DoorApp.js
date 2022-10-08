@@ -8,7 +8,7 @@ export default function DoorApp() {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor:'var(--comp-col-01)'
+    backgroundColor:'#222323'
   }
 
   return (

@@ -26,6 +26,13 @@ h2 {
 }
 button {
   font-family: 'Marr Sans Medium';
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  outline: 0;
 }
 
 :root{

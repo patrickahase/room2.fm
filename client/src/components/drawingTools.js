@@ -5,7 +5,7 @@ export default function DrawingTools(props){
   const drawingToolsStyle = {
     drawingToolsWrapper: {
       backgroundColor: 'var(--comp-col-02)',
-      padding: '0 0.25rem 0.25rem 0.25rem',
+      padding: '0 0.5rem 0.5rem 0.5rem',
       position: 'relative'
     },
     brushSizeWrapper: {
@@ -24,8 +24,8 @@ export default function DrawingTools(props){
       fontSize: '1.5rem'
     },
     sliderIcon: {
-      height: '16px',
-      width: '16px',
+      height: '12px',
+      width: '12px',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
@@ -35,7 +35,7 @@ export default function DrawingTools(props){
     },
     buttonsWrapper: {
       display: 'flex',
-      height: '3.5rem',
+      height: '3.25rem',
       justifyContent: 'space-between'
     },
     drawingButton: {
@@ -48,23 +48,32 @@ export default function DrawingTools(props){
       padding: 0
     },
     buttonLabel: {
-      fontSize: '.9rem'
+      fontSize: '12px',
+      pointerEvents: 'none',
+      fontFamily: 'GT America', 
+      color: 'var(--comp-col-01)',
+      width: '100%',
+      textAlign: 'center'
     },
     buttonIcon: {
-      height: '3vw',
-      flexGrow: '1'
+      height: '1%',
+      width: '100%',
+      flexGrow: '1',
+      pointerEvents: 'none'
     },
     colourButton: {
-      width: '30%',
+      width: '30.5%',
       position: 'relative'
     },
     colourLabel: {
       marginTop: '2px',
-      fontSize: '.9rem',
+      fontSize: '12px',
       textAlign: 'center',
       position: 'absolute',
       width: '100%',
-      color: 'var(--comp-col-02)'
+      color: 'var(--comp-col-02)',
+      pointerEvents: 'none',
+      fontFamily: 'GT America'
     },
     colourSelector: {
       width: '100%',
@@ -112,6 +121,9 @@ function UndoIcon(props){
     <svg
       width="100%"
       height="100%"
+      preserveAspectRatio="xMidYMid meet"
+      x="0"
+      y="0"
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -120,11 +132,11 @@ function UndoIcon(props){
             <polygon points="0 0, 5 2.5, 0 5" />
           </marker>
         </defs>
-        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke={props.strokeColour} markerEnd="url(#arrowhead)"
-              d=" M 30,85
-                  L 65,85
-                  A 15 15 0 1 0 65,15
-                  L 30,15
+        <path fill="none" strokeLinecap="round" strokeWidth="4" stroke={props.strokeColour} markerEnd="url(#arrowhead)"
+              d=" M 30,70
+                  L 55,70
+                  A 15 15 0 1 0 55,30
+                  L 40,30
                   " />
     </svg>
   )
@@ -134,6 +146,9 @@ function RedoIcon(props){
     <svg
       width="100%"
       height="100%"
+      preserveAspectRatio="xMidYMid meet"
+      x="0"
+      y="0"
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -142,11 +157,11 @@ function RedoIcon(props){
             <polygon points="0 0, 5 2.5, 0 5" />
           </marker>
         </defs>
-        <path fill="none" strokeLinecap="round" strokeWidth="6" stroke={props.strokeColour} markerEnd="url(#arrowhead2)"
-              d=" M 70,85
-                  L 35,85
-                  A 15 15 0 0 1 35,15
-                  L 70,15
+        <path fill="none" strokeLinecap="round" strokeWidth="4" stroke={props.strokeColour} markerEnd="url(#arrowhead2)"
+              d=" M 70,70
+                  L 45,70
+                  A 15 15 0 0 1 45,30
+                  L 60,30
                   " />
     </svg>
   )
@@ -156,22 +171,25 @@ function EraserIcon(props){
     <svg
       width="100%"
       height="100%"
+      preserveAspectRatio="xMidYMid meet"
+      x="0"
+      y="0"
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
       fill='none'
       stroke={props.strokeColour}
       strokeWidth='3'
       >
-        <path fill="none" strokeWidth="5"
-              d=" M 10,100
-                  L 10,40
-                  L 90,40
-                  L 90,100
-                  M 14,40
-                  L 14,28
-                  L 72,20
-                  L 86,20
-                  L 86,40
+        <path fill="none" strokeWidth="4"
+              d=" M 20,100
+                  L 20,40
+                  L 80,40
+                  L 80,100
+                  M 24,40
+                  L 24,28
+                  L 62,20
+                  L 76,20
+                  L 76,40
                   " />
       
     </svg>
