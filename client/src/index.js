@@ -21,6 +21,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: "/desktop/:shaderID",
+    element: <DesktopApp />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: "/mobile",
     element: <MobileApp />,
     errorElement: <ErrorPage />,

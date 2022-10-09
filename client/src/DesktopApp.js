@@ -3,6 +3,13 @@ import './DesktopApp.css';
 import BGVis from './components/bgVis';
 import Marquee from './components/marquee';
 import ResponseDisplay from './components/responseDisplay';
+import io from 'socket.io-client';
+
+import TodayLogo from './assets/TODAY_LOGOTYPE_MONO_WHITE.svg';
+import room2Logo from './assets/room2-logo.svg';
+import { useParams } from 'react-router-dom';
+
+const socket = io();
 
 export default function DesktopApp() {
 
@@ -15,27 +22,44 @@ export default function DesktopApp() {
   useEffect(() => {lastResponseIDRef.current = lastResponseID}, [lastResponseID]);
   // responses from server
   const [responseData, setResponseData] = useState([]);
+  var responseDataRef = useRef(responseData);
+  useEffect(() => {responseDataRef.current = responseData}, [responseData]);
   // current prompt
   const [currentPrompt, setCurrentPrompt] = useState('this is a prompt');
+  // shader id
+  let shaderIDParam = useParams().shaderID;
+  const [shaderID, setShaderID] = useState(0);
 
   // run on init
   useEffect(() => {
-    liveUpdate();
+    //liveUpdate();
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
+    // if using shader id from url update shader selection
+    if(shaderIDParam) { setShaderID(shaderIDParam);};
+    socket.on("receive-text-response", textResponse => {setResponseData(...responseDataRef.current, [textResponse, "text"])});
+    socket.on("receive-image-response", imageResponse => {setResponseData(...responseDataRef.current, [imageResponse, "image"])});
   }, []);
 
   return (
     <div id="desktop-wrapper" className="App">
       <div id="banner-wrapper">
-        <img id="banner-logo" src={require("./assets/today-logo-placeholder.PNG")} alt="today logo"></img>
+        <div id="banner-logo-wrapper">
+          <img className="BannerLogo" src={TodayLogo} />
+          <div id="banner-x"><XIcon strokeColour={"white"} /></div>      
+          <img className="BannerLogo" src={room2Logo} />
+        </div>
         <Marquee
           text={"room2 x Today is live @ Purpose Conference 2022 "} />
       </div>
       <div id="bg-wrapper">
         <div id="bgShader-wrapper">
-          <BGVis />
+          <BGVis
+            shaderID={shaderID}
+            width={windowSize[0]}
+            height={windowSize[1]*.9}
+          />
         </div>
         <div id="bg-response-wrapper">
           <ResponseDisplay
@@ -53,7 +77,6 @@ export default function DesktopApp() {
 
   // call to server for latest prompt and responses
   function liveUpdate(){
-    //console.log("twice")
     fetch(`https://room2.fm/api/getLiveUpdate`, {
       headers: {
         'Content-type': 'application/json'
@@ -85,4 +108,24 @@ export default function DesktopApp() {
     }
   }
 
+}
+
+function XIcon(props){
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      fill='black'
+      stroke={props.strokeColour}
+      strokeWidth="15"
+      >
+        <path fill="none" 
+              d=" M 10,-10
+                  L 90,110
+                  M 90,-10
+                  L 10,110
+                  " />
+      
+    </svg>
+  )
 }

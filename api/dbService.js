@@ -22,20 +22,11 @@ connection.connect((err) => {
   console.log('db ' + connection.state );
 });
 
-// to avoid sql injections use the cycleTable number to select from array of queries
-const sqlAsyncQueries = [ `INSERT INTO CYCLE_1 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_1;`,
-                     `INSERT INTO CYCLE_2 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_2;`,
-                     `INSERT INTO CYCLE_3 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_3;`,
-                     `INSERT INTO CYCLE_4 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_4;`,
-                     `INSERT INTO CYCLE_5 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_5;`,
-                     `INSERT INTO CYCLE_6 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_6;`,
-                     `INSERT INTO CYCLE_7 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_7;`,
-                     `INSERT INTO CYCLE_8 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_8;`,
-                     `INSERT INTO CYCLE_9 (RESPONSE, RESPONSE_TYPE) VALUES (?, ?); SELECT * FROM CYCLE_9;`];
-
 const sqlLiveQueries = {
+  getPromptQ:          `SELECT CURRENT_PROMPT AS 'currentPrompt' FROM LIVE_SCHEDULE WHERE id = 1;`,
+  updateLivePromptQ:    `UPDATE LIVE_SCHEDULE SET CURRENT_PROMPT = (?) WHERE id = 1;`,
+
   insertLiveResponseQ: `INSERT INTO LIVE_RESPONSES (RESPONSE, RESPONSE_TYPE) VALUES (?, ?);`,
-  getScheduleQ:        `SELECT CURRENT_ARTIST AS 'currentArtist', CURRENT_PROMPT AS 'currentPrompt' FROM LIVE_SCHEDULE WHERE id = 1;`, 
   getResponseUpdateQ:  `SELECT * FROM LIVE_RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 3 minute) AND (id > ?);`,
 } 
 
@@ -69,18 +60,6 @@ class DbService {
     } catch(error) { console.log(error); }
   }
 
-  async insertLiveReflection(reflection, reflectType) {
-    let insertData = [reflection, reflectType];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlLiveQueries.insertLiveResponseQ, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  }
-
   async getLiveDBUpdate(lastResponseID) {
     let insertData = [lastResponseID];
     try { const scheduleData = await new Promise((resolve, reject) => {
@@ -98,15 +77,41 @@ class DbService {
           return [scheduleData, responseData];
     } catch(error) { console.log(error); }
   }
+
+
+
+
+
+
   
-  async getLiveMobileDBUpdate() {
+  async getPromptUpdate() {
     try { const promptData = await new Promise((resolve, reject) => {
-            connection.query(sqlLiveQueries.getScheduleQ, (err, results) => {
+            connection.query(sqlLiveQueries.getPromptQ, (err, results) => {
               if(err) { reject(new Error(err.message)); }
               else { resolve(results); }
             });
           });
           return [promptData];
+    } catch(error) { console.log(error); }
+  }
+
+  async updateLivePrompt(updatedPrompt) {
+    try{  const insertId = await new Promise((resolve, reject) => {
+              connection.query(sqlLiveQueries.updateLivePromptQ, [updatedPrompt], (err, result) => {
+                  if (err) reject(new Error(err.message));
+                  resolve(result.insertId); }) });
+    } catch (error) { console.log(error); }
+  }
+
+  async insertLiveReflection(reflection, reflectType) {
+    let insertData = [reflection, reflectType];
+    try { const response = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.insertLiveResponseQ, insertData, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return reflection;
     } catch(error) { console.log(error); }
   }
 

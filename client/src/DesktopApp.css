@@ -13,9 +13,26 @@
   display: flex;
 }
 
-#banner-logo{
+#banner-logo-wrapper{
   height: 100%;
+  width: 10vh;
   border: 2px white solid;
+  background-color: var(--comp-col-01);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.BannerLogo{
+  width: 100%;
+  padding: 0.1rem;
+}
+#banner-x{
+  width: 20%;
+  margin: 0.1rem 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
 }
 
 #bg-wrapper{
@@ -41,13 +58,12 @@
 
 /* Current Prompt */
 #current-prompt-wrapper{
-  position: absolute;
-  left: 25%;
-  bottom: 50%;
-  width: 50%;
+  grid-column: 1/2;
+  grid-row: 1/2;
   z-index: 3;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 #current-prompt{
   background-color: var(--comp-col-01);

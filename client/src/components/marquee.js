@@ -12,7 +12,9 @@ export default function Marquee(props) {
     text: {
       width: 'max-content',
       position: 'relative',
-      fontSize: '8vh'
+      top: '-0.75vh',
+      fontSize: '8vh',
+      fontFamily: 'Marr Sans Medium'
     }
   }
 
@@ -39,7 +41,7 @@ export default function Marquee(props) {
       {left: '0px'},
       {left: -1 * marqText.getBoundingClientRect().width/2 + 'px'}
     ], {
-      duration: marqText.getBoundingClientRect().width * 2,
+      duration: marqText.getBoundingClientRect().width * 8,
       iterations: Infinity
     })
   }

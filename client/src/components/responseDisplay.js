@@ -106,7 +106,7 @@ export default function ResponseDisplay(props) {
       }
        
     });
-    newResponseBox.src = 'https://humstore.thelongesthum.world/'+imageResponse;
+    newResponseBox.src = imageResponse;
   }
 
   function createTextResponseDisplay(textResponse){

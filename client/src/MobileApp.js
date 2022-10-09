@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import io from 'socket.io-client';
 import './MobileApp.css';
 import { fabric } from 'fabric';
 import IntroModal from './components/introModal';
@@ -6,6 +7,7 @@ import DrawingTools from './components/drawingTools';
 import DrawingCanvas from './components/drawingCanvas';
 import IntroAnim from './components/introAnim';
 
+const socket = io();
 
 export default function MobileApp() {
 
@@ -65,7 +67,10 @@ export default function MobileApp() {
     document.addEventListener('mouseup', saveCanvasState);
     document.addEventListener('touchend', saveCanvasState);
     document.addEventListener('touchcancel', saveCanvasState);
-    liveMobileUpdate();
+
+    // set up socket events
+    // on prompt update - called on initial connection as well
+    socket.on("receive-prompt", initData => {setCurrentPrompt(initData[0][0].currentPrompt);});
   }, []);
 
   // update brush colour and cursor on colour change
@@ -262,23 +267,6 @@ export default function MobileApp() {
     }
   }
 
-  function liveMobileUpdate(){
-    fetch(`https://room2.fm/api/getLiveMobileUpdate`, {
-      headers: {
-        'Content-type': 'application/json'
-      },
-      method: 'POST',
-      mode: 'cors'
-    })
-      .then(res => res.json())
-      .then(res => updateFromMobileServerResponse(res.data));
-    setTimeout(liveMobileUpdate, liveUpdateTime);
-  }
-  //update state from latest server info
-  function updateFromMobileServerResponse(serverResponse){
-    setCurrentPrompt(serverResponse[0][0].currentPrompt); 
-  }
-
   function submitResponse(){
     let textInput = document.getElementById('text-input');
     // check if a text or an image response
@@ -292,32 +280,15 @@ export default function MobileApp() {
         width: imageInput.width,
         height: imageInput.height
       });
-      const formData = new FormData();
       let imageFile = dataURLtoFile(dataURL, 'response.png');
       drawingCanvas.clear();
-      formData.append('upload', imageFile);
-      fetch(`https://room2.fm/api/insertLiveImageReflection`, {
-        method: 'PUT',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(() => {setTimeout(responseSubmittedAnim, 4000)});
+      socket.emit("send-image-response", imageFile);
     } else if(inputIsDraw === false && textInput.value.length > 0) {
       // text input
       let responseText = textInput.value;
-      if(responseText.length > 0){
-        textInput.value = '';
-        fetch(`https://room2.fm/api/insertLiveTextReflection`, {
-          headers: { 'Content-type': 'application/json' },
-          method: 'POST',
-          mode: 'cors',
-          body: JSON.stringify({reflection: responseText})
-        })
-      .then(res => res.json())
-      .then(() => {setTimeout(responseSubmittedAnim, 4000)});   
-      }
+      socket.emit("send-text-response", responseText);
+      textInput.value = '';
     }
-    setIsLoading(true);
   }
 
   function responseSubmittedAnim(){
