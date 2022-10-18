@@ -11,7 +11,12 @@ export default function IntroAnim(props) {
       if(props.animOn){
         animateIntro();
       } else {
-        document.getElementById("anim-wrapper").remove();
+        setTimeout(() => {
+          document.getElementById("anim-wrapper").classList.add("FadeOut");
+          setTimeout(() => {
+            document.getElementById("anim-wrapper").remove();
+          }, 2000);
+        }, 2200);
       }
     }
     
@@ -36,7 +41,7 @@ export default function IntroAnim(props) {
       position: 'relative',
       width: '100%',
       border: 'none',
-      borderTop: 'solid 2px var(--comp-col-02)'
+      borderTop: 'solid 1px var(--comp-col-02)'
     },
     logo: {
       position: 'relative',

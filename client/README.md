@@ -1,5 +1,2 @@
-- fix error page style
 - update AOC
-- prefers-reduced-motion
-- animate not supported?
-- brand page edge case
+- image off bottom of page

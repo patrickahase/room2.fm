@@ -4,11 +4,13 @@ const path = require('path');
 const app = express();
 const aws = require('aws-sdk');
 const http = require('http');
+/* var cors = require('cors');
+app.use(cors()); */
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000"]
+    origin: ["https://www.controls.room2.fm", "https://controls.room2.fm", "http://localhost:3000"]
   }
 });
 
@@ -32,6 +34,8 @@ app.get('/*', function(req, res) {
   })
 });
 
+
+
 io.on('connection', socket => {
   // on initial connection send prompt data
   const db = DbService.getDbServiceInstance();
@@ -43,7 +47,7 @@ io.on('connection', socket => {
   socket.on("send-prompt", (newPrompt) => {
     const db = DbService.getDbServiceInstance();
     const result = db.updateLivePrompt(newPrompt);
-    result.then((data) => socket.broadcast.emit("receive-prompt", data))
+    result.then((data) => io.emit("receive-prompt", data))
           .catch(err => console.log(err));
   });
 
@@ -69,7 +73,39 @@ io.on('connection', socket => {
     });
   });
   
+  // for the controls
+  // get full prompt list
+  socket.on("get-prompt-list", () => {
+    const db = DbService.getDbServiceInstance();
+    const result = db.getPromptList();
+    result.then((data) => socket.emit("prompt-list", data))
+          .catch(err => console.log(err));
+  });
+  // add prompt to list
+  socket.on("add-prompt-list", (newPrompt) => {
+    const db = DbService.getDbServiceInstance();
+    const result = db.addPromptList(newPrompt);
+    result.then((data) => socket.emit("prompt-list", data))
+          .catch(err => console.log(err));
+  });
+  // remove prompt from list
+  socket.on("remove-prompt-list", (removePrompt) => {
+    const db = DbService.getDbServiceInstance();
+    const result = db.removePromptList(removePrompt);
+    result.then((data) => socket.emit("prompt-list", data))
+          .catch(err => console.log(err));
+  });
+
 });
+
+function intervalFunc(){
+  const db = DbService.getDbServiceInstance();
+  const result = db.getPromptUpdate();
+  result.then((data) => console.log(data))
+        .catch(err => console.log(err));
+}
+
+setInterval(intervalFunc, 3600000);
 
 const port = process.env.PORT || 33061;
 

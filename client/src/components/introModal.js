@@ -12,33 +12,40 @@ export default function IntroModal(props) {
       height: '100%',
       padding: '1.5rem',
       backgroundColor: 'var(--comp-col-01)',
-      color: 'var(--comp-col-02)'
+      color: 'var(--comp-col-02)',
+      overflow: 'auto'
     },
     modalBox: {
       width: '100%',
-      height: '100%',
+      minHeight: '100%',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
       alignItems: 'stretch',
-      borderTop: 'solid 2px var(--comp-col-02)',
-      overflow: 'auto'
+      borderTop: 'solid 1px var(--comp-col-02)'
     },
     AOCTitle: {
       fontSize: '2.5rem',
       flexGrow: 1,
-      fontFamily: 'Marr Sans Semibold'
+      fontFamily: 'Marr Sans Semibold',
+      fontWeight: 'normal'
     },
     AOCText: {
       fontSize: '1rem',
       paddingBottom: '2rem'
     },
     AOCButton: {
-      fontSize: '1.25em',
       backgroundColor: 'var(--comp-col-03)',
       color: 'var(--comp-col-01)',
       border: 'none',
-      padding: '0.4rem'
+      padding: '0',
+      height: '33px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: '20px',
+      fontFamily: 'Marr Sans Semibold',
+      fontWeight: 'normal'
     }
   }
 
@@ -62,16 +69,14 @@ export default function IntroModal(props) {
     <>
       <p style={modalStyle.AOCTitle}>Acknowledgement</p>
       <p style={modalStyle.AOCText}>
-        This website was produced and is maintained on the unceded territory of the Wurundjeri Woi Wurrung and Bunurong Boon 
-        Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
-        of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
-        all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
-        connectivity are built upon.
+        This website was produced and is maintained on the unceded territory of the Wurundjeri Woi Wurrung peoples of the Eastern Kulin 
+        Nation, the Traditional Custodians of the land. We recognise their ongoing legacy of connection to land, waters and culture and 
+        pay respect to their Elders past and present. We extend this respect to all other First Nations peoples and Traditional Custodians 
+        whose land the material pathways that allow our digital connectivity are built upon.
       </p>
       <button style={modalStyle.AOCButton}
-              /* onClick={() => {props.setCurrentModalPage(props.currentModalPage + 1)}}> */
               onClick={() => {props.toggleModal()}}>
-        <b>ENTER</b>
+        ENTER
       </button>
     </>,
 

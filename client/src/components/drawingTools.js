@@ -97,7 +97,7 @@ export default function DrawingTools(props){
       </div>
 
       <div style={drawingToolsStyle.buttonsWrapper}>
-        <button style={drawingToolsStyle.drawingButton} /* onClick={() => props.toggleEraser()} */>
+        <button style={drawingToolsStyle.drawingButton} onClick={e => props.toggleEraser(e)}>
           <span style={drawingToolsStyle.buttonLabel}>Eraser</span>
           <div style={drawingToolsStyle.buttonIcon}><EraserIcon strokeColour="black" /></div>
         </button>

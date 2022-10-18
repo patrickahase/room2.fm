@@ -27,7 +27,7 @@ export default function DrawingCanvas(props){
     if(canvasRef.current){
       canvasRef.current.freeDrawingBrush.color = props.brushColour;
       canvasRef.current.freeDrawingCursor = getCustomCursor();
-    }    
+    }  
   }, [props.brushColour]);
 
   useEffect(() => {
@@ -35,8 +35,7 @@ export default function DrawingCanvas(props){
       canvasRef.current.freeDrawingBrush.width = props.brushSize;
       console.log(canvasRef.current.freeDrawingBrush.width)
       canvasRef.current.freeDrawingCursor = getCustomCursor();
-    }   
-    
+    }  
   }, [props.brushSize]);
 
   return (

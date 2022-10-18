@@ -21,16 +21,14 @@ export default function ResponseDisplay(props) {
       transition: '1.5s',
       fontSize: '1rem',
       color: 'var(--comp-col-02)',
-      textShadow: '-1px 0 var(--comp-col-01), 0 1px var(--comp-col-01), 1px 0 var(--comp-col-01), 0 -1px var(--comp-col-01)'     
+      textShadow: '-1px 0 var(--comp-col-01), 0 1px var(--comp-col-01), 1px 0 var(--comp-col-01), 0 -1px var(--comp-col-01)',
+      fontFamily: 'GT America'
     }
   }
- 
-  //length between displaying the responses
-  const responseLoopDelay = 1000;
 
   // time for fade in/out and for how long the response is visible in ms
   const responseFadeTime = 1500;
-  const responseHangTime = 15000;
+  const responseHangTime = 25000;
 
   const [responsesToDisplay, setResponsesToDisplay] = useState([]);
   const responsesToDisplayRef = useRef();
@@ -41,6 +39,8 @@ export default function ResponseDisplay(props) {
 
   // max responses to display on the screen
   const displaysOnScreen = 3;
+
+  const responsesOnScreenRef = useRef(0);
 
   // when new response data arrives add it to the responsesToDisplay List
   useEffect(() => {
@@ -55,22 +55,26 @@ export default function ResponseDisplay(props) {
   )
 
   function displayNextResponse(){
-    if(document.getElementsByClassName("Response").length < displaysOnScreen && responsesToDisplayRef.current.length){
-      let newResponseList = responsesToDisplayRef.current;
-      let newResponse = newResponseList.shift();
-      if(newResponse[1] === "text"){
-        createTextResponseDisplay(newResponse[0]);
-        setResponsesToDisplay(newResponseList);
-      } else if(newResponse[1] === "image"){
-        createImageResponseDisplay(newResponse[0]);
-        setResponsesToDisplay(newResponseList);
+    // check if there's responses left to display
+    if(responsesToDisplayRef.current.length > 0){
+      // check to see how many responses are on screen
+      if(responsesOnScreenRef.current < displaysOnScreen){
+        responsesOnScreenRef.current = responsesOnScreenRef.current + 1;
+        console.log(responsesOnScreenRef.current);
+        let newResponseList = responsesToDisplayRef.current;
+        let newResponse = newResponseList.shift();
+        if(newResponse[1] === "text"){
+          createTextResponseDisplay(newResponse[0]);
+          setResponsesToDisplay(newResponseList);
+        } else if(newResponse[1] === "image"){
+          createImageResponseDisplay(newResponse[0]);
+          setResponsesToDisplay(newResponseList);
+        }
+        if(responsesToDisplayRef.current.length > 0){
+          displayNextResponse();
+        }      
       }
-      if(newResponseList.length){
-        displayNextResponse();
-      }      
-    } else if (document.getElementsByClassName("Response").length >= displaysOnScreen) {
-      setTimeout(displayNextResponse, responseLoopDelay);
-    }
+    }    
   }
 
   function createImageResponseDisplay(imageResponse){
@@ -78,7 +82,6 @@ export default function ResponseDisplay(props) {
     let collision = false;
     newResponseBox.classList.add('Response');
     Object.assign(newResponseBox.style, responseStyle.imageResponse);
-    //newResponseBox.style = responseStyle.imageResponse;
     let xRandom = Math.random();
     let yRandom = Math.random();
     newResponseBox.addEventListener("load", (e) => {
@@ -86,25 +89,21 @@ export default function ResponseDisplay(props) {
       document.getElementById('response-wrapper').appendChild(newResponseBox);
       let responseBoxDimensions = newResponseBox.getBoundingClientRect();
       newResponseBox.style.left = (80 * xRandom) + "%";
-      newResponseBox.style.top = ((100 - (props.height / responseBoxDimensions.height)) * yRandom) + "%";
-      if(props.colliding){
-        let colliderArray = Array.from(document.getElementsByClassName("Collider"));
-        for (let i = 0; i < colliderArray.length; i++) {
-          if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
-            collision = true;
-          }
+      newResponseBox.style.top = ((90 - (responseBoxDimensions.height/props.height)*100) * yRandom) + "%";
+      let colliderArray = Array.from(document.getElementsByClassName("Collider"));
+      for (let i = 0; i < colliderArray.length; i++) {
+        if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
+          collision = true;
         }
-        if(collision){
-          newResponseBox.remove();
-          window.requestAnimationFrame(() => createImageResponseDisplay(imageResponse));
-        } else {
-          newResponseBox.classList.add("Collider");
-          responseFadeInOut(newResponseBox);
-        }
-      } else {
-        responseFadeInOut(newResponseBox);
       }
-       
+      if(collision){
+       // console.log("hit", imageResponse);
+        newResponseBox.remove();
+        window.requestAnimationFrame(() => createImageResponseDisplay(imageResponse));
+      } else {
+        newResponseBox.classList.add("Collider");
+        responseFadeInOut(newResponseBox);
+      } 
     });
     newResponseBox.src = imageResponse;
   }
@@ -115,13 +114,12 @@ export default function ResponseDisplay(props) {
     newResponseBox.innerHTML = textResponse;
     newResponseBox.classList.add('Response');
     Object.assign(newResponseBox.style, responseStyle.textResponse);
-    //newResponseBox.style = responseStyle.textResponse;
     let xRandom = Math.random();
     let yRandom = Math.random();
     document.getElementById('response-wrapper').appendChild(newResponseBox);
     let responseBoxDimensions = newResponseBox.getBoundingClientRect();
     newResponseBox.style.left = (80 * xRandom) + "%";
-    newResponseBox.style.top = ((100 - (props.height / responseBoxDimensions.height)) * yRandom) + "%";
+    newResponseBox.style.top = ((90 - (responseBoxDimensions.height / props.height)*100) * yRandom) + "%";
     let colliderArray = Array.from(document.getElementsByClassName("Collider"));
     for (let i = 0; i < colliderArray.length; i++) {
       if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
@@ -134,7 +132,7 @@ export default function ResponseDisplay(props) {
     } else {
       newResponseBox.classList.add("Collider");
       responseFadeInOut(newResponseBox);
-    }     
+    }  
   }
 
   function responseFadeInOut(responseElement){
@@ -142,7 +140,7 @@ export default function ResponseDisplay(props) {
     setTimeout(() =>{
       responseElement.style.opacity = 1;
       setTimeout(() => {responseElement.style.opacity = 0;}, responseHangTime);
-      setTimeout(() => {responseElement.remove(); displayNextResponse();}, responseFadeTime + responseHangTime + 100);
+      setTimeout(() => {responseElement.remove(); responsesOnScreenRef.current = responsesOnScreenRef.current - 1; displayNextResponse();}, responseFadeTime + responseHangTime + 100);
     }, 100);
   }
 }

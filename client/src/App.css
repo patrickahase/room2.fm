@@ -23,6 +23,7 @@ body, textarea{
 }
 h2 {
   font-family: 'Marr Sans Semibold';
+  font-weight: normal;
 }
 button {
   font-family: 'Marr Sans Medium';

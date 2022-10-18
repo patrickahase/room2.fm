@@ -26,6 +26,7 @@ export default function MobileApp() {
 
   // is loading - show throbber
   const [isLoading, setIsLoading] = useState(false);
+  const [subButtonText, setSubButtonText] = useState("SUBMIT RESPONSE");
 
   // prompt state
   const [currentPrompt, setCurrentPrompt] = useState("this is a test prompt");
@@ -60,7 +61,6 @@ export default function MobileApp() {
   useEffect(() => {
     // should the page run animations
     if(window.matchMedia('all and (prefers-reduced-motion)').matches || Element.prototype.animate === false ){
-      console.log(window.matchMedia('(prefers-reduced-motion)').matches);
       setAnimOn(false);
     }
     // set undo save state
@@ -71,6 +71,8 @@ export default function MobileApp() {
     // set up socket events
     // on prompt update - called on initial connection as well
     socket.on("receive-prompt", initData => {setCurrentPrompt(initData[0][0].currentPrompt);});
+    socket.on("receive-text-response", () => {setTimeout(responseSubmittedAnim, 100)});
+    socket.on("receive-image-response", () => {setTimeout(responseSubmittedAnim, 100);});
   }, []);
 
   // update brush colour and cursor on colour change
@@ -83,7 +85,7 @@ export default function MobileApp() {
   useEffect(() => {
     if(drawingCanvasRef.current){
       updateCanvasBrush();      
-    }    
+    }   
   }, [brushSize]);
 
   return (
@@ -94,8 +96,8 @@ export default function MobileApp() {
       </div>
 
       <div style={{paddingBottom: '1px', backgroundColor: 'var(--comp-col-02)'}}>        
-        <button id="draw-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setDrawInput(true)}><b>DRAW</b></button>
-        <button id="text-input-select" className="InputSelectButton" onClick={() => setDrawInput(false)}><b>WRITE</b></button>
+        <button id="draw-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setDrawInput(true)}>DRAW</button>
+        <button id="text-input-select" className="InputSelectButton" onClick={() => setDrawInput(false)}>WRITE</button>
       </div>
 
       
@@ -124,13 +126,13 @@ export default function MobileApp() {
       <button className="SubmitResponseButton" onClick={() => {submitResponse()}}>
         {isLoading  
           ?<SubmitThrobber />
-          :<b>SUBMIT RESPONSE</b>
+          :<>{subButtonText}</>
         }
         
         
       </button>
       
-      {/* <IntroAnim
+      <IntroAnim
         animOn={animOn}
         introAnimStart={introAnimStart}  
       />     
@@ -139,7 +141,7 @@ export default function MobileApp() {
         setIntroModal={setIntroModal}
         currentModalPage={currentModalPage}
         setCurrentModalPage={setCurrentModalPage}
-        toggleModal={toggleModal} /> */}
+        toggleModal={toggleModal} />
         
     </div>
   )
@@ -195,19 +197,19 @@ export default function MobileApp() {
     }
   }
   // toggle eraser on/off - save brush if toggled on - reset old brush if toggled off
-  function toggleEraser(){
+  function toggleEraser(e){
     if(isEraser){
       drawingCanvasRef.current.freeDrawingBrush = savedBrush;
       drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
       drawingCanvasRef.current.freeDrawingBrush.color = brushColour;
       drawingCanvasRef.current.freeDrawingCursor = getCustomCursor();
-      document.getElementById("erase-brush-button").classList.remove("Active");
+      e.target.classList.remove("Active");
     } else {
       setSavedBrush(drawingCanvasRef.current.freeDrawingBrush);
       drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
       drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
       drawingCanvasRef.current.freeDrawingCursor = getCustomEraserCursor();
-      document.getElementById("erase-brush-button").classList.add("Active");
+      e.target.classList.add("Active");
     }
     setIsEraser(!isEraser);
   }
@@ -283,11 +285,13 @@ export default function MobileApp() {
       let imageFile = dataURLtoFile(dataURL, 'response.png');
       drawingCanvas.clear();
       socket.emit("send-image-response", imageFile);
+      setIsLoading(true);
     } else if(inputIsDraw === false && textInput.value.length > 0) {
       // text input
       let responseText = textInput.value;
       socket.emit("send-text-response", responseText);
       textInput.value = '';
+      setIsLoading(true);
     }
   }
 
@@ -295,10 +299,10 @@ export default function MobileApp() {
     setIsLoading(false);
     let subButton = document.getElementsByClassName("SubmitResponseButton")[0];
     subButton.classList.add("ResponseSubmitted");
-    subButton.firstChild.innerHTML = "RESPONSE SUBMITTED";
+    setSubButtonText("RESPONSE SUBMITTED");
     setTimeout(() => {
       subButton.classList.remove("ResponseSubmitted");
-      subButton.firstChild.innerHTML = "SUBMIT RESPONSE";
+      setSubButtonText("SUBMIT RESPONSE");
     }, 3000);
   }
 

@@ -25,10 +25,12 @@ export default function DesktopApp() {
   var responseDataRef = useRef(responseData);
   useEffect(() => {responseDataRef.current = responseData}, [responseData]);
   // current prompt
-  const [currentPrompt, setCurrentPrompt] = useState('this is a prompt');
+  const [currentPrompt, setCurrentPrompt] = useState('What do you hope for?');
   // shader id
   let shaderIDParam = useParams().shaderID;
   const [shaderID, setShaderID] = useState(0);
+  var shaderIDRef = useRef(shaderID);
+  useEffect(() => {shaderIDRef.current = shaderID}, [shaderID]);
 
   // run on init
   useEffect(() => {
@@ -38,8 +40,26 @@ export default function DesktopApp() {
       setWindowSize([window.innerWidth, window.innerHeight])});
     // if using shader id from url update shader selection
     if(shaderIDParam) { setShaderID(shaderIDParam);};
-    socket.on("receive-text-response", textResponse => {setResponseData(...responseDataRef.current, [textResponse, "text"])});
-    socket.on("receive-image-response", imageResponse => {setResponseData(...responseDataRef.current, [imageResponse, "image"])});
+    /* socket.on("receive-text-response", textResponse => {console.log("s",textResponse)});
+    socket.on("receive-image-response", imageResponse => {console.log("s",imageResponse)}); */
+    socket.on("receive-text-response", textResponse => {
+      let returnedResponses =[];
+      returnedResponses.push([textResponse, "text"]);
+      setResponseData(returnedResponses);
+    });
+    socket.on("receive-image-response", imageResponse => {
+      let returnedResponses =[];
+      returnedResponses.push([imageResponse, "image"]);
+      setResponseData(returnedResponses);
+    });
+    socket.on("receive-prompt", initData => {
+      setCurrentPrompt(initData[0][0].currentPrompt);
+      if(shaderIDRef.current < 4){
+        setShaderID(shaderIDRef.current + 1);
+      } else {
+        setShaderID(0);
+      }
+    });
   }, []);
 
   return (
@@ -51,7 +71,7 @@ export default function DesktopApp() {
           <img className="BannerLogo" src={room2Logo} />
         </div>
         <Marquee
-          text={"room2 x Today is live @ Purpose Conference 2022 "} />
+          text={"Today x room2 is live @ Purpose Conference 2022 "} />
       </div>
       <div id="bg-wrapper">
         <div id="bgShader-wrapper">
@@ -66,8 +86,8 @@ export default function DesktopApp() {
             height={windowSize[1]}
             responseData={responseData} />
         </div>
-        <div id="current-prompt-wrapper" className="Collider">
-          <p id="current-prompt">
+        <div id="current-prompt-wrapper">
+          <p id="current-prompt" className="Collider">
             {currentPrompt}
           </p>
         </div>
@@ -76,7 +96,7 @@ export default function DesktopApp() {
   );
 
   // call to server for latest prompt and responses
-  function liveUpdate(){
+  /* function liveUpdate(){
     fetch(`https://room2.fm/api/getLiveUpdate`, {
       headers: {
         'Content-type': 'application/json'
@@ -91,8 +111,8 @@ export default function DesktopApp() {
       // loop liveUpdate function at set interval
       setTimeout(liveUpdate, liveUpdateTime);
   }
-
-  function updateStateFromServer(serverResData){
+ */
+  /* function updateStateFromServer(serverResData){
     // update the prompt
     setCurrentPrompt(serverResData[0][0].currentPrompt);
     // add the new responses if any
@@ -106,7 +126,7 @@ export default function DesktopApp() {
       });
       setResponseData(returnedResponses);
     }
-  }
+  } */
 
 }
 

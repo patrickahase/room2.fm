@@ -12,7 +12,7 @@ import './App.css';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DoorApp />,
+    element: <MobileApp />,
     errorElement: <ErrorPage />,
   },
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/mobile",
-    element: <MobileApp />,
+    element: <DoorApp />,
     errorElement: <ErrorPage />,
   },
 ]);

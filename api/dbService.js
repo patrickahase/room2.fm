@@ -28,6 +28,10 @@ const sqlLiveQueries = {
 
   insertLiveResponseQ: `INSERT INTO LIVE_RESPONSES (RESPONSE, RESPONSE_TYPE) VALUES (?, ?);`,
   getResponseUpdateQ:  `SELECT * FROM LIVE_RESPONSES WHERE (RESPONSE_DATETIME > now() - interval 3 minute) AND (id > ?);`,
+
+  getPromptListQ:      `SELECT PROMPT AS 'currentPromptList' FROM TODAY_PROMPTS;`,
+  addPromptListQ:      `INSERT INTO TODAY_PROMPTS (PROMPT) VALUE (?);`,
+  removePromptListQ:   `DELETE FROM TODAY_PROMPTS WHERE (PROMPT)=(?);`,
 } 
 
 class DbService {
@@ -36,54 +40,7 @@ class DbService {
     return instance ? instance: new DbService();
   }
 
-  // run when inputing reflections and return responses
-  async insertReflectionGetResponses(reflection, reflectType, cycleTable) {
-    let insertData = [reflection, reflectType];
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(sqlAsyncQueries[cycleTable], insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  }
-  
-  async testLookup() {
-    try { const response = await new Promise((resolve, reject) => {
-            connection.query(`SELECT * FROM CYCLE_5;`, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return response;
-    } catch(error) { console.log(error); }
-  }
-
-  async getLiveDBUpdate(lastResponseID) {
-    let insertData = [lastResponseID];
-    try { const scheduleData = await new Promise((resolve, reject) => {
-            connection.query(sqlLiveQueries.getScheduleQ, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          const responseData = await new Promise((resolve, reject) => {
-            connection.query(sqlLiveQueries.getResponseUpdateQ, insertData, (err, results) => {
-              if(err) { reject(new Error(err.message)); }
-              else { resolve(results); }
-            });
-          });
-          return [scheduleData, responseData];
-    } catch(error) { console.log(error); }
-  }
-
-
-
-
-
-
-  
+  // client calls
   async getPromptUpdate() {
     try { const promptData = await new Promise((resolve, reject) => {
             connection.query(sqlLiveQueries.getPromptQ, (err, results) => {
@@ -113,6 +70,55 @@ class DbService {
           });
           return reflection;
     } catch(error) { console.log(error); }
+  }
+
+  // controls calls
+  // return prompt list
+  async getPromptList() {
+    try { const promptData = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.getPromptListQ, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return [promptData];
+    } catch(error) { console.log(error); }
+  }
+  // add prompt
+  // return prompt list
+  async addPromptList(newPrompt) {
+    try{  const insertId = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.addPromptListQ, [newPrompt], (err, results) => {
+              if (err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            }); 
+          });
+          const promptData = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.getPromptListQ, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return [promptData];
+      } catch (error) { console.log(error); }
+  }
+  // remove prompt
+  // return prompt list
+  async removePromptList(removePrompt) {
+    try{  const insertId = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.removePromptListQ, [removePrompt], (err, results) => {
+              if (err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            }) 
+          }); 
+          const promptData = await new Promise((resolve, reject) => {
+            connection.query(sqlLiveQueries.getPromptListQ, (err, results) => {
+              if(err) { reject(new Error(err.message)); }
+              else { resolve(results); }
+            });
+          });
+          return [promptData];
+      } catch (error) { console.log(error); }
   }
 
 }
