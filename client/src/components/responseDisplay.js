@@ -19,7 +19,7 @@ export default function ResponseDisplay(props) {
       opacity: 0,
       position: 'absolute',
       transition: '1.5s',
-      fontSize: '1rem',
+      fontSize: '2rem',
       color: 'var(--comp-col-02)',
       textShadow: '-1px 0 var(--comp-col-01), 0 1px var(--comp-col-01), 1px 0 var(--comp-col-01), 0 -1px var(--comp-col-01)',
       fontFamily: 'GT America'
@@ -30,12 +30,22 @@ export default function ResponseDisplay(props) {
   const responseFadeTime = 1500;
   const responseHangTime = 25000;
 
+  // array for new responses
   const [responsesToDisplay, setResponsesToDisplay] = useState([]);
-  const responsesToDisplayRef = useRef();
+  const responsesToDisplayRef = useRef([]);
   useEffect(() => {
     responsesToDisplayRef.current = responsesToDisplay;
     displayNextResponse();
   }, [responsesToDisplay]);
+  
+  // array for past responses
+  const [displayedResponses, setDisplayedResponses] = useState([]);
+  const displayedResponsesRef = useRef([]);
+  useEffect(() => {responsesToDisplayRef.current = responsesToDisplay;}, [displayedResponses]);
+
+  useEffect(() => {
+    displayedResponsesRef.current = [];
+  }, [props.currentPrompt]);
 
   // max responses to display on the screen
   const displaysOnScreen = 3;
@@ -60,21 +70,42 @@ export default function ResponseDisplay(props) {
       // check to see how many responses are on screen
       if(responsesOnScreenRef.current < displaysOnScreen){
         responsesOnScreenRef.current = responsesOnScreenRef.current + 1;
-        console.log(responsesOnScreenRef.current);
         let newResponseList = responsesToDisplayRef.current;
+        let oldResponseList = displayedResponsesRef.current;
         let newResponse = newResponseList.shift();
+        oldResponseList.push(newResponse);
         if(newResponse[1] === "text"){
           createTextResponseDisplay(newResponse[0]);
           setResponsesToDisplay(newResponseList);
+          setDisplayedResponses(oldResponseList);
         } else if(newResponse[1] === "image"){
           createImageResponseDisplay(newResponse[0]);
           setResponsesToDisplay(newResponseList);
+          setDisplayedResponses(oldResponseList);
         }
         if(responsesToDisplayRef.current.length > 0){
           displayNextResponse();
         }      
-      }
-    }    
+      } 
+    } else if (displayedResponsesRef.current.length > 0 && responsesOnScreenRef.current === 0) {
+      setTimeout(displayOldResponse, 2000);
+    }
+  }
+  
+  function displayOldResponse(){
+    // check to see how many responses are on screen
+    if(responsesOnScreenRef.current === 0){
+      responsesOnScreenRef.current = responsesOnScreenRef.current + 1;
+      let oldResponseList = displayedResponsesRef.current;
+      let newResponse = oldResponseList.shift();
+      oldResponseList.push(newResponse);
+      setDisplayedResponses(oldResponseList);
+      if(newResponse[1] === "text"){
+        createTextResponseDisplay(newResponse[0]);
+      } else if(newResponse[1] === "image"){
+        createImageResponseDisplay(newResponse[0]);
+      }    
+    } 
   }
 
   function createImageResponseDisplay(imageResponse){
@@ -140,7 +171,11 @@ export default function ResponseDisplay(props) {
     setTimeout(() =>{
       responseElement.style.opacity = 1;
       setTimeout(() => {responseElement.style.opacity = 0;}, responseHangTime);
-      setTimeout(() => {responseElement.remove(); responsesOnScreenRef.current = responsesOnScreenRef.current - 1; displayNextResponse();}, responseFadeTime + responseHangTime + 100);
+      setTimeout(() => {
+        responseElement.remove();
+        responsesOnScreenRef.current = responsesOnScreenRef.current - 1;
+        displayNextResponse();
+      }, responseFadeTime + responseHangTime + 100);
     }, 100);
   }
 }

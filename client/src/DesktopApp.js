@@ -21,7 +21,10 @@ export default function DesktopApp() {
   var lastResponseIDRef = useRef(lastResponseID);
   useEffect(() => {lastResponseIDRef.current = lastResponseID}, [lastResponseID]);
   // responses from server
-  const [responseData, setResponseData] = useState([]);
+  const [responseData, setResponseData] = useState([
+    /* ["https://thelongesthumstore.sgp1.digitaloceanspaces.com/room2-purpose-live/1666089854386.png", "image"],
+    ["ry", "text"], */
+  ]);
   var responseDataRef = useRef(responseData);
   useEffect(() => {responseDataRef.current = responseData}, [responseData]);
   // current prompt
@@ -84,7 +87,8 @@ export default function DesktopApp() {
         <div id="bg-response-wrapper">
           <ResponseDisplay
             height={windowSize[1]}
-            responseData={responseData} />
+            responseData={responseData}
+            currentPrompt={currentPrompt} />
         </div>
         <div id="current-prompt-wrapper">
           <p id="current-prompt" className="Collider">

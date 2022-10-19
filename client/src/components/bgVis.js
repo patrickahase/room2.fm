@@ -281,35 +281,218 @@ export default function BGVis(props) {
         gl_FragColor = vec4 (col, 1.0);      
       }`,                  
     // shader 5
-    ` #define PI 3.14159265359
-      precision highp float;
+    ` precision highp float;
       uniform vec2 u_resolution;
       uniform float u_time;
       const int steps = 400;
-      const vec3 lcol = vec3(0.855,0.804,0.722);
+      const vec3 lcol = vec3(0.51,0.443,0.518);
       const vec3 ycol = vec3(0.161,0.298,1.);
-      const vec3 rcol = vec3(1.,0.714,0.549);
+      const vec3 rcol = vec3(0.839,0.949,0.275);
       const vec3 bcol = vec3(0.);
 
-      float cubicPulse(float c, float w, float x){
-          x = abs(x - c);
-          if( x>w ) return 0.0;
-          x /= w;
-          return 1.0 - x*x*(3.0-2.0*x);
+      float sdStar(vec2 p, float r, float m){
+        // these 4 lines can be precomputed for a given shape
+        float an = 0.02618;
+        float en = 3.141593/m;
+        vec2  acs = vec2(cos(an),sin(an));
+        vec2  ecs = vec2(cos(en),sin(en));
+
+        // reduce to first sector
+        float bn = mod(atan(p.x,p.y),2.0*an) - an;
+        p = length(p)*vec2(cos(bn),abs(sin(bn)));
+
+        // line sdf
+        p -= r*acs;
+        p += ecs*clamp( -dot(p,ecs), 0.0, r*acs.y/ecs.y);
+        return length(p)*sign(p.x);
+      }
+      mat2 rotate2d(float _angle){
+        return mat2(cos(_angle),-sin(_angle),
+                    sin(_angle),cos(_angle));
       }
 
       void main(){
-        float timer = 1. + (u_time*.1);
+        float timer = u_time*.01;
         vec2 uv = (gl_FragCoord.xy-.5 * u_resolution) / u_resolution.y;
-        uv.x += 1.25;
-        float col = 0.;
-        float ringD = distance(uv, vec2(0.));
-        float ring1 = cubicPulse(1.-fract(timer)*6.,.02,1.- ringD*uv.x);
-        float ring2 = cubicPulse(1.-fract(timer + .1)*6.,fract(timer + .1),1.- ringD*uv.x);
-        vec3 col3 = mix(bcol, rcol, ring1);
-        col3 += mix(bcol, ycol, ring2);
+        float n = 120.;  // n, number of sides
+        float a = .9-(sin(timer)*.1);                 // angle factor
+        float w = 2.0 + a*a*(n-2.0);        // angle divisor, between 2 and n
+        float col = 1. - smoothstep(0., 0.003, abs(sdStar(uv * rotate2d(timer*.3), 1., w)));
+        col += 1. - smoothstep(0., 0.003, abs(sdStar(uv * rotate2d(timer*-.3), 1., w)));
+        vec3 col3 = mix(lcol, rcol, clamp(col, 0., 1.));
         gl_FragColor = vec4 (col3, 1.0);      
-      }`                  
+      }`,        
+      //truchet          
+    ` precision highp float;
+      uniform vec2 u_resolution;
+      uniform float u_time;
+      const int steps = 400;
+      const vec3 lcol = vec3(0.51,0.443,0.518);
+      const vec3 ycol = vec3(0.161,0.298,1.);
+      const vec3 rcol = vec3(0.839,0.949,0.275);
+      const vec3 bcol = vec3(0.);
+
+      float hash21(vec2 p){
+        return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+      }
+
+      vec4 Truchet(vec2 uv){
+        vec2 id = floor(uv);
+        float n = hash21(id);
+
+        uv = fract(uv)-.5;        
+        vec3 col = vec3(0.);
+
+        float d = 0.;
+
+        if (n<.5)
+          uv.x *= -1.;
+
+        float s= uv.x>-uv.y ? 1. : -1.; // find corner
+
+        vec2 cp = uv - vec2(.5)*s; // circle
+        float cd = length(cp); // centre distance
+
+        float eb = .01; //edge blur
+        col += smoothstep(eb, -eb, abs(cd-.5)-.03);
+
+        float a = atan(cp.x, cp.y);
+
+        col *= cos(a*2.)*.5+.5;
+        return vec4(col, d);
+      }
+
+      void main(){
+        float timer = u_time*.1;
+        vec2 uv = (gl_FragCoord.xy-.5 * u_resolution) / u_resolution.y;
+        uv *= 5.;
+
+
+        gl_FragColor = Truchet(uv);      
+        //gl_FragColor = vec4(col3, 1.);      
+      }`,  
+        // dither              
+    ` precision highp float;
+      uniform vec2 u_resolution;
+      uniform float u_time;
+      const int steps = 400;
+      const vec3 lcol = vec3(0.51,0.443,0.518);
+      const vec3 ycol = vec3(0.161,0.298,1.);
+      const vec3 rcol = vec3(0.839,0.949,0.275);
+      const vec3 bcol = vec3(0.);
+      const float pixel_w = 1.5;
+      const float pixel_h = 1.0;
+      #define MAX_LEVEL 4
+      const float TWO_PI = 6.28318530718;
+      const float vertices = 4.;
+      const float startIndex = vertices;
+      const float endIndex = vertices * 2.;
+
+      mat2 rotate2d(float _angle){
+        return mat2(cos(_angle),-sin(_angle),
+                    sin(_angle),cos(_angle));
+      }
+      float GetBayerFromCoordLevel2(vec2 pixelpos){
+        float finalBayer   = 0.0;
+        float finalDivisor = 0.0;
+          float layerMult	   = 1.0;
+          
+          for(float bayerLevel = float(MAX_LEVEL); bayerLevel >= 1.0; bayerLevel--)
+        {
+          float bayerSize 	= exp2(bayerLevel)*0.5;
+          vec2 bayercoord 	= mod(floor(pixelpos.xy / bayerSize),2.0);
+          layerMult 		   *= 4.0;
+          
+          float line0202 = bayercoord.x*2.0;
+
+          finalBayer += mix(line0202,3.0 - line0202,bayercoord.y) / 3.0 * layerMult;
+          finalDivisor += layerMult;
+        }
+
+        return finalBayer / finalDivisor;
+      }
+      float dither(vec2 position, float brightness) {
+        float bayer = GetBayerFromCoordLevel2(position*256.);
+          bayer = pow(bayer, 1.0 / 2.2);
+          return step(bayer, brightness);
+      }
+      
+      float metaballs(vec2 uv, float time) {
+          float timeOsc = sin(time);										// oscillation helper
+          float size = 0.5;												// base size
+          float radSegment = TWO_PI / vertices;
+          for(float i = startIndex; i < endIndex; i++) {					// create x control points
+              float rads = i * radSegment;								// get rads for control point
+              float radius = 1. + 1.5 * sin(time + rads * 1.);
+              vec2 ctrlPoint = radius * vec2(sin(rads), cos(rads));		// control points in a circle 
+          size += 1. / pow(i, distance(uv, ctrlPoint));				// metaball calculation
+          }
+          return size;
+      }
+
+      void main(){
+        float timer = u_time*.1;
+        vec2 uv = (gl_FragCoord.xy-.5 * u_resolution) / u_resolution.y;
+        uv *= 5.;
+        
+        vec3 col3 = vec3(smoothstep(0., 0.01, metaballs(uv,timer) -1.));
+        //vec3 col3 = mix(lcol, rcol, dither(uv, uv.y+.5));
+        //vec3 col3 = GetDitheredPalette(uv.x, uv);
+        //gl_FragColor = Dither_Ordered(vec4(col3, 1.), 256., uv);      
+        gl_FragColor = vec4(col3, 1.);      
+      }`,                  
+    ` precision highp float;
+      uniform vec2 u_resolution;
+      uniform float u_time;
+      const int steps = 400;
+      const vec3 lcol = vec3(0.51,0.443,0.518);
+      const vec3 ycol = vec3(0.161,0.298,1.);
+      const vec3 rcol = vec3(0.839,0.949,0.275);
+      const vec3 bcol = vec3(0.);
+      const float pixel_w = 1.5;
+      const float pixel_h = 1.0;
+      #define MAX_LEVEL 4
+
+      mat2 rotate2d(float _angle){
+        return mat2(cos(_angle),-sin(_angle),
+                    sin(_angle),cos(_angle));
+      }
+      float GetBayerFromCoordLevel2(vec2 pixelpos){
+        float finalBayer   = 0.0;
+        float finalDivisor = 0.0;
+          float layerMult	   = 1.0;
+          
+          for(float bayerLevel = float(MAX_LEVEL); bayerLevel >= 1.0; bayerLevel--)
+        {
+          float bayerSize 	= exp2(bayerLevel)*0.5;
+          vec2 bayercoord 	= mod(floor(pixelpos.xy / bayerSize),2.0);
+          layerMult 		   *= 4.0;
+          
+          float line0202 = bayercoord.x*2.0;
+
+          finalBayer += mix(line0202,3.0 - line0202,bayercoord.y) / 3.0 * layerMult;
+          finalDivisor += layerMult;
+        }
+
+        return finalBayer / finalDivisor;
+      }
+      float dither(vec2 position, float brightness) {
+        float bayer = GetBayerFromCoordLevel2(position*256.);
+          bayer = pow(bayer, 1.0 / 2.2);
+          return step(bayer, brightness);
+      }
+      
+
+      void main(){
+        float timer = u_time*.1;
+        vec2 uv = (gl_FragCoord.xy-.5 * u_resolution) / u_resolution.y;
+        uv *= .5;
+        
+        vec3 col3 = mix(lcol, rcol, dither(uv, uv.y+.5));
+        //vec3 col3 = GetDitheredPalette(uv.x, uv);
+        //gl_FragColor = Dither_Ordered(vec4(col3, 1.), 256., uv);      
+        gl_FragColor = vec4(col3, 1.);      
+      }`,                  
   ]
 
   return (

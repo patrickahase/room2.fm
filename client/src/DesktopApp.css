@@ -68,7 +68,7 @@
 #current-prompt{
   background-color: var(--comp-col-01);
   max-width: 100%;
-  font-size: 1.25vw;  
+  font-size: 2.5rem;  
   color: var(--comp-col-02);  
   user-select: none;
   text-align: center;
