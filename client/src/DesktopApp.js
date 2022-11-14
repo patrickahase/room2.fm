@@ -57,7 +57,7 @@ export default function DesktopApp() {
     });
     socket.on("receive-prompt", initData => {
       setCurrentPrompt(initData[0][0].currentPrompt);
-      if(shaderIDRef.current < 4){
+      if(shaderIDRef.current < 6){
         setShaderID(shaderIDRef.current + 1);
       } else {
         setShaderID(0);
