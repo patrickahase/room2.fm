@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import DoorApp from './DoorApp';
 import ProjectorApp from './ProjectorApp';
+import DesktopApp from './DesktopApp';
 import MobileApp from './MobileApp';
 import ErrorPage from "./components/errorPage";
 

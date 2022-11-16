@@ -14,16 +14,6 @@
   src: url('./assets/WorkSans-Bold.ttf') format("truetype");
 }
 
-button {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  border: 0;
-  border-radius: 0;
-  -webkit-border-radius: 0;
-  outline: 0;
-}
-
 :root{
   --comp-col-01:#121313;
   --comp-col-02:#ffffff;

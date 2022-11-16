@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export default function DrawingTools(props){
+export default function DrawingToolsMobile(props){
 
   const drawingToolsStyle = {
     drawingToolsWrapper: {

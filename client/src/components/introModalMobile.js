@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import A11yDialog from 'a11y-dialog';
 
-export default function IntroModal(props) {
+export default function IntroModalMobile(props) {
 
   const modalStyle = {
     modalWrapper: {

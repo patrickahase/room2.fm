@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import io from 'socket.io-client';
 import './MobileApp.css';
 import { fabric } from 'fabric';
-import IntroModal from './components/introModal';
-import DrawingTools from './components/drawingTools';
-import DrawingCanvas from './components/drawingCanvas';
-import IntroAnim from './components/introAnim';
+import IntroModalMobile from './components/introModalMobile';
+import DrawingToolsMobile from './components/drawingToolsMobile';
+import DrawingCanvasMobile from './components/drawingCanvasMobile';
 
 const socket = io();
 
@@ -104,14 +103,14 @@ export default function MobileApp() {
       <div id="input-frame">
         <div id="input-wrapper">
           <div id="drawing-wrapper">
-            <DrawingCanvas 
+            <DrawingCanvasMobile 
               brushColour={brushColour}
               brushSize={brushSize}
               setDrawingCanvas={setDrawingCanvas}
               setCurrentCanvasState={setCurrentCanvasState}
               setIsDrawing={setIsDrawing} />
             
-            <DrawingTools 
+            <DrawingToolsMobile 
               undoDrawing={undoDrawing}
               redoDrawing={redoDrawing}
               toggleEraser={toggleEraser}
@@ -137,7 +136,7 @@ export default function MobileApp() {
         introAnimStart={introAnimStart}  
       />   */}   
 
-      <IntroModal
+      <IntroModalMobile
         setIntroModal={setIntroModal}
         currentModalPage={currentModalPage}
         setCurrentModalPage={setCurrentModalPage}

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import 'glslCanvas/lib/GlslCanvas'
+import React, { useEffect, useRef, useState } from 'react'
+import 'glslCanvas/lib/GlslCanvas';
 import GlslCanvas from 'glslCanvas/lib/GlslCanvas';
 
 export default function BGVis(props) {
@@ -406,7 +406,7 @@ export default function BGVis(props) {
 
   return (
     <canvas id="bgShader" /* className="glslCanvas" */ data-fragment={fragShaders[props.shaderID]} 
-        width={props.width} height={props.height}>
+        /* width={props.width} height={props.height} */>
     </canvas>
   )  
 }
