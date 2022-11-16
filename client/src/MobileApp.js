@@ -35,7 +35,7 @@ export default function MobileApp() {
   const [inputIsDraw, setInputIsDraw] = useState(true);
   // drawing canvas state
   // drawing settings
-  const [brushColour, setBrushColour] = useState("#2436ff");
+  const [brushColour, setBrushColour] = useState("#5252ff");
   const [brushSize, setBrushSize] = useState(8);
   const [isDrawing, setIsDrawing] = useState(false);
   var isDrawingRef = useRef(isDrawing);
@@ -95,7 +95,7 @@ export default function MobileApp() {
         <p>{currentPrompt}</p>
       </div>
 
-      <div style={{paddingBottom: '1px', backgroundColor: 'var(--comp-col-02)'}}>        
+      <div style={{borderBottom: '1px solid var(--comp-col-02)', backgroundColor: 'var(--comp-col-01)', borderTopLeftRadius: '6px'}}>        
         <button id="draw-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setDrawInput(true)}>DRAW</button>
         <button id="text-input-select" className="InputSelectButton" onClick={() => setDrawInput(false)}>WRITE</button>
       </div>
@@ -132,10 +132,10 @@ export default function MobileApp() {
         
       </button>
       
-      <IntroAnim
+      {/* <IntroAnim
         animOn={animOn}
         introAnimStart={introAnimStart}  
-      />     
+      />   */}   
 
       <IntroModal
         setIntroModal={setIntroModal}

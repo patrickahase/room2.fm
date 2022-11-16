@@ -10,7 +10,7 @@ export default function IntroModal(props) {
       top: '0vw',
       width: '100%',
       height: '100%',
-      padding: '1.5rem',
+      padding: '1rem',
       backgroundColor: 'var(--comp-col-01)',
       color: 'var(--comp-col-02)',
       overflow: 'auto'
@@ -22,13 +22,12 @@ export default function IntroModal(props) {
       flexDirection: 'column',
       justifyContent: 'space-between',
       alignItems: 'stretch',
-      borderTop: 'solid 1px var(--comp-col-02)'
+      borderRadius: '6px 0px',
+      borderTop: 'solid 2px var(--comp-col-02)'
     },
     AOCTitle: {
       fontSize: '2.5rem',
-      flexGrow: 1,
-      fontFamily: 'Marr Sans Semibold',
-      fontWeight: 'normal'
+      flexGrow: 1
     },
     AOCText: {
       fontSize: '1rem',
@@ -38,14 +37,14 @@ export default function IntroModal(props) {
       backgroundColor: 'var(--comp-col-03)',
       color: 'var(--comp-col-01)',
       border: 'none',
-      padding: '0',
-      height: '33px',
+      borderRadius: '6px 0px',
+      padding: '0.4rem',
+      height: '40px',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       fontSize: '20px',
-      fontFamily: 'Marr Sans Semibold',
-      fontWeight: 'normal'
+      fontFamily: 'Work Sans Bold',
     }
   }
 

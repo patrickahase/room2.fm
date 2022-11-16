@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
-import TodayLogo from '../assets/TODAY_LOGOTYPE_MONO_WHITE.svg';
-import room2Logo from '../assets/room2-logo.svg';
+/* import TodayLogo from '../assets/TODAY_LOGOTYPE_MONO_WHITE.svg';
+import room2Logo from '../assets/room2-logo.svg'; */
 
 export default function IntroAnim(props) {
 
@@ -60,9 +60,9 @@ export default function IntroAnim(props) {
   return (
     <div id="anim-wrapper" style={introStyle.animWrapper}>
       <hr style={introStyle.hr} />
-      <img style={introStyle.logo} src={TodayLogo} />
-      <div style={introStyle.X}><XIcon strokeColour={"white"} /></div>      
-      <img style={introStyle.logo} src={room2Logo} />
+      {/* <img style={introStyle.logo} src={TodayLogo} /> */}
+      {/* <div style={introStyle.X}><XIcon strokeColour={"white"} /></div> */}      
+      {/* <img style={introStyle.logo} src={room2Logo} /> */}
       <hr style={introStyle.hr} />
     </div>
   )

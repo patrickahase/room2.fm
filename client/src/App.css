@@ -1,32 +1,20 @@
 * {
   box-sizing: border-box;
   margin: 0;
+  font-family: 'Work Sans';
 }
 
-@font-face {
-  font-family:'Marr Sans Medium';
-  src: url('./assets/MarrSansCondensed-Medium-Web.woff2') format("woff2");
+@font-face{
+  font-family: 'Work Sans';
+  src: url('./assets/WorkSans-Regular.ttf') format("truetype");
 }
 
-@font-face {
-  font-family:'Marr Sans Semibold';
-  src: url('./assets/MarrSansCondensed-Semibold-Web.woff2') format("woff2");
+@font-face{
+  font-family: 'Work Sans Bold';
+  src: url('./assets/WorkSans-Bold.ttf') format("truetype");
 }
 
-@font-face {
-  font-family:'GT America';
-  src: url('./assets/GT-America-Standard-Regular.woff2') format("woff2");
-}
-
-body, textarea{
-  font-family: 'GT America';
-}
-h2 {
-  font-family: 'Marr Sans Semibold';
-  font-weight: normal;
-}
 button {
-  font-family: 'Marr Sans Medium';
   appearance: none;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -37,9 +25,9 @@ button {
 }
 
 :root{
-  --comp-col-01:#000000;
-  --comp-col-02:#f8f7f5;
-  --comp-col-03:#d6f246;
-  --comp-col-04:#294cff;
-  --comp-col-05:#ff4f00;
+  --comp-col-01:#121313;
+  --comp-col-02:#ffffff;
+  --comp-col-03:#b5e877;
+  --comp-col-04:#5252ff;
+  --comp-col-05:#222323;
 }

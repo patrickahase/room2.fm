@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './DesktopApp.css';
+import './ProjectorApp.css';
 import BGVis from './components/bgVis';
 import Marquee from './components/marquee';
 import ResponseDisplay from './components/responseDisplay';
 import io from 'socket.io-client';
 
-import TodayLogo from './assets/TODAY_LOGOTYPE_MONO_WHITE.svg';
-import room2Logo from './assets/room2-logo.svg';
+/* import TodayLogo from './assets/TODAY_LOGOTYPE_MONO_WHITE.svg';
+import room2Logo from './assets/room2-logo.svg'; */
 import { useParams } from 'react-router-dom';
 
 const socket = io();
 
-export default function DesktopApp() {
+export default function ProjectorApp() {
 
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
   //how often to call the live update loop
@@ -69,9 +69,9 @@ export default function DesktopApp() {
     <div id="desktop-wrapper" className="App">
       <div id="banner-wrapper">
         <div id="banner-logo-wrapper">
-          <img className="BannerLogo" src={TodayLogo} />
+          {/* <img className="BannerLogo" src={TodayLogo} /> */}
           <div id="banner-x"><XIcon strokeColour={"white"} /></div>      
-          <img className="BannerLogo" src={room2Logo} />
+          {/* <img className="BannerLogo" src={room2Logo} /> */}
         </div>
         <Marquee
           text={"Today x room2 is live @ Purpose Conference 2022 "} />

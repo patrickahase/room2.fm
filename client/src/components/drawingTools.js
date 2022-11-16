@@ -43,6 +43,7 @@ export default function DrawingTools(props){
       flexDirection: 'column',
       justifyContent: 'space-between',
       border: 'solid 2px var(--comp-col-01)',
+      borderRadius: '6px 0px',
       backgroundColor: 'var(--comp-col-02)',
       width: '21%',
       padding: 0
@@ -50,7 +51,6 @@ export default function DrawingTools(props){
     buttonLabel: {
       fontSize: '12px',
       pointerEvents: 'none',
-      fontFamily: 'GT America', 
       color: 'var(--comp-col-01)',
       width: '100%',
       textAlign: 'center'
@@ -63,6 +63,7 @@ export default function DrawingTools(props){
     },
     colourButton: {
       width: '30.5%',
+      borderRadius: '6px 0px',
       position: 'relative'
     },
     colourLabel: {
@@ -73,12 +74,12 @@ export default function DrawingTools(props){
       width: '100%',
       color: 'var(--comp-col-02)',
       pointerEvents: 'none',
-      fontFamily: 'GT America'
     },
     colourSelector: {
       width: '100%',
       height: '100%',
       border: 'none',
+      borderRadius: '6px 0px',
       padding: 0,
       zIndex: '0'
     },
@@ -171,26 +172,16 @@ function EraserIcon(props){
     <svg
       width="100%"
       height="100%"
-      preserveAspectRatio="xMidYMid meet"
-      x="0"
-      y="0"
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
+      className="AudioPlayerIcon"
       fill='none'
       stroke={props.strokeColour}
       strokeWidth='3'
       >
-        <path fill="none" strokeWidth="4"
-              d=" M 20,100
-                  L 20,40
-                  L 80,40
-                  L 80,100
-                  M 24,40
-                  L 24,28
-                  L 62,20
-                  L 76,20
-                  L 76,40
-                  " />
+        <rect x="10" y="60" width="40" height="20" />
+        <polygon points="10,60 50,60 85,20 45,20" fill="yellow" strokeLinejoin="bevel" />
+        <polygon points="50,80 50,60 85,20 85,40" fill="yellow" strokeLinejoin="bevel" />
       
     </svg>
   )

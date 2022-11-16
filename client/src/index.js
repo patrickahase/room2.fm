@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import DoorApp from './DoorApp';
-import DesktopApp from './DesktopApp';
+import ProjectorApp from './ProjectorApp';
 import MobileApp from './MobileApp';
 import ErrorPage from "./components/errorPage";
 
@@ -12,22 +12,22 @@ import './App.css';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MobileApp />,
+    element: <DoorApp />,
     errorElement: <ErrorPage />,
   },
-  {
+  /* {
     path: "/desktop",
     element: <DesktopApp />,
     errorElement: <ErrorPage />,
-  },
+  }, */
   {
-    path: "/desktop/:shaderID",
-    element: <DesktopApp />,
+    path: "/Projector",
+    element: <ProjectorApp />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/mobile",
-    element: <DoorApp />,
+    element: <MobileApp />,
     errorElement: <ErrorPage />,
   },
 ]);
