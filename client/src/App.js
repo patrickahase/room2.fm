@@ -20,7 +20,7 @@ export default function App() {
   // check update interval
   let checkEndInterval;
   // current cycle - gets updated on page load
-  const [currentCycle, setCurrentCycle] = useState(0);
+  const [currentCycle, setCurrentCycle] = useState(2);
   // tide data - gets updated on page load
   const [tideData, setTideData] = useState({
     tideUp: -1.0,
@@ -267,7 +267,8 @@ export default function App() {
     for(let i = 0; i < cycleDates.length; i++){
       // check current time vs the end of the cycle, if before the end time then set the cycle int and break the for loop
       if(currentDate < cycleDates[i].endTime){
-        setCurrentCycle(i); 
+        /* !!!!!!!!!!!!!!!!!!!!!!!!!!! */
+        //setCurrentCycle(i); 
         var timeRemaining = cycleDates[i].endTime - currentDate;
         if (timeRemaining <= halfHour) {
           checkEndInterval = setInterval(checkEnd(cycleDates[i].endTime), 60000);
