@@ -1,10 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { fabric } from 'fabric';
-
 import './App.css';
-
 import DesktopApp from './components/desktopApp';
-import { cyclePresets, cycleDates } from './content/cyclePresets';
+import { cyclePresets } from './content/cyclePresets';
 
 export default function App() {
   // is accessed on mobile
@@ -20,7 +18,7 @@ export default function App() {
   // check update interval
   let checkEndInterval;
   // current cycle - gets updated on page load
-  const [currentCycle, setCurrentCycle] = useState(2);
+  const [currentCycle, setCurrentCycle] = useState(0);
   // tide data - gets updated on page load
   const [tideData, setTideData] = useState({
     tideUp: -1.0,
@@ -66,7 +64,7 @@ export default function App() {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    updateCyclePosition();
+    //updateCyclePosition();
   }, []);
 
   
@@ -257,51 +255,6 @@ export default function App() {
     }
   }
   
-  // if it overshoots it won't return anything
-  //checking if it's within half an hour of sunset - write a function in here
-  function updateCyclePosition(){
-    // first grab current UTC
-    let currentDate = Date.now();
-    var halfHour = 30 * 60 * 1000; 
-    // then compare to list of changeover times
-    for(let i = 0; i < cycleDates.length; i++){
-      // check current time vs the end of the cycle, if before the end time then set the cycle int and break the for loop
-      if(currentDate < cycleDates[i].endTime){
-        /* !!!!!!!!!!!!!!!!!!!!!!!!!!! */
-        //setCurrentCycle(i); 
-        var timeRemaining = cycleDates[i].endTime - currentDate;
-        if (timeRemaining <= halfHour) {
-          checkEndInterval = setInterval(checkEnd(cycleDates[i].endTime), 60000);
-        } 
-        for(let k = 0; k < cycleDates[i].tidalData.length; k++){
-          if(currentDate < cycleDates[i].tidalData[k].tideEnd){
-            setTideData({
-              tideUp: cycleDates[i].tidalData[k].tideUp,
-              tideHeight: cycleDates[i].tidalData[k].tideHieght
-            })
-            break; 
-          }
-        }
-        break; 
-      }
-    }
-  }
-
-  function checkEnd(end) {
-    var updatedTime = Date.now();
-    if (updatedTime >= end) {
-      clearInterval(checkEndInterval);
-      setTrackHasUpdated(true);
-      return (
-      <>
-      <span>
-        The selected track has been updated. Refresh the page to listen and respond to the new music and prompts.
-      </span>
-      </>
-      )
-    }
-
-  }
   function submitResponse(){
     // set up array to push other responses to
     let returnedResponses = [];

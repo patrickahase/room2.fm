@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import A11yDialog from 'a11y-dialog';
-import CountdownCalc, {sunsetText, currentMoonShape, moonShapeArray} from './timeCalc';
-import { cycleDates } from '../content/cyclePresets';
-import WhereAreYou from './whereModal';
 
 export default function IntroModal(props) {
   
@@ -11,13 +8,13 @@ export default function IntroModal(props) {
     const container = document.getElementById("AOC-modal");
     const dialog = new A11yDialog(container);
     dialog.show();
-    props.setIntroModal(dialog);
-    
-    window.addEventListener("keydown", secretKey);
+    props.setIntroModal(dialog);    
+    //window.addEventListener("keydown", secretKey);
   },[]);
 
   let modalPages = [
     //page 1 Logo - no continue button on this one if the site needs to get closed
+    <>
     <div id="logo-wrapper">
       <div id="text-logo">
         <pre id="pre-logo-wrapper">
@@ -32,7 +29,13 @@ export default function IntroModal(props) {
           <div id="logo-line-9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-9">\///</u>_____________<u className="text-gradient-9">\/////</u>________<u className="text-gradient-9">\/////</u>_____<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>__<u className="text-gradient-9">\///////////////</u>__<br/></div>
         </pre>            
       </div>
-    </div>,
+    </div>
+    <p>Documentation for Patrick McMahon's Research</p>
+    <nav>
+      <a>async</a>
+      <a>sync</a>
+    </nav>
+    </>,
   
     //page 2 AOC
     <div id="modal-page-wrapper">
@@ -45,7 +48,6 @@ export default function IntroModal(props) {
               all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
               connectivity are built upon.
             </p>
-            <WhereAreYou />
           </div>          
       </div>
       <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
@@ -104,18 +106,7 @@ export default function IntroModal(props) {
             <p style={{fontSize: '1.2rem'}}>
             The current cycle's track is:
             <br />
-            <span style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails}</span>
-            <br />  
-            <br />
-            {sunsetText}
-            {props.tideData.tideUp === 1
-            ? <> In nearby waterways, the tide is rising. </>
-            : <> In nearby waterways, the tide is falling. </>
-            }
-            {props.trackHasUpdated
-            ? <TrackUpdateMessage />
-            : <CountdownCalc currentCycle={props.currentCycle}/>            
-            }            
+            <span style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails}</span> 
             <br />
             <br />
             <span>
@@ -203,17 +194,6 @@ export default function IntroModal(props) {
             The current cycle's track is:
             <br />
             <p style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails} by <a href={props.cyclePreset.artistLink} target="_blank" rel="noreferrer">{props.cyclePreset.artistDetails}</a></p>        
-            <p>
-            {sunsetText}
-            {props.tideData.tideUp === 1
-            ? <>In nearby waterways, the tide is rising. </>
-            : <>In nearby waterways, the tide is falling. </>
-            }
-            {props.trackHasUpdated
-            ? <TrackUpdateMessage />
-            : <CountdownCalc currentCycle={props.currentCycle}/>            
-            }
-            </p>
             <br />       
             <br />
             <span className="ModalTextSmall">
@@ -247,14 +227,7 @@ export default function IntroModal(props) {
       <div data-a11y-dialog-hide className="ModalOverlay" ></div>
 
       <div role="document" className="ModalBox">
-        {props.currentModalPage < 2
-          ? <>{modalPages[props.currentModalPage]}</>
-          : <>
-            <NineCycleBar currentCycle={props.currentCycle} />
-            {modalPages[props.currentModalPage]}
-            <CurrentCycleBar currentCycle={props.currentCycle} />
-            </>
-          }
+        {modalPages[props.currentModalPage]}
       </div>
     </div>
   )
@@ -262,105 +235,9 @@ export default function IntroModal(props) {
   function nextModalPage(){
     props.setCurrentModalPage(props.currentModalPage + 1);
     document.getElementById("modal-text-wrapper").scrollTop = 0;
-    window.removeEventListener("keydown", secretKey);
+    //window.removeEventListener("keydown", secretKey);
   }
 
-  function secretKey(e){
-    if(props.currentModalPageRef.current === 1){
-      switch (e.key) {
-        case "!": 
-        props.setCurrentCycle(0);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "@": 
-        props.setCurrentCycle(1);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "#": 
-        props.setCurrentCycle(2);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "$": 
-        props.setCurrentCycle(3);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "%": 
-        props.setCurrentCycle(4);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "^": 
-        props.setCurrentCycle(5);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "&": 
-        props.setCurrentCycle(6);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "*": 
-        props.setCurrentCycle(7);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        case "(": 
-        props.setCurrentCycle(8);
-        props.setCurrentModalPage(props.currentModalPage + 1);
-          break;
-        default:
-          return; // Quit when this doesn't handle the key event.
-      }
-    }
-    
-  }
-}
-
-function NineCycleBar (props){
-
-  let moonSpheres = moonShapeArray.map((num, i) =>
-    {
-      if(i < props.currentCycle){
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.2}}>{moonShapeArray[i]}</div>
-      } else if (i === props.currentCycle) {
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 1}}>{moonShapeArray[i]}</div>
-      } else {
-        return <div className="MoonSphereWrapper" key={i} style={{opacity: 0.6}}>{moonShapeArray[i]}</div>
-      }
-    }
-  );
-  
-  return(
-    <div id="nine-cycle-wrapper">
-      {moonSpheres}
-    </div>
-  )
-}
-
-function CurrentCycleBar(props){
-  let currentDate = Date.now();
-  var cycleDuration = cycleDates[props.currentCycle].endTime - cycleDates[props.currentCycle].startTime;
-  var currentPos = currentDate - cycleDates[props.currentCycle].startTime;
-  var cents = 80 / cycleDuration;
-  var percentage = cents * currentPos;
-  var marginstyle = {marginTop: percentage + "vh"}
-  if (percentage >= 76) { //this is approx 3 hours at the end of the cycle
-    percentage = 76; //so that the moon doesn't overshoot the modal box
-    marginstyle = {marginTop: percentage + "vh", animationName: "pulse"} //pulse to indicate changeover is soon
-  }
-  
-  return(
-    <>
-    <div id="current-cycle-wrapper">
-      <div className="CurrentMoonWrapper" style={marginstyle}>{currentMoonShape}</div>
-      <div id="timeline-gradient"></div>
-    </div>
-    </>
-  )
-}
-
-function TrackUpdateMessage(){
-  return(
-    <span style={{marginBottom: "1rem"}}>
-      A new cycle has begun. Refresh the page to listen and respond to the new music and prompts.
-    </span>
-  )
 }
 
 

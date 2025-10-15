@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import IntroModal from './introModal';
 import GLVis from './glVis';
 import ResponseDisplay from './responseDisplay';
@@ -9,11 +9,12 @@ import ColourPicker from './colourPicker';
 import SettingsMenu from './settingsMenu';
 
 /* set timer refresh rate in ms */
+
 const timerRefreshRate = 15;
 
 export default function DesktopApp(props) {
 
-  const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [currentModalPage, setCurrentModalPage] = useState(0);
   var currentModalPageRef = useRef(currentModalPage);
   useEffect(() => {currentModalPageRef.current = currentModalPage}, [currentModalPage]);
 

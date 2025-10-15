@@ -59,6 +59,10 @@ button {
 /* Modal Style */
 .ModalWrapper{
   position: absolute;
+  z-index: 6;
+}
+.ModalBox{
+  position: fixed;
   top: 10vh;
   left: 10vw;
   right: 10vw;
@@ -66,14 +70,12 @@ button {
   background-color: var(--comp-col-01);
   border-radius: 4px;
   padding: 1vw 1.25vw;
-  z-index: 6;
-}
-.ModalBox{
-  width: 100%;
-  height: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
   align-items: center;
+  z-index: 7;
 }
 #modal-page-wrapper{
   width: 80%;
@@ -84,6 +86,13 @@ button {
   align-items: center;
   padding: 0 1.25vw;
   flex-grow: 1;
+}
+
+.ModalOverlay {
+  position: fixed; /* 1 */
+  inset: 0;
+  background-color: rgb(43 46 56 / 0.9); /* 1 */
+  z-index: 6;
 }
 
 .astrix {
@@ -102,6 +111,15 @@ a:hover {
 ::selection {
   color: var(--comp-col-03);
   background-color: var(--comp-col-04);
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+nav a {
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 /*Moon Styling*/
@@ -258,8 +276,6 @@ a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  width: 100%;
-  height: 100%;
 }
 #text-logo{
   color: var(--comp-col-02);
@@ -298,6 +314,8 @@ a:hover {
 @keyframes slideIn8 { 0% { transform: translateX(1%); } 100% { transform: translateX(0); } }
 #logo-line-9{ animation: 0.4s ease-out 1 slideIn9; }
 @keyframes slideIn9 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
+
+
 
 /* Background Visuals */
 #bg-vis-wrapper{

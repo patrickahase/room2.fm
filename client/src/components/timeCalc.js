@@ -1,4 +1,3 @@
-import React from 'react';
 import SunCalc from 'suncalc'; 
 import {cycleDates } from '../content/cyclePresets'
 
