@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,700;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital@0;1&display=swap');
+
 #desktop-wrapper{
   width: 100%;
   height: 100%;
@@ -168,6 +171,11 @@
 #desktop-wrapper #chat{
   height:100%;
   width:25%;
+  background: radial-gradient(rgb(207, 232, 222), rgb(68, 120, 99));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--comp-col-01);
 }
 
 
@@ -208,10 +216,11 @@
   background: linear-gradient(90deg, #b5e877, #5252ff);
   flex-grow: 1;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
+  overflow: hidden;
 }
 #desktop-wrapper #bg-shader-wrapper{
   grid-column: 1/2;
@@ -324,7 +333,7 @@
 /* Interface */
 #desktop-wrapper #interface-wrapper{
   position: relative;
-  z-index: 3;
+  z-index: 1;
   height: 25%;
   display: flex;
 }
@@ -336,7 +345,8 @@
   flex-direction: column;
 }
 #desktop-wrapper .DrawingUIButton{
-  font-family: 'Work Sans Bold';
+  font-family: 'Work Sans';
+  font-weight: 700;
   width: 100%;
   height: 20%;
   display: flex;
@@ -502,7 +512,8 @@
 
 /* Submit Response Button */
 #desktop-wrapper #response-submit-button{
-  font-family: 'Work Sans Bold';
+  font-family: 'Work Sans';
+  font-weight: 700;
   position: relative;
   grid-column: 1/5;
   grid-row: 5/6;

@@ -111,10 +111,10 @@ export default function SyncDesktopApp(props) {
               <div id="banner-logo-wrapper">
                 {/* <img className="BannerLogo" src={TodayLogo} /> */}
                 <div id="banner-x"></div>      
-                {/* <img className="BannerLogo" src={room2Logo} /> */}
+                <img className="BannerLogo" src={require("./assets/slowdiscpixel.gif")} />
               </div>
               <Marquee
-                text={"room2 sync test page "} />
+                text={"room2 sync documentation for PhD "} />
             </div>
 
             <div id="vis-wrapper">
@@ -206,6 +206,9 @@ export default function SyncDesktopApp(props) {
 
           </div>
           {/* dead simple text chat */}
+          <div id="chat">
+            <p>3rd party chat function removed</p>
+          </div>
           {/* <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>         */}
         </>}
     </div>

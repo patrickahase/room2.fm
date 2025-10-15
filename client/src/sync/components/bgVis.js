@@ -12,6 +12,14 @@ export default function BGVis(props) {
     }    
   }, [props.shaderID]);
   useEffect(() => {
+    console.log(props.height, document.getElementById("bgShader").height);
+    if(canvasRef.current){
+      document.getElementById("bgShader").width = props.width;
+      document.getElementById("bgShader").height = props.height;
+    }
+    
+  }, [props.height, props.width]);
+  useEffect(() => {
     canvasRef.current = new GlslCanvas(document.getElementById("bgShader"));
     canvasRef.current.load(fragShaders[props.shaderID]);
   }, []);
