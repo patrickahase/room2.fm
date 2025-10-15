@@ -1,0 +1,85 @@
+#desktop-wrapper{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #222323;
+}
+
+#banner-wrapper{
+  width: 100%;
+  height: 10%;
+  display: flex;
+}
+
+#banner-logo-wrapper{
+  height: 100%;
+  width: 10vh;
+  border: 2px white solid;
+  background-color: var(--comp-col-01);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.BannerLogo{
+  width: 100%;
+  padding: 0.1rem;
+}
+#banner-x{
+  width: 20%;
+  margin: 0.1rem 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+#bg-wrapper{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 100%;
+}
+
+#bgShader-wrapper{
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+#bgShader{
+  width: 100%;
+  height: 100%;
+}
+#bg-response-wrapper{
+  grid-column: 1/2;
+  grid-row: 1/2;
+}
+
+/* Current Prompt */
+#current-prompt-wrapper{
+  grid-column: 1/2;
+  grid-row: 1/2;
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#current-prompt{
+  background-color: var(--comp-col-01);
+  max-width: 100%;
+  font-size: 2.5rem;  
+  color: var(--comp-col-02);  
+  user-select: none;
+  text-align: center;
+  padding: 0 1vw;
+}
+.MarqueeText{
+  position: relative;
+  animation: scroll linear 60s infinite;
+}
+
+@keyframes scroll {
+  from{left: 0%;}
+  to{left: -50%;}
+}

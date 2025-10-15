@@ -1,38 +1,40 @@
-import { useEffect, useState, useRef, lazy, Suspense } from 'react';
-import './App.css';
-import AsyncDesktopApp from './components/asyncDesktopApp';
-import SyncDesktopApp from './sync/DesktopApp';
-import { cyclePresets } from './content/cyclePresets';
+import { useEffect, useState, useRef } from 'react';
+import { fabric } from 'fabric';
+//import io from 'socket.io-client';
+// import './DesktopApp.css';
 
-export default function App() {
-  // is accessed on mobile
-  const onMobile = window.matchMedia('all and (any-hover: none)').matches;
-  // is set to async
-  const [async, setAsync] = useState(false);
-  // current window size
+import IntroModalDesktop from './components/introModalDesktop';
+import Marquee from './components/marquee';
+import BGVis from './components/bgVis';
+import SettingsMenu from './components/settingsMenu';
+import ResponseDisplay from './components/responseDisplay';
+import DrawingToolsDesktop from './components/drawingToolsDesktop';
+import DrawingCanvas from './components/drawingCanvasMobile';
+import AudioControls from './components/audioControls';
+import ColourPicker from './components/colourPicker';
+
+//const socket = io();
+
+export default function SyncDesktopApp(props) {
+
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
+
+  // is the intro modal open
+  //const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(true);
+  var modalIsOpenRef = useRef(modalIsOpen);
+  useEffect(() => {modalIsOpenRef.current = modalIsOpen}, [modalIsOpen]);
   // intro modal instance
   const [introModal, setIntroModal] = useState(null);
-  // is the intro modal open
-  const [modalIsOpen, setModalIsOpen] = useState(true);
-  // has the track updated
-  const [trackHasUpdated, setTrackHasUpdated] = useState(false);
-  // check update interval
-  let checkEndInterval;
-  // current cycle - gets updated on page load
-  const [currentCycle, setCurrentCycle] = useState(0);
-  // tide data - gets updated on page load
-  const [tideData, setTideData] = useState({
-    tideUp: -1.0,
-    tideHeight: 0.8
-  });
-  /* const cyclePos = asyncCycleCalc(); */
-  /* if false it's assumed to be text instead */
-  const[inputIsDraw, setInputIsDraw] = useState(false);
-  // other responses from database
-  const [responseData, setResponseData] = useState([]);
+  const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [showOverlay, setShowOverlay] = useState(true);
+
   // current drawing colours
-  const [currentColours, setCurrentColours] = useState(cyclePresets[currentCycle].colours);
+  const [currentColours, setCurrentColours] = useState([
+    "#222323",
+    "#5252ff",
+    "#b5e877"
+  ]);
   const[selectedColour, setSelectedColour] = useState(0);
   var selectedColourRef = useRef(selectedColour);
   useEffect(() => {selectedColourRef.current = selectedColour}, [selectedColour]);
@@ -60,25 +62,26 @@ export default function App() {
   // is focus mode active
   const [focusMode, setFocusMode] = useState(false);
 
-  // my init function to run on app load
+  // if false it's assumed to be text instead
+  const[inputIsDraw, setInputIsDraw] = useState(false);
+  const [responseData, setResponseData] = useState([
+    /* ["https://thelongesthumstore.sgp1.digitaloceanspaces.com/room2-purpose-live/1666089854386.png", "image"],
+    ["ry", "text"], */
+  ]);
+  var responseDataRef = useRef(responseData);
+  useEffect(() => {responseDataRef.current = responseData}, [responseData]);
+  // current prompt
+  const [currentPrompt, setCurrentPrompt] = useState('What do you hope for?');
+
+  //init 
   useEffect(() => {
-    // set up to update window dimensions on resize event
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    //updateCyclePosition();
-    // import correct css
-    if(async){
-      import("./App.css");
-    } else if(!async){
-      import("./sync/DesktopApp.css");
-    }
+    document.addEventListener('mouseup', saveCanvasState);
+    document.addEventListener('touchend', saveCanvasState);
+    document.addEventListener('touchcancel', saveCanvasState);
   }, []);
-
-  
-  useEffect(() => {
-    setCurrentColours(cyclePresets[currentCycle].colours);
-  }, [currentCycle]);
 
   // update brush colour and cursor on colour change
   useEffect(() => {
@@ -88,105 +91,173 @@ export default function App() {
   }, [selectedColour]);
 
   useEffect(() => {
-    if(drawingCanvasRef.current && !isEraser){
-      updateCanvasBrush();
-    }    
-  }, [currentColours]);
-
-  useEffect(() => {
     if(drawingCanvasRef.current){
       updateCanvasBrush();      
     }    
   }, [brushSize]);
 
   return (
-    <div id="global-wrapper">
-      {onMobile
-      ?
-        <div id="mobile-wrapper">
-          <span id="mobile-text">
-            Unfortunately room2.fm async is currently not able to operate on mobile devices due to technical restrictions. 
-            Please try again on a desktop or laptop computer if you are able to.
-            <br />
-            <br />
-            room2 live will run on the 25th of September at Arts House and at this url. For more information and tickets please <a href="https://bleedonline.net/program/room2/#live" target="_blank" rel="noreferrer">click here</a>.
-          </span>
-        </div>
-      :
-        <>
-        {async
-          ?
-          <AsyncDesktopApp      
-            width={windowSize[0]}
-            height={windowSize[1]}
-            modalIsOpen={modalIsOpen}
-            trackHasUpdated={trackHasUpdated}
-            toggleModal={toggleModal}
+    <div id="desktop-wrapper">
+      {modalIsOpen
+        ? <IntroModalDesktop 
             setIntroModal={setIntroModal}
-            setIsDrawing={setIsDrawing}
-            cyclePreset={cyclePresets[currentCycle]}
-            currentCycle={currentCycle}
-            setCurrentCycle={setCurrentCycle}
-            tideData={tideData}
-            setInput={setInput}
-            colours={currentColours}
-            selectedColour={selectedColour}
-            setSelectedColour={setSelectedColour}
-            setCurrentColours={setCurrentColours}
-            updateCanvasBrush={updateCanvasBrush}
-            brushSize={brushSize}
-            setBrushSize={setBrushSize}
-            toggleEraser={toggleEraser}
-            setDrawingCanvas={setDrawingCanvas}
-            setCurrentCanvasState={setCurrentCanvasState}
-            undoDrawing={undoDrawing}
-            redoDrawing={redoDrawing}
-            submitResponse={submitResponse}
-            responseData={responseData}
-            toggleFocus={toggleFocus}
-            />
-          :
-          <>
-          <SyncDesktopApp />
-          </>
-        }
-        </>
-        
-      }
+            currentModalPage={currentModalPage}
+            setCurrentModalPage={setCurrentModalPage}
+            toggleModal={toggleModal} />
+        : <>
+          <div id="room2-wrapper">
+
+            <div id="banner-wrapper">
+              <div id="banner-logo-wrapper">
+                {/* <img className="BannerLogo" src={TodayLogo} /> */}
+                <div id="banner-x"></div>      
+                {/* <img className="BannerLogo" src={room2Logo} /> */}
+              </div>
+              <Marquee
+                text={"Today x room2 is live @ Purpose Conference 2022 "} />
+            </div>
+
+            <div id="vis-wrapper">
+
+              <div id="bg-shader-wrapper">
+                <BGVis
+                  /* shaderID={shaderID} */
+                  shaderID={0}
+                  width={windowSize[0]*0.75}
+                  height={windowSize[1]*0.68}
+                />
+              </div> 
+
+              <div id="bg-response-wrapper">
+                <ResponseDisplay
+                  height={windowSize[1]*0.68}
+                  responseData={responseData}
+                  currentPrompt={currentPrompt} />
+
+                {/* Menu and Prompt Overlay */}
+                <div id="menu-prompt-wrapper">
+                  {/* Settings Menu Overlay */}
+                  <SettingsMenu
+                    toggleFocus={toggleFocus} 
+                    toggleModal={toggleModal} />
+                  {/* Prompt and Input Selection */}
+                  <div id="current-prompt-wrapper" className="Collider PromptCycle">
+                    <div id="prompt-end-timer-wrapper">
+                      <div id="prompt-end-timer" />
+                      <div id="prompt-end-timer-overlay" />
+                    </div>           
+                    <div id="current-prompt">
+                      {currentPrompt}                    
+                    </div>           
+                    <div id="input-select-wrapper">
+                      <span id="input-select">I would like to&nbsp;
+                      <button id="draw-input-select" className="InputSelectButton" onClick={() => setInput(true)}>draw</button>&nbsp;/&nbsp;
+                      <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setInput(false)}>write</button>
+                      &nbsp;a response</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div id="interface-wrapper">
+
+              {/* Left Side Drawing Tools */}
+              <DrawingToolsDesktop
+                  undoDrawing={undoDrawing}
+                  redoDrawing={redoDrawing}
+                  toggleEraser={toggleEraser}
+                  colours={currentColours}
+                  brushSize={brushSize}
+                  setBrushSize={setBrushSize} />
+              
+              {/* Input Section */}
+              <div id="input-wrapper">
+                {/* Writing Section */}            
+                <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
+                {/* Drawing Section */} 
+                <DrawingCanvas 
+                  brushColour={currentColours[selectedColour]}
+                  brushSize={brushSize}
+                  setDrawingCanvas={setDrawingCanvas}
+                  setCurrentCanvasState={setCurrentCanvasState}
+                  setIsDrawing={setIsDrawing} />
+              </div>
+
+              {/* Right UI Panel */}
+              <div id="right-ui-wrapper">
+                {/* Colour Picker */}
+                <div id="col-pick-wrapper">                
+                  <ColourPicker 
+                    colours={currentColours}
+                    updateCanvasBrush={updateCanvasBrush}
+                    setSelectedColour={setSelectedColour}
+                    setCurrentColours={setCurrentColours} />              
+                </div>
+                {/* Submit Response Button */}             
+                <button id="response-submit-button" /* onClick={props.submitResponse} */>
+                  SUBMIT RESPONSE                
+                </button>
+                {/* Audio Settings */}
+                <AudioControls />            
+              </div>
+            </div>
+
+          </div>
+          {/* dead simple text chat */}
+          <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>        
+        </>}
     </div>
   )
-  
+
   // gets triggered when either the intro or info modal are brought up
   function toggleModal(){
     // add and remove event listener that triggers after drawing to save canvas to undo stack
     if(modalIsOpen){
       document.addEventListener('mouseup', saveCanvasState);
-      //console.log(introModal)
       introModal.hide();
-      document.getElementById("AOC-modal").style.display = "none";
+      getCSSRule("#desktop-wrapper .ModalWrapper").style.display = "none";
     } else {
       document.removeEventListener('mouseup', saveCanvasState);
       introModal.show();
-      document.getElementById("AOC-modal").style.display = "unset";
+      getCSSRule("#desktop-wrapper .ModalWrapper").style.display = "unset";
     }
     // toggle state
     setModalIsOpen(!modalIsOpen);
   }
+
+  function toggleFocus(){
+    let textResponseRule = getCSSRule('#desktop-wrapper .TextResponseBox');
+    let imageResponseRule = getCSSRule('#desktop-wrapper .ImageResponseBox');
+    if(!focusMode){
+      setFocusMode(true);
+      textResponseRule.style.backgroundColor = "rgb(31, 33, 28)";
+      textResponseRule.style.border = "solid white 1px";
+      imageResponseRule.style.backgroundColor = "white";
+      imageResponseRule.style.border = "solid rgb(31, 33, 28) 1px";
+    } else {
+      setFocusMode(false);
+      textResponseRule.style.backgroundColor = "";
+      textResponseRule.style.border = "";
+      imageResponseRule.style.backgroundColor = "";
+      imageResponseRule.style.border = "";
+    }
+  }
+
   // to change between draw and write - true = draw - false = text
   function setInput(changeToDraw){
     if(changeToDraw){
       setInputIsDraw(true);
-      document.getElementById("drawing-canvas-wrapper").style.zIndex = "6";
+      document.getElementById("input-wrapper").style.top= "-100%";
+      getCSSRule('#desktop-wrapper #input-wrapper::after').style.top = "calc(50% + 4px)";
       document.getElementById("draw-input-select").classList.add("ActiveInputButton");
-      document.getElementById("drawing-tools-wrapper").style.right = "-25vh";
-      document.getElementById("drawing-buttons-wrapper").style.left = "-15vh";
       document.getElementById("text-input-select").classList.remove("ActiveInputButton");
     } else {
       setInputIsDraw(false);
-      document.getElementById("drawing-canvas-wrapper").style.zIndex = "4";
+      document.getElementById("input-wrapper").style.top= "0%";
+      getCSSRule('#desktop-wrapper #input-wrapper::after').style.top = "4px";
       document.getElementById("draw-input-select").classList.remove("ActiveInputButton");
-      document.getElementById("drawing-tools-wrapper").style.right = "";
-      document.getElementById("drawing-buttons-wrapper").style.left = "";
       document.getElementById("text-input-select").classList.add("ActiveInputButton");
     }
   }
@@ -211,8 +282,9 @@ export default function App() {
       document.getElementById("erase-brush-button").classList.remove("Active");
     } else {
       setSavedBrush(drawingCanvasRef.current.freeDrawingBrush);
+      //drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
       drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
-      drawingCanvasRef.current.freeDrawingBrush.color = "#ffffff";
+      drawingCanvasRef.current.freeDrawingBrush.color = "#ffffff"
       drawingCanvasRef.current.freeDrawingCursor = getCustomEraserCursor();
       document.getElementById("erase-brush-button").classList.add("Active");
     }
@@ -223,13 +295,15 @@ export default function App() {
   function saveCanvasState(){
     // only run if mouse up is occuring after a drawing action
     if(isDrawingRef.current){
+      console.log(drawingCanvasRef.current);
       // get version of undo stack to change
       let newUndoStack = undoStackRef.current;
       // drop oldest undo if over max undo count
       if(newUndoStack.length === maxUndo){ newUndoStack.shift(); }
       // add last current state stored before updating it to store the new state
       newUndoStack.push(currentCanvasStateRef.current);
-      setCurrentCanvasState(drawingCanvasRef.current.toDatalessJSON());
+      let reloadState = drawingCanvasRef.current.toDatalessJSON();
+      setCurrentCanvasState(reloadState);
       // update undo stack into state, remove redo stack and then toggle isDrawing off
       setUndoStack(newUndoStack);
       setRedoStack([]);
@@ -270,90 +344,6 @@ export default function App() {
       setRedoStack(newRedoStack);
       // update actual canvas
       drawingCanvas.loadFromJSON(newCanvasState);      
-    }
-  }
-  
-  //// here is the typical way responses are sent to the server : now simulated
-  function submitResponse(){
-    // set up array to push other responses to
-    let returnedResponses = [];
-    // check if a text or an image response
-    if(inputIsDraw){
-      //image input
-      let imageInput = document.getElementById('drawing-canvas');
-      var dataURL = imageInput.toDataURL({
-        format: 'png',
-        left: 0,
-        top: 0,
-        width: imageInput.width,
-        height: imageInput.height
-      });
-      const formData = new FormData();
-      let imageFile = dataURLtoFile(dataURL, 'response.png');
-      drawingCanvas.clear();
-      // we add one to cycle pos to keep start from 1
-      formData.append('upload', imageFile, 'cycle_'+ (currentCycle) +'_response.png');
-      fetch(`https://room2.fm/api/insertImageReflectionGetResponses`, {
-        method: 'PUT',
-        body: formData
-      })
-      .then(res => res.json())
-      .then(res => {
-        try{
-          for(const response of res.data[1]) {
-            returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);
-          }
-          setResponseData(returnedResponses);
-        } catch(e) {
-          // if response not the data
-          console.log(e);
-        }
-        });
-    } else {
-      // text input
-      let textInput = document.getElementById('text-input');
-      let responseText = textInput.value;
-      if(responseText.length > 0){
-        textInput.value = '';
-        fetch(`https://room2.fm/api/insertTextReflectionGetResponses`, {
-          headers: { 'Content-type': 'application/json' },
-          method: 'POST',
-          mode: 'cors',
-          body: JSON.stringify({reflection: responseText, cycleTable: currentCycle})
-        })
-      .then(res => res.json())
-      .then(res => {
-        try{
-          for(const response of res.data[1]) {
-            returnedResponses.push([response.RESPONSE, response.RESPONSE_TYPE]);         
-          }
-          setResponseData(returnedResponses);
-        } catch(e) {
-          // if response not the data
-          console.log(e);
-        }
-        });      
-      }
-    }
-  }
-
-  function toggleFocus(){
-    let textResponseRule = getCSSRule('.TextResponseBox');
-    let imageResponseRule = getCSSRule('.ImageResponseBox');
-    if(!focusMode){
-      setFocusMode(true);
-      textResponseRule.style.backgroundColor = "rgb(31, 33, 28)";
-      textResponseRule.style.border = "solid white 1px";
-      imageResponseRule.style.backgroundColor = "white";
-      imageResponseRule.style.border = "solid rgb(31, 33, 28) 1px";
-      document.getElementById("settings-focus-button").classList.add("Active");
-    } else {
-      setFocusMode(false);
-      textResponseRule.style.backgroundColor = "";
-      textResponseRule.style.border = "";
-      imageResponseRule.style.backgroundColor = "";
-      imageResponseRule.style.border = "";
-      document.getElementById("settings-focus-button").classList.remove("Active");
     }
   }
 
@@ -418,3 +408,15 @@ export default function App() {
     return `url(data:image/svg+xml;base64,${window.btoa(circle)}) ${brushSize / 2} ${brushSize / 2}, move`;
   }
 }
+
+function PromptSpan(props){
+
+  useEffect(() => {
+    document.getElementById("prompt-span").innerHTML = props.prompt;
+  }, []);
+
+  return(
+    <pre id="prompt-span"></pre>
+  )
+}
+

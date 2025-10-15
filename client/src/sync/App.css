@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: 'Work Sans';
+}
+
+@font-face{
+  font-family: 'Work Sans';
+  src: url('./assets/WorkSans-Regular.ttf') format("truetype");
+}
+
+@font-face{
+  font-family: 'Work Sans Bold';
+  src: url('./assets/WorkSans-Bold.ttf') format("truetype");
+}
+
+:root{
+  --comp-col-01:#121313;
+  --comp-col-02:#ffffff;
+  --comp-col-03:#b5e877;
+  --comp-col-04:#5252ff;
+  --comp-col-05:#222323;
+}

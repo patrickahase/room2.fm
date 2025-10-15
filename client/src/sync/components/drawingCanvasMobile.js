@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
 
-export default function DrawingCanvas(props){
-
+export default function DrawingCanvasMobile(props){
+  
   const [canvas, setCanvas] = useState(null);
   let canvasRef = useRef(null);
   useEffect(() => {canvasRef.current = canvas}, [canvas]);
@@ -13,15 +13,30 @@ export default function DrawingCanvas(props){
     newCanvas.setWidth(canvasWrapper.offsetWidth);
     newCanvas.setHeight(canvasWrapper.offsetHeight);
     newCanvas.freeDrawingBrush.color = props.brushColour;    
-    //newCanvas.freeDrawingBrush = new fabric.EraserBrush(newCanvas);
     newCanvas.freeDrawingBrush.width = props.brushSize;
     newCanvas.freeDrawingCursor = getCustomCursor();
     newCanvas.on('mouse:down', () => props.setIsDrawing(true));
+    newCanvas.on('path:created', () => newCanvas.loadFromJSON(newCanvas.toDatalessJSON()));
     setCanvas(newCanvas);
     window.addEventListener('resize', updateCanvasDimensions);
     props.setDrawingCanvas(newCanvas);
     props.setCurrentCanvasState(newCanvas.toDatalessJSON());
   }, [setCanvas]);
+
+  useEffect(() => {
+    if(canvasRef.current){
+      canvasRef.current.freeDrawingBrush.color = props.brushColour;
+      canvasRef.current.freeDrawingCursor = getCustomCursor();
+    }  
+  }, [props.brushColour]);
+
+  useEffect(() => {
+    if(canvasRef.current){
+      canvasRef.current.freeDrawingBrush.width = props.brushSize;
+      console.log(canvasRef.current.freeDrawingBrush.width)
+      canvasRef.current.freeDrawingCursor = getCustomCursor();
+    }  
+  }, [props.brushSize]);
 
   return (
     <div id="drawing-canvas-wrapper">
@@ -30,11 +45,9 @@ export default function DrawingCanvas(props){
   )
 
   function updateCanvasDimensions() {
-    if(document.getElementById("drawing-canvas-wrapper")){
-      let canvasWrapper = document.getElementById("drawing-canvas-wrapper");
-      canvasRef.current.setWidth(canvasWrapper.offsetWidth);
-      canvasRef.current.setHeight(canvasWrapper.offsetHeight); 
-    }   
+    let canvasWrapper = document.getElementById("drawing-canvas-wrapper");
+    canvasRef.current.setWidth(canvasWrapper.offsetWidth);
+    canvasRef.current.setHeight(canvasWrapper.offsetHeight);    
   }
 
   function getCustomCursor() {

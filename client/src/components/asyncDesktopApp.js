@@ -12,7 +12,7 @@ import SettingsMenu from './settingsMenu';
 
 const timerRefreshRate = 15;
 
-export default function DesktopApp(props) {
+export default function AsyncDesktopApp(props) {
 
   const [currentModalPage, setCurrentModalPage] = useState(0);
   var currentModalPageRef = useRef(currentModalPage);
@@ -29,7 +29,7 @@ export default function DesktopApp(props) {
   const[graphicsSettings, setGraphicsSettings] = useState(1);
 
   return (
-    <div id="desktop-wrapper">
+    <div id="async-desktop-wrapper">
       {/* Intro Modal */}
       <IntroModal
         currentModalPage={currentModalPage}

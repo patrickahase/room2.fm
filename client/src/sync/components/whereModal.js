@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const IP_API = 'https://ipinfo.io/json?token=9f90c3a3f131ff' 
 const NATIVE_LAND_API = 'https://native-land.ca/api/index.php'
@@ -135,7 +135,7 @@ async function getPotentialLocations() {
   })
   }
 
-  function toTerritoryInfo(features) {
+  /* function toTerritoryInfo(features) {
     return features
       .map((feature) => {
         const name = feature.properties.Name
@@ -147,7 +147,7 @@ async function getPotentialLocations() {
             }
           : undefined
       })
-  }
+  } */
   
   
   function extractLocationString(data) {
