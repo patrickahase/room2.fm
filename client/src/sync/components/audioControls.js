@@ -39,11 +39,11 @@ export default function AudioControls(props){
         setAudioCtx(audioContext);
         const gainNode = audioContext.createGain();
         setAudioGain(gainNode);
-        const source = audioContext.createMediaElementSource(audioStream);
-        source.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        audioStream.load();
-        audioStream.play();
+        //const source = audioContext.createMediaElementSource(audioStream);
+        // source.connect(gainNode);
+        // gainNode.connect(audioContext.destination);
+        //audioStream.load();
+        //audioStream.play();
     } else {
         // Web Audio API is not supported
         alert("Sorry, but the Web Audio API is not supported by your browser. Please, consider upgrading to the latest version or downloading Google Chrome or Mozilla Firefox");
@@ -63,7 +63,7 @@ export default function AudioControls(props){
       </div>
       <audio 
         id="audio-stream"
-        src="https://roomtwointerface.online/stream"
+        // src="https://roomtwointerface.online/stream"
         type="audio/mpg"
         crossOrigin="anonymous" />
     </> 

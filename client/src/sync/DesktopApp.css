@@ -208,7 +208,7 @@
   background: linear-gradient(90deg, #b5e877, #5252ff);
   flex-grow: 1;
   position: relative;
-  z-index: 2;
+  z-index: 1;
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 100%;
@@ -323,6 +323,8 @@
 
 /* Interface */
 #desktop-wrapper #interface-wrapper{
+  position: relative;
+  z-index: 3;
   height: 25%;
   display: flex;
 }

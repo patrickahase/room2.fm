@@ -114,7 +114,7 @@ export default function SyncDesktopApp(props) {
                 {/* <img className="BannerLogo" src={room2Logo} /> */}
               </div>
               <Marquee
-                text={"Today x room2 is live @ Purpose Conference 2022 "} />
+                text={"room2 sync test page "} />
             </div>
 
             <div id="vis-wrapper">
@@ -122,7 +122,7 @@ export default function SyncDesktopApp(props) {
               <div id="bg-shader-wrapper">
                 <BGVis
                   /* shaderID={shaderID} */
-                  shaderID={0}
+                  shaderID={8}
                   width={windowSize[0]*0.75}
                   height={windowSize[1]*0.68}
                 />
@@ -206,7 +206,7 @@ export default function SyncDesktopApp(props) {
 
           </div>
           {/* dead simple text chat */}
-          <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>        
+          {/* <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>         */}
         </>}
     </div>
   )
