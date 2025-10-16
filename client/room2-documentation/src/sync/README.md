@@ -1,0 +1,2 @@
+- update AOC
+- image off bottom of page
