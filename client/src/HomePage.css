@@ -12,7 +12,7 @@
   --comp-col-03:#b5e877;
   --comp-col-04:#5252ff;
   --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
-  font-size: 1vw;
+  font-size: 20px;
 }
 
 body, #root{

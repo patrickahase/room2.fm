@@ -1,13 +1,16 @@
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router";
 import HomePage from "./HomePage";
+import AsyncApp from "./async/AsyncApp";
 
 const root = document.getElementById("root");
 
-ReactDOM.createRoot(root).render(
+ReactDOM.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route index element={<HomePage />} />
+      <Route path="async" element={<AsyncApp />} />
     </Routes>
   </BrowserRouter>,
+  document.getElementById('root')
 );

@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
-import "./App.css";
+import "./AsyncApp.css";
 import AsyncDesktopApp from "./components/asyncDesktopApp";
 import { cyclePresets } from "./content/cyclePresets";
 
-export default function App() {
+export default function AsyncApp() {
   // is accessed on mobile
   const onMobile = window.matchMedia("all and (any-hover: none)").matches;
   // current window size
@@ -71,12 +71,9 @@ export default function App() {
     window.addEventListener("resize", () => {
       setWindowSize([window.innerWidth, window.innerHeight]);
     });
-    //updateCyclePosition();
-  }, []);
-
-  useEffect(() => {
+    // update colours
     setCurrentColours(cyclePresets[currentCycle].colours);
-  }, [currentCycle]);
+  }, []);
 
   // update brush colour and cursor on colour change
   useEffect(() => {
@@ -101,37 +98,22 @@ export default function App() {
     <div id="global-wrapper">
       {onMobile ? (
         <div id="mobile-wrapper">
-          <span id="mobile-text">
-            Unfortunately room2.fm async is currently not able to operate on
-            mobile devices due to technical restrictions. Please try again on a
-            desktop or laptop computer if you are able to.
-            <br />
-            <br />
-            room2 live will run on the 25th of September at Arts House and at
-            this url. For more information and tickets please{" "}
-            <a
-              href="https://bleedonline.net/program/room2/#live"
-              target="_blank"
-              rel="noreferrer"
-            >
-              click here
-            </a>
-            .
-          </span>
+          <p id="mobile-text">
+            Unfortunately room2.fm async is currently not able to operate on mobile devices. 
+            Please try again on a desktop or laptop computer if you are able to.
+          </p>
         </div>
       ) : (
         <AsyncDesktopApp
           width={windowSize[0]}
           height={windowSize[1]}
           modalIsOpen={modalIsOpen}
-          trackHasUpdated={trackHasUpdated}
           toggleModal={toggleModal}
           setIntroModal={setIntroModal}
           setIsDrawing={setIsDrawing}
           cyclePreset={cyclePresets[currentCycle]}
           currentCycle={currentCycle}
           setCurrentCycle={setCurrentCycle}
-          tideData={tideData}
           setInput={setInput}
           colours={currentColours}
           selectedColour={selectedColour}
@@ -158,7 +140,6 @@ export default function App() {
     // add and remove event listener that triggers after drawing to save canvas to undo stack
     if (modalIsOpen) {
       document.addEventListener("mouseup", saveCanvasState);
-      //console.log(introModal)
       introModal.hide();
       document.getElementById("AOC-modal").style.display = "none";
     } else {

@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "a11y-dialog": "^8.1.4",
+    "fabric": "^5.2.4",
+    "gl-react": "^4.1.0",
+    "gl-react-dom": "^5.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-router": "^7.9.4"
   },
   "devDependencies": {
