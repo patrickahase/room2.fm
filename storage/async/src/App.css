@@ -149,10 +149,6 @@ button {
   font-size: 1rem;
   text-align: center;
 }
-#async-desktop-wrapper .declarationText{
-  color: var(--comp-col-02);
-  font-size: 1.25rem;
-}
 #async-desktop-wrapper #modal-continue-button{
   background-color: var(--comp-col-01);
   padding: 0 1rem;

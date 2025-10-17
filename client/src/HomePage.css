@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital@0;1&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+/*Preset Colours*/
+:root{
+  --comp-col-01:#222323;
+  --comp-col-02:#f0f6f0;
+  --comp-col-03:#b5e877;
+  --comp-col-04:#5252ff;
+  --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+  font-size: 1vw;
+}
+
+body, #root{
+  background-color: rgb(14, 14, 14);
+  min-height: 100vh;
+  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main{
+  min-width: 80vw;
+  min-height: 80vh;
+  margin: auto;
+  padding: 1vw 1.25vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  background-color: var(--comp-col-01);
+  border-radius: 4px;
+}
+
+/* Door Closed - Text Logo */
+#logo-wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+#text-logo{
+  color: var(--comp-col-02);
+  padding: 1vw auto;
+}
+#pre-logo-wrapper{
+  font-size: 1vw;
+  margin: 0;
+  white-space: pre-wrap;
+}
+.text-gradient-1{ color: #b5e877; }
+.text-gradient-2{ color: #65e285; }
+.text-gradient-3{ color: #00daa1; }
+.text-gradient-4{ color: #00cec7; }
+.text-gradient-5{ color: #00c0ee; }
+.text-gradient-6{ color: #00afff; }
+.text-gradient-7{ color: #0099ff; }
+.text-gradient-8{ color: #007dff; }
+.text-gradient-9{ color: #5252ff; }
+/* Text Logo Animations */
+#logo-line-1{ animation: 0.4s ease-out 1 slideIn1; }
+@keyframes slideIn1 { 0% { transform: translateX(-1%); } 100% { transform: translateX(0); } }
+#logo-line-2{ animation: 0.4s ease-out 1 slideIn2; }
+@keyframes slideIn2 { 0% { transform: translateX(0.5%); } 100% { transform: translateX(0); } }
+#logo-line-3{ animation: 0.4s ease-out 1 slideIn3; }
+@keyframes slideIn3 { 0% { transform: translateX(-2%); } 100% { transform: translateX(0); } }
+#logo-line-4{ animation: 0.4s ease-out 1 slideIn4; }
+@keyframes slideIn4 { 0% { transform: translateX(0.75%); } 100% { transform: translateX(0); } }
+#logo-line-5{ animation: 0.4s ease-out 1 slideIn5; }
+@keyframes slideIn5 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
+#logo-line-6{ animation: 0.4s ease-out 1 slideIn6; }
+@keyframes slideIn6 { 0% { transform: translateX(0.5%); } 100% { transform: translateX(0); } }
+#logo-line-7{ animation: 0.4s ease-out 1 slideIn7; }
+@keyframes slideIn7 { 0% { transform: translateX(-1%); } 100% { transform: translateX(0); } }
+#logo-line-8{ animation: 0.4s ease-out 1 slideIn8; }
+@keyframes slideIn8 { 0% { transform: translateX(1%); } 100% { transform: translateX(0); } }
+#logo-line-9{ animation: 0.4s ease-out 1 slideIn9; }
+@keyframes slideIn9 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
+
+.declarationText{
+  color: var(--comp-col-02);
+  font-size: 1.25rem;
+}
+
+nav {
+  display: flex;
+  gap: 2rem;
+}
+
+a {
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--comp-col-04);
+}
+
+a:hover {
+  color: var(--comp-col-03);
+  background-color: var(--comp-col-04);
+}
+
+::selection {
+  color: var(--comp-col-03);
+  background-color: var(--comp-col-04);
+}
+
+
+
+
