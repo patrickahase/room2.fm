@@ -15,6 +15,16 @@ app.get("/*", (req, res) => {
   console.log(1);
   res.sendFile(__dirname, "client/dist/index.html");
 });
+// serve index - '/' or '*' ?
+app.get("/async", (req, res) => {
+  console.log(1);
+  res.sendFile(__dirname, "client/dist/index.html");
+});
+// serve index - '/' or '*' ?
+app.get("/sync", (req, res) => {
+  console.log(1);
+  res.sendFile(__dirname, "client/dist/index.html");
+});
 
 // look more into process stuff
 const port = process.env.PORT || 33064;
