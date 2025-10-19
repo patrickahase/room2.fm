@@ -1,37 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital@0;1&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-/*General Font*/
-@font-face{
-  font-family:'IBM Plex Sans Condensed', sans-serif;
-  src: url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&display=swap') format('truetype');
-}
-
-
-
-/*Preset Colours*/
-:root{
-  --comp-col-01:#222323;
-  --comp-col-02:#f0f6f0;
-  --comp-col-03:#b5e877;
-  --comp-col-04:#5252ff;
-  --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
-  font-size: 1vw;
-}
-
-body {
-  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 button {
+  color: var(--comp-col-02);
+  cursor: pointer;
   border: 2px solid #e3e3e3;
   border-bottom-color: #979797; 
   border-right-color: #979797; 
@@ -52,174 +21,6 @@ button {
   flex-direction: column;
 }
 
-/* Modal Style */
-#async-desktop-wrapper .ModalWrapper{
-  position: absolute;
-  z-index: 6;
-}
-#async-desktop-wrapper .ModalBox{
-  position: fixed;
-  top: 10vh;
-  left: 10vw;
-  right: 10vw;
-  bottom: 10vh;
-  background-color: var(--comp-col-01);
-  border-radius: 4px;
-  padding: 1vw 1.25vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
-  align-items: center;
-  z-index: 7;
-}
-#async-desktop-wrapper #modal-page-wrapper{
-  width: 80%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1.25vw;
-  flex-grow: 1;
-}
-
-#async-desktop-wrapper .ModalOverlay {
-  position: fixed; /* 1 */
-  inset: 0;
-  background-color: rgb(43 46 56 / 0.9); /* 1 */
-  z-index: 6;
-}
-
-#async-desktop-wrapper .astrix {
-  font-size: 1.5em;
-}
-
-#async-desktop-wrapper a {
-  color: var(--comp-col-04);
-}
-
-#async-desktop-wrapper a:hover {
-  color: var(--comp-col-03);
-  background-color: var(--comp-col-04);
-}
-
-#async-desktop-wrapper ::selection {
-  color: var(--comp-col-03);
-  background-color: var(--comp-col-04);
-}
-
-#async-desktop-wrapper nav {
-  display: flex;
-  gap: 2rem;
-}
-#async-desktop-wrapper nav a {
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-#async-desktop-wrapper #modal-title-wrapper{
- width: 100%;
-}
-#async-desktop-wrapper #modal-title{
-  font-size: 3rem;
-  color: var(--comp-col-02);
-  font-family: 'Work Sans';
-}
-#async-desktop-wrapper #modal-text-wrapper{
-  overflow: hidden;
-  flex-grow: 1;
-  padding: 1.5vw 0;
-  overflow: auto;
-}
-#async-desktop-wrapper #modal-text{
-  color: var(--comp-col-02);
-  font-size: 1.25rem;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1rem;
-}
-#async-desktop-wrapper .ModalTextSmall{
-  font-size: 1rem;
-  text-align: center;
-}
-#async-desktop-wrapper #modal-continue-button{
-  background-color: var(--comp-col-01);
-  padding: 0 1rem;
-  font-size: 2.5rem;
-  color: var(--comp-col-02);
-  user-select: none;  
-}
-#async-desktop-wrapper #modal-continue-button:hover{
-  color: #5252ff;
-  background-color: #202121;
-}
-#async-desktop-wrapper #modal-throbber{
-  margin-top: 1rem;
-  width: 3rem;
-  height: 3rem;
-}
-#async-desktop-wrapper #ip-check-button{
-  background-color: var(--comp-col-01);
-  padding: 0 1rem;
-  font-size: 1rem;
-  color: var(--comp-col-02);
-  user-select: none; 
-  margin-top: 1rem;
-}
-#async-desktop-wrapper #ip-check-button:hover{
-  color: #5252ff;
-  background-color: #202121;
-}
-/* Door Closed - Text Logo */
-#async-desktop-wrapper #logo-wrapper{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-#async-desktop-wrapper #text-logo{
-  color: var(--comp-col-02);
-  padding: 1vw auto;
-}
-#async-desktop-wrapper #pre-logo-wrapper{
-  font-size: 1vw;
-  margin: 0;
-  white-space: pre-wrap;
-}
-.text-gradient-1{ color: #b5e877; }
-.text-gradient-2{ color: #65e285; }
-.text-gradient-3{ color: #00daa1; }
-.text-gradient-4{ color: #00cec7; }
-.text-gradient-5{ color: #00c0ee; }
-.text-gradient-6{ color: #00afff; }
-.text-gradient-7{ color: #0099ff; }
-.text-gradient-8{ color: #007dff; }
-.text-gradient-9{ color: #5252ff; }
-/* Text Logo Animations */
-#logo-line-1{ animation: 0.4s ease-out 1 slideIn1; }
-@keyframes slideIn1 { 0% { transform: translateX(-1%); } 100% { transform: translateX(0); } }
-#logo-line-2{ animation: 0.4s ease-out 1 slideIn2; }
-@keyframes slideIn2 { 0% { transform: translateX(0.5%); } 100% { transform: translateX(0); } }
-#logo-line-3{ animation: 0.4s ease-out 1 slideIn3; }
-@keyframes slideIn3 { 0% { transform: translateX(-2%); } 100% { transform: translateX(0); } }
-#logo-line-4{ animation: 0.4s ease-out 1 slideIn4; }
-@keyframes slideIn4 { 0% { transform: translateX(0.75%); } 100% { transform: translateX(0); } }
-#logo-line-5{ animation: 0.4s ease-out 1 slideIn5; }
-@keyframes slideIn5 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
-#logo-line-6{ animation: 0.4s ease-out 1 slideIn6; }
-@keyframes slideIn6 { 0% { transform: translateX(0.5%); } 100% { transform: translateX(0); } }
-#logo-line-7{ animation: 0.4s ease-out 1 slideIn7; }
-@keyframes slideIn7 { 0% { transform: translateX(-1%); } 100% { transform: translateX(0); } }
-#logo-line-8{ animation: 0.4s ease-out 1 slideIn8; }
-@keyframes slideIn8 { 0% { transform: translateX(1%); } 100% { transform: translateX(0); } }
-#logo-line-9{ animation: 0.4s ease-out 1 slideIn9; }
-@keyframes slideIn9 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
-
-
-
 /* Background Visuals */
 #async-desktop-wrapper #bg-vis-wrapper{
   position: absolute;
@@ -227,7 +28,7 @@ button {
   height: 100%;
   left: 0%;
   top: 0%;
-  background: linear-gradient(90deg, #b5e877, #5252ff);
+  background: black;
   z-index: 1;
   overflow: hidden;
 }
@@ -416,6 +217,8 @@ button {
   resize: none;
   border: 0;
   z-index: 5;
+  font-size: 1.25vw;
+  color: var(--comp-col-01);
 }
 
 /* Left Drawing Section */

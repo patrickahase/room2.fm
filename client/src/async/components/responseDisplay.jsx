@@ -47,6 +47,7 @@ export default function ResponseDisplay(props) {
   }
 
   function createImageResponseDisplay(imageResponse){
+    console.log(imageResponse);
     let newResponseBox = document.createElement('img');
     let collision = false;
     newResponseBox.classList.add('ImageResponseBox');
@@ -72,7 +73,8 @@ export default function ResponseDisplay(props) {
         responseFadeInOut(newResponseBox);
       } 
     });
-    newResponseBox.src = 'https://humstore.thelongesthum.world/'+imageResponse;
+    //newResponseBox.src = 'https://humstore.thelongesthum.world/'+imageResponse;
+    newResponseBox.src = imageResponse;
   }
 
   function createTextResponseDisplay(textResponse){

@@ -145,7 +145,7 @@ export default function AsyncApp() {
     } else {
       document.removeEventListener("mouseup", saveCanvasState);
       introModal.show();
-      document.getElementById("AOC-modal").style.display = "unset";
+      document.getElementById("AOC-modal").style.display = "flex";
     }
     // toggle state
     setModalIsOpen(!modalIsOpen);
@@ -282,71 +282,84 @@ export default function AsyncApp() {
         width: imageInput.width,
         height: imageInput.height,
       });
-      const formData = new FormData();
-      let imageFile = dataURLtoFile(dataURL, "response.png");
+      //const formData = new FormData();
+      //let imageFile = dataURLtoFile(dataURL, "response.png");
       drawingCanvas.clear();
+      // simulate response
+      returnedResponses.push([
+        dataURL,
+        'image',
+      ]);
+      setResponseData(returnedResponses);
+
       // we add one to cycle pos to keep start from 1
-      formData.append(
-        "upload",
-        imageFile,
-        "cycle_" + currentCycle + "_response.png"
-      );
-      fetch(`https://room2.fm/api/insertImageReflectionGetResponses`, {
-        method: "PUT",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          try {
-            for (const response of res.data[1]) {
-              returnedResponses.push([
-                response.RESPONSE,
-                response.RESPONSE_TYPE,
-              ]);
-            }
-            setResponseData(returnedResponses);
-          } catch (e) {
-            // if response not the data
-            console.log(e);
-          }
-        });
+      // formData.append(
+      //   "upload",
+      //   imageFile,
+      //   "cycle_" + currentCycle + "_response.png"
+      // );
+      // fetch(`https://room2.fm/api/insertImageReflectionGetResponses`, {
+      //   method: "PUT",
+      //   body: formData,
+      // })
+      //   .then((res) => res.json())
+      //   .then((res) => {
+      //     try {
+      //       for (const response of res.data[1]) {
+      //         returnedResponses.push([
+      //           response.RESPONSE,
+      //           response.RESPONSE_TYPE,
+      //         ]);
+      //       }
+      //       setResponseData(returnedResponses);
+      //     } catch (e) {
+      //       // if response not the data
+      //       console.log(e);
+      //     }
+      //   });
     } else {
       // text input
       let textInput = document.getElementById("text-input");
       let responseText = textInput.value;
-      if (responseText.length > 0) {
-        textInput.value = "";
-        fetch(`https://room2.fm/api/insertTextReflectionGetResponses`, {
-          headers: { "Content-type": "application/json" },
-          method: "POST",
-          mode: "cors",
-          body: JSON.stringify({
-            reflection: responseText,
-            cycleTable: currentCycle,
-          }),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            try {
-              for (const response of res.data[1]) {
-                returnedResponses.push([
-                  response.RESPONSE,
-                  response.RESPONSE_TYPE,
-                ]);
-              }
-              setResponseData(returnedResponses);
-            } catch (e) {
-              // if response not the data
-              console.log(e);
-            }
-          });
-      }
+      textInput.value = "";
+      returnedResponses.push([
+        responseText,
+        'text',
+      ]);
+      setResponseData(returnedResponses);
+      // if (responseText.length > 0) {
+      //   textInput.value = "";
+      //   fetch(`https://room2.fm/api/insertTextReflectionGetResponses`, {
+      //     headers: { "Content-type": "application/json" },
+      //     method: "POST",
+      //     mode: "cors",
+      //     body: JSON.stringify({
+      //       reflection: responseText,
+      //       cycleTable: currentCycle,
+      //     }),
+      //   })
+      //     .then((res) => res.json())
+      //     .then((res) => {
+      //       try {
+      //         for (const response of res.data[1]) {
+      //           returnedResponses.push([
+      //             response.RESPONSE,
+      //             response.RESPONSE_TYPE,
+      //           ]);
+      //         }
+      //         setResponseData(returnedResponses);
+      //       } catch (e) {
+      //         // if response not the data
+      //         console.log(e);
+      //       }
+      //     });
+      // }
     }
   }
 
   function toggleFocus() {
-    let textResponseRule = getCSSRule(".TextResponseBox");
-    let imageResponseRule = getCSSRule(".ImageResponseBox");
+    let textResponseRule = getCSSRule("#async-desktop-wrapper .TextResponseBox");
+    let imageResponseRule = getCSSRule("#async-desktop-wrapper .ImageResponseBox");
     if (!focusMode) {
       setFocusMode(true);
       textResponseRule.style.backgroundColor = "rgb(31, 33, 28)";
@@ -366,19 +379,19 @@ export default function AsyncApp() {
     }
   }
 
-  function dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(","),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, {
-      type: mime,
-    });
-  }
+  // function dataURLtoFile(dataurl, filename) {
+  //   var arr = dataurl.split(","),
+  //     mime = arr[0].match(/:(.*?);/)[1],
+  //     bstr = atob(arr[1]),
+  //     n = bstr.length,
+  //     u8arr = new Uint8Array(n);
+  //   while (n--) {
+  //     u8arr[n] = bstr.charCodeAt(n);
+  //   }
+  //   return new File([u8arr], filename, {
+  //     type: mime,
+  //   });
+  // }
 
   function getCSSRule(ruleName) {
     ruleName = ruleName.toLowerCase();

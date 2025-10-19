@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import A11yDialog from 'a11y-dialog';
-import WhereAreYou from './whereModal';
 
 export default function IntroModalDesktop(props) {
   
@@ -40,10 +39,7 @@ export default function IntroModalDesktop(props) {
               of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
               all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
               connectivity are built upon.
-            </p>
-            
-            <WhereAreYou />
-       
+            </p>       
           </div>          
       </div>
       <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
@@ -134,8 +130,6 @@ export default function IntroModalDesktop(props) {
               all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
               connectivity are built upon.
             </p>
-            
-            <WhereAreYou />
        
           </div>          
       </div>

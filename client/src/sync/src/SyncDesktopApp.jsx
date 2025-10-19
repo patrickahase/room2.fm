@@ -1,21 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
-import { fabric } from 'fabric';
-//import io from 'socket.io-client';
-// import './DesktopApp.css';
-
 import IntroModalDesktop from './components/introModalDesktop';
 import Marquee from './components/marquee';
 import BGVis from './components/bgVis';
 import SettingsMenu from './components/settingsMenu';
 import ResponseDisplay from './components/responseDisplay';
 import DrawingToolsDesktop from './components/drawingToolsDesktop';
-import DrawingCanvas from './components/drawingCanvasMobile';
+import DrawingCanvas from './components/drawingCanvas';
 import AudioControls from './components/audioControls';
 import ColourPicker from './components/colourPicker';
+import './SyncDesktopApp.css';
 
-//const socket = io();
-
-export default function SyncDesktopApp(props) {
+export default function SyncDesktopApp() {
 
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
 
@@ -65,8 +60,8 @@ export default function SyncDesktopApp(props) {
   // if false it's assumed to be text instead
   const[inputIsDraw, setInputIsDraw] = useState(false);
   const [responseData, setResponseData] = useState([
-    /* ["https://thelongesthumstore.sgp1.digitaloceanspaces.com/room2-purpose-live/1666089854386.png", "image"],
-    ["ry", "text"], */
+    ["https://thelongesthumstore.sgp1.digitaloceanspaces.com/room2-purpose-live/1666089854386.png", "image"],
+    ["ry", "text"],
   ]);
   var responseDataRef = useRef(responseData);
   useEffect(() => {responseDataRef.current = responseData}, [responseData]);
@@ -97,7 +92,7 @@ export default function SyncDesktopApp(props) {
   }, [brushSize]);
 
   return (
-    <div id="desktop-wrapper">
+    <div id="sync-desktop-wrapper">
       {modalIsOpen
         ? <IntroModalDesktop 
             setIntroModal={setIntroModal}
@@ -109,9 +104,8 @@ export default function SyncDesktopApp(props) {
 
             <div id="banner-wrapper">
               <div id="banner-logo-wrapper">
-                {/* <img className="BannerLogo" src={TodayLogo} /> */}
                 <div id="banner-x"></div>      
-                <img className="BannerLogo" src={require("./assets/slowdiscpixel.gif")} />
+                <img className="BannerLogo" src={"./assets/slowdiscpixel.gif"} />
               </div>
               <Marquee
                 text={"room2 sync documentation for PhD "} />
@@ -121,7 +115,6 @@ export default function SyncDesktopApp(props) {
 
               <div id="bg-shader-wrapper">
                 <BGVis
-                  /* shaderID={shaderID} */
                   shaderID={8}
                   width={windowSize[0]*0.75}
                   height={windowSize[1]*0.68}
@@ -134,13 +127,10 @@ export default function SyncDesktopApp(props) {
                   responseData={responseData}
                   currentPrompt={currentPrompt} />
 
-                {/* Menu and Prompt Overlay */}
                 <div id="menu-prompt-wrapper">
-                  {/* Settings Menu Overlay */}
                   <SettingsMenu
                     toggleFocus={toggleFocus} 
                     toggleModal={toggleModal} />
-                  {/* Prompt and Input Selection */}
                   <div id="current-prompt-wrapper" className="Collider PromptCycle">
                     <div id="prompt-end-timer-wrapper">
                       <div id="prompt-end-timer" />
@@ -158,12 +148,10 @@ export default function SyncDesktopApp(props) {
                   </div>
                 </div>
               </div>
-
             </div>
 
             <div id="interface-wrapper">
 
-              {/* Left Side Drawing Tools */}
               <DrawingToolsDesktop
                   undoDrawing={undoDrawing}
                   redoDrawing={redoDrawing}
@@ -172,11 +160,8 @@ export default function SyncDesktopApp(props) {
                   brushSize={brushSize}
                   setBrushSize={setBrushSize} />
               
-              {/* Input Section */}
-              <div id="input-wrapper">
-                {/* Writing Section */}            
+              <div id="input-wrapper">          
                 <textarea id="text-input" name="text based prompt response" placeholder="Please type your response here..." />
-                {/* Drawing Section */} 
                 <DrawingCanvas 
                   brushColour={currentColours[selectedColour]}
                   brushSize={brushSize}
@@ -185,21 +170,17 @@ export default function SyncDesktopApp(props) {
                   setIsDrawing={setIsDrawing} />
               </div>
 
-              {/* Right UI Panel */}
               <div id="right-ui-wrapper">
-                {/* Colour Picker */}
                 <div id="col-pick-wrapper">                
                   <ColourPicker 
                     colours={currentColours}
                     updateCanvasBrush={updateCanvasBrush}
                     setSelectedColour={setSelectedColour}
                     setCurrentColours={setCurrentColours} />              
-                </div>
-                {/* Submit Response Button */}             
-                <button id="response-submit-button" /* onClick={props.submitResponse} */>
+                </div>   
+                <button id="response-submit-button" onClick={() => submitResponse()}>
                   SUBMIT RESPONSE                
                 </button>
-                {/* Audio Settings */}
                 <AudioControls />            
               </div>
             </div>
@@ -220,19 +201,19 @@ export default function SyncDesktopApp(props) {
     if(modalIsOpen){
       document.addEventListener('mouseup', saveCanvasState);
       introModal.hide();
-      getCSSRule("#desktop-wrapper .ModalWrapper").style.display = "none";
+      getCSSRule(".ModalWrapper").style.display = "none";
     } else {
       document.removeEventListener('mouseup', saveCanvasState);
       introModal.show();
-      getCSSRule("#desktop-wrapper .ModalWrapper").style.display = "unset";
+      getCSSRule(".ModalWrapper").style.display = "flex";
     }
     // toggle state
     setModalIsOpen(!modalIsOpen);
   }
 
   function toggleFocus(){
-    let textResponseRule = getCSSRule('#desktop-wrapper .TextResponseBox');
-    let imageResponseRule = getCSSRule('#desktop-wrapper .ImageResponseBox');
+    let textResponseRule = getCSSRule('#sync-desktop-wrapper .TextResponseBox');
+    let imageResponseRule = getCSSRule('#sync-desktop-wrapper .ImageResponseBox');
     if(!focusMode){
       setFocusMode(true);
       textResponseRule.style.backgroundColor = "rgb(31, 33, 28)";
@@ -253,15 +234,105 @@ export default function SyncDesktopApp(props) {
     if(changeToDraw){
       setInputIsDraw(true);
       document.getElementById("input-wrapper").style.top= "-100%";
-      getCSSRule('#desktop-wrapper #input-wrapper::after').style.top = "calc(50% + 4px)";
+      getCSSRule('#sync-desktop-wrapper #input-wrapper::after').style.top = "calc(50% + 4px)";
       document.getElementById("draw-input-select").classList.add("ActiveInputButton");
       document.getElementById("text-input-select").classList.remove("ActiveInputButton");
     } else {
       setInputIsDraw(false);
       document.getElementById("input-wrapper").style.top= "0%";
-      getCSSRule('#desktop-wrapper #input-wrapper::after').style.top = "4px";
+      getCSSRule('#sync-desktop-wrapper #input-wrapper::after').style.top = "4px";
       document.getElementById("draw-input-select").classList.remove("ActiveInputButton");
       document.getElementById("text-input-select").classList.add("ActiveInputButton");
+    }
+  }
+
+  //// here is the typical way responses are sent to the server : now simulated
+  function submitResponse() {
+    // set up array to push other responses to
+    let returnedResponses = [];
+    // check if a text or an image response
+    if (inputIsDraw) {
+      //image input
+      let imageInput = document.getElementById("drawing-canvas");
+      var dataURL = imageInput.toDataURL({
+        format: "png",
+        left: 0,
+        top: 0,
+        width: imageInput.width,
+        height: imageInput.height,
+      });
+      //const formData = new FormData();
+      //let imageFile = dataURLtoFile(dataURL, "response.png");
+      drawingCanvas.clear();
+      // simulate response
+      returnedResponses.push([
+        dataURL,
+        'image',
+      ]);
+      setResponseData(returnedResponses);
+
+      // we add one to cycle pos to keep start from 1
+      // formData.append(
+      //   "upload",
+      //   imageFile,
+      //   "cycle_" + currentCycle + "_response.png"
+      // );
+      // fetch(`https://room2.fm/api/insertImageReflectionGetResponses`, {
+      //   method: "PUT",
+      //   body: formData,
+      // })
+      //   .then((res) => res.json())
+      //   .then((res) => {
+      //     try {
+      //       for (const response of res.data[1]) {
+      //         returnedResponses.push([
+      //           response.RESPONSE,
+      //           response.RESPONSE_TYPE,
+      //         ]);
+      //       }
+      //       setResponseData(returnedResponses);
+      //     } catch (e) {
+      //       // if response not the data
+      //       console.log(e);
+      //     }
+      //   });
+    } else {
+      // text input
+      let textInput = document.getElementById("text-input");
+      let responseText = textInput.value;
+      textInput.value = "";
+      returnedResponses.push([
+        responseText,
+        'text',
+      ]);
+      setResponseData(returnedResponses);
+      // if (responseText.length > 0) {
+      //   textInput.value = "";
+      //   fetch(`https://room2.fm/api/insertTextReflectionGetResponses`, {
+      //     headers: { "Content-type": "application/json" },
+      //     method: "POST",
+      //     mode: "cors",
+      //     body: JSON.stringify({
+      //       reflection: responseText,
+      //       cycleTable: currentCycle,
+      //     }),
+      //   })
+      //     .then((res) => res.json())
+      //     .then((res) => {
+      //       try {
+      //         for (const response of res.data[1]) {
+      //           returnedResponses.push([
+      //             response.RESPONSE,
+      //             response.RESPONSE_TYPE,
+      //           ]);
+      //         }
+      //         setResponseData(returnedResponses);
+      //       } catch (e) {
+      //         // if response not the data
+      //         console.log(e);
+      //       }
+      //     });
+      // }
     }
   }
 
@@ -298,7 +369,6 @@ export default function SyncDesktopApp(props) {
   function saveCanvasState(){
     // only run if mouse up is occuring after a drawing action
     if(isDrawingRef.current){
-      console.log(drawingCanvasRef.current);
       // get version of undo stack to change
       let newUndoStack = undoStackRef.current;
       // drop oldest undo if over max undo count
@@ -412,14 +482,14 @@ export default function SyncDesktopApp(props) {
   }
 }
 
-function PromptSpan(props){
+// function PromptSpan(props){
 
-  useEffect(() => {
-    document.getElementById("prompt-span").innerHTML = props.prompt;
-  }, []);
+//   useEffect(() => {
+//     document.getElementById("prompt-span").innerHTML = props.prompt;
+//   }, []);
 
-  return(
-    <pre id="prompt-span"></pre>
-  )
-}
+//   return(
+//     <pre id="prompt-span"></pre>
+//   )
+// }
 

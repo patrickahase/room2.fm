@@ -1,16 +1,28 @@
 import ReactDOM from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import HomePage from "./HomePage";
 import AsyncApp from "./async/AsyncApp";
+import SyncDesktopApp from "./sync/src/SyncDesktopApp";
 
-const root = document.getElementById("root");
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />,
+  },
+  {
+    path: "/async",
+    element: <AsyncApp />,
+  },
+  {
+    path: "/sync",
+    element: <SyncDesktopApp />,
+  },
+]);
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Routes>
-      <Route index element={<HomePage />} />
-      <Route path="async" element={<AsyncApp />} />
-    </Routes>
-  </BrowserRouter>,
+  <RouterProvider router={router} />,
   document.getElementById('root')
 );

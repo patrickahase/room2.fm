@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef} from 'react'
 import 'glslCanvas/lib/GlslCanvas';
 import GlslCanvas from 'glslCanvas/lib/GlslCanvas';
 
@@ -12,7 +12,6 @@ export default function BGVis(props) {
     }    
   }, [props.shaderID]);
   useEffect(() => {
-    console.log(props.height, document.getElementById("bgShader").height);
     if(canvasRef.current){
       document.getElementById("bgShader").width = props.width;
       document.getElementById("bgShader").height = props.height;

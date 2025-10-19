@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function ResponseDisplay(props) {
   
@@ -6,8 +6,7 @@ export default function ResponseDisplay(props) {
     wrapper: {
       width: '100%',
       height: '100%',
-      pointerEvents: 'none',
-      position: 'fixed'
+      pointerEvents: 'none'
     },
     imageResponse: {
       opacity: 0,
@@ -22,7 +21,7 @@ export default function ResponseDisplay(props) {
       fontSize: '2rem',
       color: 'var(--comp-col-02)',
       textShadow: '-1px 0 var(--comp-col-01), 0 1px var(--comp-col-01), 1px 0 var(--comp-col-01), 0 -1px var(--comp-col-01)',
-      fontFamily: 'GT America'
+      fontFamily: 'Work Sans'
     }
   }
 

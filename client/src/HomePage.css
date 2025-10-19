@@ -1,51 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital@0;1&display=swap');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-/*Preset Colours*/
-:root{
-  --comp-col-01:#222323;
-  --comp-col-02:#f0f6f0;
-  --comp-col-03:#b5e877;
-  --comp-col-04:#5252ff;
-  --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
-  font-size: 20px;
-}
-
-body, #root{
-  background-color: rgb(14, 14, 14);
-  min-height: 100vh;
-  font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 #root{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-main{
-  min-width: 80vw;
-  min-height: 80vh;
-  margin: auto;
-  padding: 1vw 1.25vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2rem;
-  align-items: center;
-  background-color: var(--comp-col-01);
-  border-radius: 4px;
-}
-
-/* Door Closed - Text Logo */
+/* Text Logo */
 #logo-wrapper{
   display: flex;
   flex-direction: column;
@@ -91,7 +50,6 @@ main{
 @keyframes slideIn9 { 0% { transform: translateX(-0.25%); } 100% { transform: translateX(0); } }
 
 .declarationText{
-  color: var(--comp-col-02);
   font-size: 1.25rem;
 }
 
@@ -100,21 +58,18 @@ nav {
   gap: 2rem;
 }
 
-a {
+nav a {
   font-size: 2rem;
   cursor: pointer;
   color: var(--comp-col-04);
 }
 
-a:hover {
+nav a:hover {
   color: var(--comp-col-03);
   background-color: var(--comp-col-04);
 }
 
-::selection {
-  color: var(--comp-col-03);
-  background-color: var(--comp-col-04);
-}
+
 
 
 

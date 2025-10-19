@@ -22,7 +22,15 @@ export default function AsyncDesktopApp(props) {
   const[readyToRespond, setReadyToRespond] = useState(false);  
 
   const[timer, setTimer] = useState(0.);
-  const[timerInterval, setTimerInterval] = useState(null);
+  const[timerRunning, setTimerRunning] = useState(false);
+  useEffect(() => {
+    if(timerRunning){
+      timerRef.current = requestAnimationFrame(timerStep);
+    } else if (timerRunning === false){
+      timerRef.current = null;
+    }
+  }, [timerRunning]);
+  let timerRef = useRef();
   const[audioSourceRef, setAudioSourceRef] = useState(null);
 
   // graphics settings  - 1 high 10 medium 20 low
@@ -45,10 +53,10 @@ export default function AsyncDesktopApp(props) {
         tideData={props.tideData} />
       {/* Settings Menu */}
       {!props.modalIsOpen &&
+      <>
       <SettingsMenu
         toggleModal={props.toggleModal}
-        setGraphicsSettings={setGraphicsSettings}
-        toggleFocus={props.toggleFocus} />}
+        toggleFocus={props.toggleFocus} />
       {/* Daily Prompt */}
       <div id="current-prompt-wrapper" className="Collider">
         <div id="current-prompt">
@@ -62,8 +70,11 @@ export default function AsyncDesktopApp(props) {
         startTimer={startTimer}
         pauseTimer={pauseTimer}
         restartTimer={restartTimer}
+        setTimer={setTimer}
         setAskResponse={setAskResponse}
         />
+      </>}
+      
       {/* Ask if ready to respond */} 
       {askResponse &&
         <button id="ready-submission-button" onClick={() => {setReadyToRespond(true); setAskResponse(false);}}> i'm ready to respond </button>
@@ -128,22 +139,21 @@ export default function AsyncDesktopApp(props) {
     </div>
   )
   /* update timer value (based on track position) */
+  // pause timer
   function startTimer() {
-    if(timerInterval !== null){
-      clearInterval(timerInterval); 
-      setTimerInterval(setInterval(() => {
-        setTimer(100 * audioSourceRef.currentTime/audioSourceRef.duration)
-      }, timerRefreshRate+graphicsSettings));
-    } else {
-      setTimerInterval(setInterval(() => {
-        setTimer(100 * audioSourceRef.currentTime/audioSourceRef.duration)
-      }, timerRefreshRate+graphicsSettings));
-    }
+    setTimerRunning(true);
   }
   function pauseTimer() {
-    clearInterval(timerInterval);    
+    setTimerRunning(false);
   }
   function restartTimer() {
     setTimer(0.);    
-  }  
+  }
+
+  function timerStep(timestamp){
+    setTimer(100 * audioSourceRef.currentTime/audioSourceRef.duration);
+    if(timerRef.current !== null){
+      timerRef.current = requestAnimationFrame(timerStep);
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { fabric } from 'fabric';
 
-export default function DrawingCanvasMobile(props){
+export default function DrawingCanvas(props){
   
   const [canvas, setCanvas] = useState(null);
   let canvasRef = useRef(null);

@@ -29,6 +29,7 @@ export default function AudioTrackPlayer(props) {
     //add animation when playing
     audioSourceRef.addEventListener('timeupdate', () => {
       timeline.firstChild.style.width = (100 * audioSourceRef.currentTime/audioSourceRef.duration) + "%";
+      props.setTimer(100 * audioSourceRef.currentTime/audioSourceRef.duration);
     });
     //add timeline click
     timeline.addEventListener("click", (e) => {

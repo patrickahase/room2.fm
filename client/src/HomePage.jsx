@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import './Global.css';
 import './HomePage.css';
 
 function HomePage() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <main>
+      <div id="home-page-wrapper" className="ModalBox">
 
         <div id="logo-wrapper">
           <div id="text-logo">
@@ -31,7 +30,7 @@ function HomePage() {
           <a href='./sync' target='_blank'>sync</a>
         </nav>
 
-      </main>
+      </div>
     </>
   )
 }
