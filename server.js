@@ -9,6 +9,8 @@ app.use(cors());
 
 // direct to build folder
 app.use("/", express.static(path.join(__dirname, "client/dist")));
+app.use("/async", express.static(path.join(__dirname, "client/dist")));
+app.use("/sync", express.static(path.join(__dirname, "client/dist")));
 
 // serve index - '/' or '*' ?
 app.get("/*", (req, res) => {
