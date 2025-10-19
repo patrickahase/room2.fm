@@ -9,12 +9,12 @@ app.use(express.json());
 app.use(cors());
 
 // direct to build folder
-app.use("/", express.static(path.join(__dirname, "client/build")));
+app.use("/", express.static(path.join(__dirname, "client/dist")));
 
 // serve index - '/' or '*' ?
 app.get("/*", (req, res) => {
   console.log(1);
-  res.sendFile(__dirname, "client/index.html");
+  res.sendFile(__dirname, "client/dist/index.html");
 });
 
 // look more into process stuff
