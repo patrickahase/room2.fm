@@ -1,4 +1,3 @@
-require("dotenv").config();
 const express = require("express");
 const path = require("path");
 var cors = require("cors");
@@ -12,7 +11,7 @@ app.use(cors());
 app.use("/", express.static(path.join(__dirname, "client/dist")));
 
 // serve index - '/' or '*' ?
-app.get("*", (req, res) => {
+app.get("/*splat", (req, res) => {
   console.log(1);
   res.sendFile(__dirname, "client/dist/index.html");
 });
