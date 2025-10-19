@@ -26,8 +26,8 @@ function HomePage() {
         <p className="declarationText">Documentation for Patrick McMahon's PhD Research</p>
 
         <nav>
-          <a href='./async' target='_blank'>async</a>
-          <a href='./sync' target='_blank'>sync</a>
+          {/* <a href='./async' target='_blank'>async</a>
+          <a href='./sync' target='_blank'>sync</a> */}
         </nav>
 
       </div>
