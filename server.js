@@ -10,7 +10,7 @@ app.use(cors());
 
 
 // direct to build folder
-app.use("/", express.static(path.join(__dirname, "home")));
+app.use("/", express.static(path.join(__dirname, "client/build")));
 
 // serve index - '/' or '*' ?
 app.get("*", (req, res) => {
