@@ -17,12 +17,12 @@ app.get("/*", (req, res) => {
 });
 // serve index - '/' or '*' ?
 app.get("/async", (req, res) => {
-  console.log(1);
+  console.log(2);
   res.sendFile(__dirname, "client/dist/index.html");
 });
 // serve index - '/' or '*' ?
 app.get("/sync", (req, res) => {
-  console.log(1);
+  console.log(3);
   res.sendFile(__dirname, "client/dist/index.html");
 });
 
