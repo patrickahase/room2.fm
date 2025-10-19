@@ -3,6 +3,5 @@
     "@react-router/express": "^7.9.4",
     "cross-env": "^10.1.0",
     "express": "^5.1.0"
-  },
-  "type": "module"
+  }
 }
