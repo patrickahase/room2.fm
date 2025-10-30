@@ -68,7 +68,7 @@ body, #root{
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1.25vw;
+  padding: 0 2.25vw;
   flex-grow: 1;
 }
 
@@ -91,14 +91,15 @@ a:hover{
    flex-grow: 1;
    padding: 1.5vw 0;
    overflow: auto;
+   display: flex;
  }
 #modal-text{
    font-size: 1.25rem;
-   min-height: 100%;
+   flex-grow: 1;
    display: flex;
    flex-direction: column;
    justify-content: space-between;
-   gap: 1rem;
+   gap: 2rem;
  }
  #modal-text p {
   max-width: 80vw;
