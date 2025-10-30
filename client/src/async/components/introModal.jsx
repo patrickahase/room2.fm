@@ -14,62 +14,62 @@ export default function IntroModal(props) {
   let modalPages = [
   
     //page 1 Declaration
-    <div id="modal-page-wrapper">
+    <>
       <div id="modal-title-wrapper">
-        <div id="modal-title">
+        <h2 id="modal-title">
           Welcome to room2 async...
-        </div>
-        <hr />
-      </div>
-      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc" style={{textAlign: 'center'}}>
-        <div id="modal-text" style={{alignItems: 'center', justifyContent: 'center'}}>
-          <p style={{fontSize: "1.75rem"}}>
-            This website is a limited documentation of the aysnc configuration of the room2 project, which was 
-            co-created by Patrick McMahon and Anuraag Bhatia.
-          </p>
-          <p style={{fontSize: "1.75rem"}}>
-            This documentation was created as part of Patrick McMahon's PhD submission, as a way to provide access 
-            to the UI. As the original work was a multi-user experience, built around its own ephemerality 
-            and the anonymity of its submissions, this documentation does not connect to the original server,
-            nor capture responses from any other users. The responses seen within have all been submitted by 
-            myself (Patrick) to give a simulation of what visiting async while it was open would have been like.
-          </p>
-          <p style={{fontSize: "1.75rem"}}>
-            Other than this modal page, and the simulated server responses, I have tried to keep the site as it was,
-            however other small changes were necessary due to updated package dependencies, and to be able to simultaneously 
-            serve the sync configuration.
-          </p>
-        </div>          
-      </div>
-      <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
-    </div>,
-    
-    //page 2 AOC
-    <div id="modal-page-wrapper">
-      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc" style={{textAlign: 'center'}}>
-          <div id="modal-text" style={{alignItems: 'center', justifyContent: 'space-around'}}>
-            <p style={{fontSize: "2rem"}}>
-              This website was produced and is maintained on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi 
-              Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
-              of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
-              all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
-              connectivity are built upon.
-            </p>
-          </div>          
-      </div>
-      <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
-    </div>,
-  
-    //page 3 Welcome
-    <div id="modal-page-wrapper">
-      <div id="modal-title-wrapper">
-        <div id="modal-title">
-          Welcome to room2.fm async
-        </div>
+        </h2>
         <hr />
       </div>
       <div id="modal-text-wrapper">
         <div id="modal-text">
+        <p>
+          This website is a limited documentation of the aysnc configuration of the room2 project, which was 
+          co-created by Patrick McMahon and Anuraag Bhatia.
+        </p>
+        <p>
+          This documentation was created as part of Patrick McMahon's PhD submission, as a way to provide access 
+          to the UI. As the original work was a multi-user experience, built around its own ephemerality 
+          and the anonymity of its submissions, this documentation does not connect to the original server,
+          nor capture responses from any other users. The responses seen within have all been submitted by 
+          myself (Patrick) to give a simulation of what visiting async while it was open would have been like.
+        </p>
+        <p>
+          Other than this modal page, and the simulated server responses, I have tried to keep the site as it was,
+          however other small changes were necessary due to updated package dependencies, and to be able to simultaneously 
+          serve the sync configuration.
+        </p>        
+        </div>
+      </div>
+      <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
+    </>,
+    
+    //page 2 AOC
+    <>
+      <div id="modal-text-wrapper">
+        <div id="modal-text">
+        <p style={{fontSize: "2rem"}}>
+            This website was produced and is maintained on the unceded territory of the Bunurong Boon Wurrung and Wurundjeri Woi 
+            Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
+            of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
+            all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
+            connectivity are built upon.
+          </p>        
+        </div>
+      </div>
+      <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
+    </>,
+  
+    //page 3 Welcome
+    <>
+      <div id="modal-title-wrapper">
+        <h2 id="modal-title">
+          Welcome to room2.fm async
+        </h2>
+        <hr />
+      </div>
+      <div id="modal-text-wrapper">
+        <div id="modal-text" className='ModalDetails'>
           <p>
             The current cycle's track is:
             <br />
@@ -96,7 +96,7 @@ export default function IntroModal(props) {
         </div>
       </div>        
       <button id="modal-continue-button" onClick={() => {props.toggleModal();}}> Enter </button>
-    </div>,
+    </>,
   ]
 
   return (

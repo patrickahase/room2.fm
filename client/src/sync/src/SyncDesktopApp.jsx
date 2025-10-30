@@ -21,7 +21,7 @@ export default function SyncDesktopApp() {
   useEffect(() => {modalIsOpenRef.current = modalIsOpen}, [modalIsOpen]);
   // intro modal instance
   const [introModal, setIntroModal] = useState(null);
-  const [currentModalPage, setCurrentModalPage] = useState(1);
+  const [currentModalPage, setCurrentModalPage] = useState(0);
   const [showOverlay, setShowOverlay] = useState(true);
 
   // current drawing colours

@@ -13,27 +13,41 @@ export default function IntroModalDesktop(props) {
 
   let modalPages = [
     //page 1 Logo - no continue button on this one if the site needs to get closed
-    <div id="logo-wrapper">
-      <div id="text-logo">
-        <pre id="pre-logo-wrapper">
-          <div id="logo-line-1">__________________________________________________________________<u className="text-gradient-1">/\\\\\\\\\</u>_____        <br/></div>
-          <div id="logo-line-2">&nbsp;________________________________________________________________<u className="text-gradient-2">/\\\///////\\\</u>___       <br/></div>
-          <div id="logo-line-3">&nbsp;&nbsp;_______________________________________________________________<u className="text-gradient-3">\///</u>______<u className="text-gradient-3">\//\\\</u>__      <br/></div>
-          <div id="logo-line-4">&nbsp;&nbsp;&nbsp;__<u className="text-gradient-4">/\\/\\\\\\\</u>______<u className="text-gradient-4">/\\\\\</u>________<u className="text-gradient-4">/\\\\\</u>_______<u className="text-gradient-4">/\\\\\</u>__<u className="text-gradient-4">/\\\\\</u>_____________<u className="text-gradient-4">/\\\/</u>___     <br/></div>
-          <div id="logo-line-5">&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-5">\/\\\/////\\\</u>___<u className="text-gradient-5">/\\\///\\\</u>____<u className="text-gradient-5">/\\\///\\\</u>___<u className="text-gradient-5">/\\\///\\\\\///\\\</u>________<u className="text-gradient-5">/\\\//</u>_____    <br/></div>
-          <div id="logo-line-6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-6">\/\\\</u>___<u className="text-gradient-6">\///</u>___<u className="text-gradient-6">/\\\</u>__<u className="text-gradient-6">\//\\\</u>__<u className="text-gradient-6">/\\\</u>__<u className="text-gradient-6">\//\\\</u>_<u className="text-gradient-6">\/\\\</u>_<u className="text-gradient-6">\//\\\</u>__<u className="text-gradient-6">\/\\\</u>_____<u className="text-gradient-6">/\\\//</u>________   <br/></div>
-          <div id="logo-line-7">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-7">\/\\\</u>_________<u className="text-gradient-7">\//\\\</u>__<u className="text-gradient-7">/\\\</u>__<u className="text-gradient-7">\//\\\</u>__<u className="text-gradient-7">/\\\</u>__<u className="text-gradient-7">\/\\\</u>__<u className="text-gradient-7">\/\\\</u>__<u className="text-gradient-7">\/\\\</u>___<u className="text-gradient-7">/\\\/</u>___________  <br/></div>
-          <div id="logo-line-8">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-8">\/\\\</u>__________<u className="text-gradient-8">\///\\\\\/</u>____<u className="text-gradient-8">\///\\\\\/</u>___<u className="text-gradient-8">\/\\\</u>__<u className="text-gradient-8">\/\\\</u>__<u className="text-gradient-8">\/\\\</u>__<u className="text-gradient-8">/\\\\\\\\\\\\\\\</u>_ <br/></div>
-          <div id="logo-line-9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_<u className="text-gradient-9">\///</u>_____________<u className="text-gradient-9">\/////</u>________<u className="text-gradient-9">\/////</u>_____<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>___<u className="text-gradient-9">\///</u>__<u className="text-gradient-9">\///////////////</u>__<br/></div>
-        </pre>            
+    <>
+      <div id="modal-title-wrapper">
+        <h2 id="modal-title">
+          Welcome to room2 sync...
+        </h2>
+        <hr />
       </div>
-    </div>,
+      <div id="modal-text-wrapper">
+        <div id="modal-text">
+        <p>
+          This website is a limited documentation of the aysnc configuration of the room2 project, which was 
+          co-created by Patrick McMahon and Anuraag Bhatia.
+        </p>
+        <p>
+          This documentation was created as part of Patrick McMahon's PhD submission, as a way to provide access 
+          to the UI. As the original work was a multi-user experience, built around its own ephemerality 
+          and the anonymity of its submissions, this documentation does not connect to the original server,
+          nor capture responses from any other users. The responses seen within have all been submitted by 
+          myself (Patrick) to give a simulation of what visiting async while it was open would have been like.
+        </p>
+        <p>
+          Other than this modal page, and the simulated server responses, I have tried to keep the site as it was,
+          however other small changes were necessary due to updated package dependencies, and to be able to simultaneously 
+          serve the sync configuration.
+        </p>        
+        </div>
+      </div>
+      <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
+    </>,
   
     //page 2 AOC
-    <div id="modal-page-wrapper">
-      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc" style={{textAlign: 'center'}}>
-          <div id="modal-text" style={{alignItems: 'center', justifyContent: 'space-around'}}>
-            <p id="aoc-text">
+    <>
+      <div id="modal-text-wrapper" >
+          <div id="modal-text">
+            <p style={{fontSize: "2rem"}}>
               This website was produced and is maintained on the unceded territory of the Wurundjeri Woi Wurrung and Bunurong Boon 
               Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
               of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
@@ -43,10 +57,10 @@ export default function IntroModalDesktop(props) {
           </div>          
       </div>
       <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
-    </div>,
+    </>,
     
     //page 3 Welcome
-    <div id="modal-page-wrapper">
+    <>
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm live
@@ -60,11 +74,11 @@ export default function IntroModalDesktop(props) {
               Today @ 2pm =&gt; 7pm (AEST) we will be hosting works from:
             </p>
               <p style={{fontSize: '1.95rem', padding: '1rem'}}>
-                amby downs &amp; Joel Spring <br />
-                Panda Wong &amp; 黑芝麻 (Hēi zhī ma) &amp; Wei Huang <br />
-                Mohamed Chamas &amp; Aarti Jadu <br />
-                E Fishpool &amp; Sam Miers <br />
-                w/ interstitial sounds by J <br />
+                **** ***** &amp; **** ***** <br />
+                ***** **** &amp; *** (*** *** **) &amp; *** ***** <br />
+                ******* ****** &amp; ***** **** <br />
+                * ******** &amp; *** ***** <br />
+                w/ interstitial sounds by * <br />
               </p>
             <p>
               There is no right or wrong way for you to listen, respond to, or feel the work presented @ room2. We encourage you to trust 
@@ -77,10 +91,10 @@ export default function IntroModalDesktop(props) {
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => nextModalPage()}> Continue </button>
-    </div>,
+    </>,
   
     //page 4 Instructions
-    <div id="modal-page-wrapper">
+    <>
       <div id="modal-title-wrapper">
         <div id="modal-title">
           Welcome to room2.fm live
@@ -106,10 +120,7 @@ export default function IntroModalDesktop(props) {
               If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.    
               <br />
               <br /> 
-              room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and <a href="https://soundcloud.com/anuraag69" target="_blank" rel="noreferrer">Anuraag Bhatia</a>. This 
-              iteration contains additional development work and creative consultation from <a href="https://becfary.com/" target="_blank" rel="noreferrer">
-              BF/Local Time</a> and was commissioned as part of <a href="https://bleedonline.net/" target="_blank" rel="noreferrer">BLEED</a>. 
-              Additional credits can be viewed in the site's head tag.
+              room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and <a href="https://soundcloud.com/anuraag69" target="_blank" rel="noreferrer">Anuraag Bhatia</a>.
               <br />
               <br />
               We welcome your thoughts, feedback, or questions - please send them through to room2fm@gmail.com
@@ -117,23 +128,7 @@ export default function IntroModalDesktop(props) {
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.toggleModal()}> Enter </button>
-    </div>,
-
-    // modal for welcome to country
-    <div id="modal-page-wrapper">
-      <div id="modal-text-wrapper" className="modal-text-wrapper-aoc" style={{textAlign: 'center'}}>
-          <div id="modal-text" style={{alignItems: 'center', justifyContent: 'space-around'}}>
-            <p id="aoc-text">
-              This website was produced and is maintained on the unceded territory of the Wurundjeri Woi Wurrung and Bunurong Boon 
-              Wurrung peoples of the Eastern Kulin Nation, the Traditional Custodians of the land. We recognise their ongoing legacy 
-              of connection to land, waters and culture and pay respect to their Elders past and present. We extend this respect to 
-              all other First Nations peoples and Traditional Custodians whose land the material pathways that allow our digital 
-              connectivity are built upon.
-            </p>
-       
-          </div>          
-      </div>
-    </div>
+    </>
   ]
 
   return (

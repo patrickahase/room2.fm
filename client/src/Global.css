@@ -15,6 +15,12 @@
   --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
 }
 
+@media (width > 960px) {
+  :root{
+    font-size: 20px;
+  }
+}
+
 ::selection {
   color: var(--comp-col-03);
   background-color: var(--comp-col-04);
@@ -41,18 +47,21 @@ body, #root{
 }
 
 .ModalBox{
-  min-width: 80vw;
-  min-height: 80vh;
+  width: 80vw;
+  height: 80vh;
   margin: auto;
-  padding: 1vw 1.25vw;
+  padding: 1vw 3.5vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   gap: 2rem;
   align-items: center;
   background-color: var(--comp-col-01);
   border-radius: 4px;
   z-index: 7;
+}
+.LogoBox{
+  justify-content: center;
 }
 
 .ModalOverlay {
@@ -62,7 +71,22 @@ body, #root{
   z-index: 6;
 }
 
-#modal-page-wrapper{
+#modal-text-wrapper{
+   overflow: auto;
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+ }
+
+.ModalBox p {
+  font-size: 1.75rem;
+}
+.ModalDetails p {
+  font-size: 1.5rem;
+}
+
+/* #modal-page-wrapper{
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -70,7 +94,7 @@ body, #root{
   align-items: center;
   padding: 0 2.25vw;
   flex-grow: 1;
-}
+} */
 
 a{
   color: var(--comp-col-04);
@@ -86,27 +110,23 @@ a:hover{
 #modal-title{
    font-size: 3rem;
  }
+
 #modal-text-wrapper{
-   overflow: hidden;
-   flex-grow: 1;
-   padding: 1.5vw 0;
-   overflow: auto;
-   display: flex;
- }
-#modal-text{
-   font-size: 1.25rem;
    flex-grow: 1;
    display: flex;
    flex-direction: column;
-   justify-content: space-between;
+   justify-content: center;
+   overflow: hidden;
+ }
+#modal-text{
+   display: flex;
+   flex-direction: column;
    gap: 2rem;
+   overflow: auto;
  }
- #modal-text p {
-  max-width: 80vw;
- }
+
 .ModalTextSmall{
    font-size: 1rem;
-   text-align: center;
  }
 #aoc-text{
 font-size: 1.75rem;
@@ -121,8 +141,3 @@ font-size: 1.75rem;
    color: #5252ff;
    background-color: #202121;
 }
-#modal-throbber{
-   margin-top: 1rem;
-   width: 3rem;
-   height: 3rem;
- }

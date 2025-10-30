@@ -5,7 +5,7 @@ function HomePage() {
 
   return (
     <>
-      <div id="home-page-wrapper" className="ModalBox">
+      <div id="home-page-wrapper" className="ModalBox LogoBox">
 
         <div id="logo-wrapper">
           <div id="text-logo">
