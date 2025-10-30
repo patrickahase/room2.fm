@@ -35,8 +35,8 @@ export default function IntroModalDesktop(props) {
         </p>
         <p>
           Other than this modal page, and the simulated server responses, I have tried to keep the site as it was,
-          however other small changes were necessary due to updated package dependencies, and to be able to simultaneously 
-          serve the sync configuration.
+          however the third party chat bar on the right hand side has been removed, and other small changes were 
+          necessary due to updated package dependencies, and to be able to simultaneously serve the async configuration.
         </p>        
         </div>
       </div>
