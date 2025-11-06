@@ -126,7 +126,7 @@
 /* Current Prompt */
 #sync-desktop-wrapper #current-prompt-wrapper{
   width: 50%;
-  font-size: 1rem;
+  font-size: 1.5rem;
   background-color: rgb(31, 33, 28);
   color: white;  
   user-select: none;
@@ -158,7 +158,7 @@
 }
 #sync-desktop-wrapper #input-select{
   width: 100%;
-  font-size: 1rem;   
+  font-size: 1.5rem;   
   user-select: none;
   text-align: center;
   padding: 0 1vw;
@@ -166,7 +166,7 @@
 #sync-desktop-wrapper .InputSelectButton{
   background-color: rgb(31, 33, 28);
   color: var(--comp-col-02);
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   margin: 2px 0;
 }
 #sync-desktop-wrapper .ActiveInputButton{

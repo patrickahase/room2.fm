@@ -13,9 +13,10 @@
   --comp-col-04:#5252ff;
   --comp-col-05:#121313;
   --comp-hoverlay:linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.2));
+  font-size: 10px;
 }
 
-@media (width > 960px) {
+@media (width > 1280px) {
   :root{
     font-size: 20px;
   }
@@ -140,4 +141,9 @@ font-size: 1.75rem;
 #modal-continue-button:hover{
    color: #5252ff;
    background-color: #202121;
+}
+@media (width > 1280px) {
+  :root{
+    font-size: 20px;
+  }
 }
