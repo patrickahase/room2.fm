@@ -4,6 +4,7 @@ export default function AudioControls(props){
 
   const [savedVol, setSavedVol] = useState(1.);
   const [isMuted, setIsMuted] = useState(false);
+  const [isMouseDown, setIsMouseDown] = useState(false);
   const [audioCtx, setAudioCtx] = useState(null);
   var audioCtxRef = useRef(audioCtx);
   useEffect(() => {audioCtxRef.current = audioCtx}, [audioCtx]);
@@ -15,15 +16,11 @@ export default function AudioControls(props){
 
   let volNotchGen = Array(notchNumber).fill('');
 
-  /* keep track of mouse down for volume drag event */
-  var isMouseDown = false;
-  document.addEventListener("mouseup", () => {isMouseDown = false});
-
   const VolumeNotches = volNotchGen.map((nothing, index) =>
     <button className='VolumeNotch VolumeActive' id={index}
         key={index+nothing} 
         onMouseDown={clickVolumeNotch}
-        onMouseEnter={(e) => {if(isMouseDown){clickVolumeNotch(e)}}}
+        onMouseEnter={(e) => {if(isMouseDown){clickVolumeNotch(e);}}}
         style={{height: 100/volNotchGen.length + "%"}} />
   );
 
@@ -71,7 +68,7 @@ export default function AudioControls(props){
 
   function clickVolumeNotch(e){
     e.stopPropagation();
-    isMouseDown = true;
+    setIsMouseDown(true);
     let clickedID = parseInt(e.target.id);
     /* set classes for active notch */
     let notches = document.getElementsByClassName("VolumeNotch");
@@ -88,7 +85,10 @@ export default function AudioControls(props){
     if(audioCtxRef.current){
       audioGainRef.current.gain.setValueAtTime(newVolume, audioCtxRef.current.currentTime);      
       setIsMuted(false);
-    }  
+    }
+    document.addEventListener("mouseup", () => {
+      setIsMouseDown(false);
+    }, { once: true });
   }
 
   function muteAudio(){

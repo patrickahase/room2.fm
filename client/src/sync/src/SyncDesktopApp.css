@@ -3,6 +3,7 @@
   height: 100vh;
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 }
 
 #sync-desktop-wrapper #room2-wrapper{
@@ -187,6 +188,10 @@
   display: flex;
   flex-direction: column;
 }
+#sync-desktop-wrapper .NotAvailable{
+  opacity: 0.5;
+  pointer-events: none;
+}
 #sync-desktop-wrapper .DrawingUIButton{
   font-family: 'Work Sans';
   font-weight: 700;
@@ -195,10 +200,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.25rem;
+  font-size: 2.5vh;
   border-color: rgb(227, 227, 227) rgb(151, 151, 151) rgb(151, 151, 151) rgb(227, 227, 227);
   border-style: solid;
   border-width: 2px;
+  color: var(--comp-col-01);
+  padding-left: 1vh;
 }
 #sync-desktop-wrapper #brush-up-icon{
   height: 5vh;
@@ -228,7 +235,7 @@
 #sync-desktop-wrapper #input-wrapper{
   position: relative;
   background-color: var(--comp-col-03);
-  top: 0%;
+  top: -100%;
   height: 200%;
   width: calc(75vw - 45vh);
   overflow: hidden;
@@ -239,7 +246,7 @@
 #sync-desktop-wrapper #input-wrapper::after{
   content: "";
   position: absolute;
-  top: 4px;
+  top: calc(50% + 4px);
   left: 4px;
   width: calc(100% - 12px);
   height: calc(50% - 12px);
@@ -270,6 +277,7 @@
   resize: none;
   border: 0;
   z-index: 3;
+  font-size: 1.2rem;
 }
 
 /* Righthand UI Section */
@@ -332,7 +340,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 0.75vh;
 }
 #sync-desktop-wrapper #col-swap-button{
   height: 60%;
@@ -340,16 +348,13 @@
   background: none;
   stroke: var(--comp-col-01);
   fill: var(--comp-col-01);
-  padding: 4px;
+  padding: 0.5vh;
 }
-#sync-desktop-wrapper #word-change{
+#sync-desktop-wrapper #word-change,
+#sync-desktop-wrapper #word-colour
+{
   pointer-events: none;
-  font-size: 0.7rem;
-  color: var(--comp-col-01);
-}
-#sync-desktop-wrapper #word-colour{
-  pointer-events: none;
-  font-size: 0.7rem;
+  font-size: 1.5vh;
   color: var(--comp-col-01);
 }
 
@@ -362,8 +367,9 @@
   grid-row: 5/6;
   border: none;
   background-color: var(--comp-col-03);
-  font-size: 0.8rem;
+  font-size: 1.5vh;
   color: var(--comp-col-01);
+  padding-top: 4px;
 }
 #sync-desktop-wrapper #response-submit-button::after{
   content: " ";

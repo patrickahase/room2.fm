@@ -10,6 +10,8 @@ import AudioControls from './components/audioControls';
 import ColourPicker from './components/colourPicker';
 import './SyncDesktopApp.css';
 
+import { serverSimulationEvents } from './components/serverSimulation';
+
 export default function SyncDesktopApp() {
 
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
@@ -22,7 +24,6 @@ export default function SyncDesktopApp() {
   // intro modal instance
   const [introModal, setIntroModal] = useState(null);
   const [currentModalPage, setCurrentModalPage] = useState(0);
-  const [showOverlay, setShowOverlay] = useState(true);
 
   // current drawing colours
   const [currentColours, setCurrentColours] = useState([
@@ -35,7 +36,7 @@ export default function SyncDesktopApp() {
   useEffect(() => {selectedColourRef.current = selectedColour}, [selectedColour]);
   // drawing settings
   const [brushSize, setBrushSize] = useState(8);
-  const [isDrawing, setIsDrawing] = useState(false);
+  const [isDrawing, setIsDrawing] = useState(true);
   var isDrawingRef = useRef(isDrawing);
   useEffect(() => {isDrawingRef.current = isDrawing}, [isDrawing]);
   const [isEraser, setIsEraser] = useState(false);
@@ -67,15 +68,19 @@ export default function SyncDesktopApp() {
   useEffect(() => {responseDataRef.current = responseData}, [responseData]);
   // current prompt
   const [currentPrompt, setCurrentPrompt] = useState('What do you hope for?');
+  const[isCountdown, setIsCountdown] = useState(false);
+  var isCountdownRef = useRef(isCountdown);
+  useEffect(() => {isCountdownRef.current = isCountdown}, [isCountdown]);
+  const [currentServerEvent, setcurrentServerEvent] = useState(0);
 
   //init 
   useEffect(() => {
     setWindowSize([window.innerWidth, window.innerHeight]);
     window.addEventListener('resize', () => {
       setWindowSize([window.innerWidth, window.innerHeight])});
-    document.addEventListener('mouseup', saveCanvasState);
-    document.addEventListener('touchend', saveCanvasState);
-    document.addEventListener('touchcancel', saveCanvasState);
+    //document.addEventListener('mouseup', saveCanvasState);
+    //document.addEventListener('touchend', saveCanvasState);
+    //document.addEventListener('touchcancel', saveCanvasState);
   }, []);
 
   // update brush colour and cursor on colour change
@@ -105,10 +110,10 @@ export default function SyncDesktopApp() {
             <div id="banner-wrapper">
               <div id="banner-logo-wrapper">
                 <div id="banner-x"></div>      
-                <img className="BannerLogo" src={"./assets/slowdiscpixel.gif"} />
+                <img className="BannerLogo" src={"./slowdiscpixel.gif"} />
               </div>
               <Marquee
-                text={"room2 sync documentation for PhD "} />
+                text={"Now Playing: room2 sync documentation for PhD "} />
             </div>
 
             <div id="vis-wrapper">
@@ -141,8 +146,8 @@ export default function SyncDesktopApp() {
                     </div>           
                     <div id="input-select-wrapper">
                       <span id="input-select">I would like to&nbsp;
-                      <button id="draw-input-select" className="InputSelectButton" onClick={() => setInput(true)}>draw</button>&nbsp;/&nbsp;
-                      <button id="text-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setInput(false)}>write</button>
+                      <button id="draw-input-select" className="InputSelectButton ActiveInputButton" onClick={() => setInput(true)}>draw</button>&nbsp;/&nbsp;
+                      <button id="text-input-select" className="InputSelectButton" onClick={() => setInput(false)}>write</button>
                       &nbsp;a response</span>
                     </div>
                   </div>
@@ -187,10 +192,10 @@ export default function SyncDesktopApp() {
 
           </div>
           {/* dead simple text chat */}
-          <div id="chat">
+          {/* <div id="chat">
             <p>3rd party chat function removed</p>
-          </div>
-          {/* <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>         */}
+          </div> */}
+          <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>        
         </>}
     </div>
   )
@@ -202,6 +207,7 @@ export default function SyncDesktopApp() {
       document.addEventListener('mouseup', saveCanvasState);
       introModal.hide();
       getCSSRule(".ModalWrapper").style.display = "none";
+      simulateServerEvent(currentServerEvent);
     } else {
       document.removeEventListener('mouseup', saveCanvasState);
       introModal.show();
@@ -237,12 +243,14 @@ export default function SyncDesktopApp() {
       getCSSRule('#sync-desktop-wrapper #input-wrapper::after').style.top = "calc(50% + 4px)";
       document.getElementById("draw-input-select").classList.add("ActiveInputButton");
       document.getElementById("text-input-select").classList.remove("ActiveInputButton");
+      document.getElementById("drawing-buttons-wrapper").classList.remove("NotAvailable");
     } else {
       setInputIsDraw(false);
       document.getElementById("input-wrapper").style.top= "0%";
       getCSSRule('#sync-desktop-wrapper #input-wrapper::after').style.top = "4px";
       document.getElementById("draw-input-select").classList.remove("ActiveInputButton");
       document.getElementById("text-input-select").classList.add("ActiveInputButton");
+      document.getElementById("drawing-buttons-wrapper").classList.add("NotAvailable");
     }
   }
 
@@ -336,6 +344,47 @@ export default function SyncDesktopApp() {
     }
   }
 
+  function startPromptCountdown(newPrompt){
+    if(isCountdownRef.current === false){      
+      setIsCountdown(true);
+      let promptTimer = document.getElementById("prompt-end-timer-wrapper").children[0];
+      let promptTimerOverlay = document.getElementById("prompt-end-timer-wrapper").children[1];
+      promptTimerOverlay.style.transition = "60s linear";
+      promptTimerOverlay.style.width = "100%";
+      let countdown = 60;
+      promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
+      let x = setInterval(() => {    
+        countdown -= 1;        
+        promptTimer.innerHTML = "this prompt will change in " + countdown + " seconds...";
+        if (countdown < 1) {
+          clearInterval(x);
+          promptTimerOverlay.style.transition = "0s linear";
+          promptTimerOverlay.style.width = "0%";
+          promptTimer.innerHTML = "";
+          setCurrentPrompt(newPrompt);
+          setIsCountdown(false);        
+        }
+      }, 1000);
+    }    
+  }
+
+  // simulate response from server
+  function simulateServerEvent(nextServerEvent){
+    if (serverSimulationEvents[nextServerEvent]){
+      let newEvent = serverSimulationEvents[nextServerEvent];
+      setcurrentServerEvent((nextServerEvent) => nextServerEvent + 1);
+      setTimeout(() => {
+        if(newEvent.eventType === "prompt"){
+          startPromptCountdown(newEvent.eventContent);
+        }
+        else if(newEvent.eventType === "text-response"){
+          setResponseData([[newEvent.eventContent, "text"]]);
+        }
+        simulateServerEvent(nextServerEvent + 1);
+      }, newEvent.delay * 1000);
+    }    
+  }
+
   function updateCanvasBrush(){
     drawingCanvasRef.current.freeDrawingBrush.color = currentColours[selectedColourRef.current];
     drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
@@ -418,20 +467,6 @@ export default function SyncDesktopApp() {
       // update actual canvas
       drawingCanvas.loadFromJSON(newCanvasState);      
     }
-  }
-
-  function dataURLtoFile(dataurl, filename){
-    var arr = dataurl.split(','),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, {
-      type: mime
-    });
   }
 
   function getCSSRule(ruleName) {

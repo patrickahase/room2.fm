@@ -1,5 +1,3 @@
-import React, { useEffect } from 'react';
-
 export default function Marquee(props) {
 
   const marqueeStyle = {
@@ -12,9 +10,7 @@ export default function Marquee(props) {
     text: {
       width: 'max-content',
       position: 'relative',
-      top: '-0.75vh',
       fontSize: '8vh',
-      fontFamily: 'Marr Sans Medium',
       right: '110%'
     }
   }
