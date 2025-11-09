@@ -31,7 +31,8 @@ export default function IntroModalDesktop(props) {
           to the UI. As the original work was a multi-user experience, built around its own ephemerality 
           and the anonymity of its submissions, this documentation does not connect to the original server,
           nor capture responses from any other users. The responses seen within have all been submitted by 
-          myself (Patrick) to give a simulation of what visiting async while it was open would have been like.
+          myself (Patrick) to give a simulation of what visiting async while it was open would have been like. This 
+          involves multiple prompts which will change over a 5 minute period.
         </p>
         <p>
           Other than this modal page, and the simulated server responses, I have tried to keep the site as it was,
