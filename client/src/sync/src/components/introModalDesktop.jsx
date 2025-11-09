@@ -30,9 +30,14 @@ export default function IntroModalDesktop(props) {
           This documentation was created as part of Patrick McMahon's PhD submission, as a way to provide access 
           to the UI. As the original work was a multi-user experience, built around its own ephemerality 
           and the anonymity of its submissions, this documentation does not connect to the original server,
-          nor capture responses from any other users. The responses seen within have all been submitted by 
-          myself (Patrick) to give a simulation of what visiting async while it was open would have been like. This 
-          involves multiple prompts which will change over a 5 minute period.
+          nor capture responses from any other users.
+        </p>
+        <p>
+          The simulation involves several prompts which change over a five minute period, and responses which have all 
+          been submitted by myself (Patrick) to give a simulation of what visiting sync while it was open would have 
+          been like. There is no streamed sound component, however I was listening to 
+          <a href="https://on.soundcloud.com/E2WOFlRr6Xcj4h24ZH" target='_blank' rel="noreferrer"> this mix</a> from 
+          Anuraag in another tab while making my responses.
         </p>
         <p>
           Other than this modal page, and the simulated server responses, I have tried to keep the site as it was,
@@ -113,9 +118,6 @@ export default function IntroModalDesktop(props) {
             <p>
               You can use the chat box on the right of the screen to directly speak to others participating. Select a username and click ‘Join Room’ to 
               engage. Be yourself, be someone else, be whomever you want to be!
-            </p>
-            <p>
-            Prompt responses from the online and in-person event will be intermingled and viewable for both digital and face-to-face participants.
             </p>
               <span className="ModalTextSmall">
               If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.    
