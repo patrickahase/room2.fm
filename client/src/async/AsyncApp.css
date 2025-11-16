@@ -48,6 +48,7 @@ button {
   top: 0%;
   z-index: 2;
   pointer-events: none;
+  overflow: hidden;
 }
 #async-desktop-wrapper .TextResponseBox{
   position: absolute;

@@ -270,7 +270,7 @@ export default function AsyncApp() {
   //// here is the typical way responses are sent to the server : now simulated
   function submitResponse() {
     // set up array to push other responses to
-    let returnedResponses = [];
+    let returnedResponses = cyclePresets[currentCycle].responses;
     // check if a text or an image response
     if (inputIsDraw) {
       //image input
@@ -364,6 +364,7 @@ export default function AsyncApp() {
       setFocusMode(true);
       textResponseRule.style.backgroundColor = "rgb(31, 33, 28)";
       textResponseRule.style.border = "solid white 1px";
+      textResponseRule.style.padding = "0 0.25rem";
       imageResponseRule.style.backgroundColor = "white";
       imageResponseRule.style.border = "solid rgb(31, 33, 28) 1px";
       document.getElementById("settings-focus-button").classList.add("Active");
@@ -371,6 +372,7 @@ export default function AsyncApp() {
       setFocusMode(false);
       textResponseRule.style.backgroundColor = "";
       textResponseRule.style.border = "";
+      textResponseRule.style.padding = "";
       imageResponseRule.style.backgroundColor = "";
       imageResponseRule.style.border = "";
       document
