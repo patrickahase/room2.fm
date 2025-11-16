@@ -1,1 +1,2 @@
 ## ToDo
+- sync focus mode

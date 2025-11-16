@@ -126,7 +126,7 @@ export default function IntroModalDesktop(props) {
             <p className="ModalTextSmall">
               room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and 
               <a href="https://soundcloud.com/anuraag69" target="_blank" rel="noreferrer">Anuraag Bhatia</a>. We welcome your thoughts, 
-              feedback, or questions - please send them through to *******@gmail.com
+              feedback, or questions - please send them through to *******@*****.com
             </p>
           </div>
       </div>        
