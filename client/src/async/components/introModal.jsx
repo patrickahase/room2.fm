@@ -31,13 +31,13 @@ export default function IntroModal(props) {
         <p>
           The original work was a multi-user experience, built around its own ephemerality and the anonymity of 
           its users' submissions. As such this documentation does not contain nor capture user responses, or even 
-          connect to the original serverhe original server. Instead the responses seen within have all been submitted 
+          connect to the original server. Instead the responses seen within have all been submitted 
           by myself (Patrick) to give a simulation of what visiting async while it was open would have been like.
         </p>
         <p>
           Other than this modal page, and the simulated user responses, I have tried to keep the site as it was,
           however other small changes were necessary due to updated package dependencies, and other technical 
-          requirements of its documentation format.
+          requirements of the documentation format.
         </p>        
         </div>
       </div>

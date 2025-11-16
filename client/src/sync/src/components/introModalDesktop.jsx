@@ -24,25 +24,26 @@ export default function IntroModalDesktop(props) {
         <div id="modal-text">
         <p>
           This website is a limited documentation of the aysnc configuration of the room2 project, which was 
-          co-created by Patrick McMahon and Anuraag Bhatia.
+          co-created by Patrick McMahon and Anuraag Bhatia. This documentation was created as part of Patrick 
+          McMahon's PhD submission, as a way to provide access to the UI.
         </p>
         <p>
-          This documentation was created as part of Patrick McMahon's PhD submission, as a way to provide access 
-          to the UI. As the original work was a multi-user experience, built around its own ephemerality 
-          and the anonymity of its submissions, this documentation does not connect to the original server,
-          nor capture responses from any other users.
+          The original work was a multi-user experience, built around its own ephemerality and the anonymity of 
+          its users' submissions. As such this documentation does not contain nor capture user responses, or even 
+          connect to the original server.
         </p>
         <p>
-          The simulation involves several prompts which change over a five minute period, and responses which have all 
-          been submitted by myself (Patrick) to give a simulation of what visiting sync while it was open would have 
-          been like. There is no streamed sound component, however I was listening to 
+          The simulation involves several prompts which change over a five minute period, at a much faster rate than 
+          occured during a typical sync event, and responses submitted by myself (Patrick) to give a sense of what visiting 
+          sync while it was open would have been like. There is no streamed sound component, however I was listening to 
           <a href="https://on.soundcloud.com/E2WOFlRr6Xcj4h24ZH" target='_blank' rel="noreferrer"> this mix</a> from 
           Anuraag in another tab while making my responses.
         </p>
         <p>
-          Other than this modal page, and the simulated server responses, I have tried to keep the site as it was,
-          however the third party chat bar on the right hand side has been removed, and other small changes were 
-          necessary due to updated package dependencies, and to be able to simultaneously serve the async configuration.
+          Other than this modal page, and the simulated prompts and user responses, I have tried to keep the site as it 
+          was, however elements have been modified and removed as appropriate, such as the afforementioned audio stream 
+          and the third part chat component have been removed. Other small changes were necessary due to updated package 
+          dependencies, and other technical requirements of the documentation format.
         </p>        
         </div>
       </div>
@@ -83,8 +84,7 @@ export default function IntroModalDesktop(props) {
                 **** ***** &amp; **** ***** <br />
                 ***** **** &amp; *** (*** *** **) &amp; *** ***** <br />
                 ******* ****** &amp; ***** **** <br />
-                * ******** &amp; *** ***** <br />
-                w/ interstitial sounds by * <br />
+                * ******** &amp; *** *****
               </p>
             <p>
               There is no right or wrong way for you to listen, respond to, or feel the work presented @ room2. We encourage you to trust 
@@ -119,15 +119,15 @@ export default function IntroModalDesktop(props) {
               You can use the chat box on the right of the screen to directly speak to others participating. Select a username and click ‘Join Room’ to 
               engage. Be yourself, be someone else, be whomever you want to be!
             </p>
-              <span className="ModalTextSmall">
+            <hr />
+            <p className="ModalTextSmall">
               If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.    
-              <br />
-              <br /> 
-              room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and <a href="https://soundcloud.com/anuraag69" target="_blank" rel="noreferrer">Anuraag Bhatia</a>.
-              <br />
-              <br />
-              We welcome your thoughts, feedback, or questions - please send them through to room2fm@gmail.com
-            </span>
+            </p>
+            <p className="ModalTextSmall">
+              room2.fm was created by <a href="https://patrickhase.xyz" target="_blank" rel="noreferrer">Patrick Hase</a> and 
+              <a href="https://soundcloud.com/anuraag69" target="_blank" rel="noreferrer">Anuraag Bhatia</a>. We welcome your thoughts, 
+              feedback, or questions - please send them through to *******@gmail.com
+            </p>
           </div>
       </div>        
       <button id="modal-continue-button" onClick={() => props.toggleModal()}> Enter </button>
