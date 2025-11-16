@@ -25,19 +25,19 @@ export default function IntroModal(props) {
         <div id="modal-text">
         <p>
           This website is a limited documentation of the aysnc configuration of the room2 project, which was 
-          co-created by Patrick McMahon and Anuraag Bhatia.
+          co-created by Patrick McMahon and Anuraag Bhatia. This documentation was created as part of Patrick 
+          McMahon's PhD submission, as a way to provide access to the UI.
         </p>
         <p>
-          This documentation was created as part of Patrick McMahon's PhD submission, as a way to provide access 
-          to the UI. As the original work was a multi-user experience, built around its own ephemerality 
-          and the anonymity of its submissions, this documentation does not connect to the original server,
-          nor capture responses from any other users. The responses seen within have all been submitted by 
-          myself (Patrick) to give a simulation of what visiting async while it was open would have been like.
+          The original work was a multi-user experience, built around its own ephemerality and the anonymity of 
+          its users' submissions. As such this documentation does not contain nor capture user responses, or even 
+          connect to the original serverhe original server. Instead the responses seen within have all been submitted 
+          by myself (Patrick) to give a simulation of what visiting async while it was open would have been like.
         </p>
         <p>
-          Other than this modal page, and the simulated server responses, I have tried to keep the site as it was,
-          however other small changes were necessary due to updated package dependencies, and to be able to simultaneously 
-          serve the sync configuration.
+          Other than this modal page, and the simulated user responses, I have tried to keep the site as it was,
+          however other small changes were necessary due to updated package dependencies, and other technical 
+          requirements of its documentation format.
         </p>        
         </div>
       </div>
@@ -76,6 +76,7 @@ export default function IntroModal(props) {
             <span style={{fontSize: '1.95rem'}}>{props.cyclePreset.trackDetails}</span>
           </p>
           <p>{props.cyclePreset.artistDetails}</p>
+          <hr />
           <p>
             room2.fm is a digital space for collective reflection, sharing, and vulnerability. Upon entering you will be presented with 
             an audio track and a written prompt which you can respond to via your choice of writing or drawing. You can then anonymously 
@@ -89,8 +90,8 @@ export default function IntroModal(props) {
           <p>
             This website has been optimised to run with the window maximised on Chrome and Firefox on a landscape desktop or laptop screen. 
             If you are having issues, please try using one of these browsers.
-            <br />
-            <br />
+          </p>
+          <p>
             If you would like a high-contrast version of the response text with no distortion please click 'Focus Mode' button.
           </p>
         </div>
@@ -105,7 +106,7 @@ export default function IntroModal(props) {
          aria-labelledby="modal-title"
          aria-hidden="false" >
 
-      <div data-a11y-dialog-hide className="ModalOverlay" ></div>
+      <div data-a11y-dialog-hide className="ModalOverlay"></div>
 
       <div role="document" className="ModalBox">
         {modalPages[props.currentModalPage]}
