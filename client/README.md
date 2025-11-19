@@ -1,2 +1,2 @@
 ## ToDo
-- modal intro
+- sync focus mode

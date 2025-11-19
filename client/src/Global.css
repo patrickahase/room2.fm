@@ -131,11 +131,11 @@ a:hover{
    overflow: auto;
  }
 
-.ModalTextSmall{
-   font-size: 1rem;
+.ModalBox .ModalTextSmall{
+   font-size: 1.5rem;
  }
 #aoc-text{
-font-size: 1.75rem;
+  font-size: 1.75rem;
 }
 #modal-continue-button{
    background-color: var(--comp-col-01);

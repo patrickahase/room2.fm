@@ -26,6 +26,10 @@ export default function AudioTrackPlayer(props) {
       timeline.className = "";
       timeline.className = "timelineloaded";
     });
+    audioSourceRef.addEventListener('loadeddata', () => {
+      // set up current playback position based on timer
+      audioSourceRef.currentTime = (props.timer/100) * audioSourceRef.duration;
+    });
     //add animation when playing
     audioSourceRef.addEventListener('timeupdate', () => {
       timeline.firstChild.style.width = (100 * audioSourceRef.currentTime/audioSourceRef.duration) + "%";
@@ -39,7 +43,7 @@ export default function AudioTrackPlayer(props) {
       timeline.firstChild.style.width = (100 * clickPercent) + "%";
       // set new track time
       audioSourceRef.currentTime = audioSourceRef.duration * clickPercent;
-    })
+    });
   }, []);
 
   return (

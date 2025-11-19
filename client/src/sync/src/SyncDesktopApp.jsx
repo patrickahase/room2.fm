@@ -192,10 +192,11 @@ export default function SyncDesktopApp() {
 
           </div>
           {/* dead simple text chat */}
-          {/* <div id="chat">
+          <div id="chat">
+            <img id="chat-bg" src={"/chat-placeholder.png"} alt="blurred screenshot of chat" />
             <p>3rd party chat function removed</p>
-          </div> */}
-          <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>        
+          </div>
+          {/* <iframe title="text chat" id="chat" src='https://deadsimplechat.com/34MeFCATo'></iframe>         */}
         </>}
     </div>
   )

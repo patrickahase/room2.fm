@@ -31,6 +31,14 @@ export default function AsyncDesktopApp(props) {
     }
   }, [timerRunning]);
   let timerRef = useRef();
+  // pause and restart timer based on modal
+  useEffect(() => {
+    if(props.modalIsOpen){
+      pauseTimer();
+    } else if (!props.modalIsOpen){
+      startTimer();
+    }
+  }, [props.modalIsOpen]);
   const[audioSourceRef, setAudioSourceRef] = useState(null);
 
   // graphics settings  - 1 high 10 medium 20 low
@@ -70,6 +78,7 @@ export default function AsyncDesktopApp(props) {
         startTimer={startTimer}
         pauseTimer={pauseTimer}
         restartTimer={restartTimer}
+        timer={timer}
         setTimer={setTimer}
         setAskResponse={setAskResponse}
         />

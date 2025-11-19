@@ -47,7 +47,6 @@ export default function ResponseDisplay(props) {
   }
 
   function createImageResponseDisplay(imageResponse){
-    console.log(imageResponse);
     let newResponseBox = document.createElement('img');
     let collision = false;
     newResponseBox.classList.add('ImageResponseBox');
