@@ -4,22 +4,17 @@
 export const serverSimulationEvents = [
   {
     eventType: "prompt",
-    eventContent: "change my prompt once",
-    delay: 10
+    eventContent: "What sounds in your day-to-day life give you relief?",
+    delay: 70
   },
   {
     eventType: "prompt",
-    eventContent: "change my prompt twice",
-    delay: 10
-  },
-  {
-    eventType: "text-response",
-    eventContent: "change my prompt thrice",
-    delay: 10
+    eventContent: "Focus on a particular sound you hear right now. What is something you might imagine making that sound.",
+    delay: 70
   },
   {
     eventType: "prompt",
-    eventContent: "change my prompt thrice",
-    delay: 10
+    eventContent: "Share some cover art for this track.",
+    delay: 70
   },
 ]

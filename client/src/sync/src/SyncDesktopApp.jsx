@@ -67,7 +67,7 @@ export default function SyncDesktopApp() {
   var responseDataRef = useRef(responseData);
   useEffect(() => {responseDataRef.current = responseData}, [responseData]);
   // current prompt
-  const [currentPrompt, setCurrentPrompt] = useState('What do you hope for?');
+  const [currentPrompt, setCurrentPrompt] = useState('Draw or write about the textures in this track.');
   const[isCountdown, setIsCountdown] = useState(false);
   var isCountdownRef = useRef(isCountdown);
   useEffect(() => {isCountdownRef.current = isCountdown}, [isCountdown]);
@@ -313,6 +313,7 @@ export default function SyncDesktopApp() {
         responseText,
         'text',
       ]);
+      console.log(returnedResponses);
       setResponseData(returnedResponses);
       // if (responseText.length > 0) {
       //   textInput.value = "";
