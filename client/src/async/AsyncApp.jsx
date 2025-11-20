@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import "./AsyncApp.css";
 import AsyncDesktopApp from "./components/asyncDesktopApp";
 import { cyclePresets } from "./content/cyclePresets";
+import { fabric } from 'fabric';
 
 export default function AsyncApp() {
   // is accessed on mobile
@@ -199,8 +200,8 @@ export default function AsyncApp() {
       document.getElementById("erase-brush-button").classList.remove("Active");
     } else {
       setSavedBrush(drawingCanvasRef.current.freeDrawingBrush);
-      drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
-      drawingCanvasRef.current.freeDrawingBrush.color = "#ffffff";
+      drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
+      drawingCanvasRef.current.freeDrawingBrush.width = brushSize;      
       drawingCanvasRef.current.freeDrawingCursor = getCustomEraserCursor();
       document.getElementById("erase-brush-button").classList.add("Active");
     }

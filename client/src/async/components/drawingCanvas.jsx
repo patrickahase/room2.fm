@@ -12,8 +12,7 @@ export default function DrawingCanvas(props){
     let canvasWrapper = document.getElementById("drawing-canvas-wrapper"); 
     newCanvas.setWidth(canvasWrapper.offsetWidth);
     newCanvas.setHeight(canvasWrapper.offsetHeight);
-    newCanvas.freeDrawingBrush.color = props.brushColour;    
-    //newCanvas.freeDrawingBrush = new fabric.EraserBrush(newCanvas);
+    newCanvas.freeDrawingBrush.color = props.brushColour;
     newCanvas.freeDrawingBrush.width = props.brushSize;
     newCanvas.freeDrawingCursor = getCustomCursor();
     newCanvas.on('mouse:down', () => props.setIsDrawing(true));

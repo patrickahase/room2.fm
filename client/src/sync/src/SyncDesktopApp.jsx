@@ -12,6 +12,8 @@ import './SyncDesktopApp.css';
 
 import { serverSimulationEvents } from './components/serverSimulation';
 
+import { fabric } from 'fabric';
+
 export default function SyncDesktopApp() {
 
   const [windowSize, setWindowSize] = useState([window.innerWidth, window.innerHeight]);
@@ -405,9 +407,8 @@ export default function SyncDesktopApp() {
       document.getElementById("erase-brush-button").classList.remove("Active");
     } else {
       setSavedBrush(drawingCanvasRef.current.freeDrawingBrush);
-      //drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
+      drawingCanvasRef.current.freeDrawingBrush = new fabric.EraserBrush(drawingCanvasRef.current);
       drawingCanvasRef.current.freeDrawingBrush.width = brushSize;
-      drawingCanvasRef.current.freeDrawingBrush.color = "#ffffff"
       drawingCanvasRef.current.freeDrawingCursor = getCustomEraserCursor();
       document.getElementById("erase-brush-button").classList.add("Active");
     }
