@@ -60,7 +60,7 @@
 }
 #sync-desktop-wrapper .MarqueeText{
   position: relative;
-  animation: scroll linear 60s infinite;
+  animation: scroll linear 120s infinite;
 }
 @keyframes scroll {
   from{left: 0%;}

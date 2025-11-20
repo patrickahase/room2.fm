@@ -33,10 +33,10 @@ export default function IntroModalDesktop(props) {
           connect to the original server.
         </p>
         <p>
-          The simulation involves several prompts which change over a five minute period, at a much faster rate than 
-          occured during a typical sync event, and responses submitted by myself (Patrick) to give a sense of what visiting 
-          sync while it was open would have been like. There is no streamed sound component, however I was listening to 
-          <a href="https://on.soundcloud.com/E2WOFlRr6Xcj4h24ZH" target='_blank' rel="noreferrer"> this mix</a> from 
+          The simulation involves several prompts which change over a four minute period, at a much faster rate than 
+          occured during a typical sync event, and a limited amount of responses submitted by myself (Patrick) to give a sense of what visiting 
+          sync while it was open would have been like. There is no streamed sound component, however I was listening 
+          to <a href="https://www.mixcloud.com/hopestradio/121221-intelligent-muzak-with-anuraag/" target='_blank' rel="noreferrer"> this mix</a> from 
           Anuraag in another tab while making my responses.
         </p>
         <p>

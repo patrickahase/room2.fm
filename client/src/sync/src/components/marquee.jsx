@@ -18,10 +18,10 @@ export default function Marquee(props) {
   return (
     <div id="marquee-wrapper" style={marqueeStyle.wrapper}>
       <div id="marquee-text" style={marqueeStyle.text}>
-        <span className='MarqueeText'>{props.text}{props.text}</span>
-        <span className='MarqueeText'>{props.text}{props.text}</span>
-        <span className='MarqueeText'>{props.text}{props.text}</span>
-        <span className='MarqueeText'>{props.text}{props.text}</span>
+        <span className='MarqueeText'>{props.text} <a href="https://www.mixcloud.com/hopestradio/121221-intelligent-muzak-with-anuraag/" target='_blank' rel="noreferrer">responses made while listening to this mix</a> {props.text}</span>
+        <span className='MarqueeText'>{props.text} <a href="https://www.mixcloud.com/hopestradio/121221-intelligent-muzak-with-anuraag/" target='_blank' rel="noreferrer">responses made while listening to this mix</a> {props.text}</span>
+        <span className='MarqueeText'>{props.text} <a href="https://www.mixcloud.com/hopestradio/121221-intelligent-muzak-with-anuraag/" target='_blank' rel="noreferrer">responses made while listening to this mix</a> {props.text}</span>
+        <span className='MarqueeText'>{props.text} <a href="https://www.mixcloud.com/hopestradio/121221-intelligent-muzak-with-anuraag/" target='_blank' rel="noreferrer">responses made while listening to this mix</a> {props.text}</span>
       </div>
     </div>
     

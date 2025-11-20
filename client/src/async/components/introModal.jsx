@@ -31,7 +31,7 @@ export default function IntroModal(props) {
         <p>
           The original work was a multi-user experience, built around its own ephemerality and the anonymity of 
           its users' submissions. As such this documentation does not contain nor capture user responses, or even 
-          connect to the original server. Instead the responses seen within have all been submitted 
+          connect to the original server. Instead the limited amount responses seen within have all been submitted 
           by myself (Patrick) to give a simulation of what visiting async while it was open would have been like.
         </p>
         <p>

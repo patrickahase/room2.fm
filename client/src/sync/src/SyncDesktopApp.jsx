@@ -59,11 +59,8 @@ export default function SyncDesktopApp() {
   const [focusMode, setFocusMode] = useState(false);
 
   // if false it's assumed to be text instead
-  const[inputIsDraw, setInputIsDraw] = useState(false);
-  const [responseData, setResponseData] = useState([
-    ["https://thelongesthumstore.sgp1.digitaloceanspaces.com/room2-purpose-live/1666089854386.png", "image"],
-    ["ry", "text"],
-  ]);
+  const[inputIsDraw, setInputIsDraw] = useState(true);
+  const [responseData, setResponseData] = useState([]);
   var responseDataRef = useRef(responseData);
   useEffect(() => {responseDataRef.current = responseData}, [responseData]);
   // current prompt
@@ -278,6 +275,7 @@ export default function SyncDesktopApp() {
         dataURL,
         'image',
       ]);
+      console.log(returnedResponses);
       setResponseData(returnedResponses);
 
       // we add one to cycle pos to keep start from 1
@@ -379,8 +377,8 @@ export default function SyncDesktopApp() {
         if(newEvent.eventType === "prompt"){
           startPromptCountdown(newEvent.eventContent);
         }
-        else if(newEvent.eventType === "text-response"){
-          setResponseData([[newEvent.eventContent, "text"]]);
+        else if(newEvent.eventType === "response"){
+          setResponseData([newEvent.eventContent]);
         }
         simulateServerEvent(nextServerEvent + 1);
       }, newEvent.delay * 1000);

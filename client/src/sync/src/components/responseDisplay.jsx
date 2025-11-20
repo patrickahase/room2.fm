@@ -114,7 +114,30 @@ export default function ResponseDisplay(props) {
     Object.assign(newResponseBox.style, responseStyle.imageResponse);
     let xRandom = Math.random();
     let yRandom = Math.random();
-    newResponseBox.addEventListener("load", (e) => {
+    // below was for when using link
+    // newResponseBox.addEventListener("load", (e) => {
+    //   console.log(imageResponse)
+    //   // add to the page
+    //   document.getElementById('response-wrapper').appendChild(newResponseBox);
+    //   let responseBoxDimensions = newResponseBox.getBoundingClientRect();
+    //   newResponseBox.style.left = (80 * xRandom) + "%";
+    //   newResponseBox.style.top = ((90 - (responseBoxDimensions.height/props.height)*100) * yRandom) + "%";
+    //   let colliderArray = Array.from(document.getElementsByClassName("Collider"));
+    //   for (let i = 0; i < colliderArray.length; i++) {
+    //     if(detect2DBoxCollision(newResponseBox.getBoundingClientRect(), colliderArray[i].getBoundingClientRect()) && !collision){
+    //       collision = true;
+    //     }
+    //   }
+    //   if(collision){
+    //    // console.log("hit", imageResponse);
+    //     newResponseBox.remove();
+    //     window.requestAnimationFrame(() => createImageResponseDisplay(imageResponse));
+    //   } else {
+    //     newResponseBox.classList.add("Collider");
+    //     responseFadeInOut(newResponseBox);
+    //   } 
+    // });
+    newResponseBox.src = imageResponse;
       // add to the page
       document.getElementById('response-wrapper').appendChild(newResponseBox);
       let responseBoxDimensions = newResponseBox.getBoundingClientRect();
@@ -134,8 +157,6 @@ export default function ResponseDisplay(props) {
         newResponseBox.classList.add("Collider");
         responseFadeInOut(newResponseBox);
       } 
-    });
-    newResponseBox.src = imageResponse;
   }
 
   function createTextResponseDisplay(textResponse){

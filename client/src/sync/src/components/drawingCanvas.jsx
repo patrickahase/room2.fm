@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { fabric } from 'fabric';
+import { useEffect, useRef, useState } from 'react';
+//import { fabric } from 'fabric';
+import { fabric } from './fabric';
 
 export default function DrawingCanvas(props){
   
@@ -33,7 +34,6 @@ export default function DrawingCanvas(props){
   useEffect(() => {
     if(canvasRef.current){
       canvasRef.current.freeDrawingBrush.width = props.brushSize;
-      console.log(canvasRef.current.freeDrawingBrush.width)
       canvasRef.current.freeDrawingCursor = getCustomCursor();
     }  
   }, [props.brushSize]);
