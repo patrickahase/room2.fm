@@ -53,22 +53,9 @@
   font-size: 1.25rem;
 }
 
-nav {
-  display: flex;
-  gap: 2rem;
+p {
+  color: var(--comp-col-02);
 }
-
-nav a {
-  font-size: 2rem;
-  cursor: pointer;
-  color: var(--comp-col-04);
-}
-
-nav a:hover {
-  color: var(--comp-col-03);
-  background-color: var(--comp-col-04);
-}
-
 
 
 

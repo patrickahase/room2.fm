@@ -3,6 +3,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import CatchHomePage from "./CatchHomePage";
 import HomePage from "./HomePage";
 import AsyncApp from "./async/AsyncApp";
 import SyncDesktopApp from "./sync/src/SyncDesktopApp";
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/sync",
     element: <SyncDesktopApp />,
+  },
+  {
+    path: "*",
+    element: <CatchHomePage />,
   },
 ]);
 
