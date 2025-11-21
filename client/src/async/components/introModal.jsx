@@ -26,7 +26,8 @@ export default function IntroModal(props) {
         <p>
           This website is a limited documentation of the aysnc configuration of the room2 project, which was 
           co-created by Patrick McMahon and Anuraag Bhatia. This documentation was created as part of Patrick 
-          McMahon's PhD submission, as a way to provide access to the UI.
+          McMahon's PhD submission, as a way to provide access to the UI. Please access in a desktop or laptop 
+          environment.
         </p>
         <p>
           The original work was a multi-user experience, built around its own ephemerality and the anonymity of 
