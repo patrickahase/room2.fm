@@ -247,6 +247,9 @@ button {
   color: var(--comp-col-01);
   font-size: min(1.5vw, 2vh);
 }
+#async-desktop-wrapper .DrawingUIButton:hover{
+  background-color: #d0d0d7;
+}
 #async-desktop-wrapper .DrawingUIButton:active{
   filter: invert();
 }

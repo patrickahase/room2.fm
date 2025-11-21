@@ -220,6 +220,13 @@
   border-width: 2px;
   color: var(--comp-col-01);
   padding-left: 1vh;
+  background-color: #e9e9ed;
+}
+#sync-desktop-wrapper .DrawingUIButton:hover{
+  background-color: #d0d0d7;
+}
+#sync-desktop-wrapper .DrawingUIButton:active{
+  background-color: #b1b1b9;
 }
 #sync-desktop-wrapper #brush-up-icon{
   height: 5vh;
