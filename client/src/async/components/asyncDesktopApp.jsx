@@ -119,6 +119,7 @@ export default function AsyncDesktopApp(props) {
               <ColourPicker 
                 colours={props.colours}
                 updateCanvasBrush={props.updateCanvasBrush}
+                brushSize={props.brushSize}
                 setSelectedColour={props.setSelectedColour}
                 setCurrentColours={props.setCurrentColours} />
             </div>

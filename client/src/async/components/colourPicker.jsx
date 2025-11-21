@@ -3,10 +3,8 @@ import React, { useEffect } from 'react';
 export default function ColourPicker(props){
 
   useEffect(() => {
-    document.getElementById('col1Select').addEventListener("input", colourInputChange, false);
-    document.getElementById('col2Select').addEventListener("input", colourInputChange, false);
-    document.getElementById('col3Select').addEventListener("input", colourInputChange, false);
-  }, []);
+    console.log(props.brushSize);
+  }, [props.brushSize]);
 
   return (
     <div id="drawing-tools-wrapper">
@@ -16,9 +14,9 @@ export default function ColourPicker(props){
       <span id="word-change">CHANGE</span>
       <span id="word-colour">COLOUR</span>
       <div id="col-select-wrapper">
-        <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={props.colours[0]} />
-        <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={props.colours[1]} />
-        <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue={props.colours[2]} />
+        <input type="color" id="col1Select" className="col-select first" name="col1Select" defaultValue={props.colours[0]} onInput={colourInputChange} />
+        <input type="color" id="col2Select" className="col-select second" name="col23Select" defaultValue={props.colours[1]} onInput={colourInputChange} />
+        <input type="color" id="col3Select" className="col-select third" name="col33Select" defaultValue={props.colours[2]} onInput={colourInputChange} />
       </div>
     </div>      
   )
