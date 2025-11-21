@@ -271,7 +271,8 @@ export default function AsyncApp() {
   //// here is the typical way responses are sent to the server : now simulated
   function submitResponse() {
     // set up array to push other responses to
-    let returnedResponses = cyclePresets[currentCycle].responses;
+    let returnedResponses = shuffleResponses(cyclePresets[currentCycle].responses);
+    console.log(returnedResponses);
     // check if a text or an image response
     if (inputIsDraw) {
       //image input
@@ -356,6 +357,22 @@ export default function AsyncApp() {
       //     });
       // }
     }
+  }
+
+  // shuffle response order because server won't do it
+  function shuffleResponses(responseArray){
+    let currentResponse = responseArray.length;
+    while (currentResponse != 0) {
+
+      // Pick a remaining element...
+      let randomPosition = Math.floor(Math.random() * currentResponse);
+      currentResponse--;
+
+      // And swap it with the current element.
+      [responseArray[currentResponse], responseArray[randomPosition]] = [
+        responseArray[randomPosition], responseArray[currentResponse]];
+    }
+    return responseArray;
   }
 
   function toggleFocus() {
